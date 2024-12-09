@@ -13,7 +13,7 @@ export const COLORS = {
     BORDER_COLOR: "lightgray",
     LINE_COLOR: "blue",
 
-    SHADOW_COLOR: "#132c0d",
+    SHADOW_COLOR: "dimgrey",
     DIALOG_SHADOW: "gray",
     MENU_SHADOW: "gray",
 
@@ -93,6 +93,8 @@ export const URLS = {
     // 認証系
     LOGIN_USER: `${ENVIRONMENT}/api/auth/login`,
     CHECK_LOGIN_TOKEN: `${ENVIRONMENT}/api/auth/checkToken`,
+    // ショップ系
+    SHOP_INIT: `${ENVIRONMENT}/api/shop/init`,
     // その他
     UPLOAD_IMAGE: `${ENVIRONMENT}/api/common/imgUpload`
 } as const;
