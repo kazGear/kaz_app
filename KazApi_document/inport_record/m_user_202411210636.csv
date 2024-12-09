@@ -1,0 +1,9 @@
+"login_id","login_pass","failed_login_cnt","is_login_disabled","disp_name","disp_short_name","role","cash","bankruptcy_cnt","wins","wins_get_cash","losses","losses_lost_cash"
+kaz57guitar@gmail.com,kaz_5050,0,false,kazuki,kaz,1,5000,0,0,0,0,0
+joy,joy,0,false,joy,J,1,5000,0,0,0,0,0
+admin,admin,0,false,管理者,「管」,99,5000,0,0,0,0,0
+g1234,rmYUjXuUMmFFvFbchqHYMA==,0,false,g1234,"1234",1,5000,0,0,0,0,0
+サカモト,"0yNZMYF6j8ZPJivYYGvXDg==",0,false,坂本竜馬,坂本,1,5000,0,0,0,0,0
+サイゴウ,"44oSRDDfZKdXGPimoJgZsA==",0,false,西郷隆盛,西郷,1,5000,0,0,0,0,0
+ナカオカ,"0OWflbT9h9uCGMqd1TJ76w==",0,false,中岡慎太郎,中岡,1,5000,0,0,0,0,0
+guest,cO+WjmvbT2aaUitr3X4Lig==,0,false,guest,guest,1,5000,0,0,0,0,0
