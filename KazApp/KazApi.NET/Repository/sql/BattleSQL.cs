@@ -29,7 +29,7 @@
                      , wins_get_cash    = wins_get_cash + @wins_get_cash
                      , losses           = losses + @losses
                      , losses_lost_cash = losses_lost_cash + @losses_lost_cash
-                 WHERE login_id = @login_id ;
+                 WHERE login_id = @login_id  ;
             ";
             return SQL;
         }

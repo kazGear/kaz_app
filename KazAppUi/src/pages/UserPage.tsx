@@ -91,7 +91,7 @@ const UserPage = () => {
             </SdivPageL>
             <SdivPageR>
                 <OutSideFrame styleObj={monstersStyle}>
-                    <MonstersBlock monsters={monsters} loginId={loginId}/>
+                    <MonstersBlock monsters={monsters} loginId={loginId} />
                 </OutSideFrame>
             </SdivPageR>
         </SdivPageFrame>
