@@ -95,6 +95,7 @@ export const URLS = {
     CHECK_LOGIN_TOKEN: `${ENVIRONMENT}/api/auth/checkToken`,
     // ショップ系
     SHOP_INIT: `${ENVIRONMENT}/api/shop/init`,
+    SELECT_SHOP_ITEMS: `${ENVIRONMENT}/api/shop/items`,
     // その他
     UPLOAD_IMAGE: `${ENVIRONMENT}/api/common/imgUpload`
 } as const;

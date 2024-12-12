@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import OutSideFrame from "../components/common/OutSideFrame";
 import Select from "../components/common/Select";
-import { COLORS, KEYS, URLS } from "../lib/Constants";
-import { useLayoutEffect, useState } from "react";
+import { COLORS, KEYS, PREFIX, URLS } from "../lib/Constants";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useServerWithQuery } from "../hooks/useHooksOfCommon";
-import { Shop } from "../types/Shop";
+import { Item, Shop } from "../types/Shop";
+import Button from "../components/common/Button";
 
 const SshopPageFrame = styled.div`
     margin-top: 80px;
@@ -30,7 +31,8 @@ const Std = styled.td`
 
 const ShopPage = () => {
     const [shopsOfSelectBox, setShopsOfSelectBox] = useState<Shop[]>([]);
-    const [saleItems, setaleItems] = useState(null);
+    const [selectedShop, setSelectedShop] = useState<string | undefined>("shop001");
+    const [shopItems, setShopItems] = useState<Item[]>([]);
 
     /**
      * 初期処理
@@ -44,12 +46,29 @@ const ShopPage = () => {
         }
         selectShops();
     }, []);
+    /**
+     * 店舗選択時
+     */
+    const changeShopHandler = (e: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+        setSelectedShop(e?.target.value);
+    }
+    /**
+     * 店舗アイテム表示
+     */
+    const selectItems = useServerWithQuery();
+    useEffect(() => {
+        const fetchShopItems = async () => {
+            const items: Item[] = await selectItems(URLS.SELECT_SHOP_ITEMS + `?shopId=${selectedShop}`);
+            setShopItems(items);
+        }
+        fetchShopItems();
+    }, [selectedShop]);
 
     return (
         <SshopPageFrame>
             <SdivControllerFrame>
                 <OutSideFrame styleObj={{height: "60px", margin: "20px"}}>
-                    <Select title="店舗">
+                    <Select title="店舗" onChange={changeShopHandler}>
                         {
                             shopsOfSelectBox.map((shop, index) => (
                                 <option value={shop.ShopId} key={index}>{shop.ShopName}</option>
@@ -61,26 +80,31 @@ const ShopPage = () => {
             <SdivItemFrame>
                 <p style={{margin: "20px"}}>取り扱い商品</p>
                 <Stable>
+                    <thead>
+                        <tr>
+                            <td>イメージ</td>
+                            <td>タイトル</td>
+                            <td>備考</td>
+                            <td>価格</td>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <Std>aaaaa</Std>
-                            <Std>bbbbbbb</Std>
-                            <Std>ccccccc</Std>
-                        </tr>
-                        <tr>
-                            <Std>eeeeeeeeeeee</Std>
-                            <Std>ffffffffffff</Std>
-                            <Std>gggggg</Std>
-                        </tr>
-                        <tr>
-                            <Std>eeeeeeeeeeee</Std>
-                            <Std>ffffffffffff</Std>
-                            <Std>gggggg</Std>
-                        </tr>
+                        {
+                            shopItems.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td><img src={PREFIX.BASE64 + item.ItemImage} alt="書品" style={{width: "50px", height: "50px", borderRadius: "100%"}}/></td>
+                                        <td >{item.ItemName}</td>
+                                        <td >{item.Remarks}</td>
+                                        <td>{item.ItemPrice} Gil</td>
+                                        <td><Button text="購入" onClick={()=>{}}/></td>
+                                    </tr>
+                                )
+                            })
+                        }
                     </tbody>
                 </Stable>
             </SdivItemFrame>
-
         </SshopPageFrame>
     );
 };

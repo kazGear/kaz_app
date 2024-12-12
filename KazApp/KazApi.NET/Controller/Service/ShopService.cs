@@ -3,6 +3,7 @@ using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
+using System.Linq.Expressions;
 
 namespace KazApi.Controller.Service
 {
@@ -28,5 +29,14 @@ namespace KazApi.Controller.Service
             return _posgre.Select<ShopDTO>(ShopSQL.SelectShops(), param);
         }
 
+        /// <summary>
+        /// 店舗リスト取得
+        /// </summary>
+        public IEnumerable<ItemDTO> SelectShopItems(string shopId)
+        {
+            var param = new { shop_id = shopId };
+
+            return _posgre.Select<ItemDTO>(ShopSQL.SelectItems(), param);
+        }
     }
 }

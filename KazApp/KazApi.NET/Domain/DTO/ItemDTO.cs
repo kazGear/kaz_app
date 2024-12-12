@@ -9,6 +9,6 @@
         public string ItemName { get; set; }
         public int ItemPrice { get; set; }
         public string Remarks { get; set; }
-        public int ItemImage { get; set; }
+        public string ItemImage { get; set; }
     }
 }
