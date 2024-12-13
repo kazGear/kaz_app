@@ -9,7 +9,7 @@ import MonsterReportControllerBlock from "../components/battleResultPage/Monster
 import { COLORS } from "../lib/Constants";
 
 const SdivOutsideFrame = styled.div`
-    margin-top: 60px;
+    margin-top: 20px;
     height: 100%;
 `;
 const SdivOptionFrame = styled.div`

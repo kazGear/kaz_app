@@ -14,7 +14,6 @@ import OutSideFrame from "../components/common/OutSideFrame";
 import ImgUpload from "../components/common/ImgUpload";
 
 const SdivPageFrame = styled.div`
-    margin-top: 40px;
     display: flex;
     height: 100%;
 `;
@@ -25,7 +24,8 @@ const SdivPageL = styled.div`
 `;
 const SdivPageR = styled.div`
     width: 50%;
-    height: 565px;
+    height: 85%;
+    overflow: hidden;
 `;
 const cashStyle: React.CSSProperties = {
     margin: "20px",

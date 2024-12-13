@@ -5,15 +5,17 @@ import { MonsterDTO } from "../../types/MonsterBattle";
 import { useLayoutEffect, useState } from "react";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
 import { URLS } from "../../lib/Constants";
-import NowLoading from "../common/NowLoading";
 
 const SdivMonsters = styled.div`
     height: 100%;
     margin: 20px;
 `;
-const Img = styled.img`
+const SImg = styled.img`
     width: 50px;
     height: 50px;
+    vertical-align: middle;
+    margin: 5px 0 5px 0;
+}
 `;
 const Stable = styled.table`
     height: 100%;
@@ -69,7 +71,7 @@ const MonstersBlock = ({monsters, loginId}: ArgProps) => {
                         monsters.map((monster, index) => (
                             <tr key={index}>
                                 <Std1>{monster.MonsterName}</Std1>
-                                <Std2><Img src={monsterImages(monster.MonsterId)} alt="アイコン"/>{}</Std2>
+                                <Std2><SImg src={monsterImages(monster.MonsterId)} alt="アイコン"/>{}</Std2>
                                 <Std3>HP：{monster.Hp}</Std3>
                                 <Std4>攻撃力：{monster.Attack}</Std4>
                                 <Std5>スピード：{monster.Speed}</Std5>

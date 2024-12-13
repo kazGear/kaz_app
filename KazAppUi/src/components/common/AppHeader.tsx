@@ -16,15 +16,14 @@ const Simg = styled.img`
 `;
 const Sheader = styled.header`
     width: 100%;
-    height: 50px;
-    max-height: 50px;
+    height: 10%;
     box-shadow: 0px 0px 10px 0px #000000;
     text-align: left;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
-    top: 0;
+    position: relative;
+    top: 0x;
     background-color: white;
     z-index: 2000;
 `;

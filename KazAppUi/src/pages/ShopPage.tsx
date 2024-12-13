@@ -8,8 +8,8 @@ import ShopItemTable from "../components/shopPage/ShopItemTable";
 import NowLoading from "../components/common/NowLoading";
 
 const SshopPageFrame = styled.div`
-    margin-top: 80px;
     display: flex;
+    height: 90%;
 `;
 const SdivControllerFrame = styled.div`
     width:25%;
@@ -18,6 +18,7 @@ const SdivControllerFrame = styled.div`
 const SdivItemFrame = styled.div`
     width: 75%;
     margin: 20px;
+    overflow: overlay;
 `;
 
 const ShopPage = () => {

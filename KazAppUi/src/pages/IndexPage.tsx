@@ -11,7 +11,7 @@ import ToEditPageBlock from "../components/indexPage/ToEditPageBlock";
 
 const SdivLinkFrame = styled.div`
     width: 90%;
-    margin: 60px auto;
+    margin: 0 auto;
 `;
 const SdivContentsFrame = styled.div`
     width: 50%;
