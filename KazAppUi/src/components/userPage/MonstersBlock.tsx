@@ -5,6 +5,7 @@ import { MonsterDTO } from "../../types/MonsterBattle";
 import { useLayoutEffect, useState } from "react";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
 import { URLS } from "../../lib/Constants";
+import NowLoading from "../common/NowLoading";
 
 const SdivMonsters = styled.div`
     height: 100%;
@@ -61,9 +62,10 @@ const MonstersBlock = ({monsters, loginId}: ArgProps) => {
     return (
         <SdivMonsters>
             <Strong>開放モンスター&emsp;{getMonsterCount}</Strong>
+
             <Stable>
                 <tbody>
-                    { monsters != null ?
+                    { monsters !== null ?
                         monsters.map((monster, index) => (
                             <tr key={index}>
                                 <Std1>{monster.MonsterName}</Std1>

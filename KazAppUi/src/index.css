@@ -14,6 +14,11 @@ body {
 
 }
 
+td {
+  border-top: lightgrey 1px solid;
+  border-bottom: lightgrey 1px solid;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

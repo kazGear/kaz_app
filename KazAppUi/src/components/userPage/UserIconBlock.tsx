@@ -4,6 +4,7 @@ import { UserDTO } from "../../types/UserManage";
 import { PREFIX } from "../../lib/Constants";
 import nowLoading from "../../images/background/nowLoading.gif";
 import { isEmpty } from "../../lib/CommonLogic";
+import NowLoading from "../common/NowLoading";
 
 const SdivImageFrame = styled.div`
     height: 150px;
@@ -36,7 +37,7 @@ const UserIconBlock = ({user}: ArgProps) => {
     return (
         <SdivImageFrame>
             { userImage.length < 50 ? ( // base64 prefixは30文字無い程度
-                    <Simg src={nowLoading} alt="ユーザーイメージ"/>
+                    <NowLoading alt="ユーザーイメージ" size="80pxs"/>
                 ) : (
                     <Simg src={userImage} alt="ユーザーイメージ"/>
                 )
