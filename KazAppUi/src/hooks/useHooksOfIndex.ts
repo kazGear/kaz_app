@@ -13,7 +13,7 @@ export const useCheckLogin = (
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', },
             }
-            const res = await fetch(`${URLS.CHECK_LOGIN_TOKEN}?token=${token}`, option);
+            const res = await fetch(`${URLS.CHECK_LOGIN_TOKEN}?token=${token ?? ""}`, option);
 
             // 期限切れ
             if (res.ok) {

@@ -84,23 +84,23 @@ const AppHeader = ({title}: ArgProps) => {
                 <Button text="モンスター闘技場"
                         width={125}
                         onClick={() => navigate("/BattlePage")}
-                        disabled={validToken ? false : true}/>
+                        disabled={!validToken}/>
                 <Button text="闘技場戦績"
                         width={90}
                         onClick={() => navigate("/BattleResultPage")}
-                        disabled={validToken ? false : true}/>
+                        disabled={!validToken}/>
                 <Button text="ユーザーページ"
                         width={120}
                         onClick={() => navigate("/UserPage")}
-                        disabled={validToken ? false : true}/>
+                        disabled={!validToken}/>
                 <Button text="ログイン"
                         width={80}
                         onClick={() => navigate("/LoginPage")}
-                        disabled={validToken ? false : true}/>
+                        disabled={!validToken}/>
                 <Button text="ショップ"
                         width={80}
                         onClick={() => navigate("/ShopPage")}
-                        disabled={validToken ? false : true}/>
+                        disabled={!validToken}/>
             </SdivButtonFrame>
             <div style={{display: "flex", alignItems: "center"}}>
                 {

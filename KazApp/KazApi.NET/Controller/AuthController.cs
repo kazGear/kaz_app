@@ -49,7 +49,7 @@ namespace KazApi.Controller
         [HttpPost("api/auth/checkToken")]
         public IActionResult IsValidToken([FromQuery] string token)
         {
-            if (token == null || token == "null") return Ok(false);
+            if (token == null) return Ok(false);
 
             bool isValid = UJwt.IsValidToken(token);
             return Ok(isValid);
