@@ -24,7 +24,6 @@ const frameStyle: React.CSSProperties = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    background: `${COLORS.BASE_BACKGROUND}`,
 };
 
 const Sspan = styled.span`

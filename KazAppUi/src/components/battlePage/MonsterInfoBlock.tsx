@@ -10,7 +10,7 @@ const SdivMonsterInfoFrame = styled.div`
     height: 78px;
     font-size: 15px;
     color: ${props => props.color};
-    background: ${COLORS.BASE_BACKGROUND};
+    background: rgba(255, 255, 255, 0.8);
 `;
 const Stable = styled.table`
     width: 100%;

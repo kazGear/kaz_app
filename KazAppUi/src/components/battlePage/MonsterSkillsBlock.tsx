@@ -6,7 +6,7 @@ const SdivMonsterSkillsFrame = styled.div`
     border: solid 4px ${COLORS.BORDER_COLOR};
     border-radius: 10px;
     padding: 5px;
-    background: ${COLORS.BASE_BACKGROUND};
+    background: rgba(255, 255, 255, 0.8);
 `;
 const Slist = styled.li`
     list-style: none;

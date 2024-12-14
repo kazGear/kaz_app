@@ -6,7 +6,8 @@ const Sdiv = styled.div`
     border: solid 1px ${COLORS.BORDER_COLOR};
     box-shadow: 4px 4px ${COLORS.SHADOW_COLOR};
     overflow: overlay;
-    background: ${COLORS.BASE_BACKGROUND};
+    // opacityは全て透過させてしまう
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 10px 0 10px 0
 `;
 

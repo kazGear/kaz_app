@@ -38,6 +38,7 @@ const Std4 = styled.td`
 const Simg = styled.img`
     width: 50px;
     height: 50px;
+    vertical-align: middle;
 `;
 
 interface ArgProps {

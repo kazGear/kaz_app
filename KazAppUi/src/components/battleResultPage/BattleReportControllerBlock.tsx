@@ -52,25 +52,21 @@ const BattleReportControllerBlock = ({setMonsterReport, sortType}: ArgProps) => 
     }, [monsterTypeId, sortType, isAscOrder]);
 
     return (
-        <OutSideFrame>
-            <div style={{margin: "0 0 0 20px"}}>
-                <Sh1Title>モンスター戦績</Sh1Title>
-                <MonsterTypesListBlock setMonsterTypeId={setMonsterTypeId} />
-                <Select title="ソート順" onChange={sortHandler}>
-                    <option value={KEYS.ORDER_BY_ASC}>昇順</option>
-                    <option value={KEYS.ORDER_BY_DESC}>降順</option>
-                </Select>
+        <div style={{margin: "0 0 0 20px"}}>
+            <Sh1Title>モンスター戦績</Sh1Title>
+            <MonsterTypesListBlock setMonsterTypeId={setMonsterTypeId} />
+            <Select title="ソート順" onChange={sortHandler}>
+                <option value={KEYS.ORDER_BY_ASC}>昇順</option>
+                <option value={KEYS.ORDER_BY_DESC}>降順</option>
+            </Select>
+            <div style={{textAlign: "end"}}>
                 <Button
                     text="検索"
                     onClick={fetchMonsterReportHandler}
-                    styleObj={{
-                        position: "absolute",
-                        bottom: "0",
-                        right: "0",
-                    }}
+                    styleObj={{margin: "0 15px 15px 0"}}
                 />
             </div>
-        </OutSideFrame>
+        </div>
     );
 };
 

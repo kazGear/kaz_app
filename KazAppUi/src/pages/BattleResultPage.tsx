@@ -6,7 +6,8 @@ import { useCheckToken } from "../hooks/useHooksOfCommon";
 import BattleReportControllerBlock from "../components/battleResultPage/BattleReportControllerBlock";
 import BattleReportBlock from "../components/battleResultPage/BattleReportBlock";
 import MonsterReportControllerBlock from "../components/battleResultPage/MonsterReportControllerBlock";
-import { COLORS } from "../lib/Constants";
+import OutSideFrame from "../components/common/OutSideFrame";
+import NowLoading from "../components/common/NowLoading";
 
 const SdivOutsideFrame = styled.div`
     margin-top: 20px;
@@ -15,34 +16,14 @@ const SdivOutsideFrame = styled.div`
 const SdivOptionFrame = styled.div`
     display: flex;
     justify-content: space-around;
-    height: 140px;
+    height: 22%;
     margin: 0 0 20px 0;
-`;
-const SdivOptionL = styled.div`
-    width: 55%;
-    height: 100%;
-    position: relative;
-`;
-const SdivOptionR = styled.div`
-    width: 35%;
-    height: 100%;
-    position: relative;
 `;
 const SdivReportFrame = styled.div`
     display: flex;
     justify-content: space-around;
-`;
-const SdivReportL = styled.div`
-    width: 55%;
-    max-height: 430px;
-    overflow-y: scroll;
-    background: ${COLORS.BASE_BACKGROUND};
-`;
-const SdivReportR = styled.div`
-    width: 35%;
-    max-height: 430px;
-    overflow-y: scroll;
-    background: ${COLORS.BASE_BACKGROUND};
+    margin-top: 20px;
+    height: 60%;
 `;
 
 const BattleResultPage = () => {
@@ -56,27 +37,28 @@ const BattleResultPage = () => {
         <SdivOutsideFrame>
             <SdivOptionFrame>
                 {/* 検索条件部 */}
-                <SdivOptionL>
+
+                <OutSideFrame styleObj={{width: "55%"}}>
                     <BattleReportControllerBlock setMonsterReport={setMonsterReport}
-                                                 sortType={sortType}/>
-                </SdivOptionL>
+                                                    sortType={sortType}/>
+                </OutSideFrame>
 
                 {/* 検索条件部 */}
-                <SdivOptionR>
+                <OutSideFrame styleObj={{width: "35%"}}>
                     <MonsterReportControllerBlock setBattleReport={setBattleReport}/>
-                </SdivOptionR>
+                </OutSideFrame>
             </SdivOptionFrame>
 
             <SdivReportFrame>
                 {/* レポート部 */}
-                <SdivReportL>
+                <OutSideFrame styleObj={{width: "55%"}}>
                     <MonsterReport monsterReport={monsterReport}
                                    setSortType={setSortType} />
-                 </SdivReportL>
+                 </OutSideFrame>
                 {/* レポート部 */}
-                <SdivReportR>
+                <OutSideFrame styleObj={{width: "35%"}}>
                     <BattleReportBlock battleReport={battleReport} />
-                </SdivReportR>
+                </OutSideFrame>
             </SdivReportFrame>
         </SdivOutsideFrame>
     );

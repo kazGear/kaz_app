@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { MonsterReportDTO } from "../../types/BattleReport";
 import { COLORS } from "../../lib/Constants";
 import monsterImages from "../../lib/MonsterImages";
+import OutSideFrame from "../common/OutSideFrame";
 
 const Stable = styled.table`
     width: 100%;
@@ -21,14 +22,14 @@ const StHead = styled.thead`
     background-color: white;
 `;
 const Std1 = styled.td`
-    width: 40%;
+    width: 32%;
     height: 35px;
     border-top: ${COLORS.BORDER_COLOR} 1px solid;
     border-bottom: ${COLORS.BORDER_COLOR} 1px solid;
     padding-left: 20px;
     `;
 const Std2 = styled.td`
-    width: 12%;
+    width: 20%;
     height: 35px;
     border-top: ${COLORS.BORDER_COLOR} 1px solid;
     border-bottom: ${COLORS.BORDER_COLOR} 1px solid;
