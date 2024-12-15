@@ -22,6 +22,8 @@ interface ArgProps {
 }
 
 const ShopItemTable = ({shopItems}: ArgProps) => {
+
+
     return (
         <OutSideFrame>
             <p style={{margin: "20px"}}>取り扱い商品</p>

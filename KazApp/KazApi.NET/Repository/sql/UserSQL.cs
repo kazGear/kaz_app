@@ -73,11 +73,12 @@ namespace KazApi.Repository.sql
         public static string InsertStartUpMonsters()
         {
             string SQL = @"
-                INSERT INTO m_usable_monster_types VALUES
+                INSERT INTO t_my_item VALUES
                 (
-                    @user_id,
-                    @monster_type_id,
-                    @not_use_this
+                    @user_id
+                  , @item_id
+                  , 1
+                  , @not_use_this
                 ) ;
             ";
             return SQL;
@@ -112,10 +113,10 @@ namespace KazApi.Repository.sql
                          SELECT count(*) FROM m_monster
                        )                                 AS Param2
                   FROM m_user AS u
-            INNER JOIN m_usable_monster_types AS umt
-                    ON umt.login_id = u.login_id
+            INNER JOIN t_my_item AS i
+                    ON i.login_id = u.login_id
             INNER JOIN m_monster AS m
-                    ON m.monster_type = umt .monster_type_id
+                    ON i.item_id = 'monsterType' || lpad(m.monster_type::text, 3, '0')
                  WHERE u.login_id = @login_id
               GROUP BY u.login_id ;
             ";
