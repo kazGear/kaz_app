@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import Button from "../common/Button";
-import { PREFIX } from "../../lib/Constants";
+import { KEYS, PREFIX, URLS } from "../../lib/Constants";
 import { Item } from "../../types/Shop";
 import OutSideFrame from "../common/OutSideFrame";
+import BorderTd from "../common/BorderTd";
+import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
+import { useLayoutEffect, useState } from "react";
 
 const Stable = styled.table`
     margin: auto;
-    width: 80%;
+    width: 90%;
     border-collapse: collapse;
     margin-bottom: 20px;
 `;
@@ -23,7 +26,6 @@ interface ArgProps {
 
 const ShopItemTable = ({shopItems}: ArgProps) => {
 
-
     return (
         <OutSideFrame>
             <p style={{margin: "20px"}}>取り扱い商品</p>
@@ -31,12 +33,12 @@ const ShopItemTable = ({shopItems}: ArgProps) => {
             <Stable>
                 <thead>
                     <tr>
-                        <td style={{borderTop: "none"}}>
+                        <td style={{border: "none"}}>
                             <span style={{marginLeft: "20px"}}>イメージ</span>
                         </td>
-                        <td style={{borderTop: "none"}}>タイトル</td>
-                        <td style={{borderTop: "none"}}>備考</td>
-                        <td style={{borderTop: "none"}}>価格</td>
+                        <td style={{border: "none"}}>タイトル</td>
+                        <td style={{border: "none"}}>備考</td>
+                        <td style={{border: "none"}}>価格</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,15 +46,20 @@ const ShopItemTable = ({shopItems}: ArgProps) => {
                     shopItems.map((item, index) => {
                         return (
                             <tr key={index} style={{height: "60px"}}>
-                                <td>
+                                <BorderTd>
                                     <span style={{marginLeft: "20px", display: "inline-block"}}>
                                         <Simg src={PREFIX.BASE64 + item.ItemImage} alt="書品"/>
                                     </span>
-                                </td>
-                                <td>{item.ItemName}</td>
-                                <td>{item.Remarks}</td>
-                                <td>{item.ItemPrice} Gil</td>
-                                <td><Button text="購入" onClick={()=>{}}/></td>
+                                </BorderTd>
+                                <BorderTd>{item.ItemName}</BorderTd>
+                                <BorderTd>{item.Remarks}</BorderTd>
+                                <BorderTd>{item.ItemPrice} Gil</BorderTd>
+                                <BorderTd>
+                                    {
+                                        item.IsPurchased ? <Button text="購入済" onClick={()=>{}} disabled={true}/>
+                                                         : <Button text="購入" onClick={()=>{}}/>
+                                    }
+                                </BorderTd>
                             </tr>
                         )
                     })

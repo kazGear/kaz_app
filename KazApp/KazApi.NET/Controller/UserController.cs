@@ -111,7 +111,6 @@ namespace KazApi.Controller
 
                 UserDTO? user = _service.SelectUserOne(loginId);
                 return JsonConvert.SerializeObject(user);
-
             }
             catch (Exception e)
             {

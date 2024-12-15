@@ -10,7 +10,7 @@ export const COLORS = {
     CAPTION_FONT_COLOR: "#33cc99",
     BUTTON_FORN_COLOR: "gray",
 
-    BORDER_COLOR: "lightgray",
+    BORDER_COLOR: "darkgray",
     LINE_COLOR: "blue",
 
     SHADOW_COLOR: "dimgrey",

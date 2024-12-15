@@ -3,6 +3,7 @@ import { BattleReportDTO } from "../../types/BattleReport";
 import { COLORS } from "../../lib/Constants";
 import monsterImages from "../../lib/MonsterImages";
 import React from "react";
+import BorderTd from "../common/BorderTd";
 
 const Stable = styled.table`
     width: 100%;
@@ -17,23 +18,6 @@ const StdHeader = styled.td`
     height: 25px;
     align-content: start;
     font-weight: bold;
-`;
-const Std1 = styled.td`
-    width: 15%;
-    border-left: ${COLORS.BORDER_COLOR} 1px solid;
-    padding-left: 20px;
-`;
-const Std2 = styled.td`
-    width: 45%;
-`;
-const Std3 = styled.td`
-    width: 20%;
-`;
-const Std4 = styled.td`
-    width: 20%;
-    border-right: ${COLORS.BORDER_COLOR} 1px solid;
-    color: ${COLORS.ACCENT_FONT_COLOR2};
-    text-align: left;
 `;
 const Simg = styled.img`
     width: 50px;
@@ -64,13 +48,17 @@ const BattleReportBlock = ({battleReport}: ArgProps) => {
                             </tr>
                             : ""
                         }
-                            <tr >
-                                <Std1>{report.Serial}</Std1>
-                                <Std2>{report.MonsterName}</Std2>
-                                <Std3>
+                            <tr>
+                                <BorderTd><span style={{marginLeft: "20px"}}>{report.Serial}</span></BorderTd>
+                                <BorderTd>{report.MonsterName}</BorderTd>
+                                <BorderTd>
                                     <Simg src={monsterImages(report.MonsterId)} alt=""/>
-                                </Std3>
-                                <Std4>{report.IsWin ? "Winner !!" : ""}</Std4>
+                                </BorderTd>
+                                <BorderTd>
+                                    <span style={{color: COLORS.ACCENT_FONT_COLOR2}}>
+                                        {report.IsWin ? "Winner !!" : ""}
+                                    </span>
+                                </BorderTd>
                             </tr>
                         </React.Fragment>
                     )

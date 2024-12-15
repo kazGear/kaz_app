@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { MonsterReportDTO } from "../../types/BattleReport";
 import { COLORS } from "../../lib/Constants";
 import monsterImages from "../../lib/MonsterImages";
-import OutSideFrame from "../common/OutSideFrame";
+import BorderTd from "../common/BorderTd";
 
 const Stable = styled.table`
     width: 100%;
@@ -20,38 +20,6 @@ const StHead = styled.thead`
     transform: translateY(-1px); // 上にスクロールしたものが見えてしまうので蓋をする
     font-weight: bold;
     background-color: white;
-`;
-const Std1 = styled.td`
-    width: 32%;
-    height: 35px;
-    border-top: ${COLORS.BORDER_COLOR} 1px solid;
-    border-bottom: ${COLORS.BORDER_COLOR} 1px solid;
-    padding-left: 20px;
-    `;
-const Std2 = styled.td`
-    width: 20%;
-    height: 35px;
-    border-top: ${COLORS.BORDER_COLOR} 1px solid;
-    border-bottom: ${COLORS.BORDER_COLOR} 1px solid;
-    text-align: left;
-`;
-const Std3 = styled.td`
-    width: 16%;
-    height: 35px;
-    border-top: ${COLORS.BORDER_COLOR} 1px solid;
-    border-bottom: ${COLORS.BORDER_COLOR} 1px solid;
-`;
-const Std4 = styled.td`
-    width: 16%;
-    height: 35px;
-    border-top: ${COLORS.BORDER_COLOR} 1px solid;
-    border-bottom: ${COLORS.BORDER_COLOR} 1px solid;
-`;
-const Std5 = styled.td`
-    width: 16%;
-    height: 35px;
-    border-top: ${COLORS.BORDER_COLOR} 1px solid;
-    border-bottom: ${COLORS.BORDER_COLOR} 1px solid;
 `;
 const Simg = styled.img`
     width: 30px;
@@ -78,11 +46,15 @@ const MonsterReportBlock = ({monsterReport, setSortType}: ArgProps) => {
             <Stable>
                 <StHead>
                     <tr>
-                        <Std1><label>モンスター名<Sradio type="radio" name="sortType" value="1" onChange={sortHandler}/></label></Std1>
-                        <Std2></Std2>
-                        <Std3><label>勝利数<Sradio type="radio" name="sortType" value="2" onChange={sortHandler}/></label></Std3>
-                        <Std4><label>対戦数<Sradio type="radio" name="sortType" value="3" onChange={sortHandler}/></label></Std4>
-                        <Std5><label>勝率<Sradio type="radio" name="sortType" value="4" onChange={sortHandler}/></label></Std5>
+                        <BorderTd>
+                            <label style={{marginLeft: "40px"}}>
+                                モンスター名<Sradio type="radio" name="sortType" value="1" onChange={sortHandler}/>
+                            </label>
+                        </BorderTd>
+                        <BorderTd> </BorderTd>
+                        <BorderTd><label>勝利数<Sradio type="radio" name="sortType" value="2" onChange={sortHandler}/></label></BorderTd>
+                        <BorderTd><label>対戦数<Sradio type="radio" name="sortType" value="3" onChange={sortHandler}/></label></BorderTd>
+                        <BorderTd><label>勝率<Sradio type="radio" name="sortType" value="4" onChange={sortHandler}/></label></BorderTd>
                     </tr>
                 </StHead>
                 <tbody>
@@ -90,13 +62,15 @@ const MonsterReportBlock = ({monsterReport, setSortType}: ArgProps) => {
                     monsterReport.map((report) => {
                         return (
                             <tr key={report.MonsterId}>
-                                <Std1>{report.MonsterName}</Std1>
-                                <Std2>
-                                    <Simg src={monsterImages(report.MonsterId)} alt=""/>
-                                </Std2>
-                                <Std3>{report.Wins} 勝</Std3>
-                                <Std4>{report.BattleCount} 戦</Std4>
-                                <Std5>{report.WinRate}</Std5>
+                                <BorderTd><span style={{marginLeft: "40px"}}>{report.MonsterName}</span></BorderTd>
+                                <BorderTd>
+                                    <Simg src={monsterImages(report.MonsterId)}
+                                          alt=""
+                                          style={{height: "40px", width: "40px"}}/>
+                                </BorderTd>
+                                <BorderTd>{report.Wins} 勝</BorderTd>
+                                <BorderTd>{report.BattleCount} 戦</BorderTd>
+                                <BorderTd>{report.WinRate}</BorderTd>
                             </tr>
                         )
                     })

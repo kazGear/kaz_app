@@ -1,5 +1,4 @@
 ﻿using KazApi.Domain._Const;
-using Microsoft.Extensions.Primitives;
 
 namespace KazApi.Repository.sql
 {
@@ -134,6 +133,15 @@ namespace KazApi.Repository.sql
                   , '{defaultShop}'
                 );
             ";
+            return SQL;
+        }
+
+        public static string SelectMyItem()
+        {
+            string SQL = $@"
+
+
+";
             return SQL;
         }
     }

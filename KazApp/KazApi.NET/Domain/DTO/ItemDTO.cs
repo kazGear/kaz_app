@@ -10,5 +10,6 @@
         public int ItemPrice { get; set; }
         public string Remarks { get; set; }
         public string ItemImage { get; set; }
+        public bool IsPurchased { get; set; }
     }
 }

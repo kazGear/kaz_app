@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { URLS } from "../lib/Constants";
+import { KEYS, URLS } from "../lib/Constants";
 import { useEffect, useState } from "react";
 import { useServerWithQuery } from "../hooks/useHooksOfCommon";
 import { Item } from "../types/Shop";
@@ -31,7 +31,8 @@ const ShopPage = () => {
     const selectItems = useServerWithQuery();
     useEffect(() => {
         const fetchShopItems = async () => {
-            const items: Item[] = await selectItems(URLS.SELECT_SHOP_ITEMS + `?shopId=${selectedShop}`);
+            const items: Item[] = await selectItems(
+                URLS.SELECT_SHOP_ITEMS + `?loginId=${localStorage.getItem(KEYS.USER_ID)}&shopId=${selectedShop}`);
             setShopItems(items);
         }
         fetchShopItems();

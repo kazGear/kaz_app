@@ -10,4 +10,5 @@ export interface Item {
     ItemPrice: number;
     Remarks: string;
     ItemImage: string;
+    IsPurchased: boolean;
 };

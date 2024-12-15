@@ -5,6 +5,7 @@ import { MonsterDTO } from "../../types/MonsterBattle";
 import { useLayoutEffect, useState } from "react";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
 import { URLS } from "../../lib/Constants";
+import BorderTd from "../common/BorderTd";
 
 const SdivMonsters = styled.div`
     height: 100%;

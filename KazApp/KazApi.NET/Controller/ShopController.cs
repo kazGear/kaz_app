@@ -34,16 +34,15 @@ namespace KazApi.Controller
         /// 初期処理
         /// </summary>
         [HttpPost("api/shop/items")]
-        public ActionResult<string> SelectShopItem([FromQuery] string? shopId)
+        public ActionResult<string> SelectShopItem(
+            [FromQuery] string loginId,
+            [FromQuery] string? shopId)
         {
             if (shopId == null) return JsonConvert.SerializeObject(new List<string>());
 
             // ショップリストを取得
-            IEnumerable<ItemDTO> shops = _service.SelectShopItems(shopId);
+            IEnumerable<ItemDTO> shops = _service.SelectShopItems(loginId, shopId);
             return JsonConvert.SerializeObject(shops);
         }
-
-        //[HttpPost("api/shop/purchase")]
-
     }
 }

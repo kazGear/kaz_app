@@ -28,9 +28,13 @@ namespace KazApi.Controller.Service
         /// <summary>
         /// 店舗リスト取得
         /// </summary>
-        public IEnumerable<ItemDTO> SelectShopItems(string shopId)
+        public IEnumerable<ItemDTO> SelectShopItems(string loginId , string shopId)
         {
-            var param = new { shop_id = shopId };
+            var param = new 
+            {
+                login_id = loginId,
+                shop_id = shopId 
+            };
             return _posgre.Select<ItemDTO>(ShopSQL.SelectItems(), param);
         }
 

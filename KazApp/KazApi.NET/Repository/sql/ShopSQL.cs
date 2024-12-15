@@ -23,11 +23,20 @@
         public static string SelectItems()
         {
             string SQL = @"
-                SELECT i.item_id AS ItemId
-                     , i.item_name AS ItemName
-                     , i.item_price AS ItemPrice
-                     , i.remarks AS Remarks
-                     , i.item_image AS ItemImage
+                SELECT i.item_id     AS ItemId
+                     , i.item_name   AS ItemName
+                     , i.item_price  AS ItemPrice
+                     , i.remarks     AS Remarks
+                     , i.item_image  AS ItemImage
+                     , CASE WHEN EXISTS 
+                        (
+                            SELECT *
+                            FROM t_my_item AS mi
+                            WHERE mi.item_id = i.item_id
+                              AND mi.login_id = @login_id
+                        ) 
+                       THEN TRUE 
+                       ELSE FALSE END AS IsPurchased
                   FROM m_shop AS s
             INNER JOIN m_shop_item AS si
                     ON si.shop_id = s.shop_id
