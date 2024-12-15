@@ -36,12 +36,11 @@ namespace KazApi.Controller.Service
         public IEnumerable<UserDTO> RegistedSelectUsers()
             => _posgre.Select<UserDTO>(UserSQL.SelecUsers());
 
-
         /// <summary>
         /// ユーザ登録
         /// </summary>
 
-        public bool InsertUser(
+        public void InsertUser(
             string LoginId,
             string Password,
             string DispName,
@@ -64,20 +63,19 @@ namespace KazApi.Controller.Service
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
-            return true;
         }
 
         /// <summary>
         /// ユーザが初期か使えるモンスタを設定する
         /// </summary>
-        public bool InsertStartUpMonsters(string loginId)
+        public void InsertStartUpMonsters(string loginId)
         {
             try
             {
                 DateTime now = DateTime.Now;
-                               
+
                 foreach (CMonsterType monsterType in CMonsterType.START_UP)
                 {
                     var param = new
@@ -89,12 +87,11 @@ namespace KazApi.Controller.Service
                     };
                     _posgre.Execute(UserSQL.InsertStartUpMonsters(), param);
                 }
-            } 
+            }
             catch (Exception)
             {
-                return false;
+                throw;
             }
-            return true;
         }
 
         /// <summary>
@@ -114,10 +111,18 @@ namespace KazApi.Controller.Service
         {
             var param = new { login_id = loginId };
 
-            LittleDTO<int> result =_posgre.Select<LittleDTO<int>>(UserSQL.SelectMonsterCount(), param)
+            LittleDTO<int> result = _posgre.Select<LittleDTO<int>>(UserSQL.SelectMonsterCount(), param)
                                           .Single();
             return result;
         }
 
+        /// <summary>
+        /// 使用可能ショップを登録
+        /// </summary>
+        public void InsertUsableStore(string loginId)
+        {
+            var param = new { login_id = loginId };
+            _posgre.Execute(UserSQL.InsertUsableStore(), param);
+        }
     }
 }

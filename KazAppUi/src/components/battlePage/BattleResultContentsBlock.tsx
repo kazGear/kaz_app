@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { COLORS } from "../../lib/Constants";
 import Button from "../common/Button";
 import { MetaDataDTO, MonsterDTO } from "../../types/MonsterBattle";
+import { Shop } from "../../types/Shop";
+import Strong from "../common/Strong";
 
 const SpLine = styled.p`
     color: ${COLORS.ACCENT_FONT_COLOR2};
@@ -9,17 +11,24 @@ const SpLine = styled.p`
     margin: 5px 0 0 0;
 `;
 const SdivBetResultFrame = styled.div`
-    height: 25%;
+    height: 20%;
+    text-align: center;
+    align-content: center;
+`;
+const SdivMessageFrame = styled.div`
+    height: 20%;
     text-align: center;
     align-content: center;
 `;
 const SdivButtonFrame = styled.div`
-    height: 25%;
+    margin-top: 15px;
+    height: 10%;
     text-align: end;
     align-content: flex-end;
 `;
 const Sh1 = styled.h1`
     color: ${COLORS.CAPTION_FONT_COLOR};
+    margin: 5px 0 5px 0;
 `;
 const Sspan = styled.span`
     color: ${COLORS.ACCENT_FONT_COLOR2};
@@ -34,10 +43,11 @@ interface ArgProps {
     log: MetaDataDTO | null;
     betMonster: MonsterDTO | null;
     betGil: number;
+    newShops: Shop[];
 }
 
 const BattleResultContentsBlock = (
-     {log, betMonster, betGil}: ArgProps
+     {log, betMonster, betGil, newShops}: ArgProps
     ) => {
     const strike = log && betMonster &&
         log.WinnerMonsterId === betMonster.MonsterId;
@@ -91,6 +101,17 @@ const BattleResultContentsBlock = (
                 } Gil
                 </h2>
             </SdivBetResultFrame>
+
+            <SdivMessageFrame>
+                {
+                    newShops.length > 0 ? <h3 style={{margin: 0}}>新しいショップが解禁されました。</h3> : ""
+                }
+                {
+                    newShops.map((shop, index) => (
+                        <Strong key={index}>{shop.ShopName}&emsp;</Strong>
+                    ))
+                }
+            </SdivMessageFrame>
 
             <SdivButtonFrame>
                 <Button text={"終了"} width={120} onClick={gamesetHandler}/>

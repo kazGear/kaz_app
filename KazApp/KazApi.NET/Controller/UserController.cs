@@ -4,6 +4,7 @@ using KazApi.Controller.Service;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 using KazApi.Domain.DTO;
+using System.Transactions;
 
 namespace KazApi.Controller
 {
@@ -44,32 +45,43 @@ namespace KazApi.Controller
         /// ユーザー登録
         /// </summary>
         [HttpPost("api/user/userRegist")]
-        public ActionResult<bool> UserRegist(
-            [FromQuery] string LoginId,
-            [FromQuery] string Password,
-            [FromQuery] string DispName,
-            [FromQuery] string DispShortName)
+        public ActionResult UserRegist(
+            [FromQuery] string loginId,
+            [FromQuery] string password,
+            [FromQuery] string dispName,
+            [FromQuery] string dispShortName)
         {
-            try
+            using (TransactionScope transaction = new TransactionScope())
             {
-                // 空白除去
-                LoginId = LoginId.Trim();
-                Password = Password.Trim();
-                DispName = DispName.Trim();
-                DispShortName = DispShortName.Trim();
+                try
+                {
+                    // 空白除去
+                    loginId = loginId.Trim();
+                    password = password.Trim();
+                    dispName = dispName.Trim();
+                    dispShortName = dispShortName.Trim();
+                    /*
+                    TODO 引数検証
+                    error >>> エラーページへ
+                     */
+                    _service.InsertUser(loginId, password, dispName, dispShortName);
+                    _service.InsertStartUpMonsters(loginId);
+                    _service.InsertUsableStore(loginId);
 
-                /*
-                TODO 引数検証
-                error >>> エラーページへ
-                 */
+                    // 処理完了
+                    transaction.Complete();
 
-                bool result = _service.InsertUser(LoginId, Password, DispName, DispShortName);
-                result = _service.InsertStartUpMonsters(LoginId);
-                return true;
-            }
-            catch (Exception)
-            {
-                throw new Exception(/* TODO */"エラー画面に伝搬したい");
+                    string message = $"Regist user complete. LoginId: {loginId}, DispNaem: {dispName}";
+                    Console.WriteLine(message);
+                    return Ok(new { message = message });
+                }
+                catch (Exception)
+                {
+                    string message = $"Error regist user. LoginId: {loginId}, DispNaem: {dispName}";
+                    Console.WriteLine(message);
+                    return StatusCode(500, message);
+                }
+
             }
         }
 

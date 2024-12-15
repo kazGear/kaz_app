@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
-namespace KazApi.Repository.sql
+﻿namespace KazApi.Repository.sql
 {
     /// <summary>
     /// SQL文格納クラス
@@ -36,6 +34,45 @@ namespace KazApi.Repository.sql
             INNER JOIN m_item AS i
                     ON i.item_id = si.item_id
                  WHERE s.shop_id = @shop_id ;
+            ";
+            return SQL;
+        }
+
+        public static string ExistsUsableShop()
+        {
+            string SQL = $@"
+                -- 開放可能な店舗リスト
+                SELECT s.shop_id    AS ShopId
+                     , s.shop_name  AS ShopName
+                  FROM m_shop AS s
+                 WHERE EXISTS 
+                     (
+                        SELECT * 
+                          FROM m_user AS u
+                         WHERE u.wins_get_cash >= s.win_money_until_can_use
+                           AND u.login_id = @login_id
+                     )
+            EXCEPT ALL 
+                -- 既に開放済みな店舗は除外する
+                SELECT a.shop_id
+                     , s.shop_name
+                  FROM m_available_stores AS a 
+            INNER JOIN m_shop AS s
+                    ON s.shop_id = a.shop_id
+                 WHERE a.login_id = @login_id
+                 ORDER BY ShopId ASC ;
+            ";
+            return SQL;
+        }
+
+        public static string InsertUsableStore()
+        {
+            string SQL = @$"
+                INSERT INTO m_available_stores VALUES 
+                (
+                    @login_id
+                  , @shop_id
+                );
             ";
             return SQL;
         }

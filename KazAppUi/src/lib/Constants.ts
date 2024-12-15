@@ -96,6 +96,7 @@ export const URLS = {
     // ショップ系
     SHOP_INIT: `${ENVIRONMENT}/api/shop/init`,
     SELECT_SHOP_ITEMS: `${ENVIRONMENT}/api/shop/items`,
+    PURCHASE_ITEM: `${ENVIRONMENT}/api/shop/purchase`,
     // その他
     UPLOAD_IMAGE: `${ENVIRONMENT}/api/common/imgUpload`
 } as const;

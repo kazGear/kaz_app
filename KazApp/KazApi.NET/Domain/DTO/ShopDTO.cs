@@ -9,4 +9,5 @@
         public string ShopName { get; set; }
         public int WinMoneyUntilCanUse { get; set; }
     }
+
 }

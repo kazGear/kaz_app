@@ -43,7 +43,9 @@ const UserRegistBlock = ({setShowRegistForm}: ArgProps) => {
     const [canRegist, setCanRegist] = useState(true);
     const [registResult, setRegistResult] = useState("");
 
-    // 既に登録されているログインID等と取得（検証に使用）
+    /**
+     * 既に登録されているログインID等と取得（検証に使用）
+     */
     const fetchUsersData = useServerWithQuery();
     useLayoutEffect(() => {
         const fetchUsers = async () => {
@@ -52,16 +54,18 @@ const UserRegistBlock = ({setShowRegistForm}: ArgProps) => {
         };
         fetchUsers();
     }, []);
-
-    // 既に登録されているデータ群
+    /**
+     * 既に登録されているデータ群
+     */
     useCreateUsedList({
         users,
         setUsedLoginIdList,
         setUsedDispNameList,
         setUsedDispShortNameList
     });
-
-    // 登録可能な状態か
+    /**
+     * 登録可能な状態か
+     */
     useEffect(() => {
         if (   usableLoginId
             && usablePassword
@@ -73,15 +77,16 @@ const UserRegistBlock = ({setShowRegistForm}: ArgProps) => {
             setCanRegist(true);
         }
     }, [usableLoginId, usablePassword, usableDispName, usableDispShortName]);
-
-    // 登録内容の送信
+    /**
+     * 登録内容の送信
+     */
     const insertUser = useServerWithQuery();
-    const exeUserInsert = () => {
+    const exeUserInsert = async () => {
         try {
-            insertUser(`${URLS.REGIST_USER}?LoginId=${inputLoginId}
-                                          &Password=${inputPassword}
-                                          &DispName=${inputDispName}
-                                          &DispShortName=${inputDispShortName}`);
+            await insertUser(`${URLS.REGIST_USER}?LoginId=${inputLoginId}
+                                                &Password=${inputPassword}
+                                                &DispName=${inputDispName}
+                                                &DispShortName=${inputDispShortName}`);
             localStorage.setItem(KEYS.USER_ID, inputLoginId);
             setRegistResult("正常に登録されました。");
             setCanRegist(true);
@@ -90,26 +95,33 @@ const UserRegistBlock = ({setShowRegistForm}: ArgProps) => {
             setRegistResult("登録に失敗しました。");
         }
     };
-
-    // ログインID用ハンドラ
+    /**
+     * ログインID用ハンドラ
+     */
     const inputHandlerLoginId = (e: React.ChangeEvent<HTMLInputElement>) => {
         const usable = usedLoginIdList?.includes(e.target.value);
         setUsableLoginId(!usable);
         setInputLoginId(e.target.value);
     };
-    // パスワード用ハンドラ
+    /**
+     * パスワード用ハンドラ
+     */
     const inputHandlerPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         const match: any = e.target.value.match(/.{4,}/g); // 何かしら４文字以上必須
         setUsablePassword(match);
         setInputPassword(e.target.value);
     };
-    // ユーザ名用ハンドラ
+    /**
+     * ユーザ名用ハンドラ
+     */
     const inputHandlerDispName = (e: React.ChangeEvent<HTMLInputElement>) => {
         const usable = usedDispNameList?.includes(e.target.value);
         setCanUseDispName(!usable);
         setInputDispName(e.target.value);
     };
-    // ユーザ略称用ハンドラ
+    /**
+     * ユーザ略称用ハンドラ
+     */
     const inputHandlerDispShortName = (e: React.ChangeEvent<HTMLInputElement>) => {
         const usable = usedDispShortNameList?.includes(e.target.value);
         setCanUseDispShortName(!usable);

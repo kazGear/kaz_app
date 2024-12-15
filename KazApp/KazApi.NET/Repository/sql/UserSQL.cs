@@ -1,4 +1,5 @@
 ﻿using KazApi.Domain._Const;
+using Microsoft.Extensions.Primitives;
 
 namespace KazApi.Repository.sql
 {
@@ -51,19 +52,19 @@ namespace KazApi.Repository.sql
             string SQL = @"
                 INSERT INTO m_user VALUES 
                 (
-                    @login_id,
-                    @login_pass,
-                    0,                  -- failed_login_cnt
-                    false,              -- is_login_disabled
-                    @disp_name,
-                    @disp_short_name,
-                    1,                  -- role
-                    5000,               -- cash
-                    0,                  -- bankruptcy_cnt
-                    0,                  -- wins
-                    0,                  -- wins_get_cash
-                    0,                  -- losses
-                    0                   -- losses_lost_cash
+                    @login_id
+                  , @login_pass
+                  , 0                   -- failed_login_cnt
+                  , false              -- is_login_disabled
+                  , @disp_name
+                  , @disp_short_name
+                  , 1                   -- role
+                  , 5000                -- cash
+                  , 0                   -- bankruptcy_cnt
+                  , 0                   -- wins
+                  , 0                   -- wins_get_cash
+                  , 0                   -- losses
+                  , 0                   -- losses_lost_cash
                 ) ;
                 ";
             return SQL;
@@ -76,7 +77,6 @@ namespace KazApi.Repository.sql
                 (
                     @user_id,
                     @monster_type_id,
-                    @acquired_date,
                     @not_use_this
                 ) ;
             ";
@@ -107,10 +107,10 @@ namespace KazApi.Repository.sql
         public static string SelectMonsterCount()
         {
             string SQL = @"
-                SELECT count(u.login_id)                AS Param1
-                    , (
-                        SELECT count(*) FROM m_monster
-                      )                                 AS Param2
+                SELECT count(u.login_id)                 AS Param1
+                     , (
+                         SELECT count(*) FROM m_monster
+                       )                                 AS Param2
                   FROM m_user AS u
             INNER JOIN m_usable_monster_types AS umt
                     ON umt.login_id = u.login_id
@@ -118,6 +118,20 @@ namespace KazApi.Repository.sql
                     ON m.monster_type = umt .monster_type_id
                  WHERE u.login_id = @login_id
               GROUP BY u.login_id ;
+            ";
+            return SQL;
+        }
+
+        public static string InsertUsableStore()
+        {
+            string defaultShop = "shop001";
+
+            string SQL = @$"
+                INSERT INTO m_available_stores VALUES 
+                (
+                    @login_id
+                  , '{defaultShop}'
+                );
             ";
             return SQL;
         }

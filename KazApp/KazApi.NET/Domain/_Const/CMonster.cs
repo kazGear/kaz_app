@@ -3,112 +3,112 @@
     /// <summary>
     /// モンスター定数
     /// </summary>
-    public class CMonster : Enumeration<int>
+    public class CMonster : Enumeration<string>
     {
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        private CMonster(int id, string name) : base(id, name) { }
+        private CMonster(string id, string name) : base(id, name) { }
 
-        public static readonly CMonster キラービー = new(1, "キラービー");
-        public static readonly CMonster アサシンバグ = new(2, "アサシンバグ");
-        public static readonly CMonster ラスターバグ = new(3, "ラスターバグ");
-        public static readonly CMonster カーミラ = new(4, "カーミラ");
-        public static readonly CMonster カーミラクイーン = new(5, "カーミラクイーン)");
+        public static readonly CMonster キラービー = new("monster001", "キラービー");
+        public static readonly CMonster アサシンバグ = new("monster002", "アサシンバグ");
+        public static readonly CMonster ラスターバグ = new("monster003", "ラスターバグ");
+        public static readonly CMonster カーミラ = new("monster004", "カーミラ");
+        public static readonly CMonster カーミラクイーン = new("monster005", "カーミラクイーン)");
 
-        public static readonly CMonster デーモン = new(6, "デーモン");
-        public static readonly CMonster グレートデーモン = new(7, "グレートデーモン");
-        public static readonly CMonster ゴブリン = new(8, "ゴブリン");
-        public static readonly CMonster マシンゴーレム = new(9, "マシンゴーレム");
-        public static readonly CMonster ゴブリンガード = new(10, "ゴブリンガード");
+        public static readonly CMonster デーモン = new("monster006", "デーモン");
+        public static readonly CMonster グレートデーモン = new("monster007", "グレートデーモン");
+        public static readonly CMonster ゴブリン = new("monster008", "ゴブリン");
+        public static readonly CMonster ゴブリンロード = new("monster009", "ゴブリンロード");
+        public static readonly CMonster ガーディアン = new("monster0010", "ガーディアン");
+        
+        public static readonly CMonster マシンゴーレム = new("monster011", "マシンゴーレム");
+        public static readonly CMonster ゴブリンガード = new("monster012", "ゴブリンガード");
+                public static readonly CMonster デスマシン = new("monster013", "デスマシン");
+        public static readonly CMonster ハーピー = new("monster014", "ハーピー");
+        public static readonly CMonster セイレーン = new("monster015", "セイレーン");
 
-        public static readonly CMonster ゴブリンロード = new(11, "ゴブリンロード");
-        public static readonly CMonster ガーディアン = new(12, "ガーディアン");
-        public static readonly CMonster デスマシン = new(13, "デスマシン");
-        public static readonly CMonster ハーピー = new(14, "ハーピー");
-        public static readonly CMonster セイレーン = new(15, "セイレーン");
+        public static readonly CMonster アーマーナイト = new("monster016", "アーマーナイト");
+        public static readonly CMonster ダークナイト = new("monster017", "ダークナイト");
+        public static readonly CMonster ターミネーター = new("monster018", "ターミネーター");
+        public static readonly CMonster マジシャン = new("monster019", "マジシャン");
+        public static readonly CMonster ウィザード = new("monster020", "ウィザード");
 
-        public static readonly CMonster アーマーナイト = new(16, "アーマーナイト");
-        public static readonly CMonster ダークナイト = new(17, "ダークナイト");
-        public static readonly CMonster ターミネーター = new(18, "ターミネーター");
-        public static readonly CMonster マジシャン = new(19, "マジシャン");
-        public static readonly CMonster ウィザード = new(20, "ウィザード");
+        public static readonly CMonster ハイウィザード = new("monster021", "ハイウィザード");
+        public static readonly CMonster マイコニド = new("monster022", "マイコニド");
+        public static readonly CMonster ダースマタンゴ = new("monster023", "ダースマタンゴ");
+        public static readonly CMonster ニードルバード = new("monster024", "ニードルバード");
+        public static readonly CMonster コカトバード = new("monster025", "コカトバード");
 
-        public static readonly CMonster ハイウィザード = new(21, "ハイウィザード");
-        public static readonly CMonster マイコニド = new(22, "マイコニド");
-        public static readonly CMonster ダースマタンゴ = new(23, "ダースマタンゴ");
-        public static readonly CMonster ニードルバード = new(24, "ニードルバード");
-        public static readonly CMonster コカトバード = new(25, "コカトバード");
+        public static readonly CMonster プチドラゴン = new("monster026", "プチドラゴン");
+        public static readonly CMonster プチドラゾンビ = new("monster027", "プチドラゾンビ");
+        public static readonly CMonster フロストドラゴン = new("monster028", "フロストドラゴン");
+        public static readonly CMonster プチティアマット = new("monster029", "プチティアマット");
+        public static readonly CMonster ポト = new("monster030", "ポト");
 
-        public static readonly CMonster プチドラゴン = new(26, "プチドラゴン");
-        public static readonly CMonster プチドラゾンビ = new(27, "プチドラゾンビ");
-        public static readonly CMonster フロストドラゴン = new(28, "フロストドラゴン");
-        public static readonly CMonster プチティアマット = new(29, "プチティアマット");
-        public static readonly CMonster ポト = new(30, "ポト");
+        public static readonly CMonster マーマポト = new("monster031", "マーマポト");
+        public static readonly CMonster パーパポト = new("monster032", "パーパポト");
+        public static readonly CMonster プリースト = new("monster033", "プリースト");
+        public static readonly CMonster カオスソーサラー = new("monster034", "カオスソーサラー");
+        public static readonly CMonster イビルシャーマン = new("monster035", "イビルシャーマン");
 
-        public static readonly CMonster マーマポト = new(31, "マーマポト");
-        public static readonly CMonster パーパポト = new(32, "パーパポト");
-        public static readonly CMonster プリースト = new(33, "プリースト");
-        public static readonly CMonster カオスソーサラー = new(34, "カオスソーサラー");
-        public static readonly CMonster イビルシャーマン = new(35, "イビルシャーマン");
+        public static readonly CMonster ラビ = new("monster036", "ラビ");
+        public static readonly CMonster ラビリオン = new("monster037", "ラビリオン");
+        public static readonly CMonster キングラビ = new("monster038", "キングラビ");
+        public static readonly CMonster グレートラビ = new("monster039", "グレートラビ");
+        public static readonly CMonster グリーンスライム = new("monster040", "グリーンスライム");
 
-        public static readonly CMonster ラビ = new(36, "ラビ");
-        public static readonly CMonster ラビリオン = new(37, "ラビリオン");
-        public static readonly CMonster キングラビ = new(38, "キングラビ");
-        public static readonly CMonster グレートラビ = new(39, "グレートラビ");
-        public static readonly CMonster スライム = new(40, "グリーンスライム");
+        public static readonly CMonster ブルーババロア = new("monster041", "ブルーババロア");
+        public static readonly CMonster レッドマシュマロ = new("monster042", "レッドマシュマロ");
+        public static readonly CMonster イビルソード = new("monster043", "イビルソード");
+        public static readonly CMonster イビルウェポン = new("monster044", "イビルウェポン");
+        public static readonly CMonster エレメントソード = new("monster045", "エレメントソード");
 
-        public static readonly CMonster ブルーババロア = new(41, "ブルーババロア");
-        public static readonly CMonster レッドマシュマロ = new(42, "レッドマシュマロ");
-        public static readonly CMonster イビルソード = new(43, "イビルソード");
-        public static readonly CMonster イビルウェポン = new(44, "イビルウェポン");
-        public static readonly CMonster エレメントソード = new(45, "エレメントソード");
+        public static readonly CMonster ケルベロス = new("monster046", "ケルベロス");
+        public static readonly CMonster バウンドウルフ = new("monster047", "バウンドウルフ");
+        public static readonly CMonster ジャッカル = new("monster048", "ジャッカル");
+        public static readonly CMonster ダックソルジャー = new("monster049", "ダックソルジャー");
+        public static readonly CMonster ダックジェネラル = new("monster050", "ダックジェネラル");
 
-        public static readonly CMonster ケルベロス = new(46, "ケルベロス");
-        public static readonly CMonster バウンドウルフ = new(47, "バウンドウルフ");
-        public static readonly CMonster ジャッカル = new(48, "ジャッカル");
-        public static readonly CMonster ダックソルジャー = new(49, "ダックソルジャー");
-        public static readonly CMonster ダックジェネラル = new(50, "ダックジェネラル");
+        public static readonly CMonster モールベア = new("monster051", "モールベア");
+        public static readonly CMonster ニードリオン = new("monster052", "ニードリオン");
+        public static readonly CMonster ギャルビー = new("monster053", "ギャルビー");
+        public static readonly CMonster レディビー = new("monster054", "レディビー");
+        public static readonly CMonster クインビー = new("monster055", "クインビー");
 
-        public static readonly CMonster モールベア = new(51, "モールベア");
-        public static readonly CMonster ニードリオン = new(52, "ニードリオン");
-        public static readonly CMonster ギャルビー = new(53, "ギャルビー");
-        public static readonly CMonster レディビー = new(54, "レディビー");
-        public static readonly CMonster クインビー = new(55, "クインビー");
+        public static readonly CMonster サハギン = new("monster056", "サハギン");
+        public static readonly CMonster プチポセイドン = new("monster057", "プチポセイドン");
+        public static readonly CMonster クロウラー = new("monster058", "クロウラー");
+        public static readonly CMonster メガクロウラー = new("monster059", "メガクロウラー");
+        public static readonly CMonster ギガクロウラー = new("monster060", "ギガクロウラー");
 
-        public static readonly CMonster サハギン = new(56, "サハギン");
-        public static readonly CMonster プチポセイドン = new(57, "プチポセイドン");
-        public static readonly CMonster クロウラー = new(58, "クロウラー");
-        public static readonly CMonster メガクロウラー = new(59, "メガクロウラー");
-        public static readonly CMonster ギガクロウラー = new(60, "ギガクロウラー");
+        public static readonly CMonster ぱっくんオタマ = new("monster061", "ぱっくんオタマ");
+        public static readonly CMonster ぱっくりオタマ = new("monster062", "ぱっくりオタマ");
+        public static readonly CMonster ぱっくんトカゲ = new("monster063", "ぱっくんトカゲ");
+        public static readonly CMonster ぱっくんドラゴン = new("monster064", "ぱっくんドラゴン");
+        public static readonly CMonster チビデビル = new("monster065", "チビデビル");
 
-        public static readonly CMonster ぱっくんオタマ = new(61, "ぱっくんオタマ");
-        public static readonly CMonster ぱっくりオタマ = new(62, "ぱっくりオタマ");
-        public static readonly CMonster ぱっくんトカゲ = new(63, "ぱっくんトカゲ");
-        public static readonly CMonster ぱっくんドラゴン = new(64, "ぱっくんドラゴン");
-        public static readonly CMonster チビデビル = new(65, "チビデビル");
+        public static readonly CMonster グレムリン = new("monster066", "グレムリン");
+        public static readonly CMonster オーガボックス = new("monster067", "オーガボックス");
+        public static readonly CMonster カイザーミミック = new("monster068", "カイザーミミック");
+        public static readonly CMonster バレッテ = new("monster069", "バレッテ");
+        public static readonly CMonster ゴールドバレッテ = new("monster070", "ゴールドバレッテ");
 
-        public static readonly CMonster グレムリン = new(66, "グレムリン");
-        public static readonly CMonster オーガボックス = new(67, "オーガボックス");
-        public static readonly CMonster カイザーミミック = new(68, "カイザーミミック");
-        public static readonly CMonster バレッテ = new(69, "バレッテ");
-        public static readonly CMonster ゴールドバレッテ = new(70, "ゴールドバレッテ");
+        public static readonly CMonster バシリスク = new("monster071", "バシリスク");
+        public static readonly CMonster ファイアドレイク = new("monster072", "ファイアドレイク");
+        public static readonly CMonster スペクター = new("monster073", "スペクター");
+        public static readonly CMonster ゴースト = new("monster074", "ゴースト");
+        public static readonly CMonster ユニコーンヘッド = new("monster075", "ユニコーンヘッド");
 
-        public static readonly CMonster バシリスク = new(71, "バシリスク");
-        public static readonly CMonster ファイアドレイク = new(72, "ファイアドレイク");
-        public static readonly CMonster スペクター = new(73, "スペクター");
-        public static readonly CMonster ゴースト = new(74, "ゴースト");
-        public static readonly CMonster ユニコーンヘッド = new(75, "ユニコーンヘッド");
+        public static readonly CMonster ゴールドユニコ = new("monster076", "ゴールドユニコ");
+        public static readonly CMonster シェイプシフター = new("monster077", "シェイプシフター");
+        public static readonly CMonster シャドウゼロ = new("monster078", "シャドウゼロ");
+        public static readonly CMonster シャドウゼロワン = new("monster079", "シャドウゼロワン");
+        public static readonly CMonster ボルダー = new("monster080", "ボルダー");
 
-        public static readonly CMonster ゴールドユニコ = new(76, "ゴールドユニコ");
-        public static readonly CMonster シェイプシフター = new(77, "シェイプシフター");
-        public static readonly CMonster シャドウゼロ = new(78, "シャドウゼロ");
-        public static readonly CMonster シャドウゼロワン = new(79, "シャドウゼロワン");
-        public static readonly CMonster ボルダー = new(80, "ボルダー");
-
-        public static readonly CMonster パワーボルダー = new(80, "パワーボルダー");
-        public static readonly CMonster デスボルダー = new(80, "デスボルダー");
-        public static readonly CMonster パンプキンボム = new(80, "パンプキンボム");
-        public static readonly CMonster グレネードボム = new(80, "グレネードボム");
+        public static readonly CMonster パワーボルダー = new("monster081", "パワーボルダー");
+        public static readonly CMonster デスボルダー = new("monster082", "デスボルダー");
+        public static readonly CMonster パンプキンボム = new("monster083", "パンプキンボム");
+        public static readonly CMonster グレネードボム = new("monster084", "グレネードボム");
     }
 }

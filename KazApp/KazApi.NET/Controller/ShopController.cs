@@ -43,5 +43,7 @@ namespace KazApi.Controller
             return JsonConvert.SerializeObject(shops);
         }
 
+        //[HttpPost("api/shop/purchase")]
+
     }
 }

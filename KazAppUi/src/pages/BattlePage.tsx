@@ -13,6 +13,7 @@ import GameStartBlock from "../components/battlePage/GameStartBlock";
 import MessageWindowBlock from "../components/battlePage/MessageWindowBlock";
 import CommandButtonBlock from "../components/battlePage/CommandButtonBlock";
 import MonsterWindowBlock from "../components/battlePage/MonsterWindowBlock";
+import { Shop } from "../types/Shop";
 
 const SdivOutSideFrame = styled.div`
     position: relative;
@@ -64,6 +65,7 @@ const BattlePage = () => {
     const [showBattleView, setShowBattleView] = useState(false);
 
     const [loginId, setLoginId] = useState<string | null>("");
+    const [newShops, setNewShops] = useState<Shop[]>([]);
 
     useCheckToken();
 
@@ -110,11 +112,11 @@ const BattlePage = () => {
 
     const insertResult = useServerWithJson();
     const insertBattleResult = useRegistResult();
-    const insertUserResist = useServerWithQuery();
+    const insertUserResult = useServerWithQuery();
     /**
      *  各モンスターのターン送り。戦闘ログを元に描画、表現を行う
      */
-    const nextTurnHandler = () => {
+    const nextTurnHandler = async () => {
         // 例外処理・空の配列が流れてくることがある
         if (isEmpty(battleLog)) {
             setMonsterCount(0); // ボタン状態初期化
@@ -135,11 +137,14 @@ const BattlePage = () => {
             monsters, lastLog, setResultLog, setShowResultDialog, insertResult
         });
         if (!isEmpty(lastLog) && !isEmpty(lastLog!.WinnerMonsterId)) {
-            insertUserResist(`${URLS.RECORD_USER_RESULT}?betMonsterId=${betMonster?.MonsterId}
-                                                       &betGil=${betGil}
-                                                       &betRate=${betMonster!.BetRate}
-                                                       &winningMonsterId=${lastLog?.WinnerMonsterId}
-                                                       &loginId=${loginId}`);
+            const newShops: Shop[] = await insertUserResult(
+                `${URLS.RECORD_USER_RESULT}?betMonsterId=${betMonster?.MonsterId}
+                                            &betGil=${betGil}
+                                            &betRate=${betMonster!.BetRate}
+                                            &winningMonsterId=${lastLog?.WinnerMonsterId}
+                                            &loginId=${loginId}`
+            );
+            setNewShops(newShops);
         }
     }
 
@@ -187,7 +192,8 @@ const BattlePage = () => {
                 log={resultLog}
                 betMonster={betMonster}
                 betGil={betGil}
-                showResultDialog={showResultDialog}/>
+                showResultDialog={showResultDialog}
+                newShops={newShops}/>
         </>
     );
 }

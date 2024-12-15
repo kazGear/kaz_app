@@ -9,6 +9,7 @@ using KazApi.Domain._Monster;
 using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
 using Microsoft.CodeAnalysis;
+using System.Transactions;
 
 namespace KazApi.Controller
 {
@@ -17,12 +18,14 @@ namespace KazApi.Controller
     {
         private readonly ILog<BattleMetaData> _logger;
         private readonly BattleService _service;
+        private readonly ShopService _shopService;
         private readonly MonsterFactory _monsterFactory;
 
         public BattleController(IConfiguration configuration)
         {
             _logger = new BattleLogger();
             _service = new BattleService(configuration);
+            _shopService = new ShopService(configuration);
             _monsterFactory = new MonsterFactory();
         }
 
@@ -68,15 +71,7 @@ namespace KazApi.Controller
                 BattleSystem.CalcBetRate(battleMonsters);
 
                 // テスト用モンスターで対戦
-                //IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
-                //{
-                //    monstersDTO.Where(e => e.MonsterId == ((int)CMonster.イビルシャーマン)).Single(),
-                //    monstersDTO.Where(e => e.MonsterId == ((int)CMonster.エレメントソード)).Single(),
-                //    monstersDTO.Where(e => e.MonsterId == ((int)CMonster.グリーンスライム)).Single(),
-                //    monstersDTO.Where(e => e.MonsterId == ((int)CMonster.カーミラクイーン)).Single(),
-                //    monstersDTO.Where(e => e.MonsterId == ((int)CMonster.セイレーン)).Single(),
-                //};
-                //battleMonsters = testMonsters;
+                //battleMonsters = UseTestMonsters(monstersDTO);
 
                 return JsonConvert.SerializeObject(battleMonsters); ;
             }
@@ -84,6 +79,24 @@ namespace KazApi.Controller
             {
                 return e.Message;
             }
+        }
+
+        /// <summary>
+        /// テストしたいモンスターを指定する
+        /// </summary>
+        /// <param name="monstersDTO"></param>
+        /// <returns></returns>
+        private IEnumerable<MonsterDTO> UseTestMonsters(IEnumerable<MonsterDTO> monstersDTO)
+        {
+            IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
+            {
+                monstersDTO.Where(e => e.MonsterId == CMonster.イビルシャーマン.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.エレメントソード.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.グリーンスライム.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.カーミラクイーン.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.セイレーン.VALUE).Single(),
+            };
+            return testMonsters;
         }
 
         /// <summary>
@@ -153,34 +166,50 @@ namespace KazApi.Controller
 
         /// <summary>
         /// 勝敗結果を記録（ユーザー）
+        /// ショップ開放の確認
         /// </summary>
         [HttpPost("api/user/recordUserResults")]
-        public ActionResult<bool> RecordUserResults(
+        public ActionResult<string> RecordUserResults(
             [FromQuery] string betMonsterId,
             [FromQuery] int betGil,
             [FromQuery] decimal betRate,
             [FromQuery] string winningMonsterId,
             [FromQuery] string loginId)
         {
-            try
+            using (TransactionScope transaction = new TransactionScope())
             {
-                if (string.IsNullOrEmpty(winningMonsterId)) return false;
-                
-                loginId = loginId.Trim();
-                betMonsterId = betMonsterId.Trim();
-                winningMonsterId = winningMonsterId.Trim();
+                try
+                {
+                    if (string.IsNullOrEmpty(winningMonsterId))
+                        return Ok(new { message = "No action required." });
 
-                bool hit = false;
-                if (betMonsterId == winningMonsterId) hit = true;
-                
-                _service.UpdateUserResults(hit, betGil, betRate, loginId);
+                    // クレンジング
+                    loginId = loginId.Trim();
+                    betMonsterId = betMonsterId.Trim();
+                    winningMonsterId = winningMonsterId.Trim();
+
+                    // 予想的中か
+                    bool hit = false;
+                    if (betMonsterId == winningMonsterId) hit = true;
+
+                    // 各種登録
+                    _service.UpdateUserResults(hit, betGil, betRate, loginId);
+
+                    IEnumerable<ShopDTO> InsertUsableShop = _shopService.ExistsUsableShop(loginId);
+                    if (InsertUsableShop.Count() > 0)
+                    {
+                        _shopService.InsertUsableShop(loginId, InsertUsableShop);
+                    }
+
+                    // 処理完了
+                    transaction.Complete();
+                    return JsonConvert.SerializeObject(InsertUsableShop);
+                }
+                catch (Exception)
+                {
+                    return StatusCode(500, $"Error resist user result.");
+                }
             }
-            catch (Exception)
-            {
-                return false;
-            }
-            
-            return true;
         }
     }
 }
