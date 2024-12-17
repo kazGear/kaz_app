@@ -13,22 +13,21 @@ interface ArgProps {
 }
 
 const GameBetBlock = ({
-    monsters, setBetMonster, setBetGil, showBetDialog, setShowBetDialog
- }: ArgProps) => {
-
-    const contents = (): ReactNode => {
-        return <GameBetContentsBlock
+    monsters,
+    setBetMonster,
+    setBetGil,
+    showBetDialog,
+    setShowBetDialog}: ArgProps
+) => {
+    return (
+        <DialogFrame showDialog={showBetDialog}
+                     showFilter={true}>
+            <GameBetContentsBlock
                     monsters={monsters}
                     setBetMonster={setBetMonster}
                     setBetGil={setBetGil}
                     setShowDialog={setShowBetDialog} />
-    }
-
-    return (
-        <DialogFrame
-            renderChild={contents}
-            showDialog={showBetDialog}
-            showFilter={true} />
+        </DialogFrame>
     );
 }
 

@@ -13,22 +13,17 @@ interface ArgProps {
 }
 
 const BattleResultBlock = ({
-    log, betMonster, betGil, showResultDialog, newShops
- }: ArgProps) => {
+    log, betMonster, betGil, showResultDialog, newShops }: ArgProps) => {
 
-    const contents = (): ReactNode => {
-        return <BattleResultContentsBlock
+    return (
+        <DialogFrame showDialog={showResultDialog}
+                     showFilter={true}>
+            <BattleResultContentsBlock
                     log={log}
                     betMonster={betMonster}
                     betGil={betGil}
                     newShops={newShops} />
-    }
-
-    return (
-        <DialogFrame
-            renderChild={contents}
-            showDialog={showResultDialog}
-            showFilter={true} />
+        </DialogFrame>
     );
 }
 

@@ -62,13 +62,13 @@ const SdivFilter = styled.div`
 `;
 
 interface DialogFrameProps {
-    renderChild: () => React.ReactNode;
+    children: React.ReactNode;
     showDialog: boolean;
     showFilter?: boolean;
 }
 
 const DialogFrame = (
-    {renderChild, showDialog = true, showFilter}: DialogFrameProps
+    {children, showDialog = true, showFilter}: DialogFrameProps
 ) => {
     return (
         <>
@@ -76,7 +76,7 @@ const DialogFrame = (
                 {/* <SimgL src={imageL} alt="ツタ"></SimgL> */}
                 <SdivInnerFrame>
                     <SdivMessageArea>
-                        {renderChild()}
+                        {children}
                     </SdivMessageArea>
                 </SdivInnerFrame>
                 {/* <SimgR src={imageR} alt="ツタ"></SimgR> */}

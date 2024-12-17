@@ -10,20 +10,13 @@ interface ArgProps {
 }
 
 const GameStartBlock = ({
-    battleStartHandler, selectMonstersCountHandler, showResultDialog
- }: ArgProps) => {
-
-    const contents = (): ReactNode => {
-        return <BattleStartContentsBlock
-                    battleStartHandler={battleStartHandler}
-                    selectMonstersCountHandler={selectMonstersCountHandler}
-                    />
-    }
-
+    battleStartHandler, selectMonstersCountHandler, showResultDialog}: ArgProps
+) => {
     return (
-        <DialogFrame
-            renderChild={contents}
-            showDialog={showResultDialog} />
+        <DialogFrame showDialog={showResultDialog}>
+            <BattleStartContentsBlock battleStartHandler={battleStartHandler}
+                                      selectMonstersCountHandler={selectMonstersCountHandler}/>
+        </DialogFrame>
     );
 }
 

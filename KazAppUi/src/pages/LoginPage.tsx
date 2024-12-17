@@ -46,12 +46,6 @@ const LoginPage = () => {
         if (token) setToken(token);
     }, []);
     /**
-     * ユーザー登録の内容
-     */
-    const renderUserRegistContents = () => {
-        return <UserRegistBlock setShowRegistForm={setShowRegistForm}/>
-    }
-    /**
      * ログイン処理
      */
     const login = useLogin();
@@ -79,7 +73,9 @@ const LoginPage = () => {
             </LoginContainer>
 
             {/* ユーザ登録フォーム */}
-            <DialogFrame renderChild={renderUserRegistContents} showDialog={showRegistForm}/>
+            <DialogFrame showDialog={showRegistForm}>
+                <UserRegistBlock setShowRegistForm={setShowRegistForm}/>
+            </DialogFrame>
          </>
     );
 };
