@@ -24,7 +24,7 @@ const PurchaseDialog = ({showDialog, purchaseItem, setShowPurchaseDialog}: ArgPr
         <DialogFrame showDialog={showDialog}>
             <Strong>{DECO.BLOCK_LINE}</Strong><br/>
             <Strong>{DECO.BLOCK_LINE_R}</Strong>
-            <h1 style={{margin: "5px 0 5px 0"}}>購入完了</h1>
+                <h1 style={{margin: "5px 0 5px 0"}}>購入完了</h1>
             <Strong>{DECO.BLOCK_LINE}</Strong><br/>
             <Strong>{DECO.BLOCK_LINE_R}</Strong>
 

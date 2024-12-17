@@ -56,7 +56,7 @@ const ShopPage = () => {
     return (
         <SshopPageFrame>
             <SdivControllerFrame>
-                {/* ショップ選択 */}
+                {/* コントローラ */}
                 <SelectShops setSelectedShop={setSelectedShop}
                              user={user}
                              myCash={myCash}/>

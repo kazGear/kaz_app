@@ -100,8 +100,6 @@ const BattlePage = () => {
     */
     const moveMonsters = useServerWithJson();
     const battleHandler = async () => {
-        // console.log("この後400 ??");
-        // console.log(monsters);
         const moveResult =
             await moveMonsters([...monsters], URLS.BATTLE_NEXT_TURN);
         setMonsters([...moveResult.Monsters]);

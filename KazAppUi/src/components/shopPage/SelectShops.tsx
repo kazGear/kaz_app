@@ -5,6 +5,7 @@ import { ShopDTO } from "../../types/Shop";
 import { KEYS, URLS } from "../../lib/Constants";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
 import { UserDTO } from "../../types/UserManage";
+import Accent from "../common/Accent";
 
 interface ArgProps {
     setSelectedShop: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -39,7 +40,7 @@ const SelectShops = ({setSelectedShop, user, myCash}: ArgProps) => {
     return (
         <OutSideFrame >
             <h3 style={{margin: "10px"}}>
-                所持金：{myCash?.toLocaleString()} Gil
+                所持金：<Accent>{myCash?.toLocaleString()}</Accent> Gil
             </h3>
             <Select title="店舗" onChange={changeShopHandler}>
                 {
