@@ -27,7 +27,7 @@ const SdivInnerFrame = styled.div`
     z-index: 1000;
 `;
 const SdivMessageArea = styled.div`
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

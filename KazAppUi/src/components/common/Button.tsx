@@ -21,7 +21,7 @@ const Sbutton = styled.button<SbuttonProps>`
 
     &:hover {
         cursor: pointer;
-        color: ${COLORS.ACCENT_FONT_COLOR2};
+        color: ${COLORS.ACCENT_FONT_PINK};
     }
 
     &:active {

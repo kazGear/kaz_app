@@ -6,6 +6,7 @@ import { ItemDTO } from "../types/Shop";
 import SelectShops from "../components/shopPage/SelectShops";
 import ShopItemTable from "../components/shopPage/ShopItemTable";
 import { UserDTO } from "../types/UserManage";
+import PurchaseDialog from "../components/shopPage/PurchaseDialog";
 
 const SshopPageFrame = styled.div`
     display: flex;
@@ -22,10 +23,15 @@ const SdivItemFrame = styled.div`
 `;
 
 const ShopPage = () => {
+    // ショップ関係
     const [selectedShop, setSelectedShop] = useState<string | undefined>("shop001");
     const [shopItems, setShopItems] = useState<ItemDTO[]>([]);
+    const [purchaseItem, setPurchaseItem] = useState("");
+    // ユーザー関係
     const [user, setUser] = useState<UserDTO | null>(null);
     const [myCash, setMyCash] = useState<number | null>(null);
+
+    const [showPurchaseDialog, setShowPurchaseDialog] = useState(false);
 
     /**
      * 店舗アイテム表示
@@ -50,16 +56,25 @@ const ShopPage = () => {
     return (
         <SshopPageFrame>
             <SdivControllerFrame>
+                {/* ショップ選択 */}
                 <SelectShops setSelectedShop={setSelectedShop}
                              user={user}
                              myCash={myCash}/>
             </SdivControllerFrame>
+
             <SdivItemFrame>
+                {/* 販売商品テーブル */}
                 <ShopItemTable shopItems={shopItems}
                                user={user}
                                myCash={myCash}
-                               setMyCash={setMyCash}/>
+                               setMyCash={setMyCash}
+                               setPurchaseItem={setPurchaseItem}
+                               setShowPurchaseDialog={setShowPurchaseDialog}/>
             </SdivItemFrame>
+            {/* 購入済ダイアログ */}
+            <PurchaseDialog showDialog={showPurchaseDialog}
+                            purchaseItem={purchaseItem}
+                            setShowPurchaseDialog={setShowPurchaseDialog}/>
         </SshopPageFrame>
     )
 };

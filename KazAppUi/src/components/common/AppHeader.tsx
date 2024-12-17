@@ -34,7 +34,7 @@ const SdivButtonFrame = styled.div`
 `;
 const Sh1 = styled.h1`
     margin: 20px;
-    color: ${COLORS.ACCENT_FONT_COLOR2};
+    color: ${COLORS.ACCENT_FONT_PINK};
 `;
 
 const Sspan = styled.span`

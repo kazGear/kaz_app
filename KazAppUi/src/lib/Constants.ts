@@ -3,8 +3,8 @@ const ACCENT_COLOR2: string = "#F05F8D";
 const ALERT_COLOR: string = "red";
 export const COLORS = {
     MAIN_FONT_COLOR: "gray",
-    ACCENT_FONT_COLOR: `${ACCENT_COLOR}`,
-    ACCENT_FONT_COLOR2: `${ACCENT_COLOR2}`,
+    ACCENT_FONT_GREEN: `${ACCENT_COLOR}`,
+    ACCENT_FONT_PINK: `${ACCENT_COLOR2}`,
     LOSER_FONT_COLOR: "#EC008C",
     ALERT_MESSAGE_COLOR: `${ALERT_COLOR}`,
     CAPTION_FONT_COLOR: "#33cc99",
@@ -112,3 +112,8 @@ export const KEYS = {
 export const PREFIX = {
     BASE64: "data:image/jpeg;base64,"
 } as const;
+
+export const DECO = {
+    BLOCK_LINE: "■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋",
+    BLOCK_LINE_R: "＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■"
+}

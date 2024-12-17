@@ -23,17 +23,26 @@ const Simg = styled.img`
 `;
 const SspanStrong = styled.span`
     font-weight: bold;
-    color: ${COLORS.ACCENT_FONT_COLOR2}
+    color: ${COLORS.ACCENT_FONT_PINK}
 `;
 
 interface ArgProps {
     shopItems: ItemDTO[];
     user: UserDTO | null;
     myCash: number | null;
-    setMyCash: React.Dispatch<React.SetStateAction<number | null>>
+    setMyCash: React.Dispatch<React.SetStateAction<number | null>>;
+    setPurchaseItem: React.Dispatch<React.SetStateAction<string>>;
+    setShowPurchaseDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ShopItemTable = ({shopItems, user, myCash, setMyCash}: ArgProps) => {
+const ShopItemTable = ({
+    shopItems,
+    user,
+    myCash,
+    setMyCash,
+    setPurchaseItem,
+    setShowPurchaseDialog
+}: ArgProps) => {
     /**
      * 購入処理
      */
@@ -48,6 +57,8 @@ const ShopItemTable = ({shopItems, user, myCash, setMyCash}: ArgProps) => {
             URLS.USER_INFO + `?loginId=${loginId}`
         );
         setMyCash(user.Cash);
+        setPurchaseItem(itemRow.ItemName);
+        setShowPurchaseDialog(true);
     }
 
     return (

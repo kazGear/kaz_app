@@ -74,7 +74,7 @@ const IndexPage = () => {
                     </SdivContentsFrame>
                 </div>
 
-                <p style={{color: `${COLORS.ACCENT_FONT_COLOR2}`}}>※スマホ非対応、Chrome, edge推奨。</p>
+                <p style={{color: `${COLORS.ACCENT_FONT_PINK}`}}>※スマホ非対応、Chrome, edge推奨。</p>
             </SdivLinkFrame>
         </>
     );

@@ -55,7 +55,7 @@ const BattleReportBlock = ({battleReport}: ArgProps) => {
                                     <Simg src={monsterImages(report.MonsterId)} alt=""/>
                                 </BorderTd>
                                 <BorderTd>
-                                    <span style={{color: COLORS.ACCENT_FONT_COLOR2}}>
+                                    <span style={{color: COLORS.ACCENT_FONT_PINK}}>
                                         {report.IsWin ? "Winner !!" : ""}
                                     </span>
                                 </BorderTd>

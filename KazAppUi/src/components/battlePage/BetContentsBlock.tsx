@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { MonsterDTO } from "../../types/MonsterBattle";
 import DialogFrame from "../common/DialogFrame";
 import GameBetContentsBlock from "./GameBetBlock";

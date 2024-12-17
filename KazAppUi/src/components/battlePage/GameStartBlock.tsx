@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import DialogFrame from "../common/DialogFrame";
 import BattleStartContentsBlock from "./BattleStartContentsBlock";
 

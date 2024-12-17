@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { COLORS } from "../../lib/Constants";
+import { COLORS, DECO } from "../../lib/Constants";
 import Button from "../common/Button";
 import { MetaDataDTO, MonsterDTO } from "../../types/MonsterBattle";
 import { ShopDTO } from "../../types/Shop";
 import Strong from "../common/Strong";
 
 const SpLine = styled.p`
-    color: ${COLORS.ACCENT_FONT_COLOR2};
+    color: ${COLORS.ACCENT_FONT_PINK};
     line-height: 0.5;
     margin: 5px 0 0 0;
 `;
@@ -31,7 +31,7 @@ const Sh1 = styled.h1`
     margin: 5px 0 5px 0;
 `;
 const Sspan = styled.span`
-    color: ${COLORS.ACCENT_FONT_COLOR2};
+    color: ${COLORS.ACCENT_FONT_PINK};
 `;
 
 const gamesetHandler = () => {
@@ -55,12 +55,8 @@ const BattleResultContentsBlock = (
         <>
         {log &&
             <>
-            <SpLine>
-                { log.ExistWinner ? `■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋` : "" }
-            </SpLine>
-            <SpLine>
-                { log.ExistWinner ? `■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋` : "" }
-            </SpLine>
+            <SpLine>{ log.ExistWinner ? DECO.BLOCK_LINE : "" }</SpLine>
+            <SpLine>{ log.ExistWinner ? DECO.BLOCK_LINE_R : "" }</SpLine>
             <Sh1>
                 {
                     log.ExistWinner
@@ -68,12 +64,8 @@ const BattleResultContentsBlock = (
                     : ""
                 }
             </Sh1>
-            <SpLine>
-                { log.ExistWinner ? `■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋` : "" }
-            </SpLine>
-            <SpLine>
-                { log.ExistWinner ? `■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋` : "" }
-            </SpLine>
+            <SpLine>{ log.ExistWinner ? DECO.BLOCK_LINE : "" }</SpLine>
+            <SpLine>{ log.ExistWinner ? DECO.BLOCK_LINE_R : "" }</SpLine>
 
             <h1>{log.AllLoser ? "draw ..." : ""}</h1>
 

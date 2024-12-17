@@ -38,7 +38,7 @@ const SelectShops = ({setSelectedShop, user, myCash}: ArgProps) => {
 
     return (
         <OutSideFrame >
-            <h3 style={{marginLeft: "10px"}}>
+            <h3 style={{margin: "10px"}}>
                 所持金：{myCash?.toLocaleString()} Gil
             </h3>
             <Select title="店舗" onChange={changeShopHandler}>
