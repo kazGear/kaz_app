@@ -6,9 +6,8 @@ namespace KazApi.Repository.sql
     /// SQL文格納クラス
     /// </summary>
     public static class UserSQL
-    {
-
-        public static string SelecUsers(string? loginId = null)
+    {      
+        public static string SelecUserInfo(string? loginId = null)
         {
             string WHERE = loginId != null ? " WHERE login_id = @login_id " : "";
 
@@ -136,12 +135,13 @@ namespace KazApi.Repository.sql
             return SQL;
         }
 
-        public static string SelectMyItem()
+        public static string Purchase()
         {
-            string SQL = $@"
-
-
-";
+            string SQL = @"
+                UPDATE m_user
+                   SET cash = @cash
+                 WHERE login_id = @login_id
+            ";
             return SQL;
         }
     }

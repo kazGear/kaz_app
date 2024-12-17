@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { COLORS } from "../../lib/Constants";
 import Button from "../common/Button";
 import { MetaDataDTO, MonsterDTO } from "../../types/MonsterBattle";
-import { Shop } from "../../types/Shop";
+import { ShopDTO } from "../../types/Shop";
 import Strong from "../common/Strong";
 
 const SpLine = styled.p`
@@ -42,7 +42,7 @@ interface ArgProps {
     log: MetaDataDTO | null;
     betMonster: MonsterDTO | null;
     betGil: number;
-    newShops: Shop[];
+    newShops: ShopDTO[];
 }
 
 const BattleResultContentsBlock = (

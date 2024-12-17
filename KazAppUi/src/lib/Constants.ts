@@ -74,6 +74,7 @@ export const URLS = {
     // 基本情報取得
     USER_INFO: `${ENVIRONMENT}/api/user/userInfo`,
     MONSTERS_INFO: `${ENVIRONMENT}/api/battle/monstersInfo`,
+    ITEM_INFO: `${ENVIRONMENT}/api/shop/itemInfo`,
     // ユーザ関係
     REGIST_USER_INIT: `${ENVIRONMENT}/api/user/init`,
     SELECT_LOGIN_USER: `${ENVIRONMENT}/api/user/loginUser`,

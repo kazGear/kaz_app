@@ -20,6 +20,22 @@
             return SQL;
         }
 
+        public static string SelectItemOne()
+        {
+            string SQL = @"
+                SELECT item_id     AS ItemId
+                     , item_name   AS ItemName
+                     , item_price  AS ItemPrice
+                     , remarks     AS Remarks
+                     , item_image  AS ItemImage
+                     , is_disabled AS IsDisabled
+                  FROM m_item
+                 WHERE item_id = @item_id ;
+            ";
+
+            return SQL;
+        }
+
         public static string SelectItems()
         {
             string SQL = @"
@@ -42,7 +58,8 @@
                     ON si.shop_id = s.shop_id
             INNER JOIN m_item AS i
                     ON i.item_id = si.item_id
-                 WHERE s.shop_id = @shop_id ;
+                 WHERE s.shop_id = @shop_id 
+                   AND i.is_disabled = FALSE;
             ";
             return SQL;
         }
@@ -82,6 +99,21 @@
                     @login_id
                   , @shop_id
                 );
+            ";
+            return SQL;
+        }
+
+        public static string Purchase()
+        {
+            string SQL = @"
+                INSERT INTO t_my_item 
+                VALUES 
+                (
+                    @login_id
+                  , @item_id
+                  , 1
+                  , FALSE
+                ) ;
             ";
             return SQL;
         }

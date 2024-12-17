@@ -10,11 +10,11 @@ interface ArgProps {
 
 const MonsterTypesListBlock = ({setMonsterTypeId}: ArgProps) => {
     const [monsterTypes, setMonsterTypes] = useState<MonsterTypeDTO[]>([]);
-    const fetchMonsterTypes = useServerWithQuery();
+    const goToServer = useServerWithQuery();
 
     useLayoutEffect(() => {
         const fetchTypes = async () => {
-            const types: MonsterTypeDTO[] = await fetchMonsterTypes(URLS.INIT_BATTLE_REPORT);
+            const types: MonsterTypeDTO[] = await goToServer(URLS.INIT_BATTLE_REPORT);
             setMonsterTypes(types);
         }
         fetchTypes();

@@ -64,10 +64,10 @@ const AppHeader = ({title}: ArgProps) => {
     }, [loginId]);
 
     // 表示名取得
-    const select = useServerWithQuery();
+    const goToServer = useServerWithQuery();
     useEffect(() => {
         const selectName = async () => {
-            const user: UserDTO | null = await select(`${URLS.SELECT_LOGIN_USER}?loginId=${loginId}`);
+            const user: UserDTO | null = await goToServer(`${URLS.SELECT_LOGIN_USER}?loginId=${loginId}`);
             setLoginUser(user);
             if (user) setUserImage(PREFIX.BASE64 + user.UserImage);
         }

@@ -26,7 +26,7 @@ const BattleReportControllerBlock = ({setMonsterReport, sortType}: ArgProps) => 
     const [monsterTypeId, setMonsterTypeId] = useState("0");
     const [isAscOrder, setIsAscOrder] = useState(true);
 
-    const fetchServerUseQuery = useServerWithQuery();
+    const goToServer = useServerWithQuery();
 
     /**
      * ソート制御
@@ -43,7 +43,7 @@ const BattleReportControllerBlock = ({setMonsterReport, sortType}: ArgProps) => 
      */
     const fetchMonsterReportHandler = useCallback(async () => {
         const monsterReport: MonsterReportDTO[]
-            = await fetchServerUseQuery(
+            = await goToServer(
                 URLS.MONSTER_REPORTS + `?monsterTypeId=${monsterTypeId}
                                        &sortType=${sortType}
                                        &isAscOrder=${isAscOrder}`

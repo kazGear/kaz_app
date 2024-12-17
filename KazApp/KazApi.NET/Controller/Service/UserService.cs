@@ -25,7 +25,7 @@ namespace KazApi.Controller.Service
         {
             var param = new { login_id = loginId };
 
-            return _posgre.Select<UserDTO>(UserSQL.SelecUsers(loginId), param)
+            return _posgre.Select<UserDTO>(UserSQL.SelecUserInfo(loginId), param)
                           .SingleOrDefault();
         }
 
@@ -34,7 +34,7 @@ namespace KazApi.Controller.Service
         /// </summary>
         /// <returns></returns>
         public IEnumerable<UserDTO> RegistedSelectUsers()
-            => _posgre.Select<UserDTO>(UserSQL.SelecUsers());
+            => _posgre.Select<UserDTO>(UserSQL.SelecUserInfo());
 
         /// <summary>
         /// ユーザ登録
@@ -122,6 +122,19 @@ namespace KazApi.Controller.Service
         {
             var param = new { login_id = loginId };
             _posgre.Execute(UserSQL.InsertUsableStore(), param);
+        }
+
+        /// <summary>
+        /// アイテム購入に伴う所持金の更新
+        /// </summary>
+        public void Purchase(string loginId, int cashAfterPurchase)
+        {
+            var param = new
+            {
+                login_id = loginId,
+                cash = cashAfterPurchase 
+            };
+            _posgre.Execute(UserSQL.Purchase(), param);
         }
     }
 }

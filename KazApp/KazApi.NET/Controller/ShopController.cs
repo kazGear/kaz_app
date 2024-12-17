@@ -10,12 +10,21 @@ namespace KazApi.Controller
     public class ShopController : ControllerBase
     {
         private readonly ShopService _service;
+        private readonly UserService _userService;
         private readonly IDatabase _posgre;
 
         public ShopController(IConfiguration configuration)
         {
             _service = new ShopService(configuration);
+            _userService = new UserService(configuration);
             _posgre = new PostgreSQL(configuration);
+        }
+
+        [HttpPost("api/shop/itemInfo")]
+        public ActionResult<string> SelectItemInfo([FromQuery] string itemId)
+        {
+            ItemDTO item = _service.SelectItemOne(itemId);
+            return JsonConvert.SerializeObject(item);
         }
 
         /// <summary>
@@ -43,6 +52,29 @@ namespace KazApi.Controller
             // ショップリストを取得
             IEnumerable<ItemDTO> shops = _service.SelectShopItems(loginId, shopId);
             return JsonConvert.SerializeObject(shops);
+        }
+
+        [HttpPost("api/shop/purchase")]
+        public ActionResult InsertMyItem(
+            [FromQuery] string loginId,
+            [FromQuery] string itemId)
+        {
+            // クレンジング
+            loginId = loginId.Trim();
+            itemId = itemId.Trim();
+
+            // 残金取得
+            int cash = _userService.SelectUserOne(loginId).Cash;
+            // 購入品取得
+            ItemDTO item = _service.SelectItemOne(itemId);
+
+            if (cash < item.ItemPrice) throw new Exception("資金が不足しています。");
+
+            // 各種登録
+            _service.Purchase(loginId, itemId);
+            _userService.Purchase(loginId, (cash - item.ItemPrice));
+                        
+            return Ok(200);
         }
     }
 }

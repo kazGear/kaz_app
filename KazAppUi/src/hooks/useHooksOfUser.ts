@@ -16,12 +16,12 @@ interface ArgPropsLogin {
  * ユーザーのログイン処理
  */
 export const useLogin = () => {
-    const exeLogin = useServerWithQuery();
+    const goToServer = useServerWithQuery();
     const callback = useCallback( async ({
         inputLoginId, inputPassword, setToken, setShowAlert
     }: ArgPropsLogin) => {
         try {
-            const token: string = await exeLogin(`${URLS.LOGIN_USER}?loginId=${inputLoginId}
+            const token: string = await goToServer(`${URLS.LOGIN_USER}?loginId=${inputLoginId}
                                                                    &password=${inputPassword}`);
 
             // トークン有 >>> ログイン成功

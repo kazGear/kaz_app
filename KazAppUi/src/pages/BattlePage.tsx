@@ -13,7 +13,7 @@ import GameStartBlock from "../components/battlePage/GameStartBlock";
 import MessageWindowBlock from "../components/battlePage/MessageWindowBlock";
 import CommandButtonBlock from "../components/battlePage/CommandButtonBlock";
 import MonsterWindowBlock from "../components/battlePage/MonsterWindowBlock";
-import { Shop } from "../types/Shop";
+import { ShopDTO } from "../types/Shop";
 
 const SdivOutSideFrame = styled.div`
     position: relative;
@@ -65,7 +65,7 @@ const BattlePage = () => {
     const [showBattleView, setShowBattleView] = useState(false);
 
     const [loginId, setLoginId] = useState<string | null>("");
-    const [newShops, setNewShops] = useState<Shop[]>([]);
+    const [newShops, setNewShops] = useState<ShopDTO[]>([]);
 
     useCheckToken();
 
@@ -84,9 +84,9 @@ const BattlePage = () => {
     /**
      * ゲーム開始、モンスター用意
     */
-   const fecthMonsters = useServerWithQuery();
+   const goToServer = useServerWithQuery();
    const gameStartHandler = useCallback(async (e: any) => {
-        const initMonsters: MonsterDTO[] = await fecthMonsters(
+        const initMonsters: MonsterDTO[] = await goToServer(
             `${URLS.INIT_MONSTERS}?selectMonstersCount=${selectMonstersCount.current}&loginId=${loginId}`);
         setMonsters(initMonsters);
         setMonsterCount(initMonsters.length);
@@ -112,7 +112,6 @@ const BattlePage = () => {
 
     const insertResult = useServerWithJson();
     const insertBattleResult = useRegistResult();
-    const insertUserResult = useServerWithQuery();
     /**
      *  各モンスターのターン送り。戦闘ログを元に描画、表現を行う
      */
@@ -137,7 +136,7 @@ const BattlePage = () => {
             monsters, lastLog, setResultLog, setShowResultDialog, insertResult
         });
         if (!isEmpty(lastLog) && !isEmpty(lastLog!.WinnerMonsterId)) {
-            const newShops: Shop[] = await insertUserResult(
+            const newShops: ShopDTO[] = await goToServer(
                 `${URLS.RECORD_USER_RESULT}?betMonsterId=${betMonster?.MonsterId}
                                             &betGil=${betGil}
                                             &betRate=${betMonster!.BetRate}

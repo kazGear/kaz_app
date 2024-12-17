@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { KEYS, URLS } from "../lib/Constants";
 import { useEffect, useState } from "react";
 import { useServerWithQuery } from "../hooks/useHooksOfCommon";
-import { Item } from "../types/Shop";
+import { ItemDTO } from "../types/Shop";
 import SelectShops from "../components/shopPage/SelectShops";
 import ShopItemTable from "../components/shopPage/ShopItemTable";
-import NowLoading from "../components/common/NowLoading";
+import { UserDTO } from "../types/UserManage";
 
 const SshopPageFrame = styled.div`
     display: flex;
@@ -23,17 +23,26 @@ const SdivItemFrame = styled.div`
 
 const ShopPage = () => {
     const [selectedShop, setSelectedShop] = useState<string | undefined>("shop001");
-    const [shopItems, setShopItems] = useState<Item[]>([]);
+    const [shopItems, setShopItems] = useState<ItemDTO[]>([]);
+    const [user, setUser] = useState<UserDTO | null>(null);
+    const [myCash, setMyCash] = useState<number | null>(null);
 
     /**
      * 店舗アイテム表示
      */
-    const selectItems = useServerWithQuery();
+    const select = useServerWithQuery();
     useEffect(() => {
         const fetchShopItems = async () => {
-            const items: Item[] = await selectItems(
-                URLS.SELECT_SHOP_ITEMS + `?loginId=${localStorage.getItem(KEYS.USER_ID)}&shopId=${selectedShop}`);
+            const loginId: string | null = localStorage.getItem(KEYS.USER_ID);
+
+            const items: ItemDTO[] = await select(
+                URLS.SELECT_SHOP_ITEMS + `?loginId=${loginId}&shopId=${selectedShop}`);
+            const loginUser: UserDTO = await select(
+                URLS.USER_INFO + `?loginId=${loginId}`);
+
             setShopItems(items);
+            setUser(loginUser);
+            setMyCash(loginUser.Cash);
         }
         fetchShopItems();
     }, [selectedShop]);
@@ -41,13 +50,18 @@ const ShopPage = () => {
     return (
         <SshopPageFrame>
             <SdivControllerFrame>
-                <SelectShops setSelectedShop={setSelectedShop}/>
+                <SelectShops setSelectedShop={setSelectedShop}
+                             user={user}
+                             myCash={myCash}/>
             </SdivControllerFrame>
             <SdivItemFrame>
-                <ShopItemTable shopItems={shopItems}/>
+                <ShopItemTable shopItems={shopItems}
+                               user={user}
+                               myCash={myCash}
+                               setMyCash={setMyCash}/>
             </SdivItemFrame>
         </SshopPageFrame>
-    );
+    )
 };
 
 export default ShopPage;

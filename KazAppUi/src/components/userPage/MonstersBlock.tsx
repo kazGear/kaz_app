@@ -52,10 +52,10 @@ const MonstersBlock = ({monsters, loginId}: ArgProps) => {
     /**
      * 使用権開放モンスター素の取得
      */
-    const select = useServerWithQuery();
+    const goToServer = useServerWithQuery();
     useLayoutEffect(() => {
         const selectMonsterCount = async () => {
-            const monsterCount: string = await select(URLS.GET_MONSTER_COUNT + `?loginId=${loginId}`);
+            const monsterCount: string = await goToServer(URLS.GET_MONSTER_COUNT + `?loginId=${loginId}`);
             setGetMonsterCount(monsterCount);
         }
         selectMonsterCount();

@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import Button from "../common/Button";
-import { KEYS, PREFIX, URLS } from "../../lib/Constants";
-import { Item } from "../../types/Shop";
+import { COLORS, KEYS, PREFIX, URLS } from "../../lib/Constants";
+import { ItemDTO } from "../../types/Shop";
 import OutSideFrame from "../common/OutSideFrame";
 import BorderTd from "../common/BorderTd";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
-import { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
+import { UserDTO } from "../../types/UserManage";
+import { isTemplateExpression } from "typescript";
 
 const Stable = styled.table`
     margin: auto;
-    width: 90%;
+    width: 95%;
     border-collapse: collapse;
     margin-bottom: 20px;
 `;
@@ -19,12 +21,34 @@ const Simg = styled.img`
     border-radius: 100%;
     vertical-align: middle;
 `;
+const SspanStrong = styled.span`
+    font-weight: bold;
+    color: ${COLORS.ACCENT_FONT_COLOR2}
+`;
 
 interface ArgProps {
-    shopItems: Item[];
+    shopItems: ItemDTO[];
+    user: UserDTO | null;
+    myCash: number | null;
+    setMyCash: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-const ShopItemTable = ({shopItems}: ArgProps) => {
+const ShopItemTable = ({shopItems, user, myCash, setMyCash}: ArgProps) => {
+    /**
+     * 購入処理
+     */
+    const goToServer = useServerWithQuery();
+    const purchase = async (itemRow: ItemDTO) => {
+        const loginId: string | null = localStorage.getItem(KEYS.USER_ID);
+
+        await goToServer(
+            URLS.PURCHASE_ITEM + `?loginId=${loginId}&itemId=${itemRow.ItemId}`
+        );
+        const user: UserDTO = await goToServer(
+            URLS.USER_INFO + `?loginId=${loginId}`
+        );
+        setMyCash(user.Cash);
+    }
 
     return (
         <OutSideFrame>
@@ -33,12 +57,13 @@ const ShopItemTable = ({shopItems}: ArgProps) => {
             <Stable>
                 <thead>
                     <tr>
-                        <td style={{border: "none"}}>
-                            <span style={{marginLeft: "20px"}}>イメージ</span>
+                        <td style={{border: "none", minWidth: "70px"}}>
+                            <span style={{marginLeft: "10px"}}>イメージ</span>
                         </td>
-                        <td style={{border: "none"}}>タイトル</td>
+                        <td style={{border: "none", minWidth: "120px"}}>商品名</td>
                         <td style={{border: "none"}}>備考</td>
                         <td style={{border: "none"}}>価格</td>
+                        <td style={{border: "none", width: "100px"}}> </td>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,19 +71,45 @@ const ShopItemTable = ({shopItems}: ArgProps) => {
                     shopItems.map((item, index) => {
                         return (
                             <tr key={index} style={{height: "60px"}}>
+                                {/* アイテムイメージ */}
                                 <BorderTd>
-                                    <span style={{marginLeft: "20px", display: "inline-block"}}>
+                                    <span style={{marginLeft: "10px", display: "inline-block"}}>
                                         <Simg src={PREFIX.BASE64 + item.ItemImage} alt="書品"/>
                                     </span>
                                 </BorderTd>
+                                {/* 商品名 */}
                                 <BorderTd>{item.ItemName}</BorderTd>
-                                <BorderTd>{item.Remarks}</BorderTd>
-                                <BorderTd>{item.ItemPrice} Gil</BorderTd>
+                                {/* 商品備考 */}
+                                <BorderTd>{
+                                    item.Remarks.split("\n").map((line, index) => (
+                                        <React.Fragment key={index}>
+                                            {line}<br/>
+                                        </React.Fragment>
+                                    ))
+                                }
+                                </BorderTd>
+                                {/* 価格表示 */}
+                                <BorderTd>{
+                                    myCash! < item.ItemPrice ? <SspanStrong>{item.ItemPrice}</SspanStrong>
+                                                             : item.ItemPrice
+                                } Gil
+                                </BorderTd>
+                                {/* 購入ボタン */}
                                 <BorderTd>
                                     {
-                                        item.IsPurchased ? <Button text="購入済" onClick={()=>{}} disabled={true}/>
-                                                         : <Button text="購入" onClick={()=>{}}/>
+                                        item.IsPurchased ? <Button text="購入済"
+                                                                   onClick={() => {}}
+                                                                   disabled={true}
+                                                                   styleObj={{width: "80px"}}/>
+                                                         : <Button text={
+                                                                        myCash! < item.ItemPrice ? "資金不足"
+                                                                                                    : "購入"
+                                                                    }
+                                                                   onClick={() => purchase(item)}
+                                                                   styleObj={{width: "80px"}}
+                                                                   disabled={myCash! < item.ItemPrice}/>
                                     }
+                                    <input type="hidden" value={item.ItemId}/>
                                 </BorderTd>
                             </tr>
                         )

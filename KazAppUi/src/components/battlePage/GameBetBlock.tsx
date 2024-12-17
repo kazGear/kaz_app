@@ -37,10 +37,10 @@ const GameBetContentsBlock = (
     }
 
     // ユーザ情報
-    const select = useServerWithQuery();
+    const goToServer = useServerWithQuery();
     useLayoutEffect(() => {
         const selectUser = async () => {
-            const user: UserDTO = await select(`${URLS.USER_INFO}?loginId=${localStorage.getItem(KEYS.USER_ID)}`);
+            const user: UserDTO = await goToServer(`${URLS.USER_INFO}?loginId=${localStorage.getItem(KEYS.USER_ID)}`);
             setUser(user);
             setCash(user.Cash.toLocaleString());
             setCashLimit(user.Cash);

@@ -46,10 +46,10 @@ const UserRegistBlock = ({setShowRegistForm}: ArgProps) => {
     /**
      * 既に登録されているログインID等と取得（検証に使用）
      */
-    const fetchUsersData = useServerWithQuery();
+    const goToServer = useServerWithQuery();
     useLayoutEffect(() => {
         const fetchUsers = async () => {
-            const usersFromDb: UserDTO[] = await fetchUsersData(`${URLS.REGIST_USER_INIT}`);
+            const usersFromDb: UserDTO[] = await goToServer(`${URLS.REGIST_USER_INIT}`);
             setUserList(usersFromDb);
         };
         fetchUsers();

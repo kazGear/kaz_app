@@ -7,7 +7,7 @@ const Sdiv = styled.div`
     box-shadow: 4px 4px ${COLORS.SHADOW_COLOR};
     overflow: overlay;
     // opacityは全て透過させてしまう
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     border-radius: 10px 0 10px 0
 `;
 

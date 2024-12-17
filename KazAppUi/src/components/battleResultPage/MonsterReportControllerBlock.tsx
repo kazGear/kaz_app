@@ -27,7 +27,7 @@ const MonsterReportControllerBlock = ({setBattleReport}: ArgProps) => {
     const [battleScale, setBattleScale] = useState("0");
 
     const [disable, setDisable] = useState(false);
-    const fetchServerUseQuery = useServerWithQuery();
+    const goToServer = useServerWithQuery();
     /**
      * 戦闘規模の選択
      */
@@ -39,7 +39,7 @@ const MonsterReportControllerBlock = ({setBattleReport}: ArgProps) => {
      */
     const fetchBattleReportHandler = useCallback(async () => {
         const battleReport: BattleReportDTO[]
-            = await fetchServerUseQuery(
+            = await goToServer(
                   `${URLS.BATTLE_REPORTS}?battleScale=${battleScale}
                                         &from=${from}
                                         &to=${to}`

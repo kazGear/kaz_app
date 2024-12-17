@@ -8,6 +8,7 @@ const Sspan = styled.span`
 
 interface ArgProps {
     children: React.ReactNode;
+    strongPing?: boolean;
 }
 
 const Strong = ({children}: ArgProps) => {

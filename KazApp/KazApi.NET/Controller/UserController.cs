@@ -64,6 +64,7 @@ namespace KazApi.Controller
                     TODO 引数検証
                     error >>> エラーページへ
                      */
+                    // 初期登録
                     _service.InsertUser(loginId, password, dispName, dispShortName);
                     _service.InsertStartUpMonsters(loginId);
                     _service.InsertUsableStore(loginId);

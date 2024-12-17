@@ -1,17 +1,20 @@
 import { useLayoutEffect, useState } from "react";
 import OutSideFrame from "../common/OutSideFrame";
 import Select from "../common/Select";
-import { Shop } from "../../types/Shop";
+import { ShopDTO } from "../../types/Shop";
 import { KEYS, URLS } from "../../lib/Constants";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
+import { UserDTO } from "../../types/UserManage";
 
 interface ArgProps {
     setSelectedShop: React.Dispatch<React.SetStateAction<string | undefined>>;
+    user: UserDTO | null;
+    myCash: number | null;
 }
 
-const SelectShops = ({setSelectedShop}: ArgProps) => {
-    const [shopsOfSelectBox, setShopsOfSelectBox] = useState<Shop[]>([]);
-    const select = useServerWithQuery();
+const SelectShops = ({setSelectedShop, user, myCash}: ArgProps) => {
+    const [shopsOfSelectBox, setShopsOfSelectBox] = useState<ShopDTO[]>([]);
+        const goToServer = useServerWithQuery();
 
     /**
      * 店舗の選択肢を取得
@@ -19,7 +22,9 @@ const SelectShops = ({setSelectedShop}: ArgProps) => {
     useLayoutEffect(() => {
         const selectShops = async () => {
             const loginId = localStorage.getItem(KEYS.USER_ID);
-            const shops: Shop[] = await select(URLS.SHOP_INIT + `?loginId=${loginId}`);
+            const shops: ShopDTO[] = await goToServer(
+                URLS.SHOP_INIT + `?loginId=${loginId}`
+            );
             setShopsOfSelectBox(shops);
         }
         selectShops();
@@ -33,6 +38,9 @@ const SelectShops = ({setSelectedShop}: ArgProps) => {
 
     return (
         <OutSideFrame >
+            <h3 style={{marginLeft: "10px"}}>
+                所持金：{myCash?.toLocaleString()} Gil
+            </h3>
             <Select title="店舗" onChange={changeShopHandler}>
                 {
                     shopsOfSelectBox.map((shop, index) => (

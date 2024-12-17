@@ -16,6 +16,12 @@ namespace KazApi.Controller.Service
             _posgre = new PostgreSQL(configuration);
         }
 
+        public ItemDTO SelectItemOne(string itemId)
+        {
+            var param = new { item_id = itemId };
+            return _posgre.Select<ItemDTO>(ShopSQL.SelectItemOne(), param)
+                          .Single();
+        }
         /// <summary>
         /// 店舗リスト取得
         /// </summary>
@@ -54,9 +60,23 @@ namespace KazApi.Controller.Service
         {
             foreach (ShopDTO shop in shops)
             {
-                var param = new { login_id = loginId, shop_id = shop.ShopId };
+                var param = new 
+                {
+                    login_id = loginId,
+                    shop_id = shop.ShopId
+                };
                 _posgre.Execute(ShopSQL.InsertUsableStore(), param);
             }
+        }
+
+        public void Purchase(string loginId, string itemId)
+        {
+            var param = new
+            {
+                login_id = loginId,
+                item_id = itemId
+            };
+            _posgre.Execute(ShopSQL.Purchase(), param);
         }
 
     }

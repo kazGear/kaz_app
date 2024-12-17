@@ -34,10 +34,10 @@ const CashBlock = ({user}: ArgProps) => {
     /**
      * 自己破産（所持金初期化）
      */
-    const update = useServerWithQuery();
+    const goToServer = useServerWithQuery();
     const restartAsPlayer = useCallback(() => {
         const restart = async () => {
-            const result: UserDTO | null = await update(`${URLS.RESTART_AS_PLAYER}?loginId=${loginId}`);
+            const result: UserDTO | null = await goToServer(`${URLS.RESTART_AS_PLAYER}?loginId=${loginId}`);
             setCash(result?.Cash ?? null);
             setBankruptcyCnt(result?.BankruptcyCnt ?? null);
         }

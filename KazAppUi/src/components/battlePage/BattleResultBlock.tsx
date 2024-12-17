@@ -2,14 +2,14 @@ import { ReactNode } from "react";
 import { MetaDataDTO, MonsterDTO } from "../../types/MonsterBattle";
 import DialogFrame from "../common/DialogFrame";
 import BattleResultContentsBlock from "./BattleResultContentsBlock";
-import { Shop } from "../../types/Shop";
+import { ShopDTO } from "../../types/Shop";
 
 interface ArgProps {
     log:  MetaDataDTO | null;
     betMonster: MonsterDTO | null;
     betGil: number;
     showResultDialog: boolean;
-    newShops: Shop[];
+    newShops: ShopDTO[];
 }
 
 const BattleResultBlock = ({

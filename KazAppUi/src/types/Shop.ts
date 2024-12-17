@@ -1,10 +1,10 @@
-export interface Shop {
+export interface ShopDTO {
     ShopId: string;
     ShopName: string;
     WinMoneyUntilCanUse: number;
 };
 
-export interface Item {
+export interface ItemDTO {
     ItemId: string;
     ItemName: string;
     ItemPrice: number;
