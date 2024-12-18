@@ -18,11 +18,13 @@ export interface MonsterDTO {
     MonsterId: string;
     MonsterName?: string;
     MonsterType: number;
+    MonsterTypeName: string;
     Hp: number;
     MaxHp: number;
     Attack: number;
     Speed: number;
     Week: number;
+    WeekName: string;
     Skills: SkillDTO[];
     Status: StateDTO[];
     StatusName: string[];

@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import AppHeader from './components/common/AppHeader';
 import BattleResultPage from './pages/BattleResultPage';
 import UserPage from "./pages/UserPage";
+import EditPage from "./pages/EditPage";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path={"/BattlePage"} element={<BattlePage />} />
                 <Route path={"/BattleResultPage"} element={<BattleResultPage />} />
                 <Route path={"/UserPage"} element={<UserPage />} />
+                <Route path={"/EditPage"} element={<EditPage />} />
             </Routes>
         </BrowserRouter>
     );

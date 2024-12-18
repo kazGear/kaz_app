@@ -9,7 +9,8 @@ interface ArgProps {
 const ItemRemarks = ({item}: ArgProps) => {
 
     return (
-        <BorderTd>{
+        <BorderTd>
+        {
             item.Remarks.split("\n").map((line, index) => (
                 <React.Fragment key={index}>
                     {line}<br/>

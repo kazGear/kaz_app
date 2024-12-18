@@ -91,17 +91,7 @@ namespace KazApi.Repository.sql
                 WHERE login_id = @login_id ;
             ";
             return SQL;
-        }
-
-        public static string UpdateUserImage()
-        {
-            string SQL = @"
-                UPDATE m_user
-                   SET user_image = @image
-                WHERE login_id = @login_id ;
-            ";
-            return SQL;
-        }
+        }    
 
         public static string SelectMonsterCount()
         {

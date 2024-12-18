@@ -1,5 +1,7 @@
-﻿using KazApi.Repository;
+﻿using KazApi.Domain.DTO;
+using KazApi.Repository;
 using KazApi.Repository.sql;
+using System.Collections.Generic;
 
 namespace KazApi.Controller.Service
 {
@@ -22,7 +24,14 @@ namespace KazApi.Controller.Service
                 login_id = loginId,
                 image = image,
             };
-            _posgre.Execute(UserSQL.UpdateUserImage(), param);
+            _posgre.Execute(CommonSQL.UpdateUserImage(), param);
         }
+
+        /// <summary>
+        /// コード値を取得
+        /// </summary>
+        public IEnumerable<CodeDTO> FetchElementCode()
+            => _posgre.Select<CodeDTO>(CommonSQL.FetchElementCode());
+
     }
 }

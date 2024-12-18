@@ -9,7 +9,7 @@ const Slink = styled(Link)`
     color: ${COLORS.MAIN_FONT_COLOR};
 `;
 const SpDescription = styled.p`
-    margin: 0 0 0 40px;
+    margin: 10px;
 `;
 
 interface ArgProps {
@@ -21,15 +21,15 @@ interface ArgProps {
 const ToEditPageBlock = ({validToken, classOfAnime, titleStyle}: ArgProps) => {
     return (
         <div>
-            <Slink to={validToken ? "/" : ""} >
-                <MenuTitle title={"各種設定（ 工事中 ）"}
+            <Slink to={validToken ? "/EditPage" : ""} >
+                <MenuTitle title={"各種設定"}
                         className={validToken ? classOfAnime : ""}
                         styleObj={validToken ? {} : titleStyle}/>
             </Slink>
 
             <OutSideFrame>
                 <SpDescription>
-                    制作予定・・・ モンスターデータ編集、モンスター所持スキル編集、スキル編集、ユーザー編集・・・
+                    モンスターステータス編集、モンスタースキル編集、使用モンスターの<br/>制限などが可能です。
                 </SpDescription>
             </OutSideFrame>
         </div>

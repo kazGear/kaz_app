@@ -75,6 +75,7 @@ export const URLS = {
     USER_INFO: `${ENVIRONMENT}/api/user/userInfo`,
     MONSTERS_INFO: `${ENVIRONMENT}/api/battle/monstersInfo`,
     ITEM_INFO: `${ENVIRONMENT}/api/shop/itemInfo`,
+    FETCH_WEEK_DROPDOWN: `${ENVIRONMENT}/api/common/FetchElementCode`,
     // ユーザ関係
     REGIST_USER_INIT: `${ENVIRONMENT}/api/user/init`,
     SELECT_LOGIN_USER: `${ENVIRONMENT}/api/user/loginUser`,
@@ -98,6 +99,9 @@ export const URLS = {
     SHOP_INIT: `${ENVIRONMENT}/api/shop/init`,
     SELECT_SHOP_ITEMS: `${ENVIRONMENT}/api/shop/items`,
     PURCHASE_ITEM: `${ENVIRONMENT}/api/shop/purchase`,
+    // 設定系
+    EDIT_INIT: `${ENVIRONMENT}/api/edit/init`,
+    FETCH_EDIT_MONSTERS: `${ENVIRONMENT}/api/edit/fetchMonsters`,
     // その他
     UPLOAD_IMAGE: `${ENVIRONMENT}/api/common/imgUpload`
 } as const;
@@ -116,4 +120,10 @@ export const PREFIX = {
 export const DECO = {
     BLOCK_LINE: "■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋",
     BLOCK_LINE_R: "＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■＋■"
+}
+
+export const EDIT_TYPE = {
+    MONSTER_STATUS: 1,
+    MONSTER_SKILL: 2,
+    USE_MONSTER: 3
 }

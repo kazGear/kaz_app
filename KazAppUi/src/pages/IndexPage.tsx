@@ -36,10 +36,12 @@ const IndexPage = () => {
             <SdivLinkFrame>
                 <div style={{display: "flex"}}>
                     <SdivContentsFrame>
+                        {/* ログインページ */}
                         <ToLoginPageBlock />
                     </SdivContentsFrame>
 
                     <SdivContentsFrame>
+                        {/* ユーザーページ */}
                         <ToUserPageBlock validToken={validToken}
                                          classOfAnime={classOfAnime}
                                          titleStyle={titleStyle} />
@@ -48,12 +50,14 @@ const IndexPage = () => {
 
                 <div style={{display: "flex"}}>
                     <SdivContentsFrame>
+                        {/* 戦闘ページ */}
                         <ToBattlePageBlock validToken={validToken}
                                            classOfAnime={classOfAnime}
                                            titleStyle={titleStyle}/>
                     </SdivContentsFrame>
 
                     <SdivContentsFrame>
+                        {/* 戦闘レポートページ */}
                         <ToBattleResultPageBlock validToken={validToken}
                                                  classOfAnime={classOfAnime}
                                                  titleStyle={titleStyle}/>
@@ -62,13 +66,15 @@ const IndexPage = () => {
 
                 <div style={{display: "flex"}}>
                     <SdivContentsFrame>
+                        {/* ショップページ */}
                         <ToShopPageBlock validToken={validToken}
                                          classOfAnime={classOfAnime}
                                          titleStyle={titleStyle}/>
                     </SdivContentsFrame>
 
                     <SdivContentsFrame>
-                       <ToEditPageBlock validToken={validToken}
+                        {/* 設定ページ */}
+                        <ToEditPageBlock validToken={validToken}
                                         classOfAnime={classOfAnime}
                                          titleStyle={titleStyle}/>
                     </SdivContentsFrame>

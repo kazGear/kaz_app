@@ -29,7 +29,8 @@ const ToShopPageBlock = ({validToken, classOfAnime, titleStyle}: ArgProps) => {
 
             <OutSideFrame>
                 <SpDescription>
-                    制作予定・・・ モンスターセット、スキルセットの開放、アイテム ...
+                    闘技場でのモンスターの使用権を購入できます。<br/>
+                    その他、戦闘用背景なども追加予定です。
                 </SpDescription>
             </OutSideFrame>
         </div>

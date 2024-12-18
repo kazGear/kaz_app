@@ -38,5 +38,9 @@
         ///// ロール
         ///// </summary>
         public static readonly CCodeType ROLE = new("code007", "ROLE");
+        ///// <summary>
+        ///// 設定種類
+        ///// </summary>
+        public static readonly CCodeType EDIT = new("code008", "EDIT");
     }
 }

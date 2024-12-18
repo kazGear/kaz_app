@@ -1,6 +1,8 @@
 ﻿using CSLib.Lib;
 using KazApi.Controller.Service;
+using KazApi.Domain.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 
 namespace KazApi.Controller
@@ -49,5 +51,13 @@ namespace KazApi.Controller
         
             return Ok(new { message = "Image uploaded successfully" });
         }
+
+        [HttpPost("api/common/FetchElementCode")]
+        public ActionResult<string> FetchElementCode()
+        {
+            IEnumerable<CodeDTO> result = _serviceCommon.FetchElementCode();
+            return JsonConvert.SerializeObject(result);
+        }
+        
     }
 }

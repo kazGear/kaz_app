@@ -19,13 +19,14 @@ interface ArgProps {
     title?: string;
     children: |React.ReactNode[] | React.ReactNode;
     onChange?: ChangeEventHandler<HTMLSelectElement>;
+    styleObj?: React.CSSProperties;
 }
 
-const Select = ({title, children, onChange}: ArgProps) => {
+const Select = ({title, children, onChange, styleObj}: ArgProps) => {
     return (
         <SdivFrame>
             <label>{title}</label>
-            <Sselect onChange={onChange}>
+            <Sselect onChange={onChange} style={styleObj}>
                 {children}
             </Sselect>
         </SdivFrame>

@@ -43,16 +43,15 @@ const PurchaseButton = ({
         <BorderTd>
         {
             item.IsPurchased ? <Button text="購入済"
-                                        onClick={() => {}}
-                                        disabled={true}
-                                        styleObj={{width: "80px"}}/>
-                                : <Button text={
-                                            myCash! < item.ItemPrice ? "資金不足"
-                                                                        : "購入"
-                                        }
-                                        onClick={() => purchase(item)}
-                                        styleObj={{width: "80px"}}
-                                        disabled={myCash! < item.ItemPrice}/>
+                                       onClick={() => {}}
+                                       disabled={true}
+                                       styleObj={{width: "80px"}}/>
+                             : <Button text={myCash! < item.ItemPrice ? "資金不足"
+                                                                      : "購入"
+                                       }
+                                       onClick={() => purchase(item)}
+                                       styleObj={{width: "80px"}}
+                                       disabled={myCash! < item.ItemPrice}/>
         }
         <input type="hidden" value={item.ItemId}/>
         </BorderTd>
