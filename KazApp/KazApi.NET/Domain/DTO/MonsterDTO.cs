@@ -14,8 +14,6 @@ namespace KazApi.Domain.DTO
         public string? MonsterName { get; set; }
         [JsonPropertyName("MonsterType")]
         public int MonsterType { get; set; }
-        [JsonPropertyName("MonsterTypeName")]
-        public string MonsterTypeName { get; set; }
         [JsonPropertyName("Hp")]
         public int Hp { get; set; }
         [JsonPropertyName("MaxHp")]
@@ -26,8 +24,6 @@ namespace KazApi.Domain.DTO
         public int Speed { get; set; }
         [JsonPropertyName("Week")]
         public int Week { get; set; }
-        [JsonPropertyName("WeekName")]
-        public string WeekName { get; set; }
         [JsonPropertyName("Skills")]
         public IEnumerable<SkillDTO> Skills { get; set; } = [];
         [JsonPropertyName("Status")]

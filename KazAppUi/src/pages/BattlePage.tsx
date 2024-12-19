@@ -14,6 +14,7 @@ import MessageWindowBlock from "../components/battlePage/MessageWindowBlock";
 import CommandButtonBlock from "../components/battlePage/CommandButtonBlock";
 import MonsterWindowBlock from "../components/battlePage/MonsterWindowBlock";
 import { ShopDTO } from "../types/Shop";
+import { createMonstersJson } from "../lib/CreateJson";
 
 const SdivOutSideFrame = styled.div`
     position: relative;
@@ -80,9 +81,8 @@ const BattlePage = () => {
         selectMonstersCount.current = e.target.value;
     }, []);
 
-    // モンスタ－初期化
     /**
-     * ゲーム開始、モンスター用意
+     * ゲーム開始、モンスター初期化
     */
    const goToServer = useServerWithQuery();
    const gameStartHandler = useCallback(async (e: any) => {
@@ -98,15 +98,17 @@ const BattlePage = () => {
     /**
      *  全モンスターが行動。戦闘ログを取得
     */
-    const moveMonsters = useServerWithJson();
+    const goToServerWithJson = useServerWithJson();
     const battleHandler = async () => {
-        const moveResult =
-            await moveMonsters([...monsters], URLS.BATTLE_NEXT_TURN);
-        setMonsters([...moveResult.Monsters]);
-        setBattleLog([...moveResult.BattleLog]);
-        setBattleStarted(true);
-        setMonsterCount([...moveResult.Monsters].length);
-    }
+        const monstersJson: MonsterDTO[] = createMonstersJson([...monsters]);
+        const moveResult = await goToServerWithJson(
+            monstersJson, URLS.BATTLE_NEXT_TURN
+       );
+       setMonsters([...moveResult.Monsters]);
+       setBattleLog([...moveResult.BattleLog]);
+       setBattleStarted(true);
+       setMonsterCount([...moveResult.Monsters].length);
+   };
 
     const insertResult = useServerWithJson();
     const insertBattleResult = useRegistResult();

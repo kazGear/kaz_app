@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import monsterImages from "../../../lib/MonsterImages";
-import { MonsterDTO } from "../../../types/MonsterBattle";
 import BorderTd from "../../common/BorderTd";
-import Input from "../../common/Input";
-import Select from "../../common/Select";
-import { useServerWithQuery } from "../../../hooks/useHooksOfCommon";
-import { useLayoutEffect, useState } from "react";
 import { CodeDTO } from "../../../types/Common";
-import { URLS } from "../../../lib/Constants";
+import { EditMonsterDTO } from "../../../types/Edit";
+import EditMonsterName from "./EditMonsterName";
+import EditMonsterHp from "./EditMonsterHp";
+import EditMonsterAttack from "./EditMonsterAttack";
+import EditMonsterSpeed from "./EditMonsterSpeed";
+import EditMonsterWeek from "./EditMonsterWeek";
+import { useState } from "react";
 
 const Simg = styled.img`
     vertical-align: middle;
@@ -17,31 +18,17 @@ const Simg = styled.img`
 `;
 
 interface ArgProps {
-    editMonsters: MonsterDTO[];
+    editMonsters: EditMonsterDTO[];
 }
 
 const MonsterTableBody = ({editMonsters}: ArgProps) => {
     const [weekDropDown, setWeekDropDown] = useState<CodeDTO[]>([]);
-    const [monsters, setMonsters] = useState<[MonsterDTO[]]>([[]]);
-    /**
-     * 弱点ドロップダウン
-     */
-    const goToServer = useServerWithQuery();
-    useLayoutEffect(() => {
-        const fetchWeekDropDown = async () => {
-            const dropDown: CodeDTO[] = await goToServer(
-                URLS.FETCH_ELEMENT_CODE
-            );
-            setWeekDropDown(dropDown);
-        }
-        fetchWeekDropDown();
-    }, []);
 
     return (
         <tbody>
         {
             editMonsters.map((monster, index) => (
-                <tr key={index} onChange={(e) => console.log(e)}>
+                <tr key={index}>
                     {/* ID */}
                     <BorderTd>{monster.MonsterId}</BorderTd>
                     {/* イメージ */}
@@ -50,38 +37,15 @@ const MonsterTableBody = ({editMonsters}: ArgProps) => {
                              alt="モンスター" />
                     </BorderTd>
                     {/* 名称 */}
-                    <BorderTd>{monster.MonsterName}</BorderTd>
-                    <BorderTd>
-                        <Input styleObj={{width: "120px"}} inputType="text" labelTitle=""/>
-                    </BorderTd>
+                    <EditMonsterName monster={monster}/>
                     {/* HP */}
-                    <BorderTd>{monster.Hp}</BorderTd>
-                    <BorderTd>
-                        <Input styleObj={{width: "40px"}} inputType="text" labelTitle=""/>
-                    </BorderTd>
+                    <EditMonsterHp monster={monster}/>
                     {/* 攻撃力 */}
-                    <BorderTd>{monster.Attack}</BorderTd>
-                    <BorderTd>
-                        <Input styleObj={{width: "40px"}} inputType="text" labelTitle=""/>
-                    </BorderTd>
+                    <EditMonsterAttack monster={monster}/>
                     {/* 速さ */}
-                    <BorderTd>{monster.Speed}</BorderTd>
-                    <BorderTd>
-                        <Input styleObj={{width: "40px"}} inputType="text" labelTitle=""/>
-                    </BorderTd>
+                    <EditMonsterSpeed monster={monster}/>
                     {/* 弱点 */}
-                    <BorderTd>{monster.WeekName}</BorderTd>
-                    <BorderTd>
-                        <Select styleObj={{width: "50px"}} >
-                            <option value="0"></option>
-                            {
-                                weekDropDown.map((opt, index) => (
-                                    <option key={index} value={opt.CodeId}>{opt.Name}</option>
-                                ))
-                            }
-                        </Select>
-                    </BorderTd>
-                    <Input inputType="hidden" labelTitle="" value="false"/>
+                    <EditMonsterWeek weekDropDown={weekDropDown} monster={monster} setWeekDropDown={setWeekDropDown}/>
                 </tr>
             ))
         }

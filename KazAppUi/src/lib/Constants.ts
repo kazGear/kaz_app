@@ -102,6 +102,7 @@ export const URLS = {
     // 設定系
     EDIT_INIT: `${ENVIRONMENT}/api/edit/init`,
     FETCH_EDIT_MONSTERS: `${ENVIRONMENT}/api/edit/fetchMonsters`,
+    UPDATE_MONSTER_STATUS: `${ENVIRONMENT}/api/edit/updateMonsterStatus`,
     // その他
     UPLOAD_IMAGE: `${ENVIRONMENT}/api/common/imgUpload`
 } as const;

@@ -12,7 +12,7 @@ namespace KazApi.Repository.sql
             string SQL = @"
                 UPDATE m_user
                    SET user_image = @image
-                WHERE login_id = @login_id ;
+                 WHERE login_id = @login_id ;
             ";
             return SQL;
         }

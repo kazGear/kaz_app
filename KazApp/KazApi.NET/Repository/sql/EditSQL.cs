@@ -41,7 +41,22 @@ namespace KazApi.Repository.sql
             INNER JOIN m_code AS week
                     ON week.code_id = 'code001'
                    AND week.value = monster.week
-                 WHERE ""user"".login_id = @login_id ;
+                 WHERE ""user"".login_id = @login_id
+              ORDER BY monster.monster_id ASC ;
+            ";
+            return SQL;
+        }
+
+        public static string UpdateMonsterStatus()
+        {
+            string SQL = @"
+                UPDATE m_monster
+                   SET monster_name = @monster_name 
+                     , hp           = @hp
+                     , attack       = @attack
+                     , speed        = @speed
+                     , week         = @week
+                 WHERE monster_id = @monster_id ;
             ";
             return SQL;
         }

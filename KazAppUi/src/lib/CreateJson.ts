@@ -1,6 +1,6 @@
 import { MonsterDTO, SkillDTO, StateDTO } from "../types/MonsterBattle";
 
-export const createMonstersJson = (monsters: MonsterDTO[]) => {
+export const createMonstersJson = (monsters: MonsterDTO[]): MonsterDTO[] => {
     let result: MonsterDTO[] = [];
 
     for (const m of monsters) {

@@ -33,14 +33,13 @@ export const useCheckToken = async () => {
  */
 export const useServerWithJson = () => {
     // モンスターたちの行動 ターン進行
-    const useServerWithJson = useCallback(async (params: any, url: string) => {
-        const paramasJson = createMonstersJson([...params]);
+    const useServerWithJson = useCallback(async (paramsJson: any, url: string) => {
         // json形式で大量のパラメータ送信
         const option: {} = {
             method: "POST",
             mode: "cors",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(paramasJson),
+            body: JSON.stringify(paramsJson),
         };
         // モンスターたちの一連の行動
         try {

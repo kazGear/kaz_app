@@ -88,7 +88,7 @@ namespace KazApi.Repository.sql
                 UPDATE m_user
                    SET cash = 5000
                      , bankruptcy_cnt = bankruptcy_cnt + 1
-                WHERE login_id = @login_id ;
+                 WHERE login_id = @login_id ;
             ";
             return SQL;
         }    
