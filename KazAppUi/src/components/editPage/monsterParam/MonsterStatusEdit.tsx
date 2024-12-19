@@ -1,12 +1,12 @@
 import { useLayoutEffect, useState } from "react";
-import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
-import OutSideFrame from "../common/OutSideFrame"
-import { MonsterDTO } from "../../types/MonsterBattle";
-import { COLORS, KEYS, URLS } from "../../lib/Constants";
+import { useServerWithQuery } from "../../../hooks/useHooksOfCommon";
+
+import { MonsterDTO } from "../../../types/MonsterBattle";
+import { COLORS, KEYS, URLS } from "../../../lib/Constants";
 import MonsterTableHeader from "./MonsterTableHeader";
 import MonsterTableBody from "./MonsterTableBody";
 import styled from "styled-components";
-import Button from "../common/Button";
+import Button from "../../common/Button";
 
 const Stable = styled.table`
     margin: auto;

@@ -28,6 +28,7 @@ interface ArgProps {
     styleObj?: React.CSSProperties;
     onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
     onClick?: React.MouseEventHandler<HTMLInputElement> | undefined;
+    value?: string;
 }
 
 // forwardRef: 親から参照されるため
@@ -44,6 +45,7 @@ const Input = forwardRef<HTMLInputElement, ArgProps>(({
     styleObj = {},
     onChange,
     onClick,
+    value
 }, ref) => {
     const [show, setShow] = useState(false);
 
@@ -66,6 +68,7 @@ const Input = forwardRef<HTMLInputElement, ArgProps>(({
                     onClick={onClick}
                     disabled={disabled}
                     ref={ref}
+                    value={value}
                     />
             {
                 show ? <Sspan>{alertMessage}</Sspan> : ""

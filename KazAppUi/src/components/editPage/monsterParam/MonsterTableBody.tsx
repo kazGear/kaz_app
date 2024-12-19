@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import monsterImages from "../../lib/MonsterImages";
-import { MonsterDTO } from "../../types/MonsterBattle";
-import BorderTd from "../common/BorderTd";
-import Input from "../common/Input";
-import Select from "../common/Select";
-import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
+import monsterImages from "../../../lib/MonsterImages";
+import { MonsterDTO } from "../../../types/MonsterBattle";
+import BorderTd from "../../common/BorderTd";
+import Input from "../../common/Input";
+import Select from "../../common/Select";
+import { useServerWithQuery } from "../../../hooks/useHooksOfCommon";
 import { useLayoutEffect, useState } from "react";
-import { CodeDTO } from "../../types/Common";
-import { URLS } from "../../lib/Constants";
+import { CodeDTO } from "../../../types/Common";
+import { URLS } from "../../../lib/Constants";
 
 const Simg = styled.img`
     vertical-align: middle;
@@ -22,6 +22,7 @@ interface ArgProps {
 
 const MonsterTableBody = ({editMonsters}: ArgProps) => {
     const [weekDropDown, setWeekDropDown] = useState<CodeDTO[]>([]);
+    const [monsters, setMonsters] = useState<[MonsterDTO[]]>([[]]);
     /**
      * 弱点ドロップダウン
      */
@@ -29,7 +30,7 @@ const MonsterTableBody = ({editMonsters}: ArgProps) => {
     useLayoutEffect(() => {
         const fetchWeekDropDown = async () => {
             const dropDown: CodeDTO[] = await goToServer(
-                URLS.FETCH_WEEK_DROPDOWN
+                URLS.FETCH_ELEMENT_CODE
             );
             setWeekDropDown(dropDown);
         }
@@ -40,7 +41,7 @@ const MonsterTableBody = ({editMonsters}: ArgProps) => {
         <tbody>
         {
             editMonsters.map((monster, index) => (
-                <tr key={index}>
+                <tr key={index} onChange={(e) => console.log(e)}>
                     {/* ID */}
                     <BorderTd>{monster.MonsterId}</BorderTd>
                     {/* イメージ */}
@@ -71,7 +72,7 @@ const MonsterTableBody = ({editMonsters}: ArgProps) => {
                     {/* 弱点 */}
                     <BorderTd>{monster.WeekName}</BorderTd>
                     <BorderTd>
-                        <Select styleObj={{width: "50px"}}>
+                        <Select styleObj={{width: "50px"}} >
                             <option value="0"></option>
                             {
                                 weekDropDown.map((opt, index) => (
@@ -80,6 +81,7 @@ const MonsterTableBody = ({editMonsters}: ArgProps) => {
                             }
                         </Select>
                     </BorderTd>
+                    <Input inputType="hidden" labelTitle="" value="false"/>
                 </tr>
             ))
         }

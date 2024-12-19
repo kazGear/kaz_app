@@ -75,7 +75,7 @@ export const URLS = {
     USER_INFO: `${ENVIRONMENT}/api/user/userInfo`,
     MONSTERS_INFO: `${ENVIRONMENT}/api/battle/monstersInfo`,
     ITEM_INFO: `${ENVIRONMENT}/api/shop/itemInfo`,
-    FETCH_WEEK_DROPDOWN: `${ENVIRONMENT}/api/common/FetchElementCode`,
+    FETCH_ELEMENT_CODE: `${ENVIRONMENT}/api/common/FetchElementCode`,
     // ユーザ関係
     REGIST_USER_INIT: `${ENVIRONMENT}/api/user/init`,
     SELECT_LOGIN_USER: `${ENVIRONMENT}/api/user/loginUser`,

@@ -1,9 +1,9 @@
 import { useLayoutEffect, useState } from "react";
-import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
-import OutSideFrame from "../common/OutSideFrame";
-import Select from "../common/Select";
-import { URLS } from "../../lib/Constants";
-import { CodeDTO } from "../../types/Common";
+import { useServerWithQuery } from "../../../hooks/useHooksOfCommon";
+import OutSideFrame from "../../common/OutSideFrame";
+import Select from "../../common/Select";
+import { URLS } from "../../../lib/Constants";
+import { CodeDTO } from "../../../types/Common";
 
 interface ArgProps {
     setSelectEditType: React.Dispatch<React.SetStateAction<number>>

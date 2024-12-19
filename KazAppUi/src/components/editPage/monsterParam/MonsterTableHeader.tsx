@@ -1,4 +1,4 @@
-import Strong from "../common/Strong";
+import Strong from "../../common/Strong";
 
 const MonsterTableHeader = () => {
     const prefix = " ⇒ ";
