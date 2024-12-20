@@ -6,6 +6,7 @@ import MonsterTableBody from "./MonsterTableBody";
 import styled from "styled-components";
 import Button from "../../common/Button";
 import { EditMonsterDTO } from "../../../types/Edit";
+import EditStatusFinishedDialog from "./EditStatusFinishedDialog";
 
 const Stable = styled.table`
     margin: auto;
@@ -21,9 +22,10 @@ const SdivEditHeader = styled.div`
 
 const MonsterStatusEdit = () => {
     const [editMonsters, setEditMonsters] = useState<EditMonsterDTO[]>([]);
+    const [showDialog, setShowDialog] = useState(false);
 
     /**
-     * モンスター情報
+     * 編集用モンスター情報
      */
     const goToServer = useServerWithQuery();
     useLayoutEffect(() => {
@@ -44,6 +46,8 @@ const MonsterStatusEdit = () => {
         goToServerWithJson(
             editMonsters, URLS.UPDATE_MONSTER_STATUS
         );
+        setEditMonsters([...editMonsters]);
+        setShowDialog(true);
     }, [editMonsters]);
 
     return (
@@ -57,11 +61,13 @@ const MonsterStatusEdit = () => {
                         onClick={updateStatusHandler}
                         styleObj={{margin: "20px"}}/>
             </SdivEditHeader>
+            {/* ステータス編集部 */}
             <Stable>
                 <MonsterTableHeader />
                 <MonsterTableBody editMonsters={editMonsters}/>
             </Stable>
-
+            {/* 完了ダイアログ */}
+            <EditStatusFinishedDialog isShow={showDialog} setShowDialog={setShowDialog} setEditMonsters={setEditMonsters}/>
         </div>
     );
 }

@@ -10,7 +10,8 @@ const SdivDialogFrame = styled.div`
     transform: translate(-50%, -50%);
     width: 60%;
     min-width: 510px;
-    height: 50%;
+    min-height: 25%;
+    max-height: 60%;
     border-radius: 50px;
     box-shadow: ${COLORS.DIALOG_SHADOW} 2px 4px;
     z-index: 1000;
