@@ -72,6 +72,7 @@ linux command
 自動起動
 	タスクスケジューラ(windows)
 	クーロン(linux) /etc/crontabS
+	リリースビルドしたexeファイルでないとエラー落ち？
 
 経歴書
 	https://github.com/kazGear/catalog.git
