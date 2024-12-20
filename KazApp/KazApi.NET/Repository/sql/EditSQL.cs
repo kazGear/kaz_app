@@ -1,4 +1,5 @@
 ﻿using KazApi.Domain._Const;
+using System.Security.Policy;
 
 namespace KazApi.Repository.sql
 {
@@ -57,6 +58,19 @@ namespace KazApi.Repository.sql
                      , speed        = @speed
                      , week         = @week
                  WHERE monster_id = @monster_id ;
+            ";
+            return SQL;
+        }
+
+        public static string InitAllMonsterStatus()
+        {
+            string SQL = @"
+                TRUNCATE m_monster;
+             INSERT INTO m_monster 
+             (
+                  SELECT * 
+                    FROM m_monster_origin
+             ) ;
             ";
             return SQL;
         }

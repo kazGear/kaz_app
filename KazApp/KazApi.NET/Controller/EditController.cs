@@ -67,5 +67,26 @@ namespace KazApi.Controller
             }
             return Ok(200);
         }
+
+        /// <summary>
+        /// 全モンスターのステータスを初期化する
+        /// </summary>
+        [HttpPost("api/edit/initAllMonsterStatus")]
+        public ActionResult InitAllMonsterStatus()
+        {
+            try
+            {
+                using (TransactionScope transaction = new TransactionScope())
+                {
+                    _service.InitAllMonsterStatus();
+                    transaction.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+            return Ok(200);
+        }
     }
 }

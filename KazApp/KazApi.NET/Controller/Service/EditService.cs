@@ -12,18 +12,18 @@ namespace KazApi.Controller.Service
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EditService(IConfiguration configuration)
+        internal EditService(IConfiguration configuration)
         {
             _posgre = new PostgreSQL(configuration);
         }
 
-        public IEnumerable<CodeDTO> FetchDropDown()
+        internal IEnumerable<CodeDTO> FetchDropDown()
             => _posgre.Select<CodeDTO>(EditSQL.FetchDropDown());
 
         /// <summary>
         /// 編集用モンスターデータ
         /// </summary>
-        public IEnumerable<EditMonsterDTO> FetchEditMonsters(string loginId)
+        internal IEnumerable<EditMonsterDTO> FetchEditMonsters(string loginId)
         {
             var param = new { login_id = loginId };
             return _posgre.Select<EditMonsterDTO>(EditSQL.FetchEditMonsters(), param);
@@ -48,5 +48,11 @@ namespace KazApi.Controller.Service
                 _posgre.Execute(EditSQL.UpdateMonsterStatus(), param);
             }
         }
+
+        /// <summary>
+        /// 全モンスターのステータスを初期化する
+        /// </summary>
+        internal void InitAllMonsterStatus()
+            => _posgre.Execute(EditSQL.InitAllMonsterStatus());
     }
 }

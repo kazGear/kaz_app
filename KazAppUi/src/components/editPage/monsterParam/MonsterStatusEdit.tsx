@@ -20,8 +20,13 @@ const SdivEditHeader = styled.div`
     background: ${COLORS.BASE_BACKGROUND};
 `;
 
-const MonsterStatusEdit = () => {
-    const [editMonsters, setEditMonsters] = useState<EditMonsterDTO[]>([]);
+interface ArgProps {
+    editMonsters: EditMonsterDTO[];
+    setEditMonsters: React.Dispatch<React.SetStateAction<EditMonsterDTO[]>>;
+}
+
+const MonsterStatusEdit = ({editMonsters, setEditMonsters}: ArgProps) => {
+
     const [showDialog, setShowDialog] = useState(false);
 
     /**
