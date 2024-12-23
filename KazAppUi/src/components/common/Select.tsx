@@ -20,13 +20,14 @@ interface ArgProps {
     children: |React.ReactNode[] | React.ReactNode;
     onChange?: ChangeEventHandler<HTMLSelectElement>;
     styleObj?: React.CSSProperties;
+    defaultValue?: string | number;
 }
 
-const Select = ({title, children, onChange, styleObj}: ArgProps) => {
+const   Select = ({title, children, onChange, styleObj, defaultValue}: ArgProps) => {
     return (
         <SdivFrame>
             <label>{title}</label>
-            <Sselect onChange={onChange} style={styleObj}>
+            <Sselect onChange={onChange} style={styleObj} defaultValue={defaultValue}>
                 {children}
             </Sselect>
         </SdivFrame>

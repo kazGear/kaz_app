@@ -3,11 +3,11 @@ import monsterImages from "../../../lib/MonsterImages";
 import BorderTd from "../../common/BorderTd";
 import { CodeDTO } from "../../../types/Common";
 import { EditMonsterDTO } from "../../../types/Edit";
-import EditMonsterName from "./EditMonsterName";
-import EditMonsterHp from "./EditMonsterHp";
-import EditMonsterAttack from "./EditMonsterAttack";
-import EditMonsterSpeed from "./EditMonsterSpeed";
-import EditMonsterWeek from "./EditMonsterWeek";
+import EditMonsterName from "./EditMonsterNameBlock";
+import EditMonsterHp from "./EditMonsterHpBlock";
+import EditMonsterAttack from "./EditMonsterAttackBlock";
+import EditMonsterSpeed from "./EditMonsterSpeedBlock";
+import EditMonsterWeek from "./EditMonsterWeekBlock";
 import { useState } from "react";
 
 const Simg = styled.img`

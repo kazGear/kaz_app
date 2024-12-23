@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback } from "react";
 import { KEYS, URLS } from "../lib/Constants";
-import { useCallback } from "react";
-import { createMonstersJson } from "../lib/CreateJson";
 
 /**
  *  トークンが有効か確認
@@ -59,7 +57,6 @@ export const useServerWithJson = () => {
  * サーバーと通信を行う（クエリパラメータを使用）
  */
 export const useServerWithQuery = () => {
-     // モンスター登場。モンスター数は引数で調整
      const useServerWithQuery = useCallback(async (urlWithQuery: string) => {
         try {
             const option: {} = {
@@ -80,4 +77,30 @@ export const useServerWithQuery = () => {
     }, []);
 
     return useServerWithQuery;
+};
+
+/**
+ * サーバーと通信を行う
+ */
+export const useServer = () => {
+    const useServerWithQuery = useCallback(async (url: string) => {
+       try {
+           const option: {} = {
+               method: "GET",
+               mode: "cors",
+               headers: { "Content-Type": "application/json" },
+           };
+           // urlパラメータで送信
+           const response = await fetch(
+               url, option
+           );
+           const result = await response.json();
+           return result;
+       } catch (err) {
+           console.error("サーバー通信に失敗しました。");
+           console.error(err);
+       }
+   }, []);
+
+   return useServerWithQuery;
 };

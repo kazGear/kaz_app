@@ -6,16 +6,16 @@ interface ArgProps {
     monster: EditMonsterDTO;
 }
 
-const EditMonsterName = ({monster}: ArgProps) => {
+const EditMonsterHpBlock = ({monster}: ArgProps) => {
     return (
         <>
-            <BorderTd>{monster.MonsterName}</BorderTd>
+            <BorderTd>{monster.Hp}</BorderTd>
             <BorderTd>
-                <Input styleObj={{width: "120px"}}
-                       inputType="text"
+                <Input styleObj={{width: "50px"}}
+                       inputType="number"
                        labelTitle=""
                        onChange={(e: React.ChangeEvent<HTMLInputElement> | undefined) => {
-                            monster.AfterName = e!.target.value;
+                            monster.AfterHp = parseInt(e!.target.value);
                             monster.IsChanged = true;
                        }}/>
             </BorderTd>
@@ -23,4 +23,4 @@ const EditMonsterName = ({monster}: ArgProps) => {
     );
 }
 
-export default EditMonsterName;
+export default EditMonsterHpBlock;

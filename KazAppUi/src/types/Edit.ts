@@ -16,3 +16,35 @@ export interface EditMonsterDTO {
     AfterWeek: number |  undefined;
     IsChanged: boolean;
 }
+
+export interface EditSkillsDTO {
+    // モンスターステータス
+    ItemId: string;
+    MonsterId: string;
+    MonsterName: string;
+    Hp: number;
+    MonsterAttack: number;
+    Speed: number;
+    WeekName: string;
+    MySkillId: string;
+    SkillId: string;
+    SkillName: string;
+    SkillAttack: number;
+    SkillElementName: string;
+    IsChanged: boolean;
+
+    // 各スキル
+    MySkillIds: string[];
+    SkillIds: string[];
+    SkillNames: string[];
+    SkillAttacks: number[];
+    SkillElementNames: string[];
+}
+
+export interface AllSkillDTO {
+    SkillId: string;
+    SkillName: string;
+    SkillTypeName: string;
+    ElementName: string;
+    Attack: number;
+}

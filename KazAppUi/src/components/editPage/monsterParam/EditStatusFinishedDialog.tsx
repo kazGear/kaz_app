@@ -1,6 +1,6 @@
 import { useServerWithQuery } from "../../../hooks/useHooksOfCommon";
 import { useRefreshMonsterStatus } from "../../../hooks/useHooksOfEdit";
-import { COLORS, KEYS, URLS } from "../../../lib/Constants";
+import { COLORS } from "../../../lib/Constants";
 import { EditMonsterDTO } from "../../../types/Edit";
 import Button from "../../common/Button";
 import DialogFrame from "../../common/DialogFrame";

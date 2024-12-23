@@ -2,6 +2,7 @@
 using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
+using System.Diagnostics.Contracts;
 
 namespace KazApi.Controller.Service
 {
@@ -54,5 +55,42 @@ namespace KazApi.Controller.Service
         /// </summary>
         internal void InitAllMonsterStatus()
             => _posgre.Execute(EditSQL.InitAllMonsterStatus());
+
+        /// <summary>
+        /// 全モンスターのスキルを初期化する
+        /// </summary>
+        internal void InitAllMonsterSkills()
+            => _posgre.Execute(EditSQL.InitAllMonsterSkills());
+
+        /// <summary>
+        /// 編集用モンスターデータ（スキル付き）を取得
+        /// </summary>
+        internal IEnumerable<EditSkillsDTO> FecthEditSkills(string loginId)
+        {
+            var param = new { login_id = loginId };
+            return _posgre.Select<EditSkillsDTO>(EditSQL.FecthEditSkills(), param);
+        }
+
+        internal IEnumerable<AllSkillDTO> FetchAllSkills()
+            => _posgre.Select<AllSkillDTO>(EditSQL.FetchAllSkills());
+
+        /// <summary>
+        /// モンスターのスキルを変更する
+        /// </summary>
+        internal void UpdateMonsterSkills(IEnumerable<EditSkillsDTO> skills)
+        {
+            foreach (EditSkillsDTO skill in skills)
+            {
+                for (int i = 0; i < skill.MySkillIds.Count(); i++)
+                {
+                    var param = new
+                    {
+                        myskill_id = skill.MySkillIds[i],
+                        skill_id   = skill.SkillIds[i],
+                    };
+                    _posgre.Execute(EditSQL.UpdateMonsterSkills(), param);
+                }
+            }
+        }
     }
 }

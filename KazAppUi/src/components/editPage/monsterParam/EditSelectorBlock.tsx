@@ -9,7 +9,7 @@ interface ArgProps {
     setSelectEditType: React.Dispatch<React.SetStateAction<number>>
 }
 
-const EditSelector = ({setSelectEditType}: ArgProps) => {
+const EditSelectorBlock = ({setSelectEditType}: ArgProps) => {
     const [editTypeDropDown, setEditTypeDropDown] = useState<CodeDTO[]>([]);
 
     /**
@@ -40,4 +40,4 @@ const EditSelector = ({setSelectEditType}: ArgProps) => {
     );
 }
 
-export default EditSelector;
+export default EditSelectorBlock;

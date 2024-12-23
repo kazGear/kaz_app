@@ -5,6 +5,7 @@ import { MouseEventHandler } from "react";
 interface SbuttonProps {
     opacity: number;
     width: string;
+    display: string;
 }
 
 const Sbutton = styled.button<SbuttonProps>`
@@ -18,6 +19,7 @@ const Sbutton = styled.button<SbuttonProps>`
     margin: 0 5px 0 5px;
     border-radius: 10px;
     opacity: ${props => props.opacity};
+    display: ${props => props.display};
 
     &:hover {
         cursor: pointer;
@@ -36,11 +38,12 @@ interface ButtonProps {
     width?: number;
     onClick: MouseEventHandler<HTMLButtonElement>;
     disabled?: boolean;
+    display?: string;
     styleObj?: React.CSSProperties;
 }
 
 const Button = (
-    {id, text, width, onClick, disabled = false, styleObj}: ButtonProps
+    {id, text, width, onClick, disabled = false, display = "inline", styleObj}: ButtonProps
 ) => {
     const range: string = width ? width + "px" : "100px"
     const opacity = disabled ? COLORS.BUTTON_DISABLED : 1.0;
@@ -53,6 +56,7 @@ const Button = (
             onClick={onClick}
             opacity={opacity}
             disabled={disabled}
+            display={display}
             style={styleObj}
         >
             {text}

@@ -12,7 +12,8 @@ interface ArgProps {
     setWeekDropDown: React.Dispatch<React.SetStateAction<CodeDTO[]>>;
 }
 
-const EditMonsterWeek = ({weekDropDown, monster, setWeekDropDown}: ArgProps
+const EditMonsterWeekBlock = (
+    {weekDropDown, monster, setWeekDropDown}: ArgProps
 ) => {
     /**
      * 弱点ドロップダウン
@@ -50,4 +51,4 @@ const EditMonsterWeek = ({weekDropDown, monster, setWeekDropDown}: ArgProps
     );
 }
 
-export default EditMonsterWeek;
+export default EditMonsterWeekBlock;

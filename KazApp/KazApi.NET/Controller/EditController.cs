@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using KazApi.Controller.Service;
 using KazApi.Domain.DTO;
 using System.Transactions;
+using KazApi.Domain._Factory;
 
 namespace KazApi.Controller
 {
@@ -85,6 +86,75 @@ namespace KazApi.Controller
             catch (Exception)
             {
                 return StatusCode(500);
+            }
+            return Ok(200);
+        }
+
+        /// <summary>
+        /// 全モンスターのスキルを初期化する
+        /// </summary>
+        [HttpGet("api/edit/initAllMonsterSkills")]
+        public ActionResult InitAllMonsterSkills()
+        {
+            try
+            {
+                using (TransactionScope transaction = new TransactionScope())
+                {
+                    _service.InitAllMonsterSkills();
+                    transaction.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+            return Ok(200);
+        }
+
+
+        /// <summary>
+        /// 編集用モンスターデータ（スキル付き）を取得
+        /// </summary>
+        [HttpPost("api/edit/fecthEditSkills")]
+        public ActionResult<string> FecthEditSkills([FromQuery] string loginId)
+        {
+            try
+            {
+                IEnumerable<EditSkillsDTO> result = _service.FecthEditSkills(loginId);
+                result = new EditFactory().CreateMonstersWithSkills(result);
+
+                return JsonConvert.SerializeObject(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        /// <summary>
+        /// 全スキルを取得
+        /// </summary>
+        [HttpGet("api/edit/fecthAllSkills")]
+        public ActionResult<string> FecthAllSkills()
+        {
+            IEnumerable<AllSkillDTO> result = _service.FetchAllSkills();
+            return JsonConvert.SerializeObject(result);
+        }
+
+        /// <summary>
+        /// モンスターのスキルを変更する
+        /// </summary>
+        [HttpPost("api/edit/UpdateMonsterSkills")]
+        public ActionResult UpdateMonsterSkills([FromBody] IEnumerable<EditSkillsDTO> skills)
+        {
+            try
+            {
+                skills = skills.Where(e => e.IsChanged == true);
+                _service.UpdateMonsterSkills(skills);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "スキルの更新に失敗しました。");
             }
             return Ok(200);
         }

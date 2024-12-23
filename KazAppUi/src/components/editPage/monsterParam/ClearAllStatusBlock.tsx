@@ -8,9 +8,10 @@ import { EditMonsterDTO } from "../../../types/Edit";
 
 interface ArgProps {
     setEditMonsters: React.Dispatch<React.SetStateAction<EditMonsterDTO[]>>;
+    selectEditType: number;
 }
 
-const ClearAllStatus = ({setEditMonsters}: ArgProps) => {
+const ClearAllStatusBlock = ({setEditMonsters, selectEditType}: ArgProps) => {
     const [showInitConfirm, setShowInitConfirm] = useState(false);
     const [showInitComplete, setShowInitComplete] = useState(false);
     /**
@@ -30,7 +31,9 @@ const ClearAllStatus = ({setEditMonsters}: ArgProps) => {
             <Button text="全ステータス初期化"
                     onClick={() => setShowInitConfirm(true)}
                     width={150}
-                    styleObj={{marginRight: "20px"}}/>
+                    display={selectEditType === 1 ? "inline" : "none"}
+                    styleObj={{marginRight: "20px"}}
+                    />
             {/* 初期化確認ダイアログ */}
             <DialogFrame showDialog={showInitConfirm}>
                 <h3 style={{margin: 0}}>全モンスターのステータスを初期状態に戻します。</h3>
@@ -61,4 +64,4 @@ const ClearAllStatus = ({setEditMonsters}: ArgProps) => {
     );
 }
 
-export default ClearAllStatus;
+export default ClearAllStatusBlock;

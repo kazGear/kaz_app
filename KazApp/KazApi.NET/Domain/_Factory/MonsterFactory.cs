@@ -146,6 +146,5 @@ namespace KazApi.Domain._Factory
             }
             return monstersDTO;
         }
-
     }
 }

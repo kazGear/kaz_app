@@ -25,6 +25,8 @@ namespace KazApi.Domain.DTO
         public int Week { get; set; }
         [JsonPropertyName("WeekName")]
         public string WeekName { get; set; }
+        [JsonPropertyName("IsDisabled")]
+        public string IsDisabled { get; set; }
 
         // 変更後パラメータ
 

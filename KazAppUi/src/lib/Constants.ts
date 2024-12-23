@@ -104,6 +104,10 @@ export const URLS = {
     FETCH_EDIT_MONSTERS: `${ENVIRONMENT}/api/edit/fetchMonsters`,
     UPDATE_MONSTER_STATUS: `${ENVIRONMENT}/api/edit/updateMonsterStatus`,
     INIT_ALL_MONSTERS_STATUS: `${ENVIRONMENT}/api/edit/initAllMonsterStatus`,
+    INIT_ALL_MONSTERS_SKILLS: `${ENVIRONMENT}/api/edit/initAllMonsterSkills`,
+    FETCH_EDIT_SKILLS: `${ENVIRONMENT}/api/edit/FecthEditSkills`,
+    FETCH_ALL_SKILLS: `${ENVIRONMENT}/api/edit/fecthAllSkills`,
+    CHANGE_MONSTER_SKILLS: `${ENVIRONMENT}/api/edit/UpdateMonsterSkills`,
     // その他
     UPLOAD_IMAGE: `${ENVIRONMENT}/api/common/imgUpload`
 } as const;
