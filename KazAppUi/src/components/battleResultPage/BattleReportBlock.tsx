@@ -4,6 +4,7 @@ import { COLORS } from "../../lib/Constants";
 import monsterImages from "../../lib/MonsterImages";
 import React from "react";
 import BorderTd from "../common/BorderTd";
+import NowLoading from "../common/NowLoading";
 
 const Stable = styled.table`
     width: 100%;
@@ -27,9 +28,23 @@ const Simg = styled.img`
 
 interface ArgProps {
     battleReport: BattleReportDTO[];
+    isNowLoadingBattleReport: boolean;
 }
 
-const BattleReportBlock = ({battleReport}: ArgProps) => {
+const BattleReportBlock = (
+    {battleReport, isNowLoadingBattleReport}: ArgProps
+) => {
+
+    /**
+     * ローディング
+     */
+    if (isNowLoadingBattleReport) {
+        return (
+            <div style={{margin: "100px"}}>
+                <NowLoading alt="ローディング"/>
+            </div>
+        );
+    }
 
     return (
         <Stable>

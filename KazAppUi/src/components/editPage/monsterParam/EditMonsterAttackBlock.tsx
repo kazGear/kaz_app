@@ -9,10 +9,10 @@ interface ArgProps {
 const EditMonsterAttackBlock = ({monster}: ArgProps) => {
     return (
         <>
-            <BorderTd>{monster.Attack}</BorderTd>
             <BorderTd>
                 <Input styleObj={{width: "50px"}}
                        inputType="number"
+                       defaultValue={monster.Attack}
                        labelTitle=""
                        onChange={(e: React.ChangeEvent<HTMLInputElement> | undefined) => {
                             monster.AfterAttack = parseInt(e!.target.value);

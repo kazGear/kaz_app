@@ -17,9 +17,12 @@ const Sh1Title = styled.h1`
 
 interface ArgProps {
     setBattleReport: React.Dispatch<React.SetStateAction<BattleReportDTO[]>>;
+    setIsNowLoadingBattleReport: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MonsterReportControllerBlock = ({setBattleReport}: ArgProps) => {
+const MonsterReportControllerBlock = (
+    {setBattleReport, setIsNowLoadingBattleReport}: ArgProps
+) => {
     // 送信パラメータ系
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
@@ -38,6 +41,7 @@ const MonsterReportControllerBlock = ({setBattleReport}: ArgProps) => {
      * 戦闘毎のレポートを取得
      */
     const fetchBattleReportHandler = useCallback(async () => {
+        setIsNowLoadingBattleReport(true);
         const battleReport: BattleReportDTO[]
             = await goToServer(
                   `${URLS.BATTLE_REPORTS}?battleScale=${battleScale}
@@ -45,6 +49,7 @@ const MonsterReportControllerBlock = ({setBattleReport}: ArgProps) => {
                                         &to=${to}`
             );
         setBattleReport(battleReport);
+        setIsNowLoadingBattleReport(false);
     }, [battleScale, from, to]);
 
     return (

@@ -9,10 +9,10 @@ interface ArgProps {
 const EditMonsterHpBlock = ({monster}: ArgProps) => {
     return (
         <>
-            <BorderTd>{monster.Hp}</BorderTd>
             <BorderTd>
                 <Input styleObj={{width: "50px"}}
                        inputType="number"
+                       defaultValue={monster.Hp}
                        labelTitle=""
                        onChange={(e: React.ChangeEvent<HTMLInputElement> | undefined) => {
                             monster.AfterHp = parseInt(e!.target.value);

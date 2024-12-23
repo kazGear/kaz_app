@@ -19,8 +19,8 @@ interface ArgProps {
 }
 
 const MonsterStatusEditBlock = ({editMonsters, setEditMonsters}: ArgProps) => {
-
     const [showDialog, setShowDialog] = useState(false);
+    const [isNowLoading, setIsLowLoading] = useState(true);
 
     /**
      * 編集用モンスター情報
@@ -33,6 +33,7 @@ const MonsterStatusEditBlock = ({editMonsters, setEditMonsters}: ArgProps) => {
                 URLS.FETCH_EDIT_MONSTERS + `?loginId=${loginId}`
             );
             setEditMonsters([...monsters]);
+            setIsLowLoading(false);
         }
         fetchEditMonsters();
     }, []);
@@ -56,7 +57,8 @@ const MonsterStatusEditBlock = ({editMonsters, setEditMonsters}: ArgProps) => {
             {/* ステータス編集部 */}
             <Stable>
                 <MonsterTableHeader />
-                <MonsterTableBody editMonsters={editMonsters}/>
+                <MonsterTableBody editMonsters={editMonsters}
+                                  isNowLoading={isNowLoading}/>
             </Stable>
             {/* 完了ダイアログ */}
             <EditStatusFinishedDialog isShow={showDialog}

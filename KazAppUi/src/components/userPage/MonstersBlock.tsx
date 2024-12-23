@@ -6,6 +6,7 @@ import { useLayoutEffect, useState } from "react";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
 import { URLS } from "../../lib/Constants";
 import BorderTd from "../common/BorderTd";
+import NowLoading from "../common/NowLoading";
 
 const SdivMonsters = styled.div`
     height: 100%;
@@ -48,9 +49,10 @@ interface ArgProps {
 
 const MonstersBlock = ({monsters, loginId}: ArgProps) => {
     const [getMonsterCount, setGetMonsterCount] = useState<string | null>(null);
+    const [isNowLoading, setIsNowLoading] = useState(true);
 
     /**
-     * 使用権開放モンスター素の取得
+     * 使用権開放済モンスターの取得
      */
     const goToServer = useServerWithQuery();
     useLayoutEffect(() => {
@@ -59,8 +61,19 @@ const MonstersBlock = ({monsters, loginId}: ArgProps) => {
             setGetMonsterCount(monsterCount);
         }
         selectMonsterCount();
+        setIsNowLoading(false);
     }, []);
 
+    /**
+     * ローディング
+     */
+    if (isNowLoading) {
+        return (
+            <div style={{margin: "100px"}}>
+                <NowLoading alt="ローディング"/>
+            </div>
+        );
+    }
 
     return (
         <SdivMonsters>

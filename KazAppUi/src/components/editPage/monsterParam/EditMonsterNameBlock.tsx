@@ -9,10 +9,10 @@ interface ArgProps {
 const EditMonsterNameBlock = ({monster}: ArgProps) => {
     return (
         <>
-            <BorderTd>{monster.MonsterName}</BorderTd>
-            <BorderTd>
+            <BorderTd >
                 <Input styleObj={{width: "120px"}}
                        inputType="text"
+                       defaultValue={monster.MonsterName}
                        labelTitle=""
                        onChange={(e: React.ChangeEvent<HTMLInputElement> | undefined) => {
                             monster.AfterName = e!.target.value;

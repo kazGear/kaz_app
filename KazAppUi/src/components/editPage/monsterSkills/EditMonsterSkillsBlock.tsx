@@ -5,6 +5,7 @@ import { EditSkillsDTO } from "../../../types/Edit";
 import EditSkillBlock from "./EditSkillBlock";
 import HeaderOfBody from "../../common/HeaderOfBody";
 import SkillUpdateDialog from "./SkillUpdateDialog";
+import { isNotEmittedStatement } from "typescript";
 
 interface ArgProps {
     editMonsterSkills: EditSkillsDTO[];
@@ -13,6 +14,7 @@ interface ArgProps {
 
 const EditMonsterSkillsBlock = ({editMonsterSkills, setEditMonsterSkills}: ArgProps) => {
     const [showUpdateDialog, setShowUpdateDialog] = useState(false);
+    const [isNowLoading, setIsNowLoading] = useState<boolean>(true);
     /**
      * 編集賞モンスタースキル
      */
@@ -23,6 +25,7 @@ const EditMonsterSkillsBlock = ({editMonsterSkills, setEditMonsterSkills}: ArgPr
                 URLS.FETCH_EDIT_SKILLS + `?loginId=${localStorage.getItem(KEYS.USER_ID)}`
             );
             setEditMonsterSkills(monsterSkills);
+            setIsNowLoading(false);
         }
         fetchEditSkills();
     }, []);
@@ -46,7 +49,8 @@ const EditMonsterSkillsBlock = ({editMonsterSkills, setEditMonsterSkills}: ArgPr
                               updateSkillsHandler();
                           }}
                           />
-            <EditSkillBlock editMonsterSkills={editMonsterSkills}/>
+            <EditSkillBlock editMonsterSkills={editMonsterSkills}
+                            isNowLoading={isNowLoading}/>
             <SkillUpdateDialog showDialog={showUpdateDialog}
                                setShowUpdateDialog={setShowUpdateDialog}/>
         </div>

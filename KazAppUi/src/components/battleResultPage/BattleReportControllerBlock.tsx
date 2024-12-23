@@ -20,9 +20,12 @@ const Sh1Title = styled.h1`
 interface ArgProps {
     setMonsterReport: React.Dispatch<React.SetStateAction<MonsterReportDTO[]>>;
     sortType: string;
+    setIsNowLoadingMonsterReport: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const BattleReportControllerBlock = ({setMonsterReport, sortType}: ArgProps) => {
+const BattleReportControllerBlock = (
+    {setMonsterReport, sortType, setIsNowLoadingMonsterReport}: ArgProps
+) => {
     const [monsterTypeId, setMonsterTypeId] = useState("0");
     const [isAscOrder, setIsAscOrder] = useState(true);
 
@@ -39,9 +42,10 @@ const BattleReportControllerBlock = ({setMonsterReport, sortType}: ArgProps) => 
         }
     }
     /**
-     * モンスタ毎のレポートを取得
+     * モンスター毎のレポートを取得
      */
     const fetchMonsterReportHandler = useCallback(async () => {
+        setIsNowLoadingMonsterReport(true);
         const monsterReport: MonsterReportDTO[]
             = await goToServer(
                 URLS.MONSTER_REPORTS + `?monsterTypeId=${monsterTypeId}
@@ -49,6 +53,7 @@ const BattleReportControllerBlock = ({setMonsterReport, sortType}: ArgProps) => 
                                        &isAscOrder=${isAscOrder}`
             );
         setMonsterReport(monsterReport);
+        setIsNowLoadingMonsterReport(false);
     }, [monsterTypeId, sortType, isAscOrder]);
 
     return (

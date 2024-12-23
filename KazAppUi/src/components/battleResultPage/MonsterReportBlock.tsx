@@ -3,6 +3,7 @@ import { MonsterReportDTO } from "../../types/BattleReport";
 import { COLORS } from "../../lib/Constants";
 import monsterImages from "../../lib/MonsterImages";
 import BorderTd from "../common/BorderTd";
+import NowLoading from "../common/NowLoading";
 
 const Stable = styled.table`
     width: 100%;
@@ -32,13 +33,27 @@ const Sradio = styled.input`
 
 interface ArgProps {
     monsterReport: MonsterReportDTO[];
-    setSortType:  React.Dispatch<React.SetStateAction<string>>;
+    setSortType:  React.Dispatch<React.SetStateAction<string>>
+    isNowLoadingMonsterReport: boolean;
 }
 
-const MonsterReportBlock = ({monsterReport, setSortType}: ArgProps) => {
+const MonsterReportBlock = (
+    {monsterReport, setSortType, isNowLoadingMonsterReport}: ArgProps
+) => {
     // ソート項目
     const sortHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSortType(e.target.value);
+    }
+
+    /**
+     * ローディング
+     */
+    if (isNowLoadingMonsterReport) {
+        return (
+            <div style={{margin: "100px"}}>
+                <NowLoading alt="ローディング"/>
+            </div>
+        );
     }
 
    return (

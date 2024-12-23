@@ -9,6 +9,7 @@ import EditMonsterAttack from "./EditMonsterAttackBlock";
 import EditMonsterSpeed from "./EditMonsterSpeedBlock";
 import EditMonsterWeek from "./EditMonsterWeekBlock";
 import { useState } from "react";
+import NowLoading from "../../common/NowLoading";
 
 const Simg = styled.img`
     vertical-align: middle;
@@ -19,10 +20,22 @@ const Simg = styled.img`
 
 interface ArgProps {
     editMonsters: EditMonsterDTO[];
+    isNowLoading: boolean;
 }
 
-const MonsterTableBody = ({editMonsters}: ArgProps) => {
+const MonsterTableBody = ({editMonsters, isNowLoading}: ArgProps) => {
     const [weekDropDown, setWeekDropDown] = useState<CodeDTO[]>([]);
+
+    /**
+     * ローディング
+     */
+    if (isNowLoading) {
+        return (
+            <div style={{margin: "100px"}}>
+                <NowLoading alt="ローディング" />
+            </div>
+        );
+    }
 
     return (
         <tbody>

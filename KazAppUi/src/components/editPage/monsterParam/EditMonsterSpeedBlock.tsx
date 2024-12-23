@@ -9,10 +9,10 @@ interface ArgProps {
 const EditMonsterSpeedBlock = ({monster}: ArgProps) => {
     return (
         <>
-            <BorderTd>{monster.Speed}</BorderTd>
             <BorderTd>
                 <Input styleObj={{width: "50px"}}
                        inputType="number"
+                       defaultValue={monster.Speed}
                        labelTitle=""
                        onChange={(e: React.ChangeEvent<HTMLInputElement> | undefined) => {
                             monster.AfterSpeed = parseInt(e!.target.value);

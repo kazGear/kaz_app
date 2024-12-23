@@ -23,7 +23,7 @@ interface ArgProps {
     defaultValue?: string | number;
 }
 
-const   Select = ({title, children, onChange, styleObj, defaultValue}: ArgProps) => {
+const Select = ({title, children, onChange, styleObj, defaultValue}: ArgProps) => {
     return (
         <SdivFrame>
             <label>{title}</label>

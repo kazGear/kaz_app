@@ -44,17 +44,7 @@ const ClearAllStatusBlock = ({setEditMonsters, selectEditType}: ArgProps) => {
                         clearAllMonstersStatus();
                         refreshMonsterStatus(goToServer, setEditMonsters);
                         setShowInitComplete(true);
-                    }
-                        }/>
-                </div>
-            </DialogFrame>
-            {/* 初期化完了通知 */}
-            <DialogFrame showDialog={showInitComplete}>
-                <h2>ステータスの初期化が完了しました。</h2>
-                <div style={{textAlign: "end"}}>
-                    <Button text="閉じる" onClick={() => {
-                        setShowInitConfirm(false);
-                        setShowInitComplete(false);
+                        window.location.href = "/EditPage"
                     }
                         }/>
                 </div>

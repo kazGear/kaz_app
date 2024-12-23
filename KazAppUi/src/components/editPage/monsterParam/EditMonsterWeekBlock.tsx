@@ -37,7 +37,6 @@ const EditMonsterWeekBlock = (
                         onChange={(e: React.ChangeEvent<HTMLSelectElement> | undefined) => {
                             monster.AfterWeek = parseInt(e!.target.value);
                             monster.IsChanged = true;
-                            console.log(parseInt(e!.target.value));
                         }}>
                     <option value="0"></option>
                     {
@@ -45,6 +44,7 @@ const EditMonsterWeekBlock = (
                             <option key={index} value={opt.Value}>{opt.Name}</option>
                         ))
                     }
+
                 </Select>
             </BorderTd>
         </>

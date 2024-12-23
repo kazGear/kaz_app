@@ -14,12 +14,14 @@ const Simg = styled.img<StyleProps>`
 interface ArgProps {
     alt: string;
     size?: string;
+    styleObj?: React.CSSProperties;
 }
 
-const NowLoading = ({alt, size}: ArgProps) => {
+const NowLoading = ({alt, size, styleObj}: ArgProps) => {
     return <Simg src={nowLoading}
                  alt={alt}
-                 size={size}/>;
+                 size={size}
+                 style={styleObj}/>;
 }
 
 export default NowLoading;
