@@ -32,7 +32,7 @@ namespace KazApi.Domain._Monster
         public IMonster(MonsterDTO dto, IEnumerable<ISkill> skills, IEnumerable<IState> status)
         {
             MonsterId = dto.MonsterId;
-            MonsterName = dto.MonsterName;
+            MonsterName = dto.MonsterName!;
             Hp = dto.Hp;
             if (MaxHp == 0) MaxHp = dto.MaxHp;
             Attack = dto.Attack;
@@ -130,6 +130,7 @@ namespace KazApi.Domain._Monster
                 _Log.Logging(new BattleMetaData(
                     MonsterId,
                     skill.SkillId,
+                    skill.EffectTime,
                     state.Name,
                     enableState,
                     $"{MonsterName}は{state.StateName()}状態になった。")

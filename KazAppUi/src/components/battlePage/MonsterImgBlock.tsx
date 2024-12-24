@@ -49,8 +49,8 @@ const MonsterImgBlock = ({monster, shortLog}: ArgProps) => {
             ) {
                 setEffectImage(effectImages(log.SkillId ?? ""));
                 setShowEffect(true);
-                setTimeout(() => setShowEffect(false), DAMAGE_VIEW.EFFECT_END);
-                setTimeout(() => setShowFlash(true), DAMAGE_VIEW.EFFECT_END);
+                setTimeout(() => setShowEffect(false), log.EffectTime);
+                setTimeout(() => setShowFlash(true), log.EffectTime);
                 setTimeout(() => setShowFlash(false), DAMAGE_VIEW.DAMAGE_END);
             }
         }

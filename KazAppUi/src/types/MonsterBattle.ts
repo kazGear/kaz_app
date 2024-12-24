@@ -6,6 +6,7 @@ export interface MetaDataDTO {
     EnableState: boolean;
     DisableState: boolean;
     SkillId: string;
+    EffectTime: number;
     Message: string;
     IsStop: boolean;
     AllLoser: boolean;
@@ -40,6 +41,7 @@ export interface SkillDTO {
     Attack: number;
     Weight: number;
     Critical: bigint;
+    EffectTime: number;
     Remarks?: string;
 }
 

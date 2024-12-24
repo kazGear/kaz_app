@@ -24,6 +24,7 @@ namespace KazApi.Domain._Monster._Skill
         //public string EffectFilePath { get; protected set; }
         public int Weight { get; protected set; }
         public double Critical { get; protected set; }
+        public int EffectTime { get; protected set; }
 
         /// <summary>
         /// コンストラクタ
@@ -38,9 +39,9 @@ namespace KazApi.Domain._Monster._Skill
             ElementType = dto.ElementType;
             StateType = dto.StateType;
             TargetType = dto.TargetType;
-            //EffectFilePath = effectFilePath;
             Weight = dto.Weight;
             Critical = dto.Critical;
+            EffectTime = dto.EffectTime;
         }
 
         /// <summary>

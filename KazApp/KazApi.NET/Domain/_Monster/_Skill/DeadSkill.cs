@@ -38,14 +38,16 @@ namespace KazApi.Domain._Monster._Skill
                     enemy.Hp,
                     deadDamage,
                     SkillId,
+                    EffectTime,
                     $"{enemy.MonsterName}は戦闘不能になった。"));
             }
             else
             {
                 _Log.Logging(new BattleMetaData(
                     enemy.MonsterId,
-                    SkillId
-                    , $"{enemy.MonsterName}には効かなかった。"));
+                    SkillId,
+                    EffectTime,
+                    $"{enemy.MonsterName}には効かなかった。"));
             }
         }
     }

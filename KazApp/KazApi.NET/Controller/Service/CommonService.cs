@@ -1,7 +1,6 @@
 ﻿using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
-using System.Collections.Generic;
 
 namespace KazApi.Controller.Service
 {

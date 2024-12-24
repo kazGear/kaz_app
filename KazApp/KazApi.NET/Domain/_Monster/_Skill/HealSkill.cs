@@ -29,7 +29,8 @@ namespace KazApi.Domain._Monster._Skill
                 me.Hp,
                 healPoint * -1,
                 SkillId,
-                  $"{me.MonsterName}は{healPoint}ポイント回復した！"
+                EffectTime,
+                $"{me.MonsterName}は{healPoint}ポイント回復した！"
                 ));
 
             // マイナス数値の減算でHP加算

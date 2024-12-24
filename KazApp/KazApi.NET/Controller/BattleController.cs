@@ -90,11 +90,11 @@ namespace KazApi.Controller
         {
             IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
             {
-                monstersDTO.Where(e => e.MonsterId == CMonster.イビルシャーマン.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.エレメントソード.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.グリーンスライム.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.キラービー.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.アサシンバグ.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ラスターバグ.VALUE).Single(),
                 monstersDTO.Where(e => e.MonsterId == CMonster.カーミラクイーン.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.セイレーン.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.カーミラクイーン.VALUE).Single(),
             };
             return testMonsters;
         }

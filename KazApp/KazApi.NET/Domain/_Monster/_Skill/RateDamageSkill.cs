@@ -27,6 +27,7 @@ namespace KazApi.Domain._Monster._Skill
                 enemy.Hp,
                 (int)damage,
                 SkillId,
+                EffectTime,
                 $"{enemy.MonsterName}は{(int)damage}のダメージを受けた。")
                 );
 

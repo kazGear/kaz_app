@@ -29,6 +29,7 @@ export const createMonstersJson = (monsters: MonsterDTO[]): MonsterDTO[] => {
             skill.Attack = sk.Attack;
             skill.Weight = sk.Weight;
             skill.Critical = sk.Critical;
+            skill.EffectTime = sk.EffectTime;
 
             skills.push(skill);
         }

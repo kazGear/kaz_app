@@ -2,7 +2,6 @@
 using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
-using System.Diagnostics.Contracts;
 
 namespace KazApi.Controller.Service
 {

@@ -88,7 +88,7 @@ const BattlePage = () => {
    const gameStartHandler = useCallback(async (e: any) => {
         const initMonsters: MonsterDTO[] = await goToServer(
             `${URLS.INIT_MONSTERS}?selectMonstersCount=${selectMonstersCount.current}&loginId=${loginId}`);
-        setMonsters(initMonsters);
+        setMonsters([...initMonsters]);
         setMonsterCount(initMonsters.length);
         // 画面切り替え
         setShowStartDialog(false);

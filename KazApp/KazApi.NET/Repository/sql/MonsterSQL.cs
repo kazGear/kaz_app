@@ -45,7 +45,7 @@
                     SELECT monster_id AS MonsterId
                          , skill_id   AS SkillId 
                          , disabled   AS Disabled
-                      FROM monster_skills ;
+                      FROM m_monster_skills ;
                 ";
             return SQL;
         }

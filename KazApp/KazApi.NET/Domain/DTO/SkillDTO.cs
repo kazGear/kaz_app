@@ -10,25 +10,38 @@ namespace KazApi.Domain.DTO
     {
         [JsonPropertyName("SkillId")]
         public string SkillId { get; set; }
-        [JsonPropertyName("SkillName")]
+        
+        [JsonPropertyName("SkillName"
+            )]
         public string SkillName { get; set; }
+        
         [JsonPropertyName("SkillType")]
         public int SkillType { get; set; }
+        
         [JsonPropertyName("ElementType")]
         public int ElementType { get; set; }
+        
         [JsonPropertyName("StateType")]
         public int StateType { get; set; }
+        
         [JsonPropertyName("TargetType")]
         public int TargetType { get; set; }
+        
         [JsonPropertyName("Attack")]
         public int Attack { get; set; }
+        
         [JsonPropertyName("Weight")]
         public int Weight { get; set; }
+        
         [JsonPropertyName("Critical")]
         public double Critical { get; set; }
+        
         [JsonPropertyName("Remarks")]
         public string? Remarks { get; set; } = string.Empty;
 
+        [JsonPropertyName("EffectTime")]
+        public int EffectTime { get; set; } = 1000;
+        
         /// <summary>
         /// コンストラクタ
         /// </summary>

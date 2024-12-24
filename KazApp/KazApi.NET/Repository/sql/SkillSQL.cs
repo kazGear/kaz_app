@@ -17,6 +17,7 @@
                      , attack       AS Attack
                      , weight       AS Weight
                      , critical     AS Critical
+                     , effect_time  AS EffectTime
                      , remarks      AS Remarks
                   FROM m_skill ;
             ";
