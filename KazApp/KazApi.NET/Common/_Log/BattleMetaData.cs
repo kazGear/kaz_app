@@ -63,10 +63,10 @@ namespace KazApi.Common._Log
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public BattleMetaData(string message, bool isStop = false)
+        public BattleMetaData(string message)
         {
             Message = message;
-            IsStop = isStop;
+            IsStop = false;
         }
 
         /// <summary>
@@ -74,12 +74,12 @@ namespace KazApi.Common._Log
         /// </summary>
         public BattleMetaData(
             string targetMonsterId,
-            string message,
-            bool isStop = false)
+            string message
+            )
         {
             TargetMonsterId = targetMonsterId;
             Message = message;
-            IsStop = isStop;
+            IsStop = false;
         }
         /// <summary>
         /// コンストラクタ
@@ -88,14 +88,14 @@ namespace KazApi.Common._Log
             string targetMonsterId,
             string skillId,
             int effectTime,
-            string message,
-            bool isStop = false)
+            string message
+            )
         {
             TargetMonsterId = targetMonsterId;
             SkillId = skillId;
             EffectTime = effectTime;
             Message = message;
-            IsStop = isStop;
+            IsStop = false;
         }
         /// <summary>
         /// コンストラクタ
@@ -104,14 +104,14 @@ namespace KazApi.Common._Log
             string targetMonsterId,
             bool disableState,
             string stateName,
-            string message,
-            bool isStop = false)
+            string message
+            )
         {
             TargetMonsterId = targetMonsterId;
             DisableState = disableState;
             StateName = stateName;
             Message = message;
-            IsStop = isStop;
+            IsStop = false;
         }
 
 
@@ -124,8 +124,8 @@ namespace KazApi.Common._Log
             int effectTime,
             string stateName,
             bool enableState,
-            string message,
-            bool isStop = false)
+            string message
+            )
         {
             TargetMonsterId = targetMonsterId;
             SkillId = skillId;
@@ -133,7 +133,7 @@ namespace KazApi.Common._Log
             StateName = stateName;
             EnableState = enableState;
             Message = message;
-            IsStop = isStop;
+            IsStop = false;
         }
 
         /// <summary>
@@ -144,15 +144,15 @@ namespace KazApi.Common._Log
             int beforeHp,
             int impactPoint,
             int effectTime,
-            string message,
-            bool isStop = false)
+            string message
+            )
         {
             TargetMonsterId = targetMonsterId;
             BeforeHp = beforeHp;
             ImpactPoint = impactPoint;
             EffectTime = effectTime;
             Message = message;
-            IsStop = isStop;
+            IsStop = false;
         }
         /// <summary>
         /// コンストラクタ
@@ -163,8 +163,8 @@ namespace KazApi.Common._Log
             int impactPoint,
             string skillId,
             int effectTime,
-            string message,
-            bool isStop = false)
+            string message
+            )
         {
             TargetMonsterId = targetMonsterId;
             BeforeHp = beforeHp;
@@ -172,7 +172,7 @@ namespace KazApi.Common._Log
             SkillId = skillId;
             EffectTime = effectTime;
             Message = message;
-            IsStop = isStop;
+            IsStop = false;
         }
         /// <summary>
         /// コンストラクタ
