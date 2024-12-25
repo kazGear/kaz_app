@@ -11,6 +11,7 @@ namespace KazApi.Domain._Monster._State
     {
         private static readonly double POISON_DAMAGE_RATE = 0.25;
         private static readonly double ADJUST_RATE = 0.2;
+        private static readonly string DEADLY_POISON_SKILL_ID = "skill046";
 
         /// <summary>
         /// コンストラクタ
@@ -51,6 +52,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(monster.MonsterId, $"猛毒に侵されている　..."));
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
+                DEADLY_POISON_SKILL_ID,
                 monster.Hp,
                 poisonDamage,
                 $"{monster.MonsterName}は{poisonDamage}ダメージを受けた。"
@@ -59,7 +61,7 @@ namespace KazApi.Domain._Monster._State
             // 被ダメージ
             monster.AcceptDamage(poisonDamage);
 
-            // 早く回復することがある                        
+            // 早く回復することがある
             DurationCount += URandom.durationCountUp();
 
         }

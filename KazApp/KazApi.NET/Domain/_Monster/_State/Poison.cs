@@ -12,6 +12,7 @@ namespace KazApi.Domain._Monster._State
     {
         private static readonly double POISON_DAMAGE_RATE = 0.1;
         private static readonly double ADJUST_RATE = 0.4;
+        private static readonly string POISON_SKILL_ID = "skill044";
 
         /// <summary>
         /// コンストラクタ
@@ -57,6 +58,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(monster.MonsterId, $"毒がまわってきた。。。"));
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
+                POISON_SKILL_ID,
                 monster.Hp,
                 poisonDamage,
                 $"{monster.MonsterName}は{poisonDamage}ダメージを受けた。"

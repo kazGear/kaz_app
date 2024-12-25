@@ -141,16 +141,16 @@ namespace KazApi.Common._Log
         /// </summary>
         public BattleMetaData(
             string targetMonsterId,
+            string skillId,
             int beforeHp,
             int impactPoint,
-            int effectTime,
             string message
             )
         {
             TargetMonsterId = targetMonsterId;
+            SkillId = skillId;
             BeforeHp = beforeHp;
             ImpactPoint = impactPoint;
-            EffectTime = effectTime;
             Message = message;
             IsStop = false;
         }

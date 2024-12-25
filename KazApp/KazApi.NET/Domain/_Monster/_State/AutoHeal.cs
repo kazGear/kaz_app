@@ -11,6 +11,7 @@ namespace KazApi.Domain._Monster._State
     {
         private static readonly double HEAL_RATE = 0.15;
         private static readonly double ADJUST_RATE = 0.25;
+        private static readonly string HEAL_SKILL_ID = "skill039";
 
         /// <summary>
         /// コンストラクタ
@@ -54,6 +55,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}の自然治癒！"));
             _Log.Logging(new BattleMetaData(
                 me.MonsterId,
+                HEAL_SKILL_ID,
                 me.Hp,
                 healPointFix * -1,
                 $"{me.MonsterName}のHPが{healPointFix}回復した！")

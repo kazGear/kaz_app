@@ -29,6 +29,8 @@ const ToLoginPageBlock = () => {
                     <br />
                     ※登録済ユーザー&emsp; ログインID：guest、パスワード：guest
                     <br />
+                    ※テストユーザー&emsp; ログインID：test、パスワード：test
+                    <br />
                     ※管理ユーザー&emsp; ログインID：admin、パスワード：admin
                 </SpDescription>
             </OutSideFrame>

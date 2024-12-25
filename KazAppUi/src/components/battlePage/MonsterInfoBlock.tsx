@@ -61,8 +61,7 @@ const MonsterInfoBlock = ({monster, shortLog}: ArgProps) => {
     return (
         <SdivMonsterInfoFrame
             color={infoColor === STATE_NAME.LOSER ? COLORS.LOSER_FONT_COLOR
-                                              : COLORS.MAIN_FONT_COLOR}
-                                              >
+                                                  : COLORS.MAIN_FONT_COLOR}>
             {
                 monster.Hp !== undefined ? (
                 <Stable>
