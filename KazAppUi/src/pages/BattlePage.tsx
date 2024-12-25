@@ -105,7 +105,7 @@ const BattlePage = () => {
             monstersJson, URLS.BATTLE_NEXT_TURN
        );
        setMonsters([...moveResult.Monsters]);
-       setBattleLog([...moveResult.BattleLog]);
+       setBattleLog([...moveResult.BattleLog]); // TODO ここでたまにABEND
        setBattleStarted(true);
        setMonsterCount([...moveResult.Monsters].length);
    };

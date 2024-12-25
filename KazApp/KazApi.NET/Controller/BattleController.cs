@@ -148,7 +148,12 @@ namespace KazApi.Controller
             _logger.Logging(new BattleMetaData());
             model.Monsters = monstersDTO;
             model.BattleLog = _logger.DumpMemory();
-            
+
+            if (model.Monsters.Count() <= 0) 
+                Console.WriteLine("monsters がゼロ");
+            if (model.BattleLog.Count() <= 0) 
+                Console.WriteLine("battleLog がゼロ");
+
             return JsonConvert.SerializeObject(model);
         }
 
