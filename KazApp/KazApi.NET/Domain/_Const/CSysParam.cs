@@ -18,10 +18,11 @@
         /// リモートサーバ、公開、本番
         /// </summary>
         public static readonly CEnvironment PRODUCTION = new(true, "PRODUCTION");
-        /// <summary>
+
+        /// <summary> ////////////////////////////////////////////////////////////
         /// 現環境を決定 false: 開発, true: 本番
         /// デプロイ前に確認
-        /// </summary>
+        /// </summary> ///////////////////////////////////////////////////////////
         public static readonly CEnvironment THIS_ENVIRONMENT = DEVELOPMENT;
         //public static readonly CEnvironment THIS_ENVIRONMENT = PRODUCTION;
     }

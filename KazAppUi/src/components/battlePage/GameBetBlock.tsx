@@ -85,7 +85,7 @@ const GameBetContentsBlock = (
             <SdivInputFrame>
                 <input
                     type="number"
-                    style={{width: "100px"}}
+                    style={{width: "100px", border: "1px solid black"}}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         validBet(e);
                         setBetGil(parseInt(e.target.value));

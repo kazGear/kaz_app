@@ -5,7 +5,6 @@ import { isEmpty } from "../lib/CommonLogic";
 import { useLayoutEffect } from "react";
 import { UserDTO } from "../types/UserManage";
 
-
 interface ArgPropsLogin {
     inputLoginId: string;
     inputPassword: string;
@@ -21,9 +20,9 @@ export const useLogin = () => {
         inputLoginId, inputPassword, setToken, setShowAlert
     }: ArgPropsLogin) => {
         try {
-            const token: string = await goToServer(`${URLS.LOGIN_USER}?loginId=${inputLoginId}
-                                                                   &password=${inputPassword}`);
-
+            const token: string = await goToServer(
+                `${URLS.LOGIN_USER}?loginId=${inputLoginId}&password=${inputPassword}`
+            );
             // トークン有 >>> ログイン成功
             if (token != null) {
                 localStorage.setItem(KEYS.TOKEN, token);
