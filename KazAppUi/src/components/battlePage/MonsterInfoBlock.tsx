@@ -61,7 +61,7 @@ const MonsterInfoBlock = ({monster, shortLog}: ArgProps) => {
     return (
         <SdivMonsterInfoFrame
             color={infoColor === STATE_NAME.LOSER ? COLORS.LOSER_FONT_COLOR
-                                                  : COLORS.MAIN_FONT_COLOR}>
+                                                  : COLORS.MAIN_FONT_COLOR}                                              >
             {
                 monster.Hp !== undefined ? (
                 <Stable>
@@ -75,7 +75,7 @@ const MonsterInfoBlock = ({monster, shortLog}: ArgProps) => {
                             <td>HP : </td><td>{hp <= 0 ? 0 : hp} / {monster.MaxHp}</td>
                         </tr>
                         <tr>
-                            <td>状態 : </td><td>{status.join(", ")}</td>
+                            <td>状態 : </td><td>{status.join(" ")}</td>
                         </tr>
                     </tbody>
                 </Stable>

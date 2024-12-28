@@ -16,7 +16,7 @@
                      , m.attack       AS Attack
                      , m.speed        AS Speed
                      , m.week         AS Week
-                     , max(m.hp) * 10
+                     , max(m.hp)
                          + max(m.attack) * 10
                          + max(m.speed) * 5
                          + sum(s.weight) * 20

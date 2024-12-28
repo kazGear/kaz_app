@@ -45,9 +45,11 @@ namespace KazApi.Domain._Monster._State
         public override void Impact(IMonster monster)
         {
             if (IsDisable()) return;
-            _Log.Logging(new BattleMetaData(monster.MonsterId, $"{monster.MonsterName}は眠っている Zzz ..."));
+            _Log.Logging(new BattleMetaData(
+                monster.MonsterId,
+                $"{monster.MonsterName}は眠っている Zzz ..."));
 
-            // 早く回復することがある                        
+            // 早く回復することがある
             DurationCount += URandom.durationCountUp();
         }
     }

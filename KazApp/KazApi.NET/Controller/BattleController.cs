@@ -105,56 +105,59 @@ namespace KazApi.Controller
         [HttpPost("api/battle/nextTurn")]
         public ActionResult<string> NextTurn([FromBody] IEnumerable<MonsterDTO> monsters)
         {
-            // 戦闘用モンスターを構築
-            IEnumerable<CodeDTO> codes = _service.SelectStateCode();
-            IEnumerable<IMonster> battleMonsters = _monsterFactory.CreateBattleMonsters(monsters, codes);
-
-            // TODO 未実装 チーム決め
-            ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
-            if (battleMonsters.Where(e => e.Team == CTeam.UNKNOWN.VALUE).Count() > 0)
+            try
             {
-                throw new Exception("チーム決めが完了していません。");
-            }
-            // 行動順決め
-            IEnumerable<IMonster> orderedMonsters = BattleSystem.ActionOrder(battleMonsters);
+                // 戦闘用モンスターを構築
+                IEnumerable<CodeDTO> codes = _service.SelectStateCode();
+                IEnumerable<IMonster> battleMonsters = _monsterFactory.CreateBattleMonsters(monsters, codes);
 
-            // モンスターの行動
-            foreach (IMonster me in orderedMonsters)
-            {
-                if (me.Hp <= 0) continue;
-
-                // 誰のターンか
-                MessageInfo.WhoseTurn(me);
-               
-                // 状態異常の影響
-                me.StateImpact();
+                // TODO 未実装 チーム決め
+                ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
+                if (battleMonsters.Where(e => e.Team == CTeam.UNKNOWN.VALUE).Count() > 0)
+                {
+                    throw new Exception("チーム決めが完了していません。");
+                }
+                // 行動順決め
+                IEnumerable<IMonster> orderedMonsters = BattleSystem.ActionOrder(battleMonsters);
 
                 // モンスターの行動
-                IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId).ToList();
-                if (me.IsMoveAble())
-                    me.Move(otherMonsters);
+                foreach (IMonster me in orderedMonsters)
+                {
+                    if (me.Hp <= 0) continue;
 
-                // 状態異常解除
-                BattleSystem.DisabledStatus(me);
+                    // 誰のターンか
+                    MessageInfo.WhoseTurn(me);
+
+                    // 状態異常の影響
+                    me.StateImpact();
+
+                    // モンスターの行動
+                    IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId).ToList();
+                    if (me.IsMoveAble())
+                        me.Move(otherMonsters);
+
+                    // 状態異常解除
+                    BattleSystem.DisabledStatus(me);
+                }
+
+                // 勝敗判定
+                MessageInfo.BattleResult(battleMonsters);
+
+                // DTOへ変換
+                IEnumerable<MonsterDTO> monstersDTO = _monsterFactory.ConvertToDTO(battleMonsters);
+
+                BattleViewModel model = new BattleViewModel();
+                _logger.Logging(new BattleMetaData());
+                model.Monsters = monstersDTO;
+                model.BattleLog = _logger.DumpMemory();
+
+                return JsonConvert.SerializeObject(model);
             }
-
-            // 勝敗判定
-            MessageInfo.BattleResult(battleMonsters);
-
-            // DTOへ変換
-            IEnumerable<MonsterDTO> monstersDTO = _monsterFactory.ConvertToDTO(battleMonsters);
-
-            BattleViewModel model = new BattleViewModel();
-            _logger.Logging(new BattleMetaData());
-            model.Monsters = monstersDTO;
-            model.BattleLog = _logger.DumpMemory();
-            // TODO オブジェクトが空のであることがある？
-            if (model.Monsters.Count() <= 0) 
-                Console.WriteLine("monsters がゼロ");
-            if (model.BattleLog.Count() <= 0) 
-                Console.WriteLine("battleLog がゼロ");
-
-            return JsonConvert.SerializeObject(model);
+            catch (Exception)
+            {
+                return StatusCode(500, "Error monsters move.");
+            }
+            
         }
 
         /// <summary>
