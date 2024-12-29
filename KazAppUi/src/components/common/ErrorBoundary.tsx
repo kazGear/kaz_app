@@ -42,7 +42,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
      * 非同期のエラー対応
      */
     componentDidMount(): void {
-        window.addEventListener('unhandledrejection', () => window.location.href = "/IndexnPage")
+        // window.addEventListener('unhandledrejection', () => window.location.href = "/IndexnPage")
     }
     // componentWillUnmount(): void {
     //     window.removeEventListener('unhandledrejection', this.eventHandler)

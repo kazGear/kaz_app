@@ -1,4 +1,5 @@
 ﻿using CSLib.Lib;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
@@ -31,7 +32,8 @@ namespace KazApi.Common._Filter
 
                 if (!isValid)
                 {
-                    throw new SecurityTokenException("トークンの有効期限が切れています。ログインしてください。");
+                    //throw new SecurityTokenException("トークンの有効期限が切れています。ログインしてください。");
+                    context.Result = new StatusCodeResult(500);
                 }
             }
         }

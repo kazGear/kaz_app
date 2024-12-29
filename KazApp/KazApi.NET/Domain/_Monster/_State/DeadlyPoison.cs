@@ -1,6 +1,7 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Log;
 using KazApi.Domain._Const;
+using KazApi.Domain.DTO;
 
 namespace KazApi.Domain._Monster._State
 {
@@ -16,14 +17,20 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
+        /// <param name="dto"></param>
+        public DeadlyPoison(StateDTO dto) : base(dto) { }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public DeadlyPoison(string name, int stateType, int maxDuration)
                      : base(name, stateType, maxDuration)
         {
-            StateType = CStateType.POISON.VALUE;
+            base.StateType = CStateType.DEADLY_POISON.VALUE;
         }
 
         public override IState DeepCopy()
-            => new DeadlyPoison(Name, StateType, MaxDuration);
+            => new DeadlyPoison(base.Name, base.StateType, base.MaxDuration);
 
         public override void DisabledLogging(IMonster monster)
         {
@@ -32,7 +39,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                Name,
+                base.Name,
                 $"{monster.MonsterName}の猛毒が消えたようだ。"));
 
         }
@@ -62,8 +69,7 @@ namespace KazApi.Domain._Monster._State
             monster.AcceptDamage(poisonDamage);
 
             // 早く回復することがある
-            DurationCount += URandom.durationCountUp();
-
+            base.DurationCount += URandom.durationCountUp();
         }
     }
 }

@@ -64,8 +64,8 @@ namespace KazApi.Controller
                     _monsterFactory.MappingToMonsterDTO(monstersFromDB, skillsFromDB, monsterSkillFromDB);
 
                 // 参加モンスター（ランダム）
-                IEnumerable<MonsterDTO> battleMonsters
-                    = BattleSystem.MonsterSelector(monstersDTO, selectMonstersCount);
+                IEnumerable<MonsterDTO> battleMonsters =
+                    BattleSystem.MonsterSelector(monstersDTO, selectMonstersCount);
 
                 // 賭けレート算出
                 BattleSystem.CalcBetRate(battleMonsters);
@@ -90,11 +90,11 @@ namespace KazApi.Controller
         {
             IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
             {
-                monstersDTO.Where(e => e.MonsterId == CMonster.キラービー.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.アサシンバグ.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.ラスターバグ.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.カーミラクイーン.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.カーミラクイーン.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.プチティアマット.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.デスボルダー.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.ギガクロウラー.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.ハイウィザード.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ダースマタンゴ.VALUE).Single(),
             };
             return testMonsters;
         }
@@ -147,7 +147,6 @@ namespace KazApi.Controller
                 IEnumerable<MonsterDTO> monstersDTO = _monsterFactory.ConvertToDTO(battleMonsters);
 
                 BattleViewModel model = new BattleViewModel();
-                _logger.Logging(new BattleMetaData());
                 model.Monsters = monstersDTO;
                 model.BattleLog = _logger.DumpMemory();
 
@@ -157,7 +156,7 @@ namespace KazApi.Controller
             {
                 return StatusCode(500, "Error monsters move.");
             }
-            
+
         }
 
         /// <summary>

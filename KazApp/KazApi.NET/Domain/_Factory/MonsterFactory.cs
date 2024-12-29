@@ -76,11 +76,11 @@ namespace KazApi.Domain._Factory
         {
             IList<MonsterDTO> result = [];
 
-            foreach (MonsterDTO m in monstersDTO)
+            foreach (MonsterDTO monster in monstersDTO)
             {
                 // モンスターのスキル対応表を取得
                 IEnumerable<MonsterSkillDTO> skillMap =
-                    monsterSkillsDTO.Where(e => e.MonsterId == m.MonsterId);
+                    monsterSkillsDTO.Where(e => e.MonsterId == monster.MonsterId);
 
                 IList<SkillDTO> bindSkills = [];
 
@@ -90,9 +90,10 @@ namespace KazApi.Domain._Factory
                     SkillDTO skill = skillsDTO.Where(e => e.SkillId == ms.SkillId).Single();
                     bindSkills.Add(skill);
                 }
-                m.Skills = bindSkills;
-                m.Status = [];
-                result.Add(m);
+                // スキルを持ったモンスター
+                monster.Skills = bindSkills;
+                monster.Status = []; // 初期値は異常なし
+                result.Add(monster);
             }
             return result;
         }

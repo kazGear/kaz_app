@@ -1,5 +1,4 @@
 ﻿using KazApi.Domain._Const;
-using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
 using KazApi.Domain.DTO;
 
@@ -10,7 +9,6 @@ namespace KazApi.Domain._Factory
     /// </summary>
     public class StateFactory
     {
-        private readonly IList<ISkill> _skills = new List<ISkill>();
         private IEnumerable<CodeDTO> _codeEntities;
 
         /// <summary>
@@ -18,8 +16,6 @@ namespace KazApi.Domain._Factory
         /// </summary>
         public StateFactory(IEnumerable<CodeDTO> codeEntities)
         {
-            _skills = new List<ISkill>();
-
             // 状態コード取得
             _codeEntities = codeEntities;
         }
@@ -35,6 +31,8 @@ namespace KazApi.Domain._Factory
                 return new None(param.Name, param.Value, param.Param2);
             else if (stateCode == CStateType.POISON.VALUE)
                 return new Poison(param.Name, param.Value, param.Param2);
+            else if (stateCode == CStateType.DEADLY_POISON.VALUE)
+                return new DeadlyPoison(param.Name, param.Value, param.Param2);
             else if (stateCode == CStateType.SLEEP.VALUE)
                 return new Sleep(param.Name, param.Value, param.Param2);
             else if (stateCode == CStateType.CHARM.VALUE)
@@ -81,6 +79,8 @@ namespace KazApi.Domain._Factory
                 return new None(dto);
             else if (stateCode == CStateType.POISON.VALUE)
                 return new Poison(dto);
+            else if (stateCode == CStateType.DEADLY_POISON.VALUE)
+                return new DeadlyPoison(dto);
             else if (stateCode == CStateType.SLEEP.VALUE)
                 return new Sleep(dto);
             else if (stateCode == CStateType.CHARM.VALUE)

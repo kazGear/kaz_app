@@ -31,6 +31,11 @@ export interface MonsterDTO {
     BetRate: number;
 }
 
+export interface BattleResults {
+    Monsters: MonsterDTO[];
+    BattleLog: MetaDataDTO[];
+}
+
 export interface SkillDTO {
     SkillId: string;
     SkillName: string;

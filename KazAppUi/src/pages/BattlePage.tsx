@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MetaDataDTO, MonsterDTO } from "../types/MonsterBattle";
+import { BattleResults, MetaDataDTO, MonsterDTO } from "../types/MonsterBattle";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useCheckToken } from "../hooks/useHooksOfCommon";
 import { useServerWithQuery } from "../hooks/useHooksOfCommon";
@@ -14,7 +14,7 @@ import MessageWindowBlock from "../components/battlePage/MessageWindowBlock";
 import CommandButtonBlock from "../components/battlePage/CommandButtonBlock";
 import MonsterWindowBlock from "../components/battlePage/MonsterWindowBlock";
 import { ShopDTO } from "../types/Shop";
-import { createMonstersJson } from "../lib/CreateJson";
+// import { createMonstersJson } from "../lib/CreateJson";
 
 const SdivOutSideFrame = styled.div`
     position: relative;
@@ -100,12 +100,11 @@ const BattlePage = () => {
     */
     const goToServerWithJson = useServerWithJson();
     const battleHandler = async () => {
-        const monstersJson: MonsterDTO[] = createMonstersJson([...monsters]);
-        const moveResult = await goToServerWithJson(
-            monstersJson, URLS.BATTLE_NEXT_TURN
+        const moveResult: BattleResults = await goToServerWithJson(
+            monsters, URLS.BATTLE_NEXT_TURN
        );
        setMonsters([...moveResult.Monsters]);
-       setBattleLog([...moveResult.BattleLog]); // TODO ここでたまにABEND
+       setBattleLog([...moveResult.BattleLog]);
        setBattleStarted(true);
        setMonsterCount([...moveResult.Monsters].length);
    };
@@ -116,11 +115,6 @@ const BattlePage = () => {
      *  各モンスターのターン送り。戦闘ログを元に描画、表現を行う
      */
     const nextTurnHandler = async () => {
-        // 例外処理・空の配列が流れてくることがある
-        if (isEmpty(battleLog)) {
-            setMonsterCount(0); // ボタン状態初期化
-            return;
-        }
         const [shortLog, index] = createShortLog([...battleLog]); // モンスター１体分のログ
         setShortLog([...shortLog]);
 

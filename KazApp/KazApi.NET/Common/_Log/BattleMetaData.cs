@@ -85,6 +85,27 @@ namespace KazApi.Common._Log
         /// コンストラクタ
         /// </summary>
         public BattleMetaData(
+            bool existWinner,
+            bool allLoser,
+            IMonster? alive
+            )
+        {
+            ExistWinner = existWinner;
+            AllLoser = allLoser;
+
+            if (alive != null)
+            {
+                TargetMonsterId = alive.MonsterId;
+                WinnerMonsterId = alive.MonsterId;
+                WinnerMonsterName = alive.MonsterName;
+            }
+            IsStop = true;
+        }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public BattleMetaData(
             string targetMonsterId,
             string skillId,
             int effectTime,
@@ -113,7 +134,25 @@ namespace KazApi.Common._Log
             Message = message;
             IsStop = false;
         }
-
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public BattleMetaData(
+            string targetMonsterId,
+            string skillId,
+            int beforeHp,
+            int impactPoint,
+            string message
+            )
+        {
+            TargetMonsterId = targetMonsterId;
+            SkillId = skillId;
+            BeforeHp = beforeHp;
+            ImpactPoint = impactPoint;
+            Message = message;
+            EffectTime = 1000;
+            IsStop = false;
+        }
 
         /// <summary>
         /// コンストラクタ
@@ -135,25 +174,6 @@ namespace KazApi.Common._Log
             Message = message;
             IsStop = false;
         }
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        public BattleMetaData(
-            string targetMonsterId,
-            string skillId,
-            int beforeHp,
-            int impactPoint,
-            string message
-            )
-        {
-            TargetMonsterId = targetMonsterId;
-            SkillId = skillId;
-            BeforeHp = beforeHp;
-            ImpactPoint = impactPoint;
-            Message = message;
-            IsStop = false;
-        }
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -173,22 +193,6 @@ namespace KazApi.Common._Log
             EffectTime = effectTime;
             Message = message;
             IsStop = false;
-        }
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        public BattleMetaData(bool existWinner, bool allLoser, IMonster? alive)
-        {
-            ExistWinner = existWinner;
-            AllLoser = allLoser;
-
-            if (alive != null)
-            {
-                TargetMonsterId = alive.MonsterId;
-                WinnerMonsterId = alive.MonsterId;
-                WinnerMonsterName = alive.MonsterName;
-            }
-            IsStop = true;
         }
 
         public override string ToString() => Message;

@@ -47,7 +47,7 @@ const MonsterImgBlock = ({monster, shortLog}: ArgProps) => {
             if (   log.TargetMonsterId === monster.MonsterId
                 && !isEmpty(log.SkillId)
             ) {
-                setEffectImage(effectImages(log.SkillId ?? ""));
+                setEffectImage(effectImages(log.SkillId));
                 setShowEffect(true);
                 setTimeout(() => setShowEffect(false), log.EffectTime);
                 setTimeout(() => setShowFlash(true), log.EffectTime);

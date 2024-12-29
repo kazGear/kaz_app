@@ -48,7 +48,10 @@ namespace KazApi.Domain._Const
         /// 自動回復
         /// </summary>
         public static readonly CStateType AUTOHEAL = new(8, "自動回復");
-
+        /// <summary>
+        /// 猛毒
+        /// </summary>
+        public static readonly CStateType DEADLY_POISON = new(9, "猛毒");
     }
 
     /// <summary>
@@ -92,6 +95,10 @@ namespace KazApi.Domain._Const
         /// 自動回復
         /// </summary>
         public static readonly string AUTOHEAL = "自動回復";
+        /// <summary>
+        /// 猛毒
+        /// </summary>
+        public static readonly string DEADLY_POISON = "猛毒";
 
         /// <summary>
         /// 状態名の詰め合わせを取得

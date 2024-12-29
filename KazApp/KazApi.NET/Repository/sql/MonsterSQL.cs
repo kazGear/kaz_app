@@ -17,8 +17,8 @@
                      , m.speed        AS Speed
                      , m.week         AS Week
                      , max(m.hp)
-                         + max(m.attack) * 10
-                         + max(m.speed) * 5
+                         + max(m.attack) * 20
+                         + max(m.speed) * 10
                          + sum(s.weight) * 20
                          + sum(s.critical * 100) AS BetScore
                   FROM m_monster AS m 

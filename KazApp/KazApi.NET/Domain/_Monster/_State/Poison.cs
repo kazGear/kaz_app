@@ -25,11 +25,11 @@ namespace KazApi.Domain._Monster._State
         public Poison(string name, int stateType, int maxDuration)
                : base(name, stateType, maxDuration)
         {
-            StateType = CStateType.POISON.VALUE;
+            base.StateType = CStateType.POISON.VALUE;
         }
 
         public override IState DeepCopy()
-            => new Poison(Name, StateType, MaxDuration);
+            => new Poison(base.Name, base.StateType, base.MaxDuration);
 
         public override void DisabledLogging(IMonster monster)
         {
@@ -38,7 +38,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                Name,
+                base.Name,
                 $"{monster.MonsterName}の毒が消えたようだ。"));
 
         }
