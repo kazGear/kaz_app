@@ -71,7 +71,7 @@ namespace KazApi.Controller
                 BattleSystem.CalcBetRate(battleMonsters);
 
                 // テスト用モンスターで対戦
-                //battleMonsters = UseTestMonsters(monstersDTO);
+                battleMonsters = UseTestMonsters(monstersDTO);
 
                 return JsonConvert.SerializeObject(battleMonsters); ;
             }
@@ -90,10 +90,10 @@ namespace KazApi.Controller
         {
             IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
             {
-                //monstersDTO.Where(e => e.MonsterId == CMonster.プチティアマット.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.デスボルダー.VALUE).Single(),
-                //monstersDTO.Where(e => e.MonsterId == CMonster.ギガクロウラー.VALUE).Single(),
-                //monstersDTO.Where(e => e.MonsterId == CMonster.ハイウィザード.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロ.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリンロード.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ギガクロウラー.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.カイザーミミック.VALUE).Single(),
                 monstersDTO.Where(e => e.MonsterId == CMonster.ダースマタンゴ.VALUE).Single(),
             };
             return testMonsters;

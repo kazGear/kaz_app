@@ -60,6 +60,8 @@ import effect67 from "../images/effects/effect67.webp";
 import effect68 from "../images/effects/effect68.gif";
 import effect69 from "../images/effects/effect69.gif";
 
+import stateType2 from "../images/effects/stateType2.gif"
+
 interface EffectDict {
     [key: string]: string | null;
 }
@@ -136,6 +138,8 @@ const effectImages = (effectId: string): string => {
     effectImages["skill067"] = effect67;
     effectImages["skill068"] = effect68;
     effectImages["skill069"] = effect69;
+
+    effectImages["stateType2"] = stateType2;
 
     return effectImages[effectId] ?? "";
 }

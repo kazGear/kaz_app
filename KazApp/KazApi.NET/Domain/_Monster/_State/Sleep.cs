@@ -10,6 +10,8 @@ namespace KazApi.Domain._Monster._State
     /// </summary>
     public class Sleep : IState, IDisableMove
     {
+        private static readonly string STATE_TYPE2 = "stateType2";
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -44,9 +46,13 @@ namespace KazApi.Domain._Monster._State
         /// </summary>
         public override void Impact(IMonster monster)
         {
+            int effectTime = 1400;
+
             if (IsDisable()) return;
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
+                STATE_TYPE2,
+                effectTime,
                 $"{monster.MonsterName}は眠っている Zzz ..."));
 
             // 早く回復することがある
