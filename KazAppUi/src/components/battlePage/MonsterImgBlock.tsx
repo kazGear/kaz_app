@@ -6,7 +6,6 @@ import { DAMAGE_VIEW } from "../../lib/Constants";
 import { isEmpty } from "../../lib/CommonLogic";
 import { MetaDataDTO, MonsterDTO } from "../../types/MonsterBattle";
 
-
 const SdivMonsterImgFrame = styled.div`
     margin: 10px 0 5px 0;
 `;

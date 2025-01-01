@@ -71,7 +71,7 @@ namespace KazApi.Controller
                 BattleSystem.CalcBetRate(battleMonsters);
 
                 // テスト用モンスターで対戦
-                battleMonsters = UseTestMonsters(monstersDTO);
+                battleMonsters = UseTestMonsters　(monstersDTO);
 
                 return JsonConvert.SerializeObject(battleMonsters); ;
             }
@@ -90,10 +90,10 @@ namespace KazApi.Controller
         {
             IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
             {
-                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロ.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリンロード.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.ギガクロウラー.VALUE).Single(),
                 monstersDTO.Where(e => e.MonsterId == CMonster.カイザーミミック.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ハーピー.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.セイレーン.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.マーマポト.VALUE).Single(),
                 monstersDTO.Where(e => e.MonsterId == CMonster.ダースマタンゴ.VALUE).Single(),
             };
             return testMonsters;
@@ -132,9 +132,9 @@ namespace KazApi.Controller
                     me.StateImpact();
 
                     // モンスターの行動
-                    IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId).ToList();
-                    if (me.IsMoveAble())
-                        me.Move(otherMonsters);
+                    IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId)
+                                                                   .ToList();
+                    if (me.IsMoveAble()) me.Move(otherMonsters);
 
                     // 状態異常解除
                     BattleSystem.DisabledStatus(me);
@@ -156,7 +156,6 @@ namespace KazApi.Controller
             {
                 return StatusCode(500, "Error monsters move.");
             }
-
         }
 
         /// <summary>

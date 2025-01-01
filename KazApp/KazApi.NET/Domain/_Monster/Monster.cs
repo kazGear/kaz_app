@@ -8,7 +8,7 @@ using KazApi.Domain.DTO;
 namespace KazApi.Domain._Monster
 {
     /// <summary>
-    /// モンスタークラウ
+    /// モンスタークラス
     /// </summary>
     public class Monster : IMonster
     {

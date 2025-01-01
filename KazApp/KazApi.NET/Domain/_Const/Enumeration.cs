@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using Newtonsoft.Json.Linq;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace KazApi.Domain._Const
 {
@@ -9,17 +11,20 @@ namespace KazApi.Domain._Const
     {
         public readonly T VALUE;
         public readonly string NAME;
+        public readonly string SHORT_NAME;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        protected Enumeration(T value, string name)
+        protected Enumeration(T value, string name, string shortName = "")
         {
             VALUE = value;
             NAME = name;
+            SHORT_NAME = shortName;
         }
 
-        public override string ToString() => $"NAME:{NAME},VALUE:{VALUE}" ?? "";
+        public override string ToString() 
+            => $"NAME: {NAME}, VALUE: {VALUE}, SHORT_NAME: {SHORT_NAME}" ?? "";
 
         /// <summary>
         /// フィールド名称の列挙を取得

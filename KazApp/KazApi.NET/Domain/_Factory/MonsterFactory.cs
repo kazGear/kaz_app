@@ -18,53 +18,7 @@ namespace KazApi.Domain._Factory
         {
 
         }
-        /// <summary>
-        /// モンスターオブジェクト（スキルなし）を構築
-        /// </summary>
-        public IEnumerable<IMonster> CreateNoSkillModel(IEnumerable<MonsterDTO> monsters)
-        {
-            IList<IMonster> result = [];
-
-            foreach (MonsterDTO dto in monsters)
-            {
-                // スキル無しのモンスター
-                IMonster monster = new Monster(dto, [], []);
-                result.Add(monster);
-            }
-            return result;
-        }
-                
-        /// <summary>
-        /// モンスターオブジェクト（スキル付き）を構築
-        /// </summary>
-        public IEnumerable<IMonster> CreateModel(
-            IEnumerable<MonsterDTO> monsters,
-            IEnumerable<ISkill> skills,
-            IEnumerable<MonsterSkillDTO> monsterSkills
-            )
-        {
-            IList<IMonster> result = [];
-
-            foreach (MonsterDTO monster in monsters)
-            {
-                // モンスターデフォルトのスキル
-                IEnumerable<MonsterSkillDTO> targetSkill =
-                    monsterSkills.Where(e => e.MonsterId == monster.MonsterId);
-
-                // デフォルトスキルをスキル群から探す
-                IList<ISkill> skillsForMonster = [];
-                foreach (MonsterSkillDTO dto in targetSkill)
-                {
-                    ISkill skill = skills.Where(e => e.SkillId == dto.SkillId).Single();
-                    skillsForMonster.Add(skill);
-                }
-
-                IMonster monsterModel = new Monster(monster, skillsForMonster, []);
-                result.Add(monsterModel);
-            }
-            return result;
-        }
-
+ 
         /// <summary>
         /// モンスターとスキルのマッピング（DTO）
         /// </summary>
@@ -141,7 +95,7 @@ namespace KazApi.Domain._Factory
                 MonsterDTO monsterDTO = new MonsterDTO(m);
                 monsterDTO.Skills = skillsDTO;
                 monsterDTO.Status = statusDTO;
-                monsterDTO.StatusName = CStateName.ConvertTypeToName(statusDTO);
+                monsterDTO.StatusName = CStateType.ConvertTypeToName(statusDTO);
 
                 monstersDTO.Add(monsterDTO);
             }

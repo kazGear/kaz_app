@@ -14,4 +14,5 @@ export interface UserDTO {
     BankruptcyCnt: number;
     LossesLostCash: number;
     UserImage: string;
+    Token: string;
 }

@@ -50,7 +50,7 @@ namespace KazApi.Domain._Monster
         {
             // 戦闘不能中は攻撃不可
             if (Hp <= 0) return;
-            // 攻撃対象がい
+            // 攻撃対象外
             if (monsters.Where(e => e.Hp > 0).Count() <= 0) return;
 
             ISkill skill = SelectSkill();

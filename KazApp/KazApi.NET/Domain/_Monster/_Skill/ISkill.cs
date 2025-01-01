@@ -21,7 +21,6 @@ namespace KazApi.Domain._Monster._Skill
         public int ElementType { get; protected set; }
         public int StateType { get; protected set; }
         public int TargetType { get; protected set; }
-        //public string EffectFilePath { get; protected set; }
         public int Weight { get; protected set; }
         public double Critical { get; protected set; }
         public int EffectTime { get; protected set; }

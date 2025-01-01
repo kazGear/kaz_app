@@ -16,6 +16,12 @@ const Stable = styled.table`
     width: 100%;
     height: 100%;
 `;
+const StdStatus = styled.td`
+    white-space: nowrap;
+    max-width: 105px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+`;
 
 interface ArgProps {
     monster: MonsterDTO;
@@ -61,7 +67,7 @@ const MonsterInfoBlock = ({monster, shortLog}: ArgProps) => {
     return (
         <SdivMonsterInfoFrame
             color={infoColor === STATE_NAME.LOSER ? COLORS.LOSER_FONT_COLOR
-                                                  : COLORS.MAIN_FONT_COLOR}                                              >
+                                                  : COLORS.MAIN_FONT_COLOR}>
             {
                 monster.Hp !== undefined ? (
                 <Stable>
@@ -75,7 +81,7 @@ const MonsterInfoBlock = ({monster, shortLog}: ArgProps) => {
                             <td>HP : </td><td>{hp <= 0 ? 0 : hp} / {monster.MaxHp}</td>
                         </tr>
                         <tr>
-                            <td>状態 : </td><td>{status.join(" ")}</td>
+                            <td>状態 : </td><StdStatus>{status.join(" ")}</StdStatus>
                         </tr>
                     </tbody>
                 </Stable>

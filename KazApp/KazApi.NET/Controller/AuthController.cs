@@ -1,7 +1,6 @@
 ﻿using CSLib.Lib;
-using KazApi.Domain._User;
+using KazApi.Controller.Service;
 using KazApi.Domain.DTO;
-using KazApi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -10,7 +9,7 @@ namespace KazApi.Controller
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IDatabase _posgre;
+        private readonly AuthService _service;
 
         /// <summary>
         /// コンストラクタ
@@ -18,7 +17,7 @@ namespace KazApi.Controller
         public AuthController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _posgre = new PostgreSQL(configuration);
+            _service = new AuthService(configuration);
         }
 
         /// <summary>
@@ -31,16 +30,16 @@ namespace KazApi.Controller
             if (loginId == null || password == null) return Unauthorized();
 
             // ユーザの認証
-            Auth auth = new Auth(_posgre);
-            UserDTO? user = auth.AuthenticateUser(loginId, password);
+            UserDTO? user = _service.AuthenticateUser(loginId, password);
             
             // 認証失敗
             if (user == null) return Unauthorized();
             
             // トークン発行
             string token = UJwt.GenerateJwtToken(user.LoginId, _configuration);
+            user.Token = token;
 
-            return Ok(JsonConvert.SerializeObject(token));
+            return Ok(JsonConvert.SerializeObject(user));
         }
 
         /// <summary>

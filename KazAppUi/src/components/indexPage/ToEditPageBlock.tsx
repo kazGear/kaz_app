@@ -13,23 +13,24 @@ const SpDescription = styled.p`
 `;
 
 interface ArgProps {
-    validToken: boolean;
+    isValid: boolean;
     classOfAnime: string;
     titleStyle: {}
 }
 
-const ToEditPageBlock = ({validToken, classOfAnime, titleStyle}: ArgProps) => {
+const ToEditPageBlock = ({isValid, classOfAnime, titleStyle}: ArgProps) => {
     return (
         <div>
-            <Slink to={validToken ? "/EditPage" : ""} >
+            <Slink to={isValid ? "/EditPage" : ""} >
                 <MenuTitle title={"各種設定"}
-                        className={validToken ? classOfAnime : ""}
-                        styleObj={validToken ? {} : titleStyle}/>
+                           className={isValid ? classOfAnime : ""}
+                           styleObj={isValid ? {} : titleStyle}/>
             </Slink>
 
             <OutSideFrame>
                 <SpDescription>
-                    モンスターステータス編集、モンスタースキル編集、使用モンスターの<br/>制限などが可能です。
+                    モンスターステータス編集、モンスタースキル編集、使用モンスターの制限などが可能です。<br/>
+                    ※管理ユーザのみ使用可能。
                 </SpDescription>
             </OutSideFrame>
         </div>

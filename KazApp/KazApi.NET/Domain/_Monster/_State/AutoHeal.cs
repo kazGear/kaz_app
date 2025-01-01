@@ -37,7 +37,6 @@ namespace KazApi.Domain._Monster._State
                 Name,
                 $"{monster.MonsterName}の自然治癒力がなくなった。")
                 );
-
         }
 
         /// <summary>

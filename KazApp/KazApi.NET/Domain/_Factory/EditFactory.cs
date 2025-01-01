@@ -13,6 +13,7 @@ namespace KazApi.Domain._Factory
         /// </summary>
         public EditFactory()
         {
+
         }
 
         /// <summary>

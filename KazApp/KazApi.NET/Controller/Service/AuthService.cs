@@ -3,21 +3,18 @@ using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
-namespace KazApi.Domain._User
+namespace KazApi.Controller.Service
 {
-    /// <summary>
-    /// 認証クラス
-    /// </summary>
-    public class Auth
+    public class AuthService
     {
         private readonly IDatabase _posgre;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Auth(IDatabase posgre)
+        public AuthService(IConfiguration configuration)
         {
-            _posgre = posgre;
+            _posgre = new PostgreSQL(configuration);
         }
 
         /// <summary>
@@ -39,5 +36,6 @@ namespace KazApi.Domain._User
                                    .SingleOrDefault();
             return user;
         }
+
     }
 }

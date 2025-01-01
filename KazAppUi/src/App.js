@@ -13,7 +13,7 @@ import ErrorBoundary from "./components/common/ErrorBoundary";
 function App() {
     return (
         <BrowserRouter>
-            <ErrorBoundary>
+            {/* <ErrorBoundary> */}
                 <AppHeader title="KazApp" />
                 <Routes>
                     <Route path={"/"} element={<IndexPage />} />
@@ -25,7 +25,7 @@ function App() {
                     <Route path={"/UserPage"} element={<UserPage />} />
                     <Route path={"/EditPage"} element={<EditPage />} />
                 </Routes>
-            </ErrorBoundary>
+            {/* </ErrorBoundary> */}
         </BrowserRouter>
     );
 }

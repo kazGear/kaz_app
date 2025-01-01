@@ -28,42 +28,42 @@ namespace KazApi.Domain._Factory
             CodeDTO param = _codeEntities.Where(e => e.Value == stateCode).Single();
 
             if (stateCode == CStateType.NONE.VALUE)
-                return new None(param.Name, param.Value, param.Param2);
+                return new None(param.ShortName, param.Value, param.Param2);
             else if (stateCode == CStateType.POISON.VALUE)
-                return new Poison(param.Name, param.Value, param.Param2);
+                return new Poison(param.ShortName, param.Value, param.Param2);
             else if (stateCode == CStateType.DEADLY_POISON.VALUE)
-                return new DeadlyPoison(param.Name, param.Value, param.Param2);
+                return new DeadlyPoison(param.ShortName, param.Value, param.Param2);
             else if (stateCode == CStateType.SLEEP.VALUE)
-                return new Sleep(param.Name, param.Value, param.Param2);
+                return new Sleep(param.ShortName, param.Value, param.Param2);
             else if (stateCode == CStateType.CHARM.VALUE)
-                return new Charm(param.Name, param.Value, param.Param2);
+                return new Charm(param.ShortName, param.Value, param.Param2);
             else if (stateCode == CStateType.SLOW.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.SLOW}");
-                return new None(param.Name, param.Value, param.Param2);
+                return new None(param.ShortName, param.Value, param.Param2);
             }
 
             //    return new Slow(param.Name, param.Value, param.Param2);
             else if (stateCode == CStateType.POWERUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.POWERUP}");
-                return new None(param.Name, param.Value, param.Param2);
+                return new None(param.ShortName, param.Value, param.Param2);
             }
             //    return new PowerUp(param.Name, param.Value, param.Param2);
             else if (stateCode == CStateType.DODGEUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.DODGEUP}");
-                return new None(param.Name, param.Value, param.Param2);
+                return new None(param.ShortName, param.Value, param.Param2);
             }
             //    return new DodgeUp(param.Name, param.Value, param.Param2);
             else if (stateCode == CStateType.CRITICALUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.CRITICALUP}");
-                return new None(param.Name, param.Value, param.Param2);
+                return new None(param.ShortName, param.Value, param.Param2);
             }
             //    return new CriticalUp(param.Name, param.Value, param.Param2);
             else if (stateCode == CStateType.AUTOHEAL.VALUE)
-                return new AutoHeal(param.Name, param.Value, param.Param2);
+                return new AutoHeal(param.ShortName, param.Value, param.Param2);
             else
                 throw new Exception("存在しない状態コードです。");
         }

@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { BattleResults, MetaDataDTO, MonsterDTO } from "../types/MonsterBattle";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useCheckToken } from "../hooks/useHooksOfCommon";
-import { useServerWithQuery } from "../hooks/useHooksOfCommon";
+import { useCheckToken, useServerWithQuery, useServerWithJson } from "../hooks/useHooksOfCommon";
 import { KEYS, URLS } from "../lib/Constants";
-import { useServerWithJson } from "../hooks/useHooksOfCommon";
 import { useRegistResult } from "../hooks/useHooksOfBattle";
 import { isEmpty } from "../lib/CommonLogic";
 import BattleResultBlock from "../components/battlePage/BattleResultBlock";
@@ -14,7 +12,6 @@ import MessageWindowBlock from "../components/battlePage/MessageWindowBlock";
 import CommandButtonBlock from "../components/battlePage/CommandButtonBlock";
 import MonsterWindowBlock from "../components/battlePage/MonsterWindowBlock";
 import { ShopDTO } from "../types/Shop";
-// import { createMonstersJson } from "../lib/CreateJson";
 
 const SdivOutSideFrame = styled.div`
     position: relative;
@@ -97,7 +94,7 @@ const BattlePage = () => {
     }, [loginId])
     /**
      *  全モンスターが行動。戦闘ログを取得
-    */
+     */
     const goToServerWithJson = useServerWithJson();
     const battleHandler = async () => {
         const moveResult: BattleResults = await goToServerWithJson(

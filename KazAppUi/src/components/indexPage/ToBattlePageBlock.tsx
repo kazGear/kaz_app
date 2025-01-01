@@ -22,9 +22,9 @@ const ToBattleResultPageBlock = ({validToken, classOfAnime, titleStyle}: ArgProp
     return (
         <div>
             <Slink to={validToken ? "/BattlePage" : "/"} >
-                <MenuTitle title={"モンスター闘技場"}
-                        className={validToken ? classOfAnime : ""}
-                        styleObj={validToken ? {} : titleStyle}/>
+                <MenuTitle title={"◇◆モンスター闘技場◆◇"}
+                           className={validToken ? classOfAnime : ""}
+                           styleObj={validToken ? {} : titleStyle}/>
             </Slink>
 
             <OutSideFrame>

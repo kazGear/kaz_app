@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
-using Microsoft.IdentityModel.Tokens;
 
 namespace KazApi.Common._Filter
 {

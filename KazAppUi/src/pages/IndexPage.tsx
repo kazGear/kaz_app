@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useState } from "react";
-import { COLORS } from "../lib/Constants";
+import { useLayoutEffect, useState } from "react";
+import { COLORS, KEYS, USER_ROLE } from "../lib/Constants";
 import { useCheckLogin } from "../hooks/useHooksOfIndex";
 import ToLoginPageBlock from "../components/indexPage/ToLoginPageBlock";
 import ToUserPageBlock from "../components/indexPage/ToUserPageBlock";
@@ -28,8 +28,18 @@ const titleStyle: {} = {
 
 const IndexPage = () => {
     const [validToken, setValidToken] = useState(false);
+    const [usableSettings, setUsableSettings] = useState(false);
+    const authorizedPerson: number[] = [USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN];
 
     useCheckLogin(setValidToken);
+
+    /**
+     * 設定メニューを使用できるか
+     */
+    useLayoutEffect(() => {
+        const role = localStorage.getItem(KEYS.USER_ROLE);
+        setUsableSettings(authorizedPerson.includes(parseInt(role!)));
+    }, []);
 
     return (
         <>
@@ -74,7 +84,7 @@ const IndexPage = () => {
 
                     <SdivContentsFrame>
                         {/* 設定ページ */}
-                        <ToEditPageBlock validToken={validToken}
+                        <ToEditPageBlock isValid={validToken && usableSettings}
                                         classOfAnime={classOfAnime}
                                          titleStyle={titleStyle}/>
                     </SdivContentsFrame>

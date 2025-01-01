@@ -115,6 +115,7 @@ export const URLS = {
 export const KEYS = {
     TOKEN: "token",
     USER_ID: "userId",
+    USER_ROLE: "userRole",
     ORDER_BY_ASC: "ASC",
     ORDER_BY_DESC: "DESC"
 } as const;
@@ -132,4 +133,14 @@ export const EDIT_TYPE = {
     MONSTER_STATUS: 1,
     MONSTER_SKILL: 2,
     USE_MONSTER: 3
+}
+
+export const USER_ROLE = {
+    NORMAL: 1,
+    EXCELLENT: 2,
+    DUCK: 3,
+    BE_CAREFUL: 4,
+    BLACK_LIST: 5,
+    ADMIN: 90,
+    SUPER_ADMIN: 91
 }

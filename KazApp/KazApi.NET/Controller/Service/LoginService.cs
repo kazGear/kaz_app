@@ -24,8 +24,8 @@ namespace KazApi.Controller.Service
             string select = @"
                 SELECT username
                   FROM users
-                 WHERE username = @username
-	               AND password = @password
+                 WHERE username   = @username
+	               AND password   = @password
 	               AND is_invalid = FALSE;
                 ";
 

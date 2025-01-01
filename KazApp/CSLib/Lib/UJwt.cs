@@ -15,9 +15,9 @@ namespace CSLib.Lib
         /// <summary>
         /// Json Web Token の発行
         /// </summary>
-        public static string GenerateJwtToken(string userName, IConfiguration _configuration)
+        public static string GenerateJwtToken(string userName, IConfiguration configuration)
         {
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!));
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             DateTime now = DateTime.UtcNow; // 基準時刻
@@ -28,11 +28,11 @@ namespace CSLib.Lib
             };
 
             JwtSecurityToken token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
+                issuer: configuration["Jwt:Issuer"],
+                audience: configuration["Jwt:Audience"],
                 claims: claims,
                 notBefore: now,
-                expires: DateTime.UtcNow.AddDays(Convert.ToDouble(_configuration["Jwt:ExpireDays"])),
+                expires: DateTime.UtcNow.AddDays(Convert.ToDouble(configuration["Jwt:ExpireDays"])),
                 signingCredentials: credentials
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);

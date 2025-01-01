@@ -17,28 +17,31 @@ interface ArgPropsLogin {
 export const useLogin = () => {
     const goToServer = useServerWithQuery();
     const callback = useCallback( async ({
-        inputLoginId, inputPassword, setToken, setShowAlert
-    }: ArgPropsLogin) => {
+        inputLoginId, inputPassword, setToken, setShowAlert}: ArgPropsLogin
+    ) => {
         try {
-            const token: string = await goToServer(
+            const user: UserDTO = await goToServer(
                 `${URLS.LOGIN_USER}?loginId=${inputLoginId}&password=${inputPassword}`
             );
             // トークン有 >>> ログイン成功
-            if (token != null) {
-                localStorage.setItem(KEYS.TOKEN, token);
+            if (user.Token != null) {
+                localStorage.setItem(KEYS.TOKEN, user.Token);
                 localStorage.setItem(KEYS.USER_ID, inputLoginId);
-                setToken(token);
+                localStorage.setItem(KEYS.USER_ROLE, user.Role.toString());
+                setToken(user.Token);
                 setShowAlert(false);
                 window.location.href = "/IndexPage";
-            } else if (isEmpty(token)) {
+            } else if (isEmpty(user.Token)) {
                 localStorage.removeItem(KEYS.TOKEN);
                 localStorage.removeItem(KEYS.USER_ID);
+                localStorage.removeItem(KEYS.USER_ROLE);
                 setShowAlert(true);
                 setTimeout(() => window.location.href = "/LoginPage", 2000);
             }
         } catch (err) {
             localStorage.removeItem(KEYS.TOKEN);
             localStorage.removeItem(KEYS.USER_ID);
+            localStorage.removeItem(KEYS.USER_ROLE);
             setShowAlert(true);
             setTimeout(() => window.location.href = "/LoginPage", 2000);
         }
