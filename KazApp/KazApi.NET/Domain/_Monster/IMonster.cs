@@ -102,11 +102,6 @@ namespace KazApi.Domain._Monster
         public void AcceptDamage(int damage) => Hp -= damage;
 
         /// <summary>
-        /// スキルを設定する
-        /// </summary>
-        public void SetSkill(IList<ISkill> skills) => _skills = skills;
-
-        /// <summary>
         /// チームを決定する
         /// </summary>
         public void DefineTeam(int team) => Team = team;
@@ -142,11 +137,6 @@ namespace KazApi.Domain._Monster
                 _Log.Logging(new BattleMetaData(MonsterId, $"{MonsterName}は既に{state.Name}状態になっている。"));
             }
         }
-
-        /// <summary>
-        /// 状態異常が消滅する
-        /// </summary>
-        public void LostState(IState state) => ((IList<IState>)_status).Remove(state);
 
         /// <summary>
         /// 状態異常の効果を受ける

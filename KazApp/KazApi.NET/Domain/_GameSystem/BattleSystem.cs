@@ -12,30 +12,8 @@ namespace KazApi.Domain._GameSystem
     /// 戦闘システムクラス
     /// </summary>
     public class BattleSystem
-    {        
+    {
         private static readonly ILog<BattleMetaData> LOG = new BattleLogger();
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        private BattleSystem()
-        {
-
-        }
-        
-        /// <summary>
-        /// 現状のHPを確認
-        /// </summary>
-        public static void CurrentHp(IEnumerable<IMonster> monsters)
-        {
-            foreach (IMonster m in monsters)
-            {
-                LOG.Logging(new BattleMetaData(
-                      $"[ {m.MonsterName} ] HP: {(m.Hp <= 0 ? 0 : m.Hp)} / {m.MaxHp}"
-                    + $" {(m.Hp <= 0 ? "（戦闘不能）" : "")}"
-                ));
-            }
-        }
 
         /// <summary>
         /// 敵を選択する
@@ -79,31 +57,6 @@ namespace KazApi.Domain._GameSystem
                 LOG.Logging(new BattleMetaData("クリティカルヒット！"));
             }
             return damage;
-        }
-        /// <summary>
-        /// モンスタをランダムに選出する
-        /// </summary>
-        public static IEnumerable<IMonster> MonsterSelector(IEnumerable<IMonster> monsters, int needAmount)
-        {
-            if (monsters.Count() < needAmount) throw new Exception("モンスターの選択数が多すぎます。");
-
-            IList<IMonster> result = [];
-            IList<int> usedIndex = [];
-
-            // 必要数のモンスタを用意
-            for (int i = 0; i < needAmount; i++)
-            {
-                int index = URandom.RandomInt(0, monsters.Count());
-
-                // 同じモンスターは選べない
-                while (usedIndex.Contains(index)) 
-                    index = URandom.RandomInt(0, monsters.Count());
-                usedIndex.Add(index);
-
-                IMonster monster = monsters.ElementAt(index);
-                result.Add(monster);
-            }
-            return result;
         }
 
         /// <summary>
@@ -156,6 +109,7 @@ namespace KazApi.Domain._GameSystem
         {
             IEnumerable<IState> currentStatus = me.CurrentStatus();
             ISet<IState> changedStatus = new HashSet<IState>();
+
             foreach (IState state in currentStatus)
             {
                 if (!StateIsDisabled(state))
