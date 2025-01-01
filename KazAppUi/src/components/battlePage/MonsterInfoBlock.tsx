@@ -53,7 +53,7 @@ const MonsterInfoBlock = ({monster, shortLog}: ArgProps) => {
             if (   log.TargetMonsterId === monster.MonsterId
                 && log.DisableState
             ) {
-                const filterd = status.filter(e => e !== log.StateName);
+                const filterd: string[] = status.filter(e => e !== log.StateName);
                 setStatus([...filterd]);
             }
         }

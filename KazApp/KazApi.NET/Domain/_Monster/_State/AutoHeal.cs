@@ -21,11 +21,11 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public AutoHeal(string name, int stateType, int maxDuration)
-                 : base(name, stateType, maxDuration) { }
+        public AutoHeal(string name, string shortName, int stateType, double cancelRate)
+                 : base(name, shortName, stateType, cancelRate) { }
 
         public override IState DeepCopy()
-            => new AutoHeal(Name, StateType, MaxDuration);
+            => new AutoHeal(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
         public override void DisabledLogging(IMonster monster)
         {
@@ -34,7 +34,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                Name,
+                base.ShortName,
                 $"{monster.MonsterName}の自然治癒力がなくなった。")
                 );
         }
@@ -44,8 +44,6 @@ namespace KazApi.Domain._Monster._State
         /// </summary>
         public override void Impact(IMonster me)
         {
-            if (IsDisable()) return;
-
             int healPoint1 = (int)(me.MaxHp * HEAL_RATE);
             int healPoint2 = URandom.RandomChangeInt(healPoint1, ADJUST_RATE);
             int healLimit = me.MaxHp - me.Hp;
@@ -61,8 +59,6 @@ namespace KazApi.Domain._Monster._State
                 );
 
             me.AcceptDamage(healPointFix * -1); // マイナスダメージを加えてHP増加
-
-            DurationCount++;
         }
 
     }

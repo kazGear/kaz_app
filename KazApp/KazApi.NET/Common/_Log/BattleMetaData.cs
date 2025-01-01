@@ -124,13 +124,13 @@ namespace KazApi.Common._Log
         public BattleMetaData(
             string targetMonsterId,
             bool disableState,
-            string stateName,
+            string stateShortName,
             string message
             )
         {
             TargetMonsterId = targetMonsterId;
             DisableState = disableState;
-            StateName = stateName;
+            StateName = stateShortName;
             Message = message;
             IsStop = false;
         }

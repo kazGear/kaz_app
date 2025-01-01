@@ -23,14 +23,14 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public DeadlyPoison(string name, int stateType, int maxDuration)
-                     : base(name, stateType, maxDuration)
+        public DeadlyPoison(string name, string shortName, int stateType, double cancelRate)
+                     : base(name, shortName, stateType, cancelRate)
         {
             base.StateType = CStateType.DEADLY_POISON.VALUE;
         }
 
         public override IState DeepCopy()
-            => new DeadlyPoison(base.Name, base.StateType, base.MaxDuration);
+            => new DeadlyPoison(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
         public override void DisabledLogging(IMonster monster)
         {
@@ -39,7 +39,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                base.Name,
+                base.ShortName,
                 $"{monster.MonsterName}の猛毒が消えたようだ。"));
 
         }
@@ -49,12 +49,9 @@ namespace KazApi.Domain._Monster._State
         /// </summary>
         public override void Impact(IMonster monster)
         {
-            if (IsDisable()) return;
-
             // 毒ダメージ算出
             int poisonDamage = (int)(monster.MaxHp * POISON_DAMAGE_RATE);
             poisonDamage = URandom.RandomChangeInt(poisonDamage, ADJUST_RATE);
-
 
             _Log.Logging(new BattleMetaData(monster.MonsterId, $"猛毒に侵されている　..."));
             _Log.Logging(new BattleMetaData(
@@ -67,9 +64,6 @@ namespace KazApi.Domain._Monster._State
 
             // 被ダメージ
             monster.AcceptDamage(poisonDamage);
-
-            // 早く回復することがある
-            base.DurationCount += URandom.durationCountUp();
         }
     }
 }

@@ -61,7 +61,7 @@ namespace KazApi.Domain._Const
             IList<string> result = [];
             foreach (StateDTO state in status)
             {
-                result.Add(state.Name);
+                result.Add(state.ShortName);
             }
             return result;
         }

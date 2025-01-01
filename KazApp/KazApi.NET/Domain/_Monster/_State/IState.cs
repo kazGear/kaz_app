@@ -11,19 +11,19 @@ namespace KazApi.Domain._Monster._State
         protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
 
         public string Name { get; protected set; }
+        public string ShortName { get; protected set; }
         public int StateType { get; protected set; }
-        public int MaxDuration { get; protected set; }
-        public int DurationCount { get; protected set; }
+        public double CancelRate { get; protected set; }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public IState(string name, int stateType, int maxDuration)
+        public IState(string name, string shortName, int stateType, double cancelRate)
         {
             Name = name;
+            ShortName = shortName;
             StateType = stateType;
-            MaxDuration = maxDuration;
-            DurationCount = 0;
+            CancelRate = cancelRate;
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace KazApi.Domain._Monster._State
         public IState(StateDTO dto)
         {
             Name = dto.Name;
+            ShortName = dto.ShortName;
             StateType = dto.StateType;
-            MaxDuration = dto.MaxDuration;
-            DurationCount = dto.DurationCount;
+            CancelRate = dto.CancelRate;
         }
 
         /// <summary>
@@ -56,16 +56,5 @@ namespace KazApi.Domain._Monster._State
         /// 状態の影響をモンスターに与える
         /// </summary>
         public abstract void Impact(IMonster monster);
-
-        /// <summary>
-        /// 状態名を取得
-        /// </summary>
-        public string StateName() => Name;
-
-        /// <summary>
-        /// 状態が有効であるか
-        /// </summary>
-        public bool IsDisable() => DurationCount >= MaxDuration;
-
     }
 }

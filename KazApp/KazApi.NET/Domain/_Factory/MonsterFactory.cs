@@ -1,5 +1,4 @@
-﻿using KazApi.Domain._Const;
-using KazApi.Domain._Monster;
+﻿using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
 using KazApi.Domain.DTO;
@@ -95,7 +94,6 @@ namespace KazApi.Domain._Factory
                 MonsterDTO monsterDTO = new MonsterDTO(m);
                 monsterDTO.Skills = skillsDTO;
                 monsterDTO.Status = statusDTO;
-                monsterDTO.StatusName = CStateType.ConvertTypeToName(statusDTO);
 
                 monstersDTO.Add(monsterDTO);
             }

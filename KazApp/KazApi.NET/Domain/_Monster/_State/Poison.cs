@@ -22,14 +22,14 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Poison(string name, int stateType, int maxDuration)
-               : base(name, stateType, maxDuration)
+        public Poison(string name, string shortName, int stateType, double cancelRate)
+               : base(name, shortName, stateType, cancelRate)
         {
             base.StateType = CStateType.POISON.VALUE;
         }
 
         public override IState DeepCopy()
-            => new Poison(base.Name, base.StateType, base.MaxDuration);
+            => new Poison(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
         public override void DisabledLogging(IMonster monster)
         {
@@ -38,7 +38,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                base.Name,
+                base.ShortName,
                 $"{monster.MonsterName}の毒が消えたようだ。"));
 
         }
@@ -48,12 +48,9 @@ namespace KazApi.Domain._Monster._State
         /// </summary>
         public override void Impact(IMonster monster)
         {
-            if (IsDisable()) return;
-
             // 毒ダメージ算出
             int poisonDamage = (int)(monster.MaxHp * POISON_DAMAGE_RATE);
             poisonDamage = URandom.RandomChangeInt(poisonDamage, ADJUST_RATE);
-
 
             _Log.Logging(new BattleMetaData(monster.MonsterId, $"毒がまわってきた。。。"));
             _Log.Logging(new BattleMetaData(
@@ -66,9 +63,6 @@ namespace KazApi.Domain._Monster._State
 
             // 被ダメージ
             monster.AcceptDamage(poisonDamage);
-
-            // 早く回復することがある                        
-            DurationCount += URandom.durationCountUp();
         }
     }
 }

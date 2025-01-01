@@ -71,7 +71,7 @@ namespace KazApi.Controller
                 BattleSystem.CalcBetRate(battleMonsters);
 
                 // テスト用モンスターで対戦
-                battleMonsters = UseTestMonsters　(monstersDTO);
+                //battleMonsters = UseTestMonsters(monstersDTO);
 
                 return JsonConvert.SerializeObject(battleMonsters); ;
             }
@@ -135,9 +135,11 @@ namespace KazApi.Controller
                     IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId)
                                                                    .ToList();
                     if (me.IsMoveAble()) me.Move(otherMonsters);
-
+                    
                     // 状態異常解除
-                    BattleSystem.DisabledStatus(me);
+                    if (me.CurrentStatus().Count() > 0) BattleSystem.RefreshStatus(me);
+                    
+                    _logger.Logging(new BattleMetaData());
                 }
 
                 // 勝敗判定

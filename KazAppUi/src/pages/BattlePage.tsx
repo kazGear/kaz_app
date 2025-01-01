@@ -97,6 +97,7 @@ const BattlePage = () => {
      */
     const goToServerWithJson = useServerWithJson();
     const battleHandler = async () => {
+        console.log(monsters);
         const moveResult: BattleResults = await goToServerWithJson(
             monsters, URLS.BATTLE_NEXT_TURN
        );

@@ -1,5 +1,4 @@
-﻿using CSLib.Lib;
-using KazApi.Common._Log;
+﻿using KazApi.Common._Log;
 using KazApi.Domain._Const;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain.DTO;
@@ -19,11 +18,11 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Charm(string name, int stateType, int maxDuration)
-              : base(name, stateType, maxDuration) { }
+        public Charm(string name, string shortName, int stateType, double cancelRate)
+              : base(name, shortName, stateType, cancelRate) { }
 
         public override IState DeepCopy()
-            => new Charm(Name, StateType, MaxDuration);
+            => new Charm(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
         public override void DisabledLogging(IMonster monster)
         {
@@ -32,7 +31,7 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                Name,
+                base.ShortName,
                 $"{monster.MonsterName}は我に返った！")
                 );
 
@@ -44,17 +43,12 @@ namespace KazApi.Domain._Monster._State
         /// </summary>
         public override void Impact(IMonster me)
         {
-            if (IsDisable()) return;
-
             // 睡眠時は発動しない
             int sleepCnt = me.CurrentStatus()
                              .Where(e => e.StateType == CStateType.SLEEP.VALUE)
                              .Count();
-            if (sleepCnt >= 1)
-            {
-                DurationCount++;
-                return;
-            }
+
+            if (sleepCnt >= 1) return;
 
             ISkill skill = me.SelectSkill();
             while (skill is HealSkill || skill is NoMoveSkill) // 選び直し
@@ -64,9 +58,6 @@ namespace KazApi.Domain._Monster._State
             _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は自分に攻撃！"));
             _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は {skill.SkillName} を放った！"));
             skill.Use([me], me);
-
-            // 魅了回数減少
-            DurationCount += URandom.durationCountUp();
         }
     }
 }

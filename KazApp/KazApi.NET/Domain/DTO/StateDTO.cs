@@ -8,14 +8,18 @@ namespace KazApi.Domain.DTO
     {
         [JsonPropertyName("CodeId")]
         public string CodeId { get; set; }
+      
         [JsonPropertyName("StateType")]
         public int StateType { get; set; }
+        
         [JsonPropertyName("Name")]
         public string Name { get; set; }
-        [JsonPropertyName("MaxDuration")]
-        public int MaxDuration { get; set; }
-        [JsonPropertyName("DurationCount")]
-        public int DurationCount { get; set; }
+
+        [JsonPropertyName("ShortName")]
+        public string ShortName { get; set; }
+
+        [JsonPropertyName("CancelRate")]
+        public double CancelRate { get; set; }
 
         /// <summary>
         /// コンストラクタ
@@ -30,8 +34,8 @@ namespace KazApi.Domain.DTO
             CodeId = CCodeType.STATE.VALUE;
             StateType = model.StateType;
             Name = model.Name;
-            MaxDuration = model.MaxDuration;
-            DurationCount = model.DurationCount;
+            ShortName = model.ShortName;
+            CancelRate = model.CancelRate;
         }
 
         /// <summary>

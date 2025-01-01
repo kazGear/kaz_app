@@ -81,7 +81,7 @@ for (int i = 0; i < battleTimes; i++)
                 ISet<IState> changedStatus = new HashSet<IState>();
                 foreach (IState state in currentStatus)
                 {
-                    if (!state.IsDisable())
+                    if (!BattleSystem.StateIsDisabled(state))
                         changedStatus.Add(state);
                     else
                         state.DisabledLogging(me);

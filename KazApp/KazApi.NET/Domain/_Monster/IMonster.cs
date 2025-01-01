@@ -32,7 +32,8 @@ namespace KazApi.Domain._Monster
         public IMonster(MonsterDTO dto, IEnumerable<ISkill> skills, IEnumerable<IState> status)
         {
             MonsterId = dto.MonsterId;
-            MonsterName = dto.MonsterName!;
+            MonsterName = dto.MonsterName;
+            MonsterType = dto.MonsterType;
             Hp = dto.Hp;
             if (MaxHp == 0) MaxHp = dto.MaxHp;
             Attack = dto.Attack;
@@ -131,14 +132,14 @@ namespace KazApi.Domain._Monster
                     MonsterId,
                     skill.SkillId,
                     skill.EffectTime,
-                    state.Name,
+                    state.ShortName,
                     enableState,
-                    $"{MonsterName}は{state.StateName()}状態になった。")
-                    ); ;
+                    $"{MonsterName}は{state.Name}状態になった。")
+                    );
             }
             else
             {
-                _Log.Logging(new BattleMetaData(MonsterId, $"{MonsterName}は既に{state.StateName()}状態になっている。"));
+                _Log.Logging(new BattleMetaData(MonsterId, $"{MonsterName}は既に{state.Name}状態になっている。"));
             }
         }
 

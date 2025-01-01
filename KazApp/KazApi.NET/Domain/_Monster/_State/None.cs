@@ -16,21 +16,21 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public None(string name, int stateType, int maxDuration)
-             : base(name, stateType, maxDuration)
+        public None(string name, string shortName, int stateType, double cancelRate)
+             : base(name, shortName, stateType, cancelRate)
         {
             StateType = CStateType.NONE.VALUE;
         }
 
 
         public override IState DeepCopy()
-            => new None(Name, StateType, MaxDuration);
+            => new None(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
         public override void DisabledLogging(IMonster monster)
             => throw new NotImplementedException();
 
         /// <summary>
-        /// /
+        /// 
         /// </summary>
         public override void Impact(IMonster monster)
         {

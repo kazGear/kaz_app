@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Reflection;
-using System.Xml.Linq;
+﻿using System.Reflection;
 
 namespace KazApi.Domain._Const
 {

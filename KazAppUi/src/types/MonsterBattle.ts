@@ -17,7 +17,7 @@ export interface MetaDataDTO {
 
 export interface MonsterDTO {
     MonsterId: string;
-    MonsterName?: string;
+    MonsterName: string;
     MonsterType: number;
     Hp: number;
     MaxHp: number;
@@ -26,7 +26,6 @@ export interface MonsterDTO {
     Week: number;
     Skills: SkillDTO[];
     Status: StateDTO[];
-    StatusName: string[];
     BetScore: number;
     BetRate: number;
 }
@@ -54,6 +53,6 @@ export interface StateDTO {
     CodeId: string;
     StateType: number;
     Name: string;
-    MaxDuration: number;
-    DurationCount: number;
+    ShortName: string;
+    CancelRate: number;
 }

@@ -20,7 +20,7 @@ namespace KazApi.Domain._GameSystem
         /// </summary>
         private BattleSystem()
         {
-            
+
         }
         
         /// <summary>
@@ -143,28 +143,40 @@ namespace KazApi.Domain._GameSystem
             IList<IMonster> result =
                 monsters.Where(e => e.Hp > 0)
                         .OrderByDescending(
-                            e => URandom.RandomChangeInt(e.Speed, 0.5))
+                            e => URandom.RandomChangeInt(e.Speed, 0.4))
                         .ToList();
 
             return result;
         }
 
         /// <summary>
-        /// 状態異常解除
+        /// 状態異常解除・未解除の振り分け
         /// </summary>
-        public static void DisabledStatus(IMonster me)
+        public static void RefreshStatus(IMonster me)
         {
             IEnumerable<IState> currentStatus = me.CurrentStatus();
             ISet<IState> changedStatus = new HashSet<IState>();
             foreach (IState state in currentStatus)
             {
-                if (!state.IsDisable())
+                if (!StateIsDisabled(state))
                     changedStatus.Add(state);
                 else
                     state.DisabledLogging(me);
             }
             me.UpdateStatus(changedStatus);
-            LOG.Logging(new BattleMetaData());
+        }
+
+        /// <summary>
+        /// 状態異常が解除されたか判定する
+        /// true: 解除・無効, false: 続行・有効
+        /// </summary>
+        public static bool StateIsDisabled(IState state)
+        {
+            bool result = false;
+            double randomNumber = URandom.RandomDouble(0.0, 1.0);
+
+            if (randomNumber < state.CancelRate) result = true;
+            return result;
         }
 
         /// <summary>
