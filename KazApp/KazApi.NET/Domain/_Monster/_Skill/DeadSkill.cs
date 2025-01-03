@@ -33,7 +33,7 @@ namespace KazApi.Domain._Monster._Skill
             if (randomVal <= rate)
             {
                 enemy.AcceptDamage(DEAD_DAMAGE);
-                _Log.Logging(new BattleMetaData(
+                _log.Logging(new BattleMetaData(
                     enemy.MonsterId,
                     enemy.Hp,
                     deadDamage,
@@ -43,7 +43,7 @@ namespace KazApi.Domain._Monster._Skill
             }
             else
             {
-                _Log.Logging(new BattleMetaData(
+                _log.Logging(new BattleMetaData(
                     enemy.MonsterId,
                     SkillId,
                     EffectTime,

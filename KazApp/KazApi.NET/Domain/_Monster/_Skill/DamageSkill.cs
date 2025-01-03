@@ -3,6 +3,7 @@ using KazApi.Common._Log;
 using KazApi.Domain._Const;
 using KazApi.Domain._GameSystem;
 using KazApi.Domain.DTO;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace KazApi.Domain._Monster._Skill
 {
@@ -44,14 +45,31 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         private void AttackEnemy(IMonster enemy, IMonster me)
         {
+            // 攻撃回避
+            if (!IsHitSkill(this))
+            {
+                MissLogging(enemy);
+                return;
+            }
+
             // ダメージ量が多少揺れる
             int damage = URandom.RandomChangeInt(Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE.VALUE);
 
             // 弱点等のダメージ欲正
-            damage = BattleSystem.WeeknessDamage(enemy, this, damage);
-            damage = BattleSystem.CriticalDamage(this, damage);
+            damage = WeeknessDamage(this, enemy, damage);
+            damage = CriticalDamage(this, damage);
 
-            _Log.Logging(new BattleMetaData(
+            HitLogging(enemy, damage);
+            enemy.AcceptDamage(damage);
+        }
+        /// <summary>
+        /// 攻撃がヒットした際のログ
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="damage"></param>
+        private void HitLogging(IMonster enemy, int damage)
+        {
+            _log.Logging(new BattleMetaData(
                 enemy.MonsterId,
                 enemy.Hp,
                 damage,
@@ -59,22 +77,36 @@ namespace KazApi.Domain._Monster._Skill
                 EffectTime,
                 $"{enemy.MonsterName}は{damage}のダメージを受けた。")
                 );
+        }
+        /// <summary>
+        /// 攻撃を外した際際のログ
+        /// </summary>
+        private void MissLogging(IMonster enemy)
+        {
+            int noDamage = 0;
+            string missSkill = "";
+            int noEffectTime = 0;
 
-            enemy.AcceptDamage(damage);
+            _log.Logging(new BattleMetaData(
+                enemy.MonsterId,
+                enemy.Hp,
+                noDamage,
+                missSkill,
+                noEffectTime,
+                $"{enemy.MonsterName}は攻撃を回避した！")
+                );
         }
         /// <summary>
         /// 単体攻撃か全体攻撃かを選択する
         /// </summary>
         private int OneOrAll()
         {
-            if (TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
+            if (base.TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
             {
                 return URandom.RandomBool() ? CTarget.ENEMY_RANDOM.VALUE
                                             : CTarget.ENEMY_ALL.VALUE;
             }
-            return TargetType;
-
+            return base.TargetType;
         }
-
     }
 }

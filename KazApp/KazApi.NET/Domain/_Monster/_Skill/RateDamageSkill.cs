@@ -22,7 +22,7 @@ namespace KazApi.Domain._Monster._Skill
             // 現HPの割合ダメージ
             double damage = enemy.Hp * (Attack / 100.0);
 
-            _Log.Logging(new BattleMetaData(
+            _log.Logging(new BattleMetaData(
                 enemy.MonsterId,
                 enemy.Hp,
                 (int)damage,

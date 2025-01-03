@@ -35,7 +35,10 @@ namespace KazApi.Domain.DTO
         
         [JsonPropertyName("Critical")]
         public double Critical { get; set; }
-        
+
+        [JsonPropertyName("HitRate")]
+        public double HitRate { get; set; }
+
         [JsonPropertyName("Remarks")]
         public string? Remarks { get; set; } = string.Empty;
 
@@ -61,6 +64,7 @@ namespace KazApi.Domain.DTO
             Attack = model.Attack;
             Weight = model.Weight;
             Critical = model.Critical;
+            HitRate = model.HitRate;
             Remarks = "";
         }
 

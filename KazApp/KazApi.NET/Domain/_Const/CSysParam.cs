@@ -67,7 +67,7 @@
         /// <summary>
         /// クリティカル補正率
         /// </summary>
-        public static readonly CSysRate CRITICAL_DAMAGE = new(1.6, "CRITICAL_DAMAGE");
+        public static readonly CSysRate CRITICAL_DAMAGE = new(1.7, "CRITICAL_DAMAGE");
         /// <summary>
         /// 行動順補正率
         /// </summary>

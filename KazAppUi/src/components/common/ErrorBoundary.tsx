@@ -37,6 +37,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         console.error("ErrorBoundary caught an error", error, info);
         localStorage.removeItem(KEYS.TOKEN);
         localStorage.removeItem(KEYS.USER_ID);
+        localStorage.removeItem(KEYS.USER_ROLE);
     }
     /**
      * 非同期のエラー対応
@@ -50,7 +51,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
     render() {
         if (this.state.hasError) {
-            return <h1 style={{marginTop: "60px"}}>暫定エラーページ</h1>;
+            return <h1 style={{margin: "60px"}}>暫定エラーページ</h1>;
         }
 
         return this.props.children;

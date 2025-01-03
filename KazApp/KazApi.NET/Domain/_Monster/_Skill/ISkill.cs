@@ -11,7 +11,7 @@ namespace KazApi.Domain._Monster._Skill
     public abstract class ISkill
     {
 
-        protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
+        protected readonly ILog<BattleMetaData> _log = new BattleLogger();
         protected int _initialAttack;
 
         public string SkillId { get; protected set; }
@@ -23,6 +23,7 @@ namespace KazApi.Domain._Monster._Skill
         public int TargetType { get; protected set; }
         public int Weight { get; protected set; }
         public double Critical { get; protected set; }
+        public double HitRate { get; protected set; }
         public int EffectTime { get; protected set; }
 
         /// <summary>
@@ -40,6 +41,7 @@ namespace KazApi.Domain._Monster._Skill
             TargetType = dto.TargetType;
             Weight = dto.Weight;
             Critical = dto.Critical;
+            HitRate = dto.HitRate;
             EffectTime = dto.EffectTime;
         }
 
@@ -65,5 +67,52 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         protected void InitPower()
             => Attack = _initialAttack;
+
+        /// <summary>
+        /// 弱点属性によるダメージの算出
+        /// </summary>
+        public int WeeknessDamage(ISkill skill, IMonster enemy, int damage)
+        {
+            // 弱点ダメージが発生しようがなければダメージの変動なし
+            if (skill.ElementType == CElement.NONE.VALUE) return damage;
+            if (enemy.Week == CElement.NONE.VALUE) return damage;
+
+            if (enemy.Week == skill.ElementType)
+            {
+                damage = (int)(damage * CSysRate.WEEK_DAMAGE.VALUE);
+                _log.Logging(new BattleMetaData("弱点ダメージ！"));
+            }
+            return damage;
+        }
+
+        /// <summary>
+        /// クリティカルによるダメージ
+        /// </summary>
+        public int CriticalDamage(ISkill skill, int damage)
+        {
+            double randomVal = URandom.RandomDouble(0.0, 1.0);
+            bool isCritical = randomVal <= skill.Critical;
+
+            if (isCritical)
+            {
+                damage = (int)(damage * CSysRate.CRITICAL_DAMAGE.VALUE);
+                _log.Logging(new BattleMetaData("クリティカルヒット！"));
+            }
+            return damage;
+        }
+
+        /// <summary>
+        /// スキルが命中したか判定
+        /// true: hit, false: miss
+        /// </summary>
+        public bool IsHitSkill(ISkill skill)
+        {
+            bool result = false;
+            double randVal = URandom.RandomDouble(0.0, 1.0);
+
+            if (randVal <= skill.HitRate) result = true;
+
+            return result;
+        }
     }
 }

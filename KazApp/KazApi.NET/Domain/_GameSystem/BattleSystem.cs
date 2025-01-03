@@ -1,8 +1,6 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Log;
-using KazApi.Domain._Const;
 using KazApi.Domain._Monster;
-using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
 using KazApi.Domain.DTO;
 
@@ -24,39 +22,6 @@ namespace KazApi.Domain._GameSystem
 
             int enemyIndex = URandom.RandomInt(0, enemies.Count());
             return enemies.ElementAt(enemyIndex);
-        }
-        /// <summary>
-        /// 弱点属性によるダメージの算出
-        /// </summary>
-        public static int WeeknessDamage(IMonster enemy, ISkill skill, int damage)
-        {
-            if (skill.ElementType == CElement.NONE.VALUE) return damage;
-            if (enemy.Week == CElement.NONE.VALUE) return damage;
-
-            int week = enemy.Week;
-            bool isWeekness = week == skill.ElementType;
-
-            if (isWeekness)
-            {
-                damage = (int)(damage * CSysRate.WEEK_DAMAGE.VALUE);
-                LOG.Logging(new BattleMetaData("弱点ダメージ！"));
-            }
-            return damage;
-        }
-        /// <summary>
-        /// クリティカルによるダメージ
-        /// </summary>
-        public static int CriticalDamage(ISkill skill, int damage)
-        {
-            double randomVal = URandom.RandomDouble(0.0, 1.0);
-            bool isCritical = randomVal <= skill.Critical;
-
-            if (isCritical)
-            {
-                damage = (int)(damage * CSysRate.CRITICAL_DAMAGE.VALUE);
-                LOG.Logging(new BattleMetaData("クリティカルヒット！"));
-            }
-            return damage;
         }
 
         /// <summary>

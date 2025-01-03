@@ -24,7 +24,7 @@ namespace KazApi.Domain._Monster._Skill
             int healAble = me.MaxHp - me.Hp;
             healPoint = healAble < healPoint ? healAble : healPoint;
 
-            _Log.Logging(new BattleMetaData(
+            _log.Logging(new BattleMetaData(
                 me.MonsterId,
                 me.Hp,
                 healPoint * -1,
