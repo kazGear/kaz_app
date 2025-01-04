@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-import { COLORS, KEYS, PREFIX, URLS } from "../../lib/Constants";
+import { COLORS, KEYS, PREFIX, URLS, USER_ROLE } from "../../lib/Constants";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { isEmpty } from "../../lib/CommonLogic";
 import { useServerWithQuery } from "../../hooks/useHooksOfCommon";
@@ -45,8 +45,11 @@ const Sspan = styled.span`
 interface ArgProps { title: string; }
 
 const AppHeader = ({title}: ArgProps) => {
+    // ユーザー関係
     const [loginId, setLoginId] = useState<string | null>("");
     const [loginUser, setLoginUser] = useState<UserDTO | null>();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const authorizedPerson: number[] = [USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN];
     const [userImage, setUserImage] = useState<string>("");
     const [validToken, setValidToken] = useState(false);
 
@@ -57,10 +60,12 @@ const AppHeader = ({title}: ArgProps) => {
 
     useCheckLogin(setValidToken);
 
-    // ユーザー名取得のため
+    // ユーザー情報
     useLayoutEffect(() => {
         const id: string | null = localStorage.getItem(KEYS.USER_ID);
+        const role: string | null = localStorage.getItem(KEYS.USER_ROLE);
         setLoginId(id);
+        setIsAdmin(authorizedPerson.includes(parseInt(role!)));
     }, [loginId]);
 
     // 表示名取得
@@ -99,7 +104,7 @@ const AppHeader = ({title}: ArgProps) => {
                 <Button text="設定"
                         width={60}
                         onClick={() => navigate("/EditPage")}
-                        disabled={!validToken}/>
+                        disabled={!validToken || !isAdmin}/>
                 <Button text="ログイン"
                         width={80}
                         onClick={() => navigate("/LoginPage")}
