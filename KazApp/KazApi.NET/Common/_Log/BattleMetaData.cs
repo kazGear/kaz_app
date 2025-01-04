@@ -39,7 +39,10 @@ namespace KazApi.Common._Log
         
         [JsonPropertyName("IsStop")]
         public readonly bool IsStop = false;
-        
+
+        [JsonPropertyName("IsDodge")]
+        public readonly bool IsDodge = false;
+
         [JsonPropertyName("AllLoser")]
         public readonly bool AllLoser = false;
         
@@ -194,7 +197,28 @@ namespace KazApi.Common._Log
             Message = message;
             IsStop = false;
         }
-
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public BattleMetaData(
+            string targetMonsterId,
+            int beforeHp,
+            int impactPoint,
+            string skillId,
+            int effectTime,
+            bool isDodge,
+            string message
+            )
+        {
+            TargetMonsterId = targetMonsterId;
+            BeforeHp = beforeHp;
+            ImpactPoint = impactPoint;
+            SkillId = skillId;
+            EffectTime = effectTime;
+            IsDodge = isDodge;
+            Message = message;
+            IsStop = false;
+        }
         public override string ToString() => Message;
     }
 }

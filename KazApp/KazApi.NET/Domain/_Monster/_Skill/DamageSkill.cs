@@ -84,15 +84,15 @@ namespace KazApi.Domain._Monster._Skill
         private void MissLogging(IMonster enemy)
         {
             int noDamage = 0;
-            string missSkill = "";
-            int noEffectTime = 0;
+            bool isDodge = true;
 
             _log.Logging(new BattleMetaData(
                 enemy.MonsterId,
                 enemy.Hp,
                 noDamage,
-                missSkill,
-                noEffectTime,
+                base.SkillId,
+                base.EffectTime,
+                isDodge,
                 $"{enemy.MonsterName}は攻撃を回避した！")
                 );
         }

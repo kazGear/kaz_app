@@ -37,20 +37,31 @@ const MonsterImgBlock = ({monster, shortLog}: ArgProps) => {
     const imgRef = useRef<HTMLImageElement>(null);
     const [effectImage, setEffectImage] = useState("");
     const [showEffect, setShowEffect] = useState(false);
-    const [showFlash, setShowFlash] = useState(false);
     const monsterImage = monsterImages(monster.MonsterId);
+    // モンスターの動き
+    const [monsterMove, setMonsterMove] = useState({});
+    const noMove = {animation: ""}
+    const damageFlash = {animation: "0.8s damageFlash"};
+    const dodge = {animation: `${DAMAGE_VIEW.DODGE_END / 1000}s dodge`}
 
     // ダメージ表現
     useEffect(() => {
         for (const log of shortLog) {
             if (   log.TargetMonsterId === monster.MonsterId
-                && !isEmpty(log.SkillId)
-            ) {
+                && !isEmpty(log.SkillId)) // 受けるスキルがある
+            {
                 setEffectImage(effectImages(log.SkillId));
                 setShowEffect(true);
-                setTimeout(() => setShowEffect(false), log.EffectTime);
-                setTimeout(() => setShowFlash(true), log.EffectTime);
-                setTimeout(() => setShowFlash(false), DAMAGE_VIEW.DAMAGE_END);
+
+                if (log.IsDodge) { // 回避した
+                    setTimeout(() => setShowEffect(false), log.EffectTime);
+                    setTimeout(() => setMonsterMove(dodge), DAMAGE_VIEW.DODGE_START);
+                    setTimeout(() => setMonsterMove(noMove), DAMAGE_VIEW.DODGE_END);
+                } else { // ヒットした
+                    setTimeout(() => setShowEffect(false), log.EffectTime);
+                    setTimeout(() => setMonsterMove(damageFlash), log.EffectTime);
+                    setTimeout(() => setMonsterMove(noMove), DAMAGE_VIEW.DAMAGE_END);
+                }
             }
         }
     }, [shortLog]);
@@ -63,7 +74,7 @@ const MonsterImgBlock = ({monster, shortLog}: ArgProps) => {
                     src={monsterImage}
                     alt="Loding ..."
                     ref={imgRef}
-                    style={{animation: showFlash ? "0.8s flash" : ""}}
+                    style={monsterMove}
                     />
                 <SimgEffect
                     src={effectImage}

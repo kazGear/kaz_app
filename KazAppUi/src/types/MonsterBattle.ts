@@ -9,6 +9,7 @@ export interface MetaDataDTO {
     EffectTime: number;
     Message: string;
     IsStop: boolean;
+    IsDodge: boolean;
     AllLoser: boolean;
     ExistWinner: boolean;
     WinnerMonsterId: string;

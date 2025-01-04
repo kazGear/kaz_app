@@ -58,7 +58,8 @@ export const STATE_NAME = {
 } as const;
 
 export const DAMAGE_VIEW = {
-    EFFECT_END: 1500,
+    DODGE_START: 0,
+    DODGE_END: 1500,
     DAMAGE_END: 2500,
 } as const;
 
