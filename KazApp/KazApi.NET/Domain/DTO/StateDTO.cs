@@ -21,11 +21,14 @@ namespace KazApi.Domain.DTO
         [JsonPropertyName("CancelRate")]
         public double CancelRate { get; set; }
 
+        [JsonPropertyName("Activate")]
+        public bool Activate { get; set; }
+
         /// <summary>
         /// コンストラクタ
+        /// デシリアライズ用
         /// </summary>
         public StateDTO() { }
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -36,19 +39,7 @@ namespace KazApi.Domain.DTO
             Name = model.Name;
             ShortName = model.ShortName;
             CancelRate = model.CancelRate;
-        }
-
-        /// <summary>
-        /// DTOへ変換
-        /// </summary>
-        public static IEnumerable<StateDTO> ModelToDTO(IEnumerable<IState> models)
-        {
-            IList<StateDTO> result = [];
-
-            foreach (IState model in models)
-                result.Add(new StateDTO(model));
-
-            return result;
+            Activate = model.Activate;
         }
     }
 }

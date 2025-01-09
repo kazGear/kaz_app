@@ -22,7 +22,10 @@ namespace KazApi.Domain.DTO
       
         [JsonPropertyName("MaxHp")]
         public int MaxHp { get; set; }
-      
+
+        [JsonPropertyName("DefaultAttack")]
+        public int DefaultAttack { get; set; }
+
         [JsonPropertyName("Attack")]
         public int Attack { get; set; }
       
@@ -46,6 +49,7 @@ namespace KazApi.Domain.DTO
 
         /// <summary>
         /// コンストラクタ
+        /// デシリアライズ用
         /// </summary>
         public MonsterDTO() { }
         /// <summary>
@@ -58,6 +62,7 @@ namespace KazApi.Domain.DTO
             MonsterType = model.MonsterType;
             Hp = model.Hp;
             MaxHp = model.MaxHp;
+            DefaultAttack = model.DefaultAttack;
             Attack = model.Attack;
             Speed = model.Speed;
             Week = model.Week;

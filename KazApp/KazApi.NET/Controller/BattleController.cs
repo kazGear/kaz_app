@@ -40,9 +40,9 @@ namespace KazApi.Controller
                 IEnumerable<MonsterDTO> monsters = _service.SelectMonsters(loginId);
                 return JsonConvert.SerializeObject(monsters);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return e.Message;
+                return StatusCode(500, "Error monsters info.");
             }
         }
 
@@ -71,13 +71,13 @@ namespace KazApi.Controller
                 BattleSystem.CalcBetRate(battleMonsters);
 
                 // テスト用モンスターで対戦
-                //battleMonsters = UseTestMonsters(monstersDTO);
+                battleMonsters = UseTestMonsters(monstersDTO);
 
                 return JsonConvert.SerializeObject(battleMonsters); ;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return e.Message;
+                return StatusCode(500, "Error init battle.");
             }
         }
 
@@ -90,11 +90,17 @@ namespace KazApi.Controller
         {
             IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
             {
-                monstersDTO.Where(e => e.MonsterId == CMonster.カイザーミミック.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.ハーピー.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.セイレーン.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.マーマポト.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.ダースマタンゴ.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.カーミラクイーン.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.マーマポト.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.パーパポト.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.カーミラ.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.アサシンバグ.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.イビルウェポン.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.クロウラー.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.ダースマタンゴ.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリン.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリンガード.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリンロード.VALUE).Single(),
             };
             return testMonsters;
         }
@@ -135,10 +141,10 @@ namespace KazApi.Controller
                     IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId)
                                                                    .ToList();
                     if (me.IsMoveAble()) me.Move(otherMonsters);
-                    
+
                     // 状態異常解除
-                    if (me.CurrentStatus().Count() > 0) BattleSystem.RefreshStatus(me);
-                    
+                    if (me.CurrentStatus().Count() > 0) me.RefreshStatus();
+
                     _logger.Logging(new BattleMetaData());
                 }
 

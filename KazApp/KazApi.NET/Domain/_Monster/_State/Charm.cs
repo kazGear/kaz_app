@@ -13,28 +13,30 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Charm(StateDTO dto) : base(dto) { }
-
+        public Charm(StateDTO dto) : base(dto) 
+        {
+            base.Activate = true;
+        }
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public Charm(string name, string shortName, int stateType, double cancelRate)
-              : base(name, shortName, stateType, cancelRate) { }
+              : base(name, shortName, stateType, cancelRate)
+        {
+            base.Activate = true;
+        }
 
         public override IState DeepCopy()
             => new Charm(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
         public override void DisabledLogging(IMonster monster)
         {
-            bool disableState = true;
-
-            _Log.Logging(new BattleMetaData(
+            base._log.Logging(new BattleMetaData(
                 monster.MonsterId,
-                disableState,
+                base.disabledState,
                 base.ShortName,
                 $"{monster.MonsterName}は我に返った！")
                 );
-
         }
 
         /// <summary>
@@ -55,8 +57,8 @@ namespace KazApi.Domain._Monster._State
                 skill = me.SelectSkill();
 
             // 自傷
-            _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は自分に攻撃！"));
-            _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は {skill.SkillName} を放った！"));
+            base._log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は自分に攻撃！"));
+            base._log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は {skill.SkillName} を放った！"));
             skill.Use([me], me);
         }
     }

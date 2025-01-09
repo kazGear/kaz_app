@@ -39,7 +39,6 @@ namespace KazApi.Domain._Monster._Skill
                 GiveNegativeState(monsters, me);
             }
         }
-
         /// <summary>
         /// 良い状態を与える
         /// </summary>
@@ -47,7 +46,6 @@ namespace KazApi.Domain._Monster._Skill
         {
             me.AcceptState(_state!.DeepCopy(), this);
         }
-
         /// <summary>
         /// 悪い状態を与える
         /// </summary>
@@ -79,7 +77,6 @@ namespace KazApi.Domain._Monster._Skill
                 }
             }
         }
-
         /// <summary>
         /// 状態異常を受けなかった際のログ
         /// </summary>

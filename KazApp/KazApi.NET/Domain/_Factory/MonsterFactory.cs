@@ -88,8 +88,8 @@ namespace KazApi.Domain._Factory
             IList<MonsterDTO> monstersDTO = [];
             foreach (IMonster m in battleMonsters)
             {
-                IEnumerable<SkillDTO> skillsDTO = SkillDTO.ModelToDTO(m.CurrentSkills());
-                IEnumerable<StateDTO> statusDTO = StateDTO.ModelToDTO(m.CurrentStatus());
+                IEnumerable<SkillDTO> skillsDTO = ISkill.ModelToDTO(m.CurrentSkills());
+                IEnumerable<StateDTO> statusDTO = IState.ModelToDTO(m.CurrentStatus());
 
                 MonsterDTO monsterDTO = new MonsterDTO(m);
                 monsterDTO.Skills = skillsDTO;

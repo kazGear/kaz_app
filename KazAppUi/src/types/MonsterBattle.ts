@@ -22,6 +22,7 @@ export interface MonsterDTO {
     MonsterType: number;
     Hp: number;
     MaxHp: number;
+    DefaultAttack: number;
     Attack: number;
     Speed: number;
     Week: number;
@@ -56,4 +57,5 @@ export interface StateDTO {
     Name: string;
     ShortName: string;
     CancelRate: number;
+    Activate: boolean;
 }

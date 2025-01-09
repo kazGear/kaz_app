@@ -1,51 +1,55 @@
-﻿//using KazApi.Common._Const;
-//using KazApi.Common._Log;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Monster._Skill;
+using KazApi.Domain.DTO;
 
-//namespace KazApi.Domain._Monster._State
-//{
-//    /// <summary>
-//    /// 攻撃力UP状態クラス
-//    /// </summary>
-//    public class PowerUp : IState
-//    {
-//        private static readonly double ATTACK_GAIN = 1.0;
-//        private bool _firstTime = true;
+namespace KazApi.Domain._Monster._State
+{
+    /// <summary>
+    /// 攻撃力UP状態クラス
+    /// </summary>
+    public class PowerUp : IState, IPositiveSkill
+    {
+        private static readonly double ATTACK_GAIN = 1.3;
 
-//        /// <summary>
-//        /// コンストラクタ
-//        /// </summary>
-//        public PowerUp(string name, int stateType, int maxDuration)
-//                : base(name, stateType, maxDuration) 
-//        {
-//            base.StateType = ((int)CStateType.POWERUP);
-//        }
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public PowerUp(StateDTO dto) : base(dto) { }
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public PowerUp(string name, string shortName, int stateType, double cancelRate)
+                : base(name, shortName, stateType, cancelRate) { }
 
-//        public override IState DeepCopy()
-//            => new PowerUp(base.Name, base.StateType, base.MaxDuration);
+        public override IState DeepCopy()
+            => new PowerUp(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-//        public override void DisabledLogging(IMonster monster)
-//            => base._Log.Logging(
-//                new BattleMetaData(
-//                    monster.MonsterId,
-//                    $"{monster.MonsterName}の攻撃力が元に戻った。"));
+        public override void DisabledLogging(IMonster me)
+        {
+            me.InitAttack();
 
-//        /// <summary>
-//        /// 攻撃力を上昇させる
-//        /// </summary>
-//        public override void Impact(IMonster monster)
-//        {
-//            //monster.InitAttack();
-//            //if (IsDisable()) return;
+            base._log.Logging(new BattleMetaData(
+                me.MonsterId,
+                base.disabledState,
+                base.ShortName,
+                $"{me.MonsterName}の攻撃力が元に戻った。")
+                );
+        }
+        /// <summary>
+        /// 攻撃力を上昇させる
+        /// </summary>
+        public override void Impact(IMonster me)
+        {
+            if (me.Attack == me.DefaultAttack)
+            {
+                double gainerAttack = (double)me.Attack * ATTACK_GAIN;
+                me.ChangeAttack((int)gainerAttack);
 
-//            //double gain = (double)monster.Attack * ATTACK_GAIN;
-//            //monster.ChangeAttack(monster.Attack + (int)gain);
-//            //_firstTime = false;
-
-//            //base._Log.Logging($"{monster.Name}の攻撃力は上昇している！");
-
-//            //base._durationCount++;
-
-//        }
-
-//    }
-//}
+                base._log.Logging(new BattleMetaData(
+                    me.MonsterId,
+                    $"{me.MonsterName}の攻撃力が上昇した！")
+                    );
+            }
+        }
+    }
+}

@@ -66,25 +66,6 @@ namespace KazApi.Domain._GameSystem
 
             return result;
         }
-
-        /// <summary>
-        /// 状態異常解除・未解除の振り分け
-        /// </summary>
-        public static void RefreshStatus(IMonster me)
-        {
-            IEnumerable<IState> currentStatus = me.CurrentStatus();
-            ISet<IState> changedStatus = new HashSet<IState>();
-
-            foreach (IState state in currentStatus)
-            {
-                if (!StateIsDisabled(state))
-                    changedStatus.Add(state);
-                else
-                    state.DisabledLogging(me);
-            }
-            me.UpdateStatus(changedStatus);
-        }
-
         /// <summary>
         /// 状態異常が解除されたか判定する
         /// true: 解除・無効, false: 続行・有効

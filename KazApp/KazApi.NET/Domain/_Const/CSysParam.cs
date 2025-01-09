@@ -47,7 +47,6 @@
         /// コンストラクタ
         /// </summary>
         private CPrefix(string value, string name) : base(value, name) { }
-
         /// <summary>
         /// ユーザーイメージ保管場所
         /// </summary>

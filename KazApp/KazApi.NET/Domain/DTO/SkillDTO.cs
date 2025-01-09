@@ -11,8 +11,7 @@ namespace KazApi.Domain.DTO
         [JsonPropertyName("SkillId")]
         public string SkillId { get; set; }
         
-        [JsonPropertyName("SkillName"
-            )]
+        [JsonPropertyName("SkillName")]
         public string SkillName { get; set; }
         
         [JsonPropertyName("SkillType")]
@@ -47,9 +46,9 @@ namespace KazApi.Domain.DTO
         
         /// <summary>
         /// コンストラクタ
+        /// デシリアライズ用
         /// </summary>
         public SkillDTO() { }
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -66,19 +65,6 @@ namespace KazApi.Domain.DTO
             Critical = model.Critical;
             HitRate = model.HitRate;
             Remarks = "";
-        }
-
-        /// <summary>
-        /// DTOへ変換
-        /// </summary>
-        public static IEnumerable<SkillDTO> ModelToDTO(IEnumerable<ISkill> models)
-        {
-            IList<SkillDTO> result = [];
-
-            foreach (ISkill model in models)
-                result.Add(new SkillDTO(model));
-
-            return result;
         }
     }
 }

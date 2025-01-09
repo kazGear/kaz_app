@@ -13,6 +13,7 @@
                      , m.monster_type AS MonsterType
                      , m.hp           AS Hp
                      , m.hp           AS MaxHp
+                     , m.attack       AS DefaultAttack
                      , m.attack       AS Attack
                      , m.speed        AS Speed
                      , m.week         AS Week

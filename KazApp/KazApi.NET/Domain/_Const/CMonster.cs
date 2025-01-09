@@ -19,12 +19,12 @@
         public static readonly CMonster デーモン = new("monster006", "デーモン");
         public static readonly CMonster グレートデーモン = new("monster007", "グレートデーモン");
         public static readonly CMonster ゴブリン = new("monster008", "ゴブリン");
-        public static readonly CMonster ゴブリンロード = new("monster009", "ゴブリンロード");
-        public static readonly CMonster ガーディアン = new("monster0010", "ガーディアン");
+        public static readonly CMonster ゴブリンガード = new("monster009", "ゴブリンガード");
+        public static readonly CMonster ゴブリンロード = new("monster010", "ゴブリンロード");
         
         public static readonly CMonster マシンゴーレム = new("monster011", "マシンゴーレム");
-        public static readonly CMonster ゴブリンガード = new("monster012", "ゴブリンガード");
-                public static readonly CMonster デスマシン = new("monster013", "デスマシン");
+        public static readonly CMonster ガーディアン = new("monster012", "ガーディアン");
+        public static readonly CMonster デスマシン = new("monster013", "デスマシン");
         public static readonly CMonster ハーピー = new("monster014", "ハーピー");
         public static readonly CMonster セイレーン = new("monster015", "セイレーン");
 

@@ -17,7 +17,6 @@ namespace KazApi.Domain._Monster._State
         /// コンストラクタ
         /// </summary>
         public AutoHeal(StateDTO dto) : base(dto) { }
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -27,18 +26,15 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new AutoHeal(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster monster)
+        public override void DisabledLogging(IMonster me)
         {
-            bool disableState = true;
-
-            _Log.Logging(new BattleMetaData(
-                monster.MonsterId,
-                disableState,
+            base._log.Logging(new BattleMetaData(
+                me.MonsterId,
+                base.disabledState,
                 base.ShortName,
-                $"{monster.MonsterName}の自然治癒力がなくなった。")
+                $"{me.MonsterName}の自然治癒力がなくなった。")
                 );
         }
-
         /// <summary>
         /// 自ターンに自動回復する
         /// </summary>
@@ -49,8 +45,8 @@ namespace KazApi.Domain._Monster._State
             int healLimit = me.MaxHp - me.Hp;
             int healPointFix = healPoint2 >= healLimit ? healLimit : healPoint2;
 
-            _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}の自然治癒！"));
-            _Log.Logging(new BattleMetaData(
+            base._log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}の自然治癒！"));
+            base._log.Logging(new BattleMetaData(
                 me.MonsterId,
                 HEAL_SKILL_ID,
                 me.Hp,

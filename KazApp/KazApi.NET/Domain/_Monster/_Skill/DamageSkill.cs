@@ -65,8 +65,6 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// 攻撃がヒットした際のログ
         /// </summary>
-        /// <param name="enemy"></param>
-        /// <param name="damage"></param>
         private void HitLogging(IMonster enemy, int damage)
         {
             _log.Logging(new BattleMetaData(

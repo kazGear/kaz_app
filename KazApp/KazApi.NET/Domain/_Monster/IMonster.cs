@@ -1,5 +1,6 @@
 ﻿using KazApi.Common._Log;
 using KazApi.Domain._Const;
+using KazApi.Domain._GameSystem;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
 using KazApi.Domain.DTO;
@@ -21,6 +22,7 @@ namespace KazApi.Domain._Monster
         public int MonsterType { get; protected set; }
         public int Hp { get; protected set; }
         public int MaxHp { get; protected set; } = 0;
+        public int DefaultAttack { get; protected set; }
         public int Attack { get; protected set; }
         public int Speed { get; protected set; }
         public int Team { get; protected set; }
@@ -36,6 +38,7 @@ namespace KazApi.Domain._Monster
             MonsterType = dto.MonsterType;
             Hp = dto.Hp;
             if (MaxHp == 0) MaxHp = dto.MaxHp;
+            DefaultAttack = dto.DefaultAttack;
             Attack = dto.Attack;
             _defaultAttack = dto.Attack;
             Speed = dto.Speed;
@@ -65,53 +68,46 @@ namespace KazApi.Domain._Monster
                 AttackMove(monsters, skill);
             }
         }
-
         /// <summary>
         /// 攻撃する
         /// </summary>
         protected abstract void AttackMove(IEnumerable<IMonster> monsters, ISkill skill);
-
         /// <summary>
         /// 有利な行動
         /// </summary>
         protected abstract void PositiveMove(IEnumerable<IMonster> monsters, ISkill skill);
-
         /// <summary>
         /// スキルを選択
         /// </summary>
         public abstract ISkill SelectSkill();
-
         /// <summary>
         /// 現在のスキルを見る
         /// </summary>
         public IEnumerable<ISkill> CurrentSkills() => new List<ISkill>(_skills);
-
         /// <summary>
         /// 現在のステータスを見る
         /// </summary>
         public IEnumerable<IState> CurrentStatus() => new List<IState>(_status);
-
         /// <summary>
         /// ステータスを更新する
         /// </summary>
         public void UpdateStatus(ISet<IState> changedStatus) => _status = changedStatus;
-
         /// <summary>
         /// ダメージを受ける
         /// </summary>
         public void AcceptDamage(int damage) => Hp -= damage;
-
         /// <summary>
         /// チームを決定する
         /// </summary>
         public void DefineTeam(int team) => Team = team;
-
-        // 攻撃力を変更する
-        //public void ChangeAttack(int attack) => Attack = attack;
-
-        // 攻撃力を戻す
-        //public void InitAttack() => Attack = _defaultAttack;
-
+        /// <summary>
+        /// 攻撃力を変更する
+        /// </summary>
+        public void ChangeAttack(int attack) => Attack = attack;
+        /// <summary>
+        /// 攻撃力を戻す
+        /// </summary>
+        public void InitAttack() => Attack = DefaultAttack;
         /// <summary>
         /// 状態異常になる
         /// </summary>
@@ -137,7 +133,30 @@ namespace KazApi.Domain._Monster
                 _Log.Logging(new BattleMetaData(MonsterId, $"{MonsterName}は既に{state.Name}状態になっている。"));
             }
         }
+        /// <summary>
+        /// 状態異常解除・未解除の振り分け
+        /// </summary>
+        public void RefreshStatus()
+        {
+            IEnumerable<IState> currentStatus = this.CurrentStatus();
+            ISet<IState> changedStatus = new HashSet<IState>();
 
+            foreach (IState state in currentStatus)
+            {
+                if (BattleSystem.StateIsDisabled(state) && state.Activate)
+                {
+                    // ステータス解除
+                    state.DisabledLogging(this);
+                }
+                else
+                {
+                    // ステータス有効化・継続
+                    state.Activation();
+                    changedStatus.Add(state);
+                }
+            }
+            UpdateStatus(changedStatus);
+        }
         /// <summary>
         /// 状態異常の効果を受ける
         /// </summary>
@@ -147,7 +166,6 @@ namespace KazApi.Domain._Monster
             IEnumerable<IState> copyStatus = new List<IState>(_status);
             foreach (IState state in copyStatus) state.Impact(this);
         }
-
         /// <summary>
         /// 行動できる状態か判定
         /// </summary>

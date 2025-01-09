@@ -100,7 +100,7 @@ const BattlePage = () => {
         const moveResult: BattleResults = await goToServerWithJson(
             monsters, URLS.BATTLE_NEXT_TURN
        );
-       setMonsters([...moveResult.Monsters]);
+       setMonsters([...moveResult.Monsters]); console.log(moveResult.Monsters);
        setBattleLog([...moveResult.BattleLog]);
        setBattleStarted(true);
        setMonsterCount([...moveResult.Monsters].length);

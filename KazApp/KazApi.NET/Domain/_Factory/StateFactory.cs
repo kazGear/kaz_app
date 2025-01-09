@@ -21,7 +21,7 @@ namespace KazApi.Domain._Factory
         }
 
         /// <summary>
-        /// 状態オブジェクトを作成
+        /// 状態オブジェクトを作成（状態コードより）
         /// </summary>
         public IState Create(int stateCode)
         {
@@ -42,13 +42,9 @@ namespace KazApi.Domain._Factory
                 Console.WriteLine($"対応していないコードです：{CStateType.SLOW}");
                 return new None(param.Name, param.ShortName, param.Value, param.Param3);
             }
-
             //    return new Slow(param.Name, param.Value, param.Param3);
             else if (stateCode == CStateType.POWERUP.VALUE)
-            {
-                Console.WriteLine($"対応していないコードです：{CStateType.POWERUP}");
-                return new None(param.Name, param.ShortName, param.Value, param.Param3);
-            }
+                return new PowerUp(param.Name, param.ShortName, param.Value, param.Param3);
             //    return new PowerUp(param.Name, param.Value, param.Param3);
             else if (stateCode == CStateType.DODGEUP.VALUE)
             {
@@ -67,7 +63,6 @@ namespace KazApi.Domain._Factory
             else
                 throw new Exception("存在しない状態コードです。");
         }
-
         /// <summary>
         /// 状態オブジェクトを作成（DTOより）
         /// </summary>
@@ -87,8 +82,8 @@ namespace KazApi.Domain._Factory
                 return new Charm(dto);
             //else if (stateCode == ((int)CStateType.SLOW))
             //    return new Slow(param.Name, param.Value, param.Param3);
-            //else if (stateCode == ((int)CStateType.POWERUP))
-            //    return new PowerUp(param.Name, param.Value, param.Param3);
+            else if (stateCode == CStateType.POWERUP.VALUE)
+                return new PowerUp(dto);
             //else if (stateCode == ((int)CStateType.DODGEUP))
             //    return new DodgeUp(param.Name, param.Value, param.Param3);
             //else if (stateCode == ((int)CStateType.CRITICALUP))

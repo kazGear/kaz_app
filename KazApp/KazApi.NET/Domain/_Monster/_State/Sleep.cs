@@ -14,7 +14,10 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Sleep(StateDTO dto) : base(dto) { }
+        public Sleep(StateDTO dto) : base(dto) 
+        {
+            base.Activate = true;
+        }
 
         /// <summary>
         /// コンストラクタ
@@ -23,6 +26,7 @@ namespace KazApi.Domain._Monster._State
               : base(name, shortName, stateType, cancelRate)
         {
             StateType = CStateType.SLEEP.VALUE;
+            base.Activate = true;
         }
 
         public override IState DeepCopy()
@@ -30,14 +34,12 @@ namespace KazApi.Domain._Monster._State
 
         public override void DisabledLogging(IMonster monster)
         {
-            bool disableState = true;
-
-            _Log.Logging(new BattleMetaData(
+            base._log.Logging(new BattleMetaData(
                 monster.MonsterId,
-                disableState,
+                base.disabledState,
                 base.ShortName,
-                $"{monster.MonsterName}は目覚めた！"));
-
+                $"{monster.MonsterName}は目覚めた！")
+                );
         }
 
         /// <summary>
@@ -47,11 +49,12 @@ namespace KazApi.Domain._Monster._State
         {
             int effectTime = 1400;
 
-            _Log.Logging(new BattleMetaData(
+            base._log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 STATE_TYPE2,
                 effectTime,
-                $"{monster.MonsterName}は眠っている Zzz ..."));
+                $"{monster.MonsterName}は眠っている Zzz ...")
+                );
         }
     }
 }
