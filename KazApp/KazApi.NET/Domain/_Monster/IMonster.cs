@@ -93,6 +93,10 @@ namespace KazApi.Domain._Monster
         /// </summary>
         public void UpdateStatus(ISet<IState> changedStatus) => _status = changedStatus;
         /// <summary>
+        /// スキルを更新する
+        /// </summary>
+        public void UpdateSkills(IList<ISkill> changedSkills) => _skills = changedSkills;
+        /// <summary>
         /// ダメージを受ける
         /// </summary>
         public void AcceptDamage(int damage) => Hp -= damage;
@@ -162,7 +166,7 @@ namespace KazApi.Domain._Monster
         /// </summary>
         public void StateImpact()
         {
-            // 変化したコレクションの操作は例外となる > 変化していないコレクションを操作して回避
+            // 変化したコレクションの操作は例外となる > 新しいコレクションを操作して回避
             IEnumerable<IState> copyStatus = new List<IState>(_status);
             foreach (IState state in copyStatus) state.Impact(this);
         }

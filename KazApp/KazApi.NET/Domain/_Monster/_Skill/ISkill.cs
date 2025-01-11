@@ -22,6 +22,7 @@ namespace KazApi.Domain._Monster._Skill
         public int StateType { get; protected set; }
         public int TargetType { get; protected set; }
         public int Weight { get; protected set; }
+        public double DefaultCritical { get; protected set; }
         public double Critical { get; protected set; }
         public double HitRate { get; protected set; }
         public int EffectTime { get; protected set; }
@@ -29,7 +30,7 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ISkill(SkillDTO dto, string effectFilePath)
+        public ISkill(SkillDTO dto)
         {
             SkillId = dto.SkillId;
             SkillName = dto.SkillName;
@@ -40,6 +41,7 @@ namespace KazApi.Domain._Monster._Skill
             StateType = dto.StateType;
             TargetType = dto.TargetType;
             Weight = dto.Weight;
+            DefaultCritical = dto.DefaultCritical;
             Critical = dto.Critical;
             HitRate = dto.HitRate;
             EffectTime = dto.EffectTime;
@@ -65,6 +67,14 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         protected void InitPower()
             => Attack = _initialAttack;
+
+        /// <summary>
+        /// クリティカル率を変更する
+        /// </summary>
+        /// <param name="newRate"></param>
+        public void SetCritical(double newRate)
+            => Critical = newRate;
+
         /// <summary>
         /// 弱点属性によるダメージの算出
         /// </summary>

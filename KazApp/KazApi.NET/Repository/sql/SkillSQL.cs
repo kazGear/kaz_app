@@ -16,6 +16,7 @@
                      , target_type  AS TargetType
                      , attack       AS Attack
                      , weight       AS Weight
+                     , critical     AS DefaultCritical
                      , critical     AS Critical
                      , hit_rate     AS HitRate
                      , effect_time  AS EffectTime

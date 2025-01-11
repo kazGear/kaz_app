@@ -12,8 +12,8 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public RateDamageSkill(SkillDTO dto, string effectFilePath)
-                        : base(dto, effectFilePath) { }
+        public RateDamageSkill(SkillDTO dto)
+                        : base(dto) { }
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {

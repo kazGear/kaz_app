@@ -1,34 +1,65 @@
-﻿//using KazApi.Common._Const;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Monster._Skill;
+using KazApi.Domain.DTO;
 
-//namespace KazApi.Domain._Monster._State
-//{
-//    /// <summary>
-//    /// クリティカル率アップ状態クラス
-//    /// </summary>
-//    public class CriticalUp : IState
-//    {
-//        /// <summary>
-//        /// コンストラクタ
-//        /// </summary>
-//        public CriticalUp(string name, int stateType, int maxDuration)
-//                   : base(name, stateType, maxDuration)
-//        {
-//            base.StateType = ((int)CStateType.CRITICALUP);
-//        }
+namespace KazApi.Domain._Monster._State
+{
+    /// <summary>
+    /// クリティカル率アップ状態クラス
+    /// </summary>
+    public class CriticalUp : IState, IPositiveSkill
+    {
+        private static readonly double CRITICAL_GAIN = 4.0;
 
-//        public override IState DeepCopy()
-//            => new CriticalUp(base.Name, base.StateType, base.MaxDuration);
+        public CriticalUp(StateDTO dto) : base(dto) { }
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public CriticalUp(string name, string shortName, int stateType, double cancelRate)
+                   : base(name, shortName, stateType, cancelRate) { }
 
-//        public override void DisabledLogging(IMonster monster)
-//            => throw new NotImplementedException();
+        public override IState DeepCopy()
+            => new CriticalUp(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-//        /// <summary>
-//        /// 
-//        /// </summary>
-//        public override void Impact(IMonster monster)
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
+        public override void DisabledLogging(IMonster me)
+        {
+            IList<ISkill> result = new List<ISkill>();
 
-//}
+            // 全スキルのクリティカル率を戻す
+            foreach (ISkill skill in me.CurrentSkills())
+            {
+                skill.SetCritical(skill.DefaultCritical);
+                result.Add(skill);
+            }
+            me.UpdateSkills(result);
+
+            base._log.Logging(new BattleMetaData(
+                me.MonsterId,
+                base._disabledState,
+                base.ShortName,
+                $"{me.MonsterName}のクリティカル率が元に戻った。")
+                );
+        }
+
+
+        /// <summary>
+        /// クリティカル率を上昇させる
+        /// </summary>
+        public override void Impact(IMonster me)
+        {
+            IList<ISkill> result = new List<ISkill>();
+
+            // 全スキルのクリティカル率を補正
+            foreach (ISkill skill in me.CurrentSkills())
+            {
+                if (skill.Critical == skill.DefaultCritical)
+                {
+                    skill.SetCritical(skill.Critical * CRITICAL_GAIN);
+                }
+                result.Add(skill);
+            }
+            me.UpdateSkills(result);
+        }
+    }
+
+}

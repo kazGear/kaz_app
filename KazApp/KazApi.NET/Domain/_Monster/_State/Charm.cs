@@ -33,7 +33,7 @@ namespace KazApi.Domain._Monster._State
         {
             base._log.Logging(new BattleMetaData(
                 monster.MonsterId,
-                base.disabledState,
+                base._disabledState,
                 base.ShortName,
                 $"{monster.MonsterName}は我に返った！")
                 );

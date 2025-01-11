@@ -3,7 +3,6 @@ using KazApi.Common._Log;
 using KazApi.Domain._Const;
 using KazApi.Domain._GameSystem;
 using KazApi.Domain.DTO;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace KazApi.Domain._Monster._Skill
 {
@@ -15,8 +14,8 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public DamageSkill(SkillDTO dto, string effectFilePath)
-                    : base(dto, effectFilePath) { }
+        public DamageSkill(SkillDTO dto)
+                    : base(dto) { }
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {
@@ -56,8 +55,8 @@ namespace KazApi.Domain._Monster._Skill
             int damage = URandom.RandomChangeInt(Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE.VALUE);
 
             // 弱点等のダメージ欲正
-            damage = WeeknessDamage(this, enemy, damage);
-            damage = CriticalDamage(this, damage);
+            damage = base.WeeknessDamage(this, enemy, damage);
+            damage = base.CriticalDamage(this, damage);
 
             HitLogging(enemy, damage);
             enemy.AcceptDamage(damage);

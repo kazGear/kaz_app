@@ -67,7 +67,7 @@ namespace KazApi.Domain._Factory
         /// </summary>
         private void CreateDamageSkill(SkillDTO skill)
         {
-            ISkill result = new DamageSkill(skill, ""); // TODO エフェクト画像のファイルパス 
+            ISkill result = new DamageSkill(skill); // TODO エフェクト画像のファイルパス 
             _skills.Add(result);
         }
         /// <summary>
@@ -75,7 +75,7 @@ namespace KazApi.Domain._Factory
         /// </summary>
         private void CreateStateSkill(SkillDTO skill)
         {
-            ISkill result = new StateSkill(skill, "", _stateFactory.Create(skill.StateType));
+            ISkill result = new StateSkill(skill, _stateFactory.Create(skill.StateType));
             // TODO エフェクト画像のファイルパス
             _skills.Add(result);
         }
@@ -84,7 +84,7 @@ namespace KazApi.Domain._Factory
         /// </summary>
         private void CreateHealSkill(SkillDTO skill)
         {
-            ISkill result = new HealSkill(skill, ""); // TODO エフェクト画像のファイルパス
+            ISkill result = new HealSkill(skill); // TODO エフェクト画像のファイルパス
             _skills.Add(result);
         }
         /// <summary>
@@ -92,7 +92,7 @@ namespace KazApi.Domain._Factory
         /// </summary>
         private void CreateNotMoveSkill(SkillDTO skill)
         {
-            ISkill result = new NoMoveSkill(skill, ""); // TODO エフェクト画像のファイルパス
+            ISkill result = new NoMoveSkill(skill); // TODO エフェクト画像のファイルパス
             _skills.Add(result);
         }
         /// <summary>
@@ -100,7 +100,7 @@ namespace KazApi.Domain._Factory
         /// </summary>
         private void CreateRatioAttackSkill(SkillDTO skill)
         {
-            ISkill result = new RateDamageSkill(skill, ""); // TODO エフェクト画像のファイルパス
+            ISkill result = new RateDamageSkill(skill); // TODO エフェクト画像のファイルパス
             _skills.Add(result);
         }
         /// <summary>
@@ -108,7 +108,7 @@ namespace KazApi.Domain._Factory
         /// </summary>
         private void CreateDeadSkill(SkillDTO skill)
         {
-            ISkill result = new DeadSkill(skill, ""); // TODO エフェクト画像のファイルパス
+            ISkill result = new DeadSkill(skill); // TODO エフェクト画像のファイルパス
             _skills.Add(result);
         }
     }

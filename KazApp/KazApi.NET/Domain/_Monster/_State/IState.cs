@@ -9,7 +9,7 @@ namespace KazApi.Domain._Monster._State
     public abstract class IState
     {
         protected readonly ILog<BattleMetaData> _log = new BattleLogger();
-        protected readonly bool disabledState = true;
+        protected readonly bool _disabledState = true;
 
         public string Name { get; protected set; }
         public string ShortName { get; protected set; }

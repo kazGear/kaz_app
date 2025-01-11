@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using KazApi.Domain._Monster._Skill;
+using NuGet.Protocol.Plugins;
 
 namespace KazApi.Domain.DTO
 {
@@ -31,7 +32,10 @@ namespace KazApi.Domain.DTO
         
         [JsonPropertyName("Weight")]
         public int Weight { get; set; }
-        
+
+        [JsonPropertyName("DefaultCritical")]
+        public double DefaultCritical { get; set; }
+
         [JsonPropertyName("Critical")]
         public double Critical { get; set; }
 
@@ -43,10 +47,10 @@ namespace KazApi.Domain.DTO
 
         [JsonPropertyName("EffectTime")]
         public int EffectTime { get; set; } = 1000;
-        
+
         /// <summary>
         /// コンストラクタ
-        /// デシリアライズ用
+        /// デシリアライズのため必須
         /// </summary>
         public SkillDTO() { }
         /// <summary>
@@ -62,6 +66,7 @@ namespace KazApi.Domain.DTO
             TargetType = model.TargetType;
             Attack = model.Attack;
             Weight = model.Weight;
+            DefaultCritical = model.DefaultCritical;
             Critical = model.Critical;
             HitRate = model.HitRate;
             Remarks = "";

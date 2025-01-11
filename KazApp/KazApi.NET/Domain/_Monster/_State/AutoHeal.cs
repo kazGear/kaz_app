@@ -30,7 +30,7 @@ namespace KazApi.Domain._Monster._State
         {
             base._log.Logging(new BattleMetaData(
                 me.MonsterId,
-                base.disabledState,
+                base._disabledState,
                 base.ShortName,
                 $"{me.MonsterName}の自然治癒力がなくなった。")
                 );

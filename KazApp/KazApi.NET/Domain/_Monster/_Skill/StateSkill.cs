@@ -19,8 +19,8 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public StateSkill(SkillDTO dto, string effectFilePath, IState state)
-                   : base(dto, effectFilePath)
+        public StateSkill(SkillDTO dto, IState state)
+                   : base(dto)
         {
             _state = state;
         }

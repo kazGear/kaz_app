@@ -10,8 +10,8 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public NoMoveSkill(SkillDTO dto, string effectFilePath)
-                    : base(dto, effectFilePath) { }
+        public NoMoveSkill(SkillDTO dto)
+                    : base(dto) { }
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {

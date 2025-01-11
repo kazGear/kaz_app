@@ -46,6 +46,7 @@ export interface SkillDTO {
     TargetType: number;
     Attack: number;
     Weight: number;
+    DefaultCritical: bigint;
     Critical: bigint;
     EffectTime: number;
     Remarks?: string;

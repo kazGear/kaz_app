@@ -49,7 +49,7 @@ namespace KazApi.Domain.DTO
 
         /// <summary>
         /// コンストラクタ
-        /// デシリアライズ用
+        /// デシリアライズのため必須
         /// </summary>
         public MonsterDTO() { }
         /// <summary>

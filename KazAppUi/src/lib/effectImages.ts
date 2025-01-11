@@ -48,6 +48,7 @@ import effect47 from "../images/effects/effect47.webp";
 import effect48 from "../images/effects/effect48.gif";
 import effect49 from "../images/effects/effect49.webp";
 import effect52 from "../images/effects/effect52.webp";
+import effect54 from "../images/effects/effect54.webp";
 import effect58 from "../images/effects/effect58.gif";
 import effect59 from "../images/effects/effect59.gif";
 import effect60 from "../images/effects/effect60.gif";
@@ -123,7 +124,7 @@ const effectImages = (effectId: string): string => {
     effectImages["skill051"] = null;
     effectImages["skill052"] = effect52;
     effectImages["skill053"] = null;
-    effectImages["skill054"] = null;
+    effectImages["skill054"] = effect54;
     effectImages["skill055"] = null;
     effectImages["skill056"] = null;
     effectImages["skill057"] = null;

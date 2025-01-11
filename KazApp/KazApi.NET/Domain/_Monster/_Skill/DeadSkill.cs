@@ -16,8 +16,8 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public DeadSkill(SkillDTO dto, string effectFilePath)
-                  : base(dto, effectFilePath) { }
+        public DeadSkill(SkillDTO dto)
+                  : base(dto) { }
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {

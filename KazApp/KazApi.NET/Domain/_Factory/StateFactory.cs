@@ -45,7 +45,7 @@ namespace KazApi.Domain._Factory
             //    return new Slow(param.Name, param.Value, param.Param3);
             else if (stateCode == CStateType.POWERUP.VALUE)
                 return new PowerUp(param.Name, param.ShortName, param.Value, param.Param3);
-            //    return new PowerUp(param.Name, param.Value, param.Param3);
+
             else if (stateCode == CStateType.DODGEUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.DODGEUP}");
@@ -53,11 +53,8 @@ namespace KazApi.Domain._Factory
             }
             //    return new DodgeUp(param.Name, param.Value, param.Param3);
             else if (stateCode == CStateType.CRITICALUP.VALUE)
-            {
-                Console.WriteLine($"対応していないコードです：{CStateType.CRITICALUP}");
-                return new None(param.Name, param.ShortName, param.Value, param.Param3);
-            }
-            //    return new CriticalUp(param.Name, param.Value, param.Param3);
+                return new CriticalUp(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.AUTOHEAL.VALUE)
                 return new AutoHeal(param.Name, param.ShortName, param.Value, param.Param3);
             else
@@ -86,8 +83,8 @@ namespace KazApi.Domain._Factory
                 return new PowerUp(dto);
             //else if (stateCode == ((int)CStateType.DODGEUP))
             //    return new DodgeUp(param.Name, param.Value, param.Param3);
-            //else if (stateCode == ((int)CStateType.CRITICALUP))
-            //    return new CriticalUp(param.Name, param.Value, param.Param3);
+            else if (stateCode == CStateType.CRITICALUP.VALUE)
+                return new CriticalUp(dto);
             else if (stateCode == CStateType.AUTOHEAL.VALUE)
                 return new AutoHeal(dto);
             else
