@@ -93,31 +93,5 @@ namespace KazApi.Controller.Service
             }
             return true;
         }
-
-        /// <summary>
-        /// 勝敗結果を記録（ユーザー）
-        /// </summary>
-        public bool UpdateUserResults(bool hit, int betGil, decimal betRate, string loginId)
-        {
-            try
-            {
-                var param = new
-                {
-                    login_id         = loginId,
-                    wins             = hit ? 1 : 0,
-                    losses           = hit ? 0 : 1,
-                    cash             = hit ? Math.Floor(betGil * betRate) : (-1 * betGil),
-                    wins_get_cash    = hit ? Math.Floor(betGil * betRate) : 0,
-                    losses_lost_cash = hit ? 0 : betGil,
-                };
-                _posgre.Execute(BattleSQL.InsertUserResult(), param);
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
     }
 }

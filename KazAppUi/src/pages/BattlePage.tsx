@@ -100,7 +100,7 @@ const BattlePage = () => {
         const moveResult: BattleResults = await goToServerWithJson(
             monsters, URLS.BATTLE_NEXT_TURN
        );
-       console.log(moveResult.Monsters); // tmp
+       console.log(moveResult.Monsters); // tmp //////////////////////////
        setMonsters([...moveResult.Monsters]); console.log(moveResult.Monsters);
        setBattleLog([...moveResult.BattleLog]);
        setBattleStarted(true);
@@ -121,12 +121,12 @@ const BattlePage = () => {
         setMonsterCount(monsterCount - 1);
         setBattleStarted(false);
 
-        // 勝敗判定
+        // モンスターの戦績を記録
         const lastLog: MetaDataDTO | undefined = shortLog.pop();
-
         insertBattleResult({
             monsters, lastLog, setResultLog, setShowResultDialog, insertResult
         });
+        // ユーザの成績を記録
         if (!isEmpty(lastLog) && !isEmpty(lastLog!.WinnerMonsterId)) {
             const newShops: ShopDTO[] = await goToServer(
                 `${URLS.RECORD_USER_RESULT}?betMonsterId=${betMonster?.MonsterId}

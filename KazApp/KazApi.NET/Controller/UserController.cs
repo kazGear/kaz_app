@@ -12,11 +12,13 @@ namespace KazApi.Controller
     public class UserController : ControllerBase
     {
         private readonly UserService _service;
+        private readonly ShopService _shopService;
         private readonly IDatabase _posgre;
 
         public UserController(IConfiguration configuration)
         {
             _service = new UserService(configuration);
+            _shopService = new ShopService(configuration);
             _posgre = new PostgreSQL(configuration);
         }
 
@@ -128,6 +130,54 @@ namespace KazApi.Controller
         {
             LittleDTO<int> result = _service.SelectMonsterCount(loginId);
             return JsonConvert.SerializeObject($"{result.Param1} / {result.Param2}");
+        }
+
+        /// <summary>
+        /// 勝敗結果を記録（ユーザー）
+        /// ショップ開放の確認
+        /// </summary>
+        [HttpPost("api/user/recordUserResults")]
+        public ActionResult<string> RecordUserResults(
+            [FromQuery] string betMonsterId,
+            [FromQuery] int betGil,
+            [FromQuery] decimal betRate,
+            [FromQuery] string winningMonsterId,
+            [FromQuery] string loginId)
+        {
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(winningMonsterId))
+                        return Ok(new { message = "No action required." });
+
+                    // クレンジング
+                    loginId = loginId.Trim();
+                    betMonsterId = betMonsterId.Trim();
+                    winningMonsterId = winningMonsterId.Trim();
+
+                    // 予想的中か
+                    bool hit = false;
+                    if (betMonsterId == winningMonsterId) hit = true;
+
+                    // 各種登録
+                    _service.UpdateUserResults(hit, betGil, betRate, loginId);
+
+                    IEnumerable<ShopDTO> InsertUsableShop = _shopService.ExistsUsableShop(loginId);
+                    if (InsertUsableShop.Count() > 0)
+                    {
+                        _shopService.InsertUsableShop(loginId, InsertUsableShop);
+                    }
+
+                    // 処理完了
+                    transaction.Complete();
+                    return JsonConvert.SerializeObject(InsertUsableShop);
+                }
+                catch (Exception)
+                {
+                    return StatusCode(500, $"Error resist user result.");
+                }
+            }
         }
     }
 }
