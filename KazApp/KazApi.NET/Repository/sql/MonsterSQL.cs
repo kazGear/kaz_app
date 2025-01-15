@@ -13,9 +13,10 @@
                      , m.monster_type AS MonsterType
                      , m.hp           AS Hp
                      , m.hp           AS MaxHp
-                     , m.attack       AS DefaultAttack
                      , m.attack       AS Attack
+                     , m.attack       AS DefaultAttack
                      , m.speed        AS Speed
+                     , m.speed        AS DefaultSpeed
                      , m.week         AS Week
                      , max(m.hp)
                          + max(m.attack) * 20

@@ -47,6 +47,8 @@ import effect46 from "../images/effects/effect46.gif";
 import effect47 from "../images/effects/effect47.webp";
 import effect48 from "../images/effects/effect48.gif";
 import effect49 from "../images/effects/effect49.webp";
+import effect50 from "../images/effects/effect50.webp";
+import effect51 from "../images/effects/effect51.webp";
 import effect52 from "../images/effects/effect52.webp";
 import effect54 from "../images/effects/effect54.webp";
 import effect58 from "../images/effects/effect58.gif";
@@ -61,8 +63,6 @@ import effect66 from "../images/effects/effect66.webp";
 import effect67 from "../images/effects/effect67.webp";
 import effect68 from "../images/effects/effect68.gif";
 import effect69 from "../images/effects/effect69.gif";
-
-import stateType2 from "../images/effects/stateType2.gif"
 
 interface EffectDict {
     [key: string]: string | null;
@@ -120,8 +120,8 @@ const effectImages = (effectId: string): string => {
     effectImages["skill047"] = effect47;
     effectImages["skill048"] = effect48;
     effectImages["skill049"] = effect49;
-    effectImages["skill050"] = null;
-    effectImages["skill051"] = null;
+    effectImages["skill050"] = effect50;
+    effectImages["skill051"] = effect51;
     effectImages["skill052"] = effect52;
     effectImages["skill053"] = null;
     effectImages["skill054"] = effect54;
@@ -140,8 +140,6 @@ const effectImages = (effectId: string): string => {
     effectImages["skill067"] = effect67;
     effectImages["skill068"] = effect68;
     effectImages["skill069"] = effect69;
-
-    effectImages["stateType2"] = stateType2;
 
     return effectImages[effectId] ?? "";
 }

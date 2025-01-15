@@ -1,33 +1,68 @@
-﻿//using KazApi.Common._Const;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Const;
+using KazApi.Domain.DTO;
+using System.Diagnostics.Metrics;
 
-//namespace KazApi.Domain._Monster._State
-//{
-//    /// <summary>
-//    /// スロー状態クラス
-//    /// </summary>
-//    public class Slow : IState
-//    {
-//        /// <summary>
-//        /// コンストラクタ
-//        /// </summary>
-//        public Slow(string name, int stateType, int maxDuration) 
-//             : base(name, stateType, maxDuration)
-//        {
-//            base.StateType = ((int)CStateType.SLOW);
-//        }
+namespace KazApi.Domain._Monster._State
+{
+    /// <summary>
+    /// スロー状態クラス
+    /// </summary>
+    public class Slow : IState
+    {
+        private static readonly double DOWN_RATE = 0.5;
 
-//        public override IState DeepCopy()
-//            => new Slow(base.Name, base.StateType, base.MaxDuration);
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public Slow(StateDTO dto) : base(dto)
+        {
+            base.Activate = true;
+        }
+        
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public Slow(string name, string shortName, int stateType, double cancelRate) 
+             : base(name, shortName, stateType, cancelRate)
+        {
+            base.StateType = CStateType.SLOW.VALUE;
+            base.Activate = true;
+        }
 
-//        public override void DisabledLogging(IMonster monster)
-//            => throw new NotImplementedException();
+        public override IState DeepCopy()
+            => new Slow(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-//        /// <summary>
-//        /// 
-//        /// </summary>
-//        public override void Impact(IMonster monster)
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-//}
+        public override void DisabledLogging(IMonster me)
+        {
+            me.InitSpeed();
+
+            base._log.Logging(new BattleMetaData(
+                me.MonsterId,
+                base._disabledState,
+                base.ShortName,
+                $"{me.MonsterName}のスロー状態が解除された。")
+                );
+        }
+
+        /// <summary>
+        /// モンスターの行動速度を遅くする
+        /// </summary>
+        public override void Impact(IMonster me)
+        {
+            if (me.Speed == me.DefaultSpeed)
+            {
+                double downedSpeed = (double)me.Speed * DOWN_RATE;
+                me.SetSpeed((int)downedSpeed);
+
+                base._log.Logging(new BattleMetaData(
+                    me.MonsterId,
+                    $"{me.MonsterName}はスロー状態になった。")
+                    );
+            }
+
+
+
+        }
+    }
+}

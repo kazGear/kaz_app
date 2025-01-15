@@ -43,7 +43,7 @@ namespace KazApi.Domain._Monster._State
             if (me.Attack == me.DefaultAttack)
             {
                 double gainerAttack = (double)me.Attack * ATTACK_GAIN;
-                me.ChangeAttack((int)gainerAttack);
+                me.SetAttack((int)gainerAttack);
 
                 base._log.Logging(new BattleMetaData(
                     me.MonsterId,

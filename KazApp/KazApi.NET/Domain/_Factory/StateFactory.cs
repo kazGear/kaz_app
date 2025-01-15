@@ -38,14 +38,9 @@ namespace KazApi.Domain._Factory
             else if (stateCode == CStateType.CHARM.VALUE)
                 return new Charm(param.Name, param.ShortName, param.Value, param.Param3);
             else if (stateCode == CStateType.SLOW.VALUE)
-            {
-                Console.WriteLine($"対応していないコードです：{CStateType.SLOW}");
-                return new None(param.Name, param.ShortName, param.Value, param.Param3);
-            }
-            //    return new Slow(param.Name, param.Value, param.Param3);
+                return new Slow(param.Name, param.ShortName, param.Value, param.Param3);
             else if (stateCode == CStateType.POWERUP.VALUE)
                 return new PowerUp(param.Name, param.ShortName, param.Value, param.Param3);
-
             else if (stateCode == CStateType.DODGEUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.DODGEUP}");
@@ -54,7 +49,6 @@ namespace KazApi.Domain._Factory
             //    return new DodgeUp(param.Name, param.Value, param.Param3);
             else if (stateCode == CStateType.CRITICALUP.VALUE)
                 return new CriticalUp(param.Name, param.ShortName, param.Value, param.Param3);
-
             else if (stateCode == CStateType.AUTOHEAL.VALUE)
                 return new AutoHeal(param.Name, param.ShortName, param.Value, param.Param3);
             else
@@ -77,8 +71,8 @@ namespace KazApi.Domain._Factory
                 return new Sleep(dto);
             else if (stateCode == CStateType.CHARM.VALUE)
                 return new Charm(dto);
-            //else if (stateCode == ((int)CStateType.SLOW))
-            //    return new Slow(param.Name, param.Value, param.Param3);
+            else if (stateCode == CStateType.SLOW.VALUE)
+                return new Slow(dto);
             else if (stateCode == CStateType.POWERUP.VALUE)
                 return new PowerUp(dto);
             //else if (stateCode == ((int)CStateType.DODGEUP))

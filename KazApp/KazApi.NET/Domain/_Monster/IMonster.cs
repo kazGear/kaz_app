@@ -15,16 +15,16 @@ namespace KazApi.Domain._Monster
         protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
         protected ISet<IState> _status = new HashSet<IState>();
         protected IList<ISkill> _skills = new List<ISkill>();
-        protected int _defaultAttack;
 
         public string MonsterId { get; protected set; }
         public string MonsterName { get; protected set; }
         public int MonsterType { get; protected set; }
         public int Hp { get; protected set; }
         public int MaxHp { get; protected set; } = 0;
-        public int DefaultAttack { get; protected set; }
         public int Attack { get; protected set; }
+        public int DefaultAttack { get; protected set; }
         public int Speed { get; protected set; }
+        public int DefaultSpeed { get; protected set; }
         public int Team { get; protected set; }
         public int Week { get; protected set; }
 
@@ -38,10 +38,11 @@ namespace KazApi.Domain._Monster
             MonsterType = dto.MonsterType;
             Hp = dto.Hp;
             if (MaxHp == 0) MaxHp = dto.MaxHp;
-            DefaultAttack = dto.DefaultAttack;
             Attack = dto.Attack;
-            _defaultAttack = dto.Attack;
+            DefaultAttack = dto.DefaultAttack;
             Speed = dto.Speed;
+            DefaultAttack = dto.Attack;
+
             foreach (IState state in status) _status.Add(state);
             foreach (ISkill skill in skills) _skills.Add(skill);
             Team = CTeam.UNKNOWN.VALUE;
@@ -107,11 +108,19 @@ namespace KazApi.Domain._Monster
         /// <summary>
         /// 攻撃力を変更する
         /// </summary>
-        public void ChangeAttack(int attack) => Attack = attack;
+        public void SetAttack(int attack) => Attack = attack;
+        /// <summary>
+        /// スピードを変更する
+        /// </summary>
+        public void SetSpeed(int speed) => Speed = speed;
         /// <summary>
         /// 攻撃力を戻す
         /// </summary>
         public void InitAttack() => Attack = DefaultAttack;
+        /// <summary>
+        /// スピードを戻す
+        /// </summary>
+        public void InitSpeed() => Speed = DefaultSpeed;
         /// <summary>
         /// 状態異常になる
         /// </summary>
