@@ -8,7 +8,8 @@
         public static string SelectMonsters()
         {
             string SQL = @"
-                SELECT m.monster_id   AS MonsterId 
+                SELECT
+                       m.monster_id   AS MonsterId 
                      , m.monster_name AS MonsterName
                      , m.monster_type AS MonsterType
                      , m.hp           AS Hp
@@ -25,20 +26,31 @@
                          + max(m.speed) * 10
                          + sum(s.weight) * 20
                          + sum(s.critical * 100) AS BetScore
-                  FROM m_monster AS m 
-            INNER JOIN m_monster_skills AS ms
+                  FROM
+                       m_monster AS m 
+            INNER JOIN
+                       m_monster_skills AS ms
                     ON ms.monster_id = m.monster_id 
-            INNER JOIN m_skill AS s
+
+            INNER JOIN
+                       m_skill AS s
                     ON s.skill_id = ms.skill_id
-                 WHERE EXISTS 
-                    (
-                        SELECT *
-                          FROM t_my_item AS i
-                         WHERE login_id = :login_id
+
+                 WHERE
+                       EXISTS 
+                      (
+                        SELECT
+                               *
+                          FROM
+                               t_my_item AS i
+                         WHERE
+                               login_id = :login_id
                            AND i.item_id = 'monsterType' || lpad(m.monster_type::text, 3, '0')
-                    )
-              GROUP BY m.monster_id
-              ORDER BY m.monster_id ASC ;
+                      )
+              GROUP BY
+                       m.monster_id
+              ORDER BY
+                       m.monster_id ASC ;
             ";
             return SQL;
         }
@@ -46,10 +58,12 @@
         public static string SelectMonsterSkill()
         {
             string SQL = @"
-                    SELECT monster_id AS MonsterId
+                    SELECT
+                           monster_id AS MonsterId
                          , skill_id   AS SkillId 
                          , disabled   AS Disabled
-                      FROM m_monster_skills ;
+                      FROM
+                           m_monster_skills ;
                 ";
             return SQL;
         }

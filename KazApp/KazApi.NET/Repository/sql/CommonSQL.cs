@@ -10,9 +10,12 @@ namespace KazApi.Repository.sql
         public static string UpdateUserImage()
         {
             string SQL = @"
-                UPDATE m_user
-                   SET user_image = @image
-                 WHERE login_id = @login_id ;
+                UPDATE
+                       m_user
+                   SET
+                       user_image = @image
+                 WHERE
+                       login_id = @login_id ;
             ";
             return SQL;
         }
@@ -20,15 +23,18 @@ namespace KazApi.Repository.sql
         public static string FetchElementCode()
         {
             string SQL = $@"
-                SELECT code_id AS CodeId
+                SELECT
+                       code_id AS CodeId
                      , value   AS VALUE
                      , name    AS Name
                      , param1  AS Param1
                      , param2  AS Param2
                      , param3  AS Param3
                      , remarks AS Remarks
-                  FROM m_code
-                 WHERE code_id = '{CCodeType.ELEMENT.VALUE}' ;
+                  FROM
+                       m_code
+                 WHERE
+                       code_id = '{CCodeType.ELEMENT.VALUE}' ;
             ";
             return SQL;
         }

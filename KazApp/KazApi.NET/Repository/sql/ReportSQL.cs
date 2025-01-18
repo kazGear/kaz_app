@@ -10,11 +10,15 @@ namespace KazApi.Repository.sql
         public static string SelectMonsterTypes()
         {
             string SQL = $@"
-                SELECT value AS MonsterTypeId
+                SELECT
+                       value AS MonsterTypeId
                      , name  AS MonsterTypeName
-                  FROM m_code
-                 WHERE code_id = @code_id
-              ORDER BY MonsterTypeName ASC
+                  FROM
+                       m_code
+                 WHERE
+                       code_id = @code_id
+              ORDER BY
+                       MonsterTypeName ASC
             ";
             return SQL;
         }
@@ -25,17 +29,23 @@ namespace KazApi.Repository.sql
             string ORDER_BY = PartialOrderByMonsterReport(param.sort_type , param.is_asc_order);
 
             string SQL = $@"
-                SELECT m.monster_id          AS MonsterId
+                SELECT
+                       m.monster_id          AS MonsterId
                      , max(m.monster_name)   AS MonsterName
                      , count(*)              AS BattleCount
                      , sum(CASE WHEN is_win = TRUE
                                 THEN 1
                                 ELSE 0 END ) AS Wins
-                  FROM m_monster AS m
-            INNER JOIN t_battle_result AS br
+                  FROM
+                       m_monster AS m
+            INNER JOIN
+                       t_battle_result AS br
                     ON m.monster_id = br.monster_id
+
                 {WHERE}
-              GROUP BY m.monster_id
+
+              GROUP BY
+                       m.monster_id
              {ORDER_BY} ;
             ";
 
@@ -91,7 +101,8 @@ namespace KazApi.Repository.sql
             string AND_fromTo = PartialBattleReportFromTo(from, to);
 
             string SQL = $@"
-                SELECT DENSE_RANK() OVER (
+                SELECT
+                       DENSE_RANK() OVER (
                            ORDER BY battle_end_date ASC, battle_end_time ASC
                        )                 AS BattleId
                      , b.battle_end_date AS BattleEndDate 
@@ -100,21 +111,32 @@ namespace KazApi.Repository.sql
                      , b.monster_id      AS MonsterId
                      , m.monster_name    AS MonsterName 
                      , b.is_win          AS IsWin
-                  FROM t_battle_result AS b
-            INNER JOIN m_monster AS m
+                  FROM
+                       t_battle_result AS b
+            INNER JOIN
+                       m_monster AS m
                     ON b.monster_id = m.monster_id
-                 WHERE EXISTS 
-                    (
+
+                 WHERE
+                       EXISTS 
+                      (
                         SELECT
-                          FROM t_battle_result AS br
-                         WHERE b.battle_end_date = br.battle_end_date
+                               *
+                          FROM
+                               t_battle_result AS br
+                         WHERE
+                               b.battle_end_date = br.battle_end_date
                            AND b.battle_end_time = br.battle_end_time
-                      GROUP BY battle_end_date
+
+                      GROUP BY
+                               battle_end_date
                              , battle_end_time 
                        {HAVING}
-                    )
+                      )
                   {AND_fromTo}
-              ORDER BY BattleEndDate ASC 
+
+              ORDER BY
+                       BattleEndDate ASC 
                      , BattleEndTime ASC 
                      , Serial ASC ;
             ";

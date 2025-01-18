@@ -8,7 +8,8 @@
         public static string SelectCode()
         {
             string SQL = @"
-                SELECT code_id      AS CodeId
+                SELECT 
+                       code_id      AS CodeId
                      , value        AS Value
                      , name         AS Name
                      , short_name   AS ShortName
@@ -16,7 +17,8 @@
                      , param2       AS Param2
                      , param3       AS Param3
                      , remarks      AS Remarks
-                  FROM m_code ;
+                  FROM
+                       m_code ;
             ";
             return SQL;
         }
