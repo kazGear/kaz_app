@@ -10,9 +10,7 @@ namespace KazApi.Domain._Monster._Skill
     /// </summary>
     public abstract class ISkill
     {
-
         protected readonly ILog<BattleMetaData> _log = new BattleLogger();
-        protected readonly URandom _random;
         protected int _initialAttack;
 
         public string SkillId { get; protected set; }
@@ -46,8 +44,6 @@ namespace KazApi.Domain._Monster._Skill
             Critical = dto.Critical;
             HitRate = dto.HitRate;
             EffectTime = dto.EffectTime;
-
-            _random = new URandom();
         }
 
         /// <summary>
@@ -59,7 +55,7 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         public void PowerDown()
         {
-            double allAttackDamage = Attack * _random.RandomDouble(
+            double allAttackDamage = Attack * new URandom().RandomDouble(
                 CSysRate.ALL_ATTACK_ADJUST_MIN.VALUE,
                 CSysRate.ALL_ATTACK_ADJUST_MAX.VALUE
                 );
@@ -99,7 +95,7 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         public int CriticalDamage(ISkill skill, int damage)
         {
-            double randomVal = _random.RandomDouble(0.0, 1.0);
+            double randomVal = new URandom().RandomDouble(0.0, 1.0);
             bool isCritical = randomVal <= skill.Critical;
 
             if (isCritical)
@@ -113,12 +109,12 @@ namespace KazApi.Domain._Monster._Skill
         /// スキルが命中したか判定
         /// true: hit, false: miss
         /// </summary>
-        public bool IsHitSkill(ISkill skill)
+        public bool IsHitSkill(ISkill skill, IMonster enemy)
         {
             bool result = false;
-            double randVal = _random.RandomDouble(0.0, 1.0);
+            double randVal = new URandom().RandomDouble(0.0, 1.0);
 
-            if (randVal <= skill.HitRate) result = true;
+            if (randVal <= (skill.HitRate - enemy.Dodge)) result = true;
 
             return result;
         }

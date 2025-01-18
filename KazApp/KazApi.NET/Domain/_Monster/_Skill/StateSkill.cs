@@ -56,7 +56,7 @@ namespace KazApi.Domain._Monster._Skill
                 // 単体付与
                 IMonster enemy = BattleSystem.SelectOneEnemy(monsters.ToList());
 
-                if (!IsHitSkill(this)) // 効かないことがある
+                if (!IsHitSkill(this, enemy)) // 効かないことがある
                 {
                     MissLogging(enemy);
                     return;
@@ -68,7 +68,7 @@ namespace KazApi.Domain._Monster._Skill
                 // 全体付与
                 foreach (IMonster enemy in monsters)
                 {
-                    if (!IsHitSkill(this)) // 効かないことがある
+                    if (!IsHitSkill(this, enemy)) // 効かないことがある
                     {
                         MissLogging(enemy);
                         continue;

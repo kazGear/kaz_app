@@ -27,7 +27,7 @@ namespace KazApi.Domain._Monster._Skill
             double rate = 1.0 - enemy.Hp / (double)enemy.MaxHp;
             rate = rate < 0.05 ? 0.05 : rate; // 最低でも５％は効く
 
-            double randomVal = base._random.RandomDouble(0.0, 1.0);
+            double randomVal = new URandom().RandomDouble(0.0, 1.0);
             int deadDamage = 9999;
 
             if (randomVal <= rate)

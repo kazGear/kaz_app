@@ -16,7 +16,9 @@
                      , m.attack       AS Attack
                      , m.attack       AS DefaultAttack
                      , m.speed        AS Speed
-                     , m.speed        AS DefaultSpeed
+                     , m.speed        AS DefaultSpeed                   
+                     , m.dodge        AS Dodge
+                     , m.dodge        AS DefaultDodge
                      , m.week         AS Week
                      , max(m.hp)
                          + max(m.attack) * 20

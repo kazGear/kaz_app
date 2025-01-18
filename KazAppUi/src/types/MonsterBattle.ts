@@ -26,6 +26,8 @@ export interface MonsterDTO {
     DefaultAttack: number;
     Speed: number;
     DefaultSpeed: number;
+    Dodge: number;
+    DefaultDodge: number;
     Week: number;
     Skills: SkillDTO[];
     Status: StateDTO[];

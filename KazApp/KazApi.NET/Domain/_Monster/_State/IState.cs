@@ -1,5 +1,4 @@
-﻿using CSLib.Lib;
-using KazApi.Common._Log;
+﻿using KazApi.Common._Log;
 using KazApi.Domain.DTO;
 
 namespace KazApi.Domain._Monster._State
@@ -10,7 +9,6 @@ namespace KazApi.Domain._Monster._State
     public abstract class IState
     {
         protected readonly ILog<BattleMetaData> _log = new BattleLogger();
-        protected readonly URandom _random;
         protected readonly bool _disabledState = true;
 
         public string Name { get; protected set; }
@@ -31,8 +29,6 @@ namespace KazApi.Domain._Monster._State
             ShortName = shortName;
             StateType = stateType;
             CancelRate = cancelRate;
-
-            _random = new URandom();
         }
         /// <summary>
         /// コンストラクタ
@@ -44,8 +40,6 @@ namespace KazApi.Domain._Monster._State
             StateType = dto.StateType;
             CancelRate = dto.CancelRate;
             Activate = dto.Activate;
-
-            _random = new URandom();
         }
         /// <summary>
         /// 状態有効化、状態解除の可能性が出現

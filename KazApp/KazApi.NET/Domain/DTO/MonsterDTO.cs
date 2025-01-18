@@ -23,18 +23,24 @@ namespace KazApi.Domain.DTO
         [JsonPropertyName("MaxHp")]
         public int MaxHp { get; set; }
 
+        [JsonPropertyName("Attack")]
+        public int Attack { get; set; }
+
         [JsonPropertyName("DefaultAttack")]
         public int DefaultAttack { get; set; }
 
-        [JsonPropertyName("Attack")]
-        public int Attack { get; set; }
+        [JsonPropertyName("Speed")]
+        public int Speed { get; set; }
 
         [JsonPropertyName("DefaultSpeed")]
         public int DefaultSpeed { get; set; }
 
-        [JsonPropertyName("Speed")]
-        public int Speed { get; set; }
-       
+        [JsonPropertyName("Dodge")]
+        public double Dodge { get; set; }
+
+        [JsonPropertyName("DefaultDodge")]
+        public double DefaultDodge { get; set; }
+
         [JsonPropertyName("Week")]
         public int Week { get; set; }
        
@@ -69,6 +75,8 @@ namespace KazApi.Domain.DTO
             DefaultAttack = model.DefaultAttack;
             Speed = model.Speed;
             DefaultSpeed = model.DefaultSpeed;
+            Dodge = model.Dodge;
+            DefaultDodge = model.DefaultDodge;
             Week = model.Week;
         }
     }

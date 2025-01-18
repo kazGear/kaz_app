@@ -14,7 +14,6 @@ namespace KazApi.Domain._Monster
     public abstract class IMonster
     {
         protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
-        protected readonly URandom _random;
         protected ISet<IState> _status = new HashSet<IState>();
         protected IList<ISkill> _skills = new List<ISkill>();
 
@@ -27,6 +26,8 @@ namespace KazApi.Domain._Monster
         public int DefaultAttack { get; protected set; }
         public int Speed { get; protected set; }
         public int DefaultSpeed { get; protected set; }
+        public double Dodge { get; protected set; }
+        public double DefaultDodge { get; protected set; }
         public int Team { get; protected set; }
         public int Week { get; protected set; }
 
@@ -44,13 +45,13 @@ namespace KazApi.Domain._Monster
             DefaultAttack = dto.DefaultAttack;
             Speed = dto.Speed;
             DefaultAttack = dto.Attack;
+            Dodge = dto.Dodge;
+            DefaultDodge = dto.DefaultDodge;
 
             foreach (IState state in status) _status.Add(state);
             foreach (ISkill skill in skills) _skills.Add(skill);
             Team = CTeam.UNKNOWN.VALUE;
             Week = dto.Week;
-
-            _random = new URandom();
         }
         /// <summary>
         /// 行動する
