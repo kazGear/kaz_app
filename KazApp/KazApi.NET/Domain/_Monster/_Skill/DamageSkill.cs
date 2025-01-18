@@ -52,7 +52,7 @@ namespace KazApi.Domain._Monster._Skill
             }
 
             // ダメージ量が多少揺れる
-            int damage = URandom.RandomChangeInt(Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE.VALUE);
+            int damage = base._random.RandomChangeInt(Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE.VALUE);
 
             // 弱点等のダメージ欲正
             damage = base.WeeknessDamage(this, enemy, damage);
@@ -100,7 +100,7 @@ namespace KazApi.Domain._Monster._Skill
         {
             if (base.TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
             {
-                return URandom.RandomBool() ? CTarget.ENEMY_RANDOM.VALUE
+                return base._random.RandomBool() ? CTarget.ENEMY_RANDOM.VALUE
                                             : CTarget.ENEMY_ALL.VALUE;
             }
             return base.TargetType;

@@ -1,4 +1,5 @@
-﻿using KazApi.Common._Log;
+﻿using CSLib.Lib;
+using KazApi.Common._Log;
 using KazApi.Domain._Const;
 using KazApi.Domain._GameSystem;
 using KazApi.Domain._Monster._Skill;
@@ -13,6 +14,7 @@ namespace KazApi.Domain._Monster
     public abstract class IMonster
     {
         protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
+        protected readonly URandom _random;
         protected ISet<IState> _status = new HashSet<IState>();
         protected IList<ISkill> _skills = new List<ISkill>();
 
@@ -47,6 +49,8 @@ namespace KazApi.Domain._Monster
             foreach (ISkill skill in skills) _skills.Add(skill);
             Team = CTeam.UNKNOWN.VALUE;
             Week = dto.Week;
+
+            _random = new URandom();
         }
         /// <summary>
         /// 行動する

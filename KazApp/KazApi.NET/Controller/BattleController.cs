@@ -68,7 +68,7 @@ namespace KazApi.Controller
                 BattleSystem.CalcBetRate(battleMonsters);
 
                 // テスト用モンスターで対戦
-                battleMonsters = UseTestMonsters(monstersDTO);
+                //battleMonsters = UseTestMonsters(monstersDTO);
 
                 return JsonConvert.SerializeObject(battleMonsters); ;
             }

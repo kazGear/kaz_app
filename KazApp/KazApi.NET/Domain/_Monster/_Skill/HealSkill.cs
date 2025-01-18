@@ -18,7 +18,7 @@ namespace KazApi.Domain._Monster._Skill
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {
-            int healPoint = URandom.RandomChangeInt(
+            int healPoint = base._random.RandomChangeInt(
                 (Attack + me.Attack), CSysRate.MAGIC_SKILL_DAMAGE.VALUE
                 );
 

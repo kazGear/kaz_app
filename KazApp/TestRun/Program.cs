@@ -42,10 +42,10 @@ double rateDouble = 0.10;
 double loop = 1000000.0;
 for (int i = 0; i < loop; i++)
 {
-    int randInt = URandom.RandomInt(0, 100);
+    int randInt = new URandom().RandomInt(0, 100);
     if (randInt < rate) hit++;
 
-    double randDouble = URandom.RandomDouble(0.0, 1.0);
+    double randDouble = new URandom().RandomDouble(0.0, 1.0);
     if (randDouble < rateDouble) hitDouble += 1.0;
 }
 Print($"hit(int): {hit}, rate: {(hit / loop) * 100}%");

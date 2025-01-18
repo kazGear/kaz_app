@@ -14,6 +14,7 @@ Console.WriteLine("Auto battle start...");
 IDatabase _posgre = new PostgreSQL();
 BattleService _service = new BattleService();
 MonsterFactory _monsterFactory = new MonsterFactory();
+URandom _random = new URandom();
 
 int battleTimes = 5; // 戦闘回数
 
@@ -38,7 +39,7 @@ for (int i = 0; i < battleTimes; i++)
 
         // 参加モンスター（モンスター数はランダム）
         IEnumerable<MonsterDTO> battleMonstersDTO
-            = BattleSystem.MonsterSelector(monstersDTO, URandom.RandomInt(2, 7));
+            = BattleSystem.MonsterSelector(monstersDTO, _random.RandomInt(2, 7));
 
         // 戦闘用モンスターを構築
         IEnumerable<CodeDTO> stateCodeFromDB =_service.SelectStateCode();

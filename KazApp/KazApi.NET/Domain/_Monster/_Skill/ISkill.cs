@@ -12,6 +12,7 @@ namespace KazApi.Domain._Monster._Skill
     {
 
         protected readonly ILog<BattleMetaData> _log = new BattleLogger();
+        protected readonly URandom _random;
         protected int _initialAttack;
 
         public string SkillId { get; protected set; }
@@ -45,6 +46,8 @@ namespace KazApi.Domain._Monster._Skill
             Critical = dto.Critical;
             HitRate = dto.HitRate;
             EffectTime = dto.EffectTime;
+
+            _random = new URandom();
         }
 
         /// <summary>
@@ -56,7 +59,7 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         public void PowerDown()
         {
-            double allAttackDamage = Attack * URandom.RandomDouble(
+            double allAttackDamage = Attack * _random.RandomDouble(
                 CSysRate.ALL_ATTACK_ADJUST_MIN.VALUE,
                 CSysRate.ALL_ATTACK_ADJUST_MAX.VALUE
                 );
@@ -96,7 +99,7 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         public int CriticalDamage(ISkill skill, int damage)
         {
-            double randomVal = URandom.RandomDouble(0.0, 1.0);
+            double randomVal = _random.RandomDouble(0.0, 1.0);
             bool isCritical = randomVal <= skill.Critical;
 
             if (isCritical)
@@ -113,7 +116,7 @@ namespace KazApi.Domain._Monster._Skill
         public bool IsHitSkill(ISkill skill)
         {
             bool result = false;
-            double randVal = URandom.RandomDouble(0.0, 1.0);
+            double randVal = _random.RandomDouble(0.0, 1.0);
 
             if (randVal <= skill.HitRate) result = true;
 

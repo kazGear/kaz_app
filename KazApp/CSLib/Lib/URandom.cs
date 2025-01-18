@@ -5,12 +5,16 @@
     /// </summary>
     public class URandom
     {
-        /// <summary>
-        /// コンストラクタ 
-        /// </summary>
-        private URandom()
-        {
+        private readonly int _seed;
 
+        /// <summary>
+        /// コンストラクタ
+        /// 乱数シードが毎回変わる
+        /// </summary>
+        public URandom()
+        {
+            DateTime dt = DateTime.Now;
+            _seed = dt.Second + dt.Millisecond + dt.Nanosecond;
         }
 
         /// <summary>
@@ -18,9 +22,9 @@
         /// minValue: 下限を含む
         /// maxValue: 排他的な上限（その数値は含まない）
         /// </summary>
-        public static int RandomInt(int minValue, int maxValue)
+        public int RandomInt(int minValue, int maxValue)
         {
-            Random r = new Random();
+            Random r = new Random(_seed);
             return r.Next(minValue, maxValue);
         }
 
@@ -29,16 +33,16 @@
         /// minValue: 下限を含む
         /// maxValue: 排他的な上限（その数値は含まない）
         /// </summary>
-        public static double RandomDouble(double minValue, double maxValue)
+        public double RandomDouble(double minValue, double maxValue)
         {
-            Random r = new Random();
+            Random r = new Random(_seed);
             return r.NextDouble() * (maxValue - minValue) + minValue;
         }
 
         /// <summary>
         /// 対象の数値を rate(%) に応じて増減させる 
         /// </summary>
-        public static int RandomChangeInt(int target, double rate)
+        public int RandomChangeInt(int target, double rate)
         {
             double adjust = target * RandomDouble(0, rate);
             bool randBool = RandomBool();
@@ -52,27 +56,12 @@
         /// <summary>
         /// true / false のいずれかを生成 
         /// </summary>
-        public static bool RandomBool()
+        public bool RandomBool()
         {
-            Random r = new Random();
+            Random r = new Random(_seed);
             int oneOrzero = r.Next(0, 2); // 0 or 1
 
             return 1 == oneOrzero ? true : false;
-        }
-
-        /// <summary>
-        /// 状態異常の経過数を追加
-        /// </summary>
-        /// <returns></returns>
-        public static int durationCountUp()
-        {
-            bool doubleCount = RandomBool();
-
-            // 早く目覚めることがある
-            if (doubleCount)
-                return 2;
-            else
-                return 1;
         }
     }
 }
