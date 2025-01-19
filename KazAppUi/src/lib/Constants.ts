@@ -71,8 +71,8 @@ const DOMAIN = {
 ////////////////////////////////////////////////////////////////
 // ドメインを決定。デプロイ前に確認 ///////////////////////////////
 ////////////////////////////////////////////////////////////////
-const ENVIRONMENT = DOMAIN.LOCAL_HOST_API;
-// const ENVIRONMENT = DOMAIN.XSERVER_API;
+// const ENVIRONMENT = DOMAIN.LOCAL_HOST_API;
+const ENVIRONMENT = DOMAIN.XSERVER_API;
 export const URLS = {
     // 基本情報取得
     USER_INFO: `${ENVIRONMENT}/api/user/userInfo`,

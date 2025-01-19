@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 using KazApi.Domain._Monster._Skill;
-using NuGet.Protocol.Plugins;
 
 namespace KazApi.Domain.DTO
 {

@@ -9,7 +9,7 @@ namespace KazApi.Domain._Monster._State
     /// </summary>
     public class PowerUp : IState, IPositiveSkill
     {
-        private static readonly double ATTACK_GAIN = 1.5;
+        private static readonly double ATTACK_GAIN = 1.75;
 
         /// <summary>
         /// コンストラクタ

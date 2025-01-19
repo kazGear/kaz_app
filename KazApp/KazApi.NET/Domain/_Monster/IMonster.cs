@@ -44,7 +44,7 @@ namespace KazApi.Domain._Monster
             Attack = dto.Attack;
             DefaultAttack = dto.DefaultAttack;
             Speed = dto.Speed;
-            DefaultAttack = dto.Attack;
+            DefaultSpeed= dto.Speed;
             Dodge = dto.Dodge;
             DefaultDodge = dto.DefaultDodge;
 
@@ -119,13 +119,21 @@ namespace KazApi.Domain._Monster
         /// </summary>
         public void SetSpeed(int speed) => Speed = speed;
         /// <summary>
-        /// 攻撃力を戻す
+        /// 回避力を変更する
+        /// </summary>
+        public void SetDodge(double dodge) => Dodge = dodge;
+        /// <summary>
+        /// 攻撃力を元に戻す
         /// </summary>
         public void InitAttack() => Attack = DefaultAttack;
         /// <summary>
-        /// スピードを戻す
+        /// スピードを元に戻す
         /// </summary>
         public void InitSpeed() => Speed = DefaultSpeed;
+        /// <summary>
+        /// 回避力を元に戻す
+        /// </summary>
+        public void InitDodge() => Dodge = DefaultDodge;
         /// <summary>
         /// 状態異常になる
         /// </summary>

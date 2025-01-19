@@ -29,28 +29,34 @@ namespace KazApi.Domain._Factory
 
             if (stateCode == CStateType.NONE.VALUE)
                 return new None(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.POISON.VALUE)
                 return new Poison(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.DEADLY_POISON.VALUE)
                 return new DeadlyPoison(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.SLEEP.VALUE)
                 return new Sleep(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.CHARM.VALUE)
                 return new Charm(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.SLOW.VALUE)
                 return new Slow(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.POWERUP.VALUE)
                 return new PowerUp(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.DODGEUP.VALUE)
-            {
-                Console.WriteLine($"対応していないコードです：{CStateType.DODGEUP}");
-                return new None(param.Name, param.ShortName, param.Value, param.Param3);
-            }
-            //    return new DodgeUp(param.Name, param.Value, param.Param3);
+                return new DodgeUp(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.CRITICALUP.VALUE)
                 return new CriticalUp(param.Name, param.ShortName, param.Value, param.Param3);
+
             else if (stateCode == CStateType.AUTOHEAL.VALUE)
                 return new AutoHeal(param.Name, param.ShortName, param.Value, param.Param3);
+
             else
                 throw new Exception("存在しない状態コードです。");
         }
@@ -63,24 +69,34 @@ namespace KazApi.Domain._Factory
 
             if (stateCode == CStateType.NONE.VALUE)
                 return new None(dto);
+
             else if (stateCode == CStateType.POISON.VALUE)
                 return new Poison(dto);
+
             else if (stateCode == CStateType.DEADLY_POISON.VALUE)
                 return new DeadlyPoison(dto);
+
             else if (stateCode == CStateType.SLEEP.VALUE)
                 return new Sleep(dto);
+
             else if (stateCode == CStateType.CHARM.VALUE)
                 return new Charm(dto);
+
             else if (stateCode == CStateType.SLOW.VALUE)
                 return new Slow(dto);
+
             else if (stateCode == CStateType.POWERUP.VALUE)
                 return new PowerUp(dto);
-            //else if (stateCode == ((int)CStateType.DODGEUP))
-            //    return new DodgeUp(param.Name, param.Value, param.Param3);
+
+            else if (stateCode == CStateType.DODGEUP.VALUE)
+                return new DodgeUp(dto);
+
             else if (stateCode == CStateType.CRITICALUP.VALUE)
                 return new CriticalUp(dto);
+
             else if (stateCode == CStateType.AUTOHEAL.VALUE)
                 return new AutoHeal(dto);
+
             else
                 throw new Exception("存在しない状態コードです。");
         }

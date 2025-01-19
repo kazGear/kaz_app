@@ -23,8 +23,8 @@
         /// 現環境を決定 false: 開発, true: 本番
         /// デプロイ前に確認
         /// </summary> ///////////////////////////////////////////////////////////
-        public static readonly CEnvironment THIS_ENVIRONMENT = DEVELOPMENT;
-        //public static readonly CEnvironment THIS_ENVIRONMENT = PRODUCTION;
+        //public static readonly CEnvironment THIS_ENVIRONMENT = DEVELOPMENT;
+        public static readonly CEnvironment THIS_ENVIRONMENT = PRODUCTION;
     }
 
     public class CFilePath : Enumeration<string>
@@ -65,7 +65,7 @@
         /// <summary>
         /// クリティカル補正率
         /// </summary>
-        public static readonly CSysRate CRITICAL_DAMAGE = new(1.7, "CRITICAL_DAMAGE");
+        public static readonly CSysRate CRITICAL_DAMAGE = new(1.8, "CRITICAL_DAMAGE");
         /// <summary>
         /// 行動順補正率
         /// </summary>

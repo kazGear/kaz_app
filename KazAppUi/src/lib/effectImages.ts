@@ -50,6 +50,7 @@ import effect49 from "../images/effects/effect49.webp";
 import effect50 from "../images/effects/effect50.webp";
 import effect51 from "../images/effects/effect51.webp";
 import effect52 from "../images/effects/effect52.webp";
+import effect53 from "../images/effects/effect53.webp";
 import effect54 from "../images/effects/effect54.webp";
 import effect58 from "../images/effects/effect58.gif";
 import effect59 from "../images/effects/effect59.gif";
@@ -64,13 +65,16 @@ import effect67 from "../images/effects/effect67.webp";
 import effect68 from "../images/effects/effect68.gif";
 import effect69 from "../images/effects/effect69.gif";
 
+import stateType2 from "../images/effects/stateType2.gif";
+
 interface EffectDict {
     [key: string]: string | null;
 }
 const effectImages = (effectId: string): string => {
     const effectImages: EffectDict = {};
 
-    effectImages["skill000"] = null; // index: 0 (エフェクトなし)
+    // スキルイメージ
+    effectImages["skill000"] = null;
     effectImages["skill001"] = effect1;
     effectImages["skill002"] = effect2;
     effectImages["skill003"] = effect3;
@@ -123,7 +127,7 @@ const effectImages = (effectId: string): string => {
     effectImages["skill050"] = effect50;
     effectImages["skill051"] = effect51;
     effectImages["skill052"] = effect52;
-    effectImages["skill053"] = null;
+    effectImages["skill053"] = effect53;
     effectImages["skill054"] = effect54;
     effectImages["skill055"] = null;
     effectImages["skill056"] = null;
@@ -140,6 +144,9 @@ const effectImages = (effectId: string): string => {
     effectImages["skill067"] = effect67;
     effectImages["skill068"] = effect68;
     effectImages["skill069"] = effect69;
+
+    // 状態異常イメージ
+    effectImages["stateType2"] = stateType2;
 
     return effectImages[effectId] ?? "";
 }

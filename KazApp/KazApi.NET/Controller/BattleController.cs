@@ -91,15 +91,23 @@ namespace KazApi.Controller
                 //monstersDTO.Where(e => e.MonsterId == CMonster.マーマポト.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.パーパポト.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.カーミラ.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.キラービー.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.アサシンバグ.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.ラスターバグ.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.キラービー.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.アサシンバグ.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.ラスターバグ.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.イビルウェポン.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.クロウラー.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.ダースマタンゴ.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリン.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリンガード.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.ゴブリンロード.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.サハギン.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.プチポセイドン.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.パンプキンボム.VALUE).Single(),
+                //monstersDTO.Where(e => e.MonsterId == CMonster.グレネードボム.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.シェイプシフター.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロ.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロワン.VALUE).Single(),
+
             };
             return testMonsters;
         }

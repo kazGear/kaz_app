@@ -1,7 +1,6 @@
 ﻿using KazApi.Common._Log;
 using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
-using System.Diagnostics.Metrics;
 
 namespace KazApi.Domain._Monster._State
 {
@@ -10,7 +9,7 @@ namespace KazApi.Domain._Monster._State
     /// </summary>
     public class Slow : IState
     {
-        private static readonly double DOWN_RATE = 0.5;
+        private static readonly double DOWN_RATE = 0.25;
 
         /// <summary>
         /// コンストラクタ
@@ -52,7 +51,7 @@ namespace KazApi.Domain._Monster._State
         {
             if (me.Speed == me.DefaultSpeed)
             {
-                double downedSpeed = (double)me.Speed * DOWN_RATE;
+                double downedSpeed = me.Speed * DOWN_RATE;
                 me.SetSpeed((int)downedSpeed);
 
                 base._log.Logging(new BattleMetaData(
