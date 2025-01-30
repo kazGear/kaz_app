@@ -121,7 +121,7 @@ namespace KazApi.Repository.sql
                        EXISTS 
                       (
                         SELECT
-                               *
+                               1
                           FROM
                                t_battle_result AS br
                          WHERE

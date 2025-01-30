@@ -19,7 +19,8 @@ C# APP
 	資材配置
 		/srv/server_build
 	本番用ビルド
-		dotnet publish -c Release -o ｛出力フォルダ名｝ ｛ソリューションファイル名｝
+		例：dotnet publish -c Release -o ｛出力フォルダ名｝ ｛ソリューションファイル名｝
+		dotnet publish -c Release -o build KazApi.sln
 	エラーログ
 		・アプリケーションの実行ディレクトリ内のlogsフォルダ
 		・コンソール出力
