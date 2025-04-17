@@ -20,6 +20,7 @@ namespace CSLib.Lib
         {
 
         }
+
         /// <summary>
         /// AESで暗号化する関数 
         /// </summary>
@@ -50,6 +51,7 @@ namespace CSLib.Lib
 
             return encrypted_str;
         }
+
         /// <summary>
         /// AESで復号する関数 
         /// </summary>

@@ -20,15 +20,6 @@ namespace KazApi.Controller
         }
 
         /// <summary>
-        /// 初期処理
-        /// </summary>
-        [HttpPost("api/common/runtime")]
-        public ActionResult<string> Init()
-        {
-            return UEnvironment.IsRuntime();
-        }
-
-        /// <summary>
         /// 画像ファイルアップロード
         /// </summary>
         [HttpPost("api/common/imgUpload")]

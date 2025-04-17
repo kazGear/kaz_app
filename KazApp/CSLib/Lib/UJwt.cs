@@ -23,11 +23,12 @@ namespace CSLib.Lib
             DateTime now = DateTime.UtcNow; // 基準時刻
 
             var claims = new[] {
-                new Claim(JwtRegisteredClaimNames.Sub, userName),
+                new Claim(JwtRegisteredClaimNames.Sid, userName),
+                new Claim(JwtRegisteredClaimNames.Sub, "user authentication for kazApp."),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            JwtSecurityToken token = new JwtSecurityToken(
+            JwtSecurityToken jwtPayload = new JwtSecurityToken(
                 issuer: configuration["Jwt:Issuer"],
                 audience: configuration["Jwt:Audience"],
                 claims: claims,
@@ -35,10 +36,20 @@ namespace CSLib.Lib
                 expires: DateTime.UtcNow.AddDays(Convert.ToDouble(configuration["Jwt:ExpireDays"])),
                 signingCredentials: credentials
                 );
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new JwtSecurityTokenHandler().WriteToken(jwtPayload);
         }
 
         /// <summary>
+        /// TODO: 本メソッド削除、AuthActionFilterクラスを削除
+        /// 認証確認したいエンドポイントに [Authorize] を付与
+        /// サービス起動時のコードに認証設定をしている
+        /// 仕組みの概要
+        //
+        //- AddAuthenticationとAddJwtBearerなどを通じて認証の設定をアプリケーション全体に適用します。
+        //- [Authorize] 属性をつけると、そのエンドポイントまたはコントローラーで認証が強制されます。
+        //- 有効なJWTが提供されない場合は、自動的にアクセスが拒否されます（例えば、HTTPステータスコード401 Unauthorizedが返されます）。
+        //
+        /// 
         /// トークンが有効か確認
         /// true: 有効, false: 無効
         /// </summary>
@@ -46,10 +57,10 @@ namespace CSLib.Lib
         {
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
-            // トークンデコード
-            JwtSecurityToken? jwtToken = null;
+            JwtSecurityToken? jwtToken;
             try
             {
+                // トークンデコード。改ざんされていれば例外発生
                 jwtToken = handler.ReadToken(token) as JwtSecurityToken;
                 if (jwtToken == null) return false;
             }

@@ -84,6 +84,7 @@ public class Startup
                            .AllowAnyMethod()
                            .AllowAnyHeader());
         });
+
         services.AddControllers().
                  AddJsonOptions(options =>
         {
@@ -106,10 +107,10 @@ public class Startup
             //app.UseHttpsRedirection();
         }
 
-        app.UseStaticFiles();
         app.UseRouting();
-        app.UseCors("AllowAll");
+        app.UseCors("AllowAll"); // app.UseStaticFiles()ÇÊÇËêÊÇ…é¿çsÇ∑ÇÈïKóvÇ™Ç†ÇÈ
 
+        app.UseStaticFiles();
         app.UseAuthentication();
         app.UseAuthorization();
 
@@ -127,17 +128,6 @@ public class Startup
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ************************************************************************************************
