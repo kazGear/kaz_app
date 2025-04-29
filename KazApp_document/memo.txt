@@ -1,0 +1,97 @@
+﻿デプロイ
+	設定ファイルの環境関係はｋ、Deveropment > Production に変更すること。
+	開発時はその反対の設定。
+
+設定ファイル
+	launchSettings.Development.json
+	launchSettings.Production.json
+	appsettings.json
+	カスタム定数クラス(CSysParam.cs, Constants.ts)	
+	など
+
+react ui
+	資材配置
+		/var/www/client_build
+	本番用ビルド
+		npm run build
+
+C# APP
+	資材配置
+		/srv/server_build
+	本番用ビルド
+		例：dotnet publish -c Release -o ｛出力フォルダ名｝ ｛ソリューションファイル名｝
+		dotnet publish -c Release -o build KazApi.sln
+	エラーログ
+		・アプリケーションの実行ディレクトリ内のlogsフォルダ
+		・コンソール出力
+		・Linuxのシステムログ（journalctlコマンド） sudo journalctl -u KazApi
+
+postgresSQL
+	エラーログ /var/log/postgresql/postgresql-[version]-main.log
+	postgres: kazxxxxx
+		
+	backup
+		pg_dump -U [ユーザー名] -h [ホスト名] -d [データベース名] -F c -b -v -f [バックアップファイル名].backup
+			例：pg_dump -U postgres -h localhost -d kaz_app -F c -b -v -f C:\repository_kaz_app\kaz_app\KazApp_document\postgres_backup\bk_postgres.backup
+		
+		リストアする前に、スキーマ（テーブル等）を一掃。(A5等で実行)
+			DROP SCHEMA public CASCADE; 
+			CREATE SCHEMA public;  -- 新しいスキーマを作成
+			-- 権限を設定 
+			GRANT ALL ON SCHEMA public TO postgres;
+			GRANT ALL ON SCHEMA public TO public;
+
+		pg_restore -U [ユーザー名] -h [ホスト名] -d [データベース名] -v [バックアップファイル名].backup
+			例：pg_restore -U postgres -h 162.43.39.95 -d kaz_app -v C:\repository_kaz_app\kaz_app\KazApp_document\postgres_backup\bk_postgres.backup
+
+
+
+nginx
+	https://kazapp-trial.com (162.43.39.95)
+	設定ファイル /etc/nginx/sites-available/default
+	SSL証明書ログ Saving debug log to /var/log/letsencrypt/letsencrypt.log
+	SSL証明書 /etc/letsencrypt/live/try-the-work.net/certificate.pfx（pass:kazxxxxx）
+	api サービス設定ファイル /etc/systemd/system/KazApi.service
+	３月に一度証明書を更新する必要があるが、自動更新するようにしてある（はず）。
+	
+	再起動
+		デーモン: sudo systemctl daemon-reload
+		nginx: sudo systemctl restart nginx
+		app: sudo systemctl restart KazApi
+		db: sudo systemctl restart postgresql
+	状態確認
+		sudo systemctl status {対象}
+
+linux command
+	sudo systemctl daemon-reload デーモン、サービスの再読み込み
+	sudo systemctl restart nginx 再起動
+	sudo systemctl restart postgresql
+	sudo systemctl restart KazApi
+	sudo systemctl status KazApi 状態確認 
+	...
+
+自動起動
+	タスクスケジューラ(windows)
+	クーロン(linux) /etc/crontabS
+	リリースビルドしたexeファイルでないとエラー落ち？
+
+経歴書
+	https://github.com/kazGear/catalog.git
+	
+SSL証明書・https化（Let's encrypt）
+	sudo apt-get update
+	sudo apt-get install certbot
+	sudo certbot certonly --standalone
+	
+	/etc/nginx/sites-available/default
+	
+	server { 
+		listen 443 ssl; 
+		server_name yourdomain.com; 
+		ssl_certificate /etc/letsencrypt/live/{ドメイン名}/fullchain.pem;
+		ssl_certificate_key /etc/letsencrypt/live/{ドメイン名}/privkey.pem;
+			location / { 
+				root /var/www/html;
+				index index.html index.htm; 
+			}
+	}
