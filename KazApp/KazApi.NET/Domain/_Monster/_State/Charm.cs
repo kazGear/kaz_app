@@ -17,6 +17,7 @@ namespace KazApi.Domain._Monster._State
         {
             base.Activate = true;
         }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>

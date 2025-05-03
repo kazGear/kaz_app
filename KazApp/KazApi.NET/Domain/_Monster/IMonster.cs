@@ -1,4 +1,4 @@
-﻿using KazApi.Common._Log;
+﻿ using KazApi.Common._Log;
 using KazApi.Domain._Const;
 using KazApi.Domain._GameSystem;
 using KazApi.Domain._Monster._Skill;

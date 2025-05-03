@@ -11,23 +11,38 @@ namespace UnitTest.KazApi.Common
 {
     public class MessageInfoTest
     {
+        private readonly IMonster _normalMonster;
+        private readonly IMonster _deadMonster;
+
         public MessageInfoTest()
         {
+            _normalMonster = new Monster
+                (
+                    MockMonsterParams.NormalParam,
+                    MockSkillSets.AttackOnly,
+                    []
+                );
+            _deadMonster = new Monster
+                (
+                    MockMonsterParams.DeadParam,
+                    MockSkillSets.AttackOnly,
+                    []
+                );
 
+            new BattleLogger().DumpMemory(); // ログ初期化
         }
 
         [Fact(DisplayName = "誰のターンか")]
         public void UT001()
         {
-            var monster = MockMonsters.DamageSkillMonster;
-            MessageInfo.WhoseTurn(monster);
+            MessageInfo.WhoseTurn(_normalMonster);
 
             var logger = new BattleLogger();
             var log = logger.DumpMemory();
             var who = log[1]; // ログの中央
 
             Assert.True(log.Count == 3);
-            Assert.Contains(monster.MonsterName, who.Message);
+            Assert.Contains(_normalMonster.MonsterName, who.Message);
         }
 
         [Fact(DisplayName = "戦闘結果　未決着")]
@@ -35,8 +50,8 @@ namespace UnitTest.KazApi.Common
         {
             var monsters = new List<IMonster>()
             {
-                MockMonsters.HealSkillMonster,
-                MockMonsters.DamageSkillMonster
+                _normalMonster,
+                _normalMonster
             };
 
             MessageInfo.BattleResult(monsters);
@@ -51,8 +66,8 @@ namespace UnitTest.KazApi.Common
         {
             var monsters = new List<IMonster>()
             {
-                MockMonsters.DeadMonster,
-                MockMonsters.DamageSkillMonster
+                _deadMonster,
+                _normalMonster
             };
 
             MessageInfo.BattleResult(monsters);
@@ -62,7 +77,7 @@ namespace UnitTest.KazApi.Common
 
             Assert.True(log.Count == 6);
             Assert.Contains(
-                MockMonsters.DamageSkillMonster.MonsterName,
+                _normalMonster.MonsterName,
                 winner.Message
                 );
         }
@@ -72,8 +87,8 @@ namespace UnitTest.KazApi.Common
         {
             var monsters = new List<IMonster>()
             {
-                MockMonsters.DeadMonster,
-                MockMonsters.DeadMonster
+                _deadMonster,
+                _deadMonster
             };
 
             MessageInfo.BattleResult(monsters);

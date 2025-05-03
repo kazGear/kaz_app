@@ -11,7 +11,11 @@ namespace KazApi.Domain._Monster._State
     {
         private static readonly double CRITICAL_GAIN = 4.0;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public CriticalUp(StateDTO dto) : base(dto) { }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -41,7 +45,6 @@ namespace KazApi.Domain._Monster._State
                 );
         }
 
-
         /// <summary>
         /// クリティカル率を上昇させる
         /// </summary>
@@ -61,5 +64,4 @@ namespace KazApi.Domain._Monster._State
             me.UpdateSkills(result);
         }
     }
-
 }

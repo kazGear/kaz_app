@@ -15,6 +15,7 @@ namespace KazApi.Domain._Monster._State
         /// コンストラクタ
         /// </summary>
         public DodgeUp(StateDTO dto) : base(dto) { }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -35,6 +36,7 @@ namespace KazApi.Domain._Monster._State
                 $"{me.MonsterName}の回避力が元に戻った。")
                 );
         }
+
         /// <summary>
         /// 回避力を上昇させる
         /// </summary>

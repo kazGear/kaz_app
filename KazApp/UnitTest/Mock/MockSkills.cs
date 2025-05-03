@@ -17,6 +17,7 @@ namespace UnitTest.Mock
             TargetType = 1,
             Attack = 10,
             Weight = 10,
+            DefaultCritical = 0.1,
             Critical = 0.1,
             HitRate = 0.9,
         });
@@ -31,6 +32,7 @@ namespace UnitTest.Mock
             TargetType = 1,
             Attack = 20,
             Weight = 20,
+            DefaultCritical = 0.1,
             Critical = 0.1,
             HitRate = 0.85,
         });
@@ -45,11 +47,27 @@ namespace UnitTest.Mock
             TargetType = 1,
             Attack = 50,
             Weight = 50,
+            DefaultCritical = 0.1,
             Critical = 0.1,
             HitRate = 0.7,
         });
 
-        public static readonly ISkill Heal039 = new DamageSkill(new SkillDTO()
+        public static readonly ISkill Damage017 = new DamageSkill(new SkillDTO()
+        {
+            SkillId = "skill017",
+            SkillName = "ファイアボール",
+            SkillType = 3,
+            ElementType = 1,
+            StateType = 0,
+            TargetType = 3,
+            Attack = 10,
+            Weight = 10,
+            DefaultCritical = 0.0,
+            Critical = 0.0,
+            HitRate = 1.0,
+        });
+
+        public static readonly ISkill Heal039 = new HealSkill(new SkillDTO()
         {
             SkillId = "skill039",
             SkillName = "ケアル",
@@ -59,11 +77,12 @@ namespace UnitTest.Mock
             TargetType = 6,
             Attack = 20,
             Weight = 20,
-            Critical = 0,
+            DefaultCritical = 0.0,
+            Critical = 0.0,
             HitRate = 1,
         });
 
-        public static readonly ISkill Heal042 = new DamageSkill(new SkillDTO()
+        public static readonly ISkill Heal042 = new HealSkill(new SkillDTO()
         {
             SkillId = "skill042",
             SkillName = "ケアルジャ",
@@ -73,11 +92,12 @@ namespace UnitTest.Mock
             TargetType = 6,
             Attack = 60,
             Weight = 50,
-            Critical = 0,
+            DefaultCritical = 0.0,
+            Critical = 0.0,
             HitRate = 1,
         });
 
-        public static readonly ISkill Heal043 = new DamageSkill(new SkillDTO()
+        public static readonly ISkill Heal043 = new HealSkill(new SkillDTO()
         {
             SkillId = "skill043",
             SkillName = "リジェネ",
@@ -87,11 +107,12 @@ namespace UnitTest.Mock
             TargetType = 6,
             Attack = 0,
             Weight = 20,
-            Critical = 0,
+            DefaultCritical = 0.0,
+            Critical = 0.0,
             HitRate = 1,
         });
 
-        public static readonly ISkill NoMove055 = new DamageSkill(new SkillDTO()
+        public static readonly ISkill NoMove055 = new NoMoveSkill(new SkillDTO()
         {
             SkillId = "skill055",
             SkillName = "ミスをした",
@@ -101,7 +122,8 @@ namespace UnitTest.Mock
             TargetType = 0,
             Attack = 0,
             Weight = 0,
-            Critical = 0,
+            DefaultCritical = 0.0,
+            Critical = 0.0,
             HitRate = 1,
         });
 

@@ -11,7 +11,7 @@ namespace UnitTest.KazApi.Common
     {
         public BattleLoggerTest()
         {
-
+            new BattleLogger().DumpMemory(); // ログ初期化
         }
 
         [Fact(DisplayName = "ログ出力　データ無し")]
@@ -61,8 +61,8 @@ namespace UnitTest.KazApi.Common
             var log = logger.DumpAll();
             var log2 = logger.DumpAll();
 
-            Assert.True(log.Count() == 1000);
-            Assert.True(log2.Count() == 1000);
+            Assert.True(log.Count == 1000);
+            Assert.True(log2.Count == 1000);
         }
     }
 }

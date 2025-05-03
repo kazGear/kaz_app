@@ -17,6 +17,7 @@ namespace KazApi.Domain._Monster._State
         /// コンストラクタ
         /// </summary>
         public AutoHeal(StateDTO dto) : base(dto) { }
+ 
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -35,6 +36,7 @@ namespace KazApi.Domain._Monster._State
                 $"{me.MonsterName}の自然治癒力がなくなった。")
                 );
         }
+
         /// <summary>
         /// 自ターンに自動回復する
         /// </summary>

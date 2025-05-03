@@ -1,4 +1,5 @@
 ﻿using KazApi.Common._Log;
+using KazApi.Domain._Monster;
 using UnitTest.Mock;
 using Xunit.Abstractions;
 
@@ -45,14 +46,19 @@ namespace UnitTest.KazApi.Common
             BattleMetaData data = new BattleMetaData(
                 true,
                 false,
-                MockMonsters.DamageSkillMonster
+                new Monster
+                    (
+                        MockMonsterParams.NormalParam,
+                        MockSkillSets.AttackOnly,
+                        []
+                    )
                 );
             Assert.True(data.ExistWinner);
             Assert.False(data.AllLoser);
             Assert.True(data.IsStop);
             Assert.True(data.TargetMonsterId == "monster001");
             Assert.True(data.WinnerMonsterId == "monster001");
-            Assert.True(data.WinnerMonsterName == "DamageSkillMonster");
+            Assert.True(data.WinnerMonsterName == "NormalParamMonster");
         }
 
         [Fact(DisplayName = "コンストラクタ4_2")]

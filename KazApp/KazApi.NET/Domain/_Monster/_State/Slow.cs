@@ -59,9 +59,6 @@ namespace KazApi.Domain._Monster._State
                     $"{me.MonsterName}はスロー状態になった。")
                     );
             }
-
-
-
         }
     }
 }

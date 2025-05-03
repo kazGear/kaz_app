@@ -15,6 +15,7 @@ namespace KazApi.Domain._Monster._State
         /// コンストラクタ
         /// </summary>
         public PowerUp(StateDTO dto) : base(dto) { }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -35,6 +36,7 @@ namespace KazApi.Domain._Monster._State
                 $"{me.MonsterName}の攻撃力が元に戻った。")
                 );
         }
+
         /// <summary>
         /// 攻撃力を上昇させる
         /// </summary>
