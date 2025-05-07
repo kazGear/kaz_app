@@ -1,0 +1,81 @@
+﻿using KazApi.Domain._Const;
+using KazApi.Domain._Monster;
+using KazApi.Domain._Monster._Skill;
+using KazApi.Domain._Monster._State;
+using Microsoft.CodeAnalysis.Host.Mef;
+using UnitTest.Mock;
+using Xunit.Abstractions;
+
+namespace UnitTest.KazApi.Domain._Skill
+{
+    public class ISkillTest
+    {
+        private readonly ITestOutputHelper _output;
+        private readonly IMonster _monster;
+
+        public ISkillTest(ITestOutputHelper output)
+        {
+            _output = output;
+            _monster = new Monster(
+                MockMonsterParams.NoDodge,
+                MockSkillSets.HealOnly,
+                []
+                );
+        }
+
+        [Fact(DisplayName = "攻撃力低下")]
+        public void UT001()
+        {
+            var skill = MockSkills.AbsHit;
+            int beforeAttack = skill.Attack;
+
+            skill.PowerDown();
+
+            Assert.True(skill.Attack < beforeAttack);
+        }
+
+        [Fact(DisplayName = "弱点ダメージ")]
+        public void UT002()
+        {
+            var fire = MockSkills.AbsHitAllOrSingleTargetFire;
+            var weekFireMonster = new Monster(
+                MockMonsterParams.WeekFire,
+                MockSkillSets.AbsHitAllAttackOnly,
+                []
+                );
+            int beforeDamage = fire.Attack;
+
+            int weekDamage = fire.WeeknessDamage(
+                fire,
+                weekFireMonster,
+                fire.Attack);
+
+            Assert.True(beforeDamage < weekDamage);
+        }
+
+        [Fact(DisplayName = "クリティカルダメージ")]
+        public void UT003()
+        {
+            var critical = MockSkills.AbsHitCritical;
+            int beforeDamage = critical.Attack;
+
+            int criticalDamage = critical.CriticalDamage(
+                critical,
+                critical.Attack);
+
+            Assert.True(beforeDamage < criticalDamage);
+        }
+
+        [Fact(DisplayName = "当たり判定")]
+        public void UT004()
+        {
+            var halfHit = MockSkills.HalfHit;
+
+            int hitCount = 0;
+            for (int i = 0; i < 1000; i++)
+                if (halfHit.IsHitSkill(halfHit, _monster)) hitCount++;
+
+            Assert.True(hitCount >= 400);
+        }
+    }
+}
