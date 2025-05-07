@@ -50,6 +50,7 @@ namespace KazApi.Domain._Monster._Skill
         /// スキルを使用
         /// </summary>
         public abstract void Use(IEnumerable<IMonster> monsters, IMonster me);
+
         /// <summary>
         /// 全体攻撃の際は威力減少
         /// </summary>
@@ -61,6 +62,7 @@ namespace KazApi.Domain._Monster._Skill
                 );
             Attack = (int)allAttackDamage;
         }
+
         /// <summary>
         /// 攻撃力を初期値に戻す
         /// </summary>
@@ -90,6 +92,7 @@ namespace KazApi.Domain._Monster._Skill
             }
             return damage;
         }
+
         /// <summary>
         /// クリティカルによるダメージ
         /// </summary>
@@ -105,6 +108,7 @@ namespace KazApi.Domain._Monster._Skill
             }
             return damage;
         }
+
         /// <summary>
         /// スキルが命中したか判定
         /// true: hit, false: miss
@@ -118,6 +122,7 @@ namespace KazApi.Domain._Monster._Skill
 
             return result;
         }
+
         /// <summary>
         /// DTOへ変換
         /// </summary>

@@ -16,8 +16,8 @@ namespace UnitTest.KazApi.Domain._State
             _output = output;
             _monster = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     [MockStatus.AUTOHEAL]
                 );
 
@@ -31,8 +31,8 @@ namespace UnitTest.KazApi.Domain._State
             {
                 var monster = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     [MockStatus.AUTOHEAL]
                 );
                 monster.AcceptDamage((int)(_monster.Hp * 0.5));

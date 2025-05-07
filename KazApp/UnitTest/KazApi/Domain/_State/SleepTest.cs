@@ -20,14 +20,14 @@ namespace UnitTest.KazApi.Domain._State
             _output = output;
             _monster = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     [new Sleep("睡眠", "眠", CStateType.SLEEP.VALUE, 0.0)]
                 );
             _monster2 = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     []
                 );
             new BattleLogger().DumpMemory(); // ログ初期化

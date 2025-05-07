@@ -18,14 +18,14 @@ namespace UnitTest.KazApi.Common
         {
             _normalMonster = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     []
                 );
             _deadMonster = new Monster
                 (
-                    MockMonsterParams.DeadParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Dead,
+                    MockSkillSets.AbsHitOnly,
                     []
                 );
 

@@ -16,8 +16,8 @@ namespace UnitTest.KazApi.Domain._State
             _output = output;
             _monster = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     [MockStatus.SLOW]
                 );
             new BattleLogger().DumpMemory(); // ログ初期化
@@ -30,8 +30,8 @@ namespace UnitTest.KazApi.Domain._State
             {
                 var monster = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     [MockStatus.SLOW]
                 );
 

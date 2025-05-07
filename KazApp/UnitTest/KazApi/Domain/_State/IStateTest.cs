@@ -21,8 +21,8 @@ namespace UnitTest.KazApi.Domain._State
             _state = MockStatus.AUTOHEAL;
             _monster = new Monster
                 (
-                    MockMonsterParams.NormalParam,
-                    MockSkillSets.AttackOnly,
+                    MockMonsterParams.Normal,
+                    MockSkillSets.AbsHitOnly,
                     [MockStatus.AUTOHEAL]
                 );
             new BattleLogger().DumpMemory(); // ログ初期化

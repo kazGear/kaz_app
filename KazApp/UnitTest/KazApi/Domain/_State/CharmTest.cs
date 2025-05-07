@@ -15,8 +15,8 @@ namespace UnitTest.KazApi.Domain._State
         {
             _output = output;
             _monster = new Monster( // 必ず自傷ダメージが当たる設定
-                MockMonsterParams.NoDodgeParam,
-                MockSkillSets.FireOnly,
+                MockMonsterParams.NoDodge,
+                MockSkillSets.AbsHitAllOrSingleTargetOnly,
                 [MockStatus.CHARM]
                 );
 

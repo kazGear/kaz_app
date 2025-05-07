@@ -48,8 +48,8 @@ namespace UnitTest.KazApi.Common
                 false,
                 new Monster
                     (
-                        MockMonsterParams.NormalParam,
-                        MockSkillSets.AttackOnly,
+                        MockMonsterParams.Normal,
+                        MockSkillSets.AbsHitOnly,
                         []
                     )
                 );

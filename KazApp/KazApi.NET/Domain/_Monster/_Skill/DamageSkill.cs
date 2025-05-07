@@ -101,7 +101,7 @@ namespace KazApi.Domain._Monster._Skill
             if (base.TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
             {
                 return new URandom().RandomBool() ? CTarget.ENEMY_RANDOM.VALUE
-                                            : CTarget.ENEMY_ALL.VALUE;
+                                                  : CTarget.ENEMY_ALL.VALUE;
             }
             return base.TargetType;
         }

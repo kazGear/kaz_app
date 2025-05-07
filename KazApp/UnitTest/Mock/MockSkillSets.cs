@@ -7,34 +7,54 @@ namespace UnitTest.Mock
 {
     public static class MockSkillSets
     {
-        public static readonly IEnumerable<ISkill> AttackOnly = new List<ISkill>()
+        public static readonly IEnumerable<ISkill> AbsHitOnly = new List<ISkill>()
         {
-            MockSkills.Damage001,
-            MockSkills.Damage001,
-            MockSkills.Damage001,
-            MockSkills.Damage001,
-            MockSkills.Damage001,
-            MockSkills.Damage001,
+            MockSkills.AbsHit,
+            MockSkills.AbsHit,
+            MockSkills.AbsHit,
+            MockSkills.AbsHit,
+            MockSkills.AbsHit,
+            MockSkills.AbsHit,
         };
 
-        public static readonly IEnumerable<ISkill> FireOnly = new List<ISkill>()
+        public static readonly IEnumerable<ISkill> AbsHitAllAttackOnly = new List<ISkill>()
         {
-            MockSkills.Damage017,
-            MockSkills.Damage017,
-            MockSkills.Damage017,
-            MockSkills.Damage017,
-            MockSkills.Damage017,
-            MockSkills.Damage017,
+            MockSkills.AbsHitAllTarget,
+            MockSkills.AbsHitAllTarget,
+            MockSkills.AbsHitAllTarget,
+            MockSkills.AbsHitAllTarget,
+            MockSkills.AbsHitAllTarget,
+            MockSkills.AbsHitAllTarget,
+        };
+
+        public static readonly IEnumerable<ISkill> AbsHitAllOrSingleTargetOnly = new List<ISkill>()
+        {
+            MockSkills.AbsHitAllOrSingleTargetFire,
+            MockSkills.AbsHitAllOrSingleTargetFire,
+            MockSkills.AbsHitAllOrSingleTargetFire,
+            MockSkills.AbsHitAllOrSingleTargetFire,
+            MockSkills.AbsHitAllOrSingleTargetFire,
+            MockSkills.AbsHitAllOrSingleTargetFire,
         };
 
         public static readonly IEnumerable<ISkill> HealOnly = new List<ISkill>()
         {
-            MockSkills.Heal039,
-            MockSkills.Heal039,
-            MockSkills.Heal039,
-            MockSkills.Heal039,
-            MockSkills.Heal039,
-            MockSkills.Heal039,
+            MockSkills.HealMagic,
+            MockSkills.HealMagic,
+            MockSkills.HealMagic,
+            MockSkills.HealMagic,
+            MockSkills.HealMagic,
+            MockSkills.HealMagic,
+        };
+
+        public static readonly IEnumerable<ISkill> InvalidTargetOnly = new List<ISkill>()
+        {
+            MockSkills.InvalidTarget,
+            MockSkills.InvalidTarget,
+            MockSkills.InvalidTarget,
+            MockSkills.InvalidTarget,
+            MockSkills.InvalidTarget,
+            MockSkills.InvalidTarget,
         };
     }
 }
