@@ -1,4 +1,5 @@
-﻿using KazApi.Domain._Monster._Skill;
+﻿using KazApi.Domain._Const;
+using KazApi.Domain._Monster._Skill;
 using KazApi.Domain.DTO;
 
 namespace UnitTest.Mock
@@ -9,10 +10,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill001",
             SkillName = "打撃（必中）",
-            SkillType = 1,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 1,
+            SkillType = CSkillType.BLOW.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 10,
             Weight = 10,
             DefaultCritical = 0.1,
@@ -24,10 +25,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill001",
             SkillName = "打撃（5割当たる）",
-            SkillType = 1,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 1,
+            SkillType = CSkillType.BLOW.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 10,
             Weight = 10,
             DefaultCritical = 0.1,
@@ -39,10 +40,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill001_1",
             SkillName = "打撃(Critical)",
-            SkillType = 1,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 1,
+            SkillType = CSkillType.BLOW.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 10,
             Weight = 10,
             DefaultCritical = 1.0,
@@ -54,9 +55,9 @@ namespace UnitTest.Mock
         {
             SkillId = "skill001",
             SkillName = "打撃（無効なターゲット）",
-            SkillType = 1,
-            ElementType = 0,
-            StateType = 0,
+            SkillType = CSkillType.BLOW.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
             TargetType = -1,
             Attack = 10,
             Weight = 10,
@@ -69,10 +70,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill005",
             SkillName = "回し蹴り（必中全体）",
-            SkillType = 1,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 2,
+            SkillType = CSkillType.BLOW.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_ALL.VALUE,
             Attack = 10,
             Weight = 10,
             DefaultCritical = 0.1,
@@ -84,10 +85,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill017",
             SkillName = "ファイアボール（必中）",
-            SkillType = 3,
-            ElementType = 1,
-            StateType = 0,
-            TargetType = 3,
+            SkillType = CSkillType.ATTACK_MAGIC.VALUE,
+            ElementType = CElement.FIRE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM_OR_ALL.VALUE,
             Attack = 10,
             Weight = 10,
             DefaultCritical = 0.0,
@@ -99,10 +100,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill017",
             SkillName = "ファイアボール（必中単体）",
-            SkillType = 3,
-            ElementType = 1,
-            StateType = 0,
-            TargetType = 1,
+            SkillType = CSkillType.ATTACK_MAGIC.VALUE,
+            ElementType = CElement.FIRE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 10,
             Weight = 10,
             DefaultCritical = 0.0,
@@ -114,10 +115,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill020",
             SkillName = "アイススマッシュ（必中単体）",
-            SkillType = 3,
-            ElementType = 3,
-            StateType = 0,
-            TargetType = 1,
+            SkillType = CSkillType.ATTACK_MAGIC.VALUE,
+            ElementType = CElement.ICE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 10,
             Weight = 10,
             DefaultCritical = 0.0,
@@ -129,10 +130,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill036",
             SkillName = "グラビガ（必中）",
-            SkillType = 4,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 1,
+            SkillType = CSkillType.ATTACK_RATE.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 50, // ５０％ダメージ
             Weight = 30,
             DefaultCritical = 0.0,
@@ -144,10 +145,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill038",
             SkillName = "デススペル（必中）",
-            SkillType = 5,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 1,
+            SkillType = CSkillType.DEAD.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 0,
             Weight = 40,
             DefaultCritical = 0.0,
@@ -159,27 +160,12 @@ namespace UnitTest.Mock
         {
             SkillId = "skill039",
             SkillName = "ケアル",
-            SkillType = 6,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 6,
+            SkillType = CSkillType.HEAL.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CTarget.FRIEND_RANDOM.VALUE,
             Attack = 20,
             Weight = 20,
-            DefaultCritical = 0.0,
-            Critical = 0.0,
-            HitRate = 1,
-        });
-
-        public static readonly ISkill Heal042 = new HealSkill(new SkillDTO()
-        {
-            SkillId = "skill042",
-            SkillName = "ケアルジャ",
-            SkillType = 6,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 6,
-            Attack = 60,
-            Weight = 50,
             DefaultCritical = 0.0,
             Critical = 0.0,
             HitRate = 1,
@@ -189,10 +175,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill043",
             SkillName = "リジェネ", // 良い状態
-            SkillType = 7,
-            ElementType = 0,
-            StateType = 8,
-            TargetType = 6,
+            SkillType = CSkillType.STATE.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.AUTOHEAL.VALUE,
+            TargetType = CTarget.FRIEND_RANDOM.VALUE,
             Attack = 0,
             Weight = 20,
             DefaultCritical = 0.0,
@@ -204,10 +190,10 @@ namespace UnitTest.Mock
         {
             SkillId = "skill044",
             SkillName = "ポイズン", // 悪い状態
-            SkillType = 7,
-            ElementType = 0,
-            StateType = 1,
-            TargetType = 1,
+            SkillType = CSkillType.STATE.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.POISON.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
             Attack = 0,
             Weight = 20,
             DefaultCritical = 0.0,
@@ -215,14 +201,44 @@ namespace UnitTest.Mock
             HitRate = 1.0, // 必中
         }, MockStatus.POISON);
 
+        public static readonly ISkill Sleep = new StateSkill(new SkillDTO()
+        {
+            SkillId = "skill047",
+            SkillName = "スリプル", // 悪い状態
+            SkillType = CSkillType.STATE.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.SLEEP.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
+            Attack = 0,
+            Weight = 20,
+            DefaultCritical = 0.0,
+            Critical = 0.0,
+            HitRate = 1.0, // 必中
+        }, MockStatus.SLEEP);
+
+        public static readonly ISkill Charm = new StateSkill(new SkillDTO()
+        {
+            SkillId = "skill049",
+            SkillName = "チャーム", // 悪い状態
+            SkillType = CSkillType.STATE.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.CHARM.VALUE,
+            TargetType = CTarget.ENEMY_RANDOM.VALUE,
+            Attack = 0,
+            Weight = 20,
+            DefaultCritical = 0.0,
+            Critical = 0.0,
+            HitRate = 1.0, // 必中
+        }, MockStatus.CHARM);
+
         public static readonly ISkill NoMove055 = new NoMoveSkill(new SkillDTO()
         {
             SkillId = "skill055",
             SkillName = "ミスをした",
-            SkillType = 8,
-            ElementType = 0,
-            StateType = 0,
-            TargetType = 0,
+            SkillType = CSkillType.NOT_MOVE.VALUE,
+            ElementType = CElement.NONE.VALUE,
+            StateType = CStateType.NONE.VALUE,
+            TargetType = CStateType.NONE.VALUE,
             Attack = 0,
             Weight = 0,
             DefaultCritical = 0.0,

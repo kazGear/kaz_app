@@ -2,6 +2,7 @@
 using KazApi.Domain._Monster._State;
 using KazApi.Domain._Monster;
 using KazApi.Domain.DTO;
+using KazApi.Domain._Const;
 
 namespace UnitTest.Mock
 {
@@ -11,7 +12,7 @@ namespace UnitTest.Mock
         {
             MonsterId = "monster001",
             MonsterName = "NormalParamMonster",
-            MonsterType = 1,
+            MonsterType = -1,
             Hp = 100,
             MaxHp = 100,
             Attack = 20,
@@ -20,14 +21,14 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.1,
             DefaultDodge = 0.1,
-            Week = 0
+            Week = CStateType.NONE.VALUE
         };
 
         public static readonly MonsterDTO NoDodge = new()
         {
             MonsterId = "monster002",
             MonsterName = "NoDodgeMonster",
-            MonsterType = 1,
+            MonsterType = -1,
             Hp = 100,
             MaxHp = 100,
             Attack = 20,
@@ -36,14 +37,14 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = 0
+            Week = CStateType.NONE.VALUE
         };
 
         public static readonly MonsterDTO Dead = new()
         {
             MonsterId = "monster003",
             MonsterName = "DeadMonster",
-            MonsterType = 1,
+            MonsterType = -1,
             Hp = 0,
             MaxHp = 100,
             Attack = 20,
@@ -52,14 +53,14 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.1,
             DefaultDodge = 0.1,
-            Week = 0
+            Week = CStateType.NONE.VALUE
         };
 
         public static readonly MonsterDTO WeekFire = new()
         {
             MonsterId = "monster004",
             MonsterName = "WeekFireMonster",
-            MonsterType = 1,
+            MonsterType = -1,
             Hp = 100,
             MaxHp = 100,
             Attack = 20,
@@ -68,15 +69,15 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = 1
+            Week = CElement.FIRE.VALUE
         };
 
         public static readonly MonsterDTO DyingHp = new()
         {
             MonsterId = "monster054",
             MonsterName = "DyingMonster",
-            MonsterType = 1,
-            Hp = 1,
+            MonsterType = -1,
+            Hp = 10,
             MaxHp = 100,
             Attack = 20,
             DefaultAttack = 20,
@@ -84,7 +85,7 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = 1
+            Week = CElement.FIRE.VALUE
         };
     }
 }
