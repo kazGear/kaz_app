@@ -56,5 +56,15 @@ namespace UnitTest.Mock
             MockSkills.InvalidTarget,
             MockSkills.InvalidTarget,
         };
+
+        public static readonly IEnumerable<ISkill> NoMoveOnly = new List<ISkill>()
+        {
+            MockSkills.NoMove055,
+            MockSkills.NoMove055,
+            MockSkills.NoMove055,
+            MockSkills.NoMove055,
+            MockSkills.NoMove055,
+            MockSkills.NoMove055,
+        };
     }
 }
