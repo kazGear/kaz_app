@@ -2,7 +2,7 @@
 
 namespace UnitTest.Mock
 {
-    public static class StateFactoryTest
+    public static class MockStatus
     {
         public static readonly IState NONE =
             new None(MockStateParams.NONE);
