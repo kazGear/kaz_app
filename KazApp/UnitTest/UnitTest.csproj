@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="KazApi\Domain\_Factory\" />
+    <Folder Include="KazApi\Domain\_GameSystem\" />
   </ItemGroup>
 
 </Project>
