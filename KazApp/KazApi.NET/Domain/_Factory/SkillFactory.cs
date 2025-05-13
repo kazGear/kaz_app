@@ -16,7 +16,7 @@ namespace KazApi.Domain._Factory
         /// コンストラクタ
         /// </summary>
         public SkillFactory(IEnumerable<CodeDTO> codeEntities)
-        {         
+        {
             _skills = new List<ISkill>();
             _stateFactory = new StateFactory(codeEntities);
         }
@@ -49,7 +49,7 @@ namespace KazApi.Domain._Factory
 
             else if (skill.SkillType == CSkillType.ATTACK_RATE.VALUE)
                 // 割合ダメージスキル
-                CreateRatioAttackSkill(skill);
+                CreateRateAttackSkill(skill);
 
             else if (skill.SkillType == CSkillType.DEAD.VALUE)
                 // 即死攻撃スキル
@@ -104,7 +104,7 @@ namespace KazApi.Domain._Factory
         /// <summary>
         /// 割合ダメージスキルを生成
         /// </summary>
-        private void CreateRatioAttackSkill(SkillDTO skill)
+        private void CreateRateAttackSkill(SkillDTO skill)
         {
             ISkill result = new RateDamageSkill(skill); // TODO エフェクト画像のファイルパス
             _skills.Add(result);

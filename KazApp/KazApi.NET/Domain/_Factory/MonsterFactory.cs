@@ -45,7 +45,7 @@ namespace KazApi.Domain._Factory
                 }
                 // スキルを持ったモンスター
                 monster.Skills = bindSkills;
-                monster.Status = []; // 初期値は異常なし
+                monster.Status = []; // 初期値は状態なし
                 result.Add(monster);
             }
             return result;
