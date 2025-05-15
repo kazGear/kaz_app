@@ -1,7 +1,4 @@
-﻿using KazApi.Domain._Monster._Skill;
-using KazApi.Domain._Monster._State;
-using KazApi.Domain._Monster;
-using KazApi.Domain.DTO;
+﻿using KazApi.Domain.DTO;
 using KazApi.Domain._Const;
 
 namespace UnitTest.Mock
@@ -21,7 +18,8 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.1,
             DefaultDodge = 0.1,
-            Week = CStateType.NONE.VALUE
+            Week = CStateType.NONE.VALUE,
+            BetScore = 1000
         };
 
         public static readonly MonsterDTO NoDodge = new()
@@ -33,11 +31,12 @@ namespace UnitTest.Mock
             MaxHp = 100,
             Attack = 20,
             DefaultAttack = 20,
-            Speed = 15,
+            Speed = 50,
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = CStateType.NONE.VALUE
+            Week = CStateType.NONE.VALUE,
+            BetScore = 1000
         };
 
         public static readonly MonsterDTO Dead = new()
@@ -49,11 +48,12 @@ namespace UnitTest.Mock
             MaxHp = 100,
             Attack = 20,
             DefaultAttack = 20,
-            Speed = 15,
+            Speed = 50,
             DefaultSpeed = 15,
             Dodge = 0.1,
             DefaultDodge = 0.1,
-            Week = CStateType.NONE.VALUE
+            Week = CStateType.NONE.VALUE,
+            BetScore = 1000
         };
 
         public static readonly MonsterDTO WeekFire = new()
@@ -69,12 +69,13 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = CElement.FIRE.VALUE
+            Week = CElement.FIRE.VALUE,
+            BetScore = 1000
         };
 
         public static readonly MonsterDTO DyingHp = new()
         {
-            MonsterId = "monster054",
+            MonsterId = "monster005",
             MonsterName = "DyingMonster",
             MonsterType = -1,
             Hp = 10,
@@ -85,7 +86,8 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = CElement.FIRE.VALUE
+            Week = CElement.FIRE.VALUE,
+            BetScore = 1000
         };
     }
 }

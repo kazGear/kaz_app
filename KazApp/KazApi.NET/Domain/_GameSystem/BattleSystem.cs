@@ -25,7 +25,7 @@ namespace KazApi.Domain._GameSystem
         }
 
         /// <summary>
-        /// モンスターをランダムに選出する
+        /// 戦闘モンスターをランダムに選出する
         /// </summary>
         public static IEnumerable<T> MonsterSelector<T>(IEnumerable<T> monsters, int needAmount)
         {
