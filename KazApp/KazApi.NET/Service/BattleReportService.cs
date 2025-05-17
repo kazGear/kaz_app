@@ -3,7 +3,7 @@ using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class BattleReportService
     {
@@ -58,7 +58,7 @@ namespace KazApi.Controller.Service
                 IEnumerable<MonsterReportDTO> report
                     = _posgre.Select<MonsterReportDTO>(
                         ReportSQL.SelectMonsterReport(param), param);
-                                
+
                 return report;
             }
             catch (Exception)
@@ -87,7 +87,7 @@ namespace KazApi.Controller.Service
                             param.from,
                             param.to
                             ), param);
-                           
+
                 return report;
             }
             catch (Exception)

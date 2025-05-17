@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using KazApi.Controller.Service;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 using KazApi.Domain.DTO;
 using System.Transactions;
+using KazApi.Service;
 
 namespace KazApi.Controller
 {

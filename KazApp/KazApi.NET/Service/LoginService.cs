@@ -1,7 +1,7 @@
 ﻿using KazApi.Domain._User;
 using KazApi.Repository;
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class LoginService
     {

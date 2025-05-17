@@ -2,7 +2,7 @@
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class CommonService
     {
@@ -21,7 +21,7 @@ namespace KazApi.Controller.Service
             var param = new
             {
                 login_id = loginId,
-                image = image,
+                image,
             };
             _posgre.Execute(CommonSQL.UpdateUserImage(), param);
         }

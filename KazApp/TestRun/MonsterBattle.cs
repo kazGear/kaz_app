@@ -6,7 +6,7 @@ using KazApi.Domain._Monster._State;
 using KazApi.Domain._Monster;
 using KazApi.Domain.DTO;
 using System.Text;
-using KazApi.Controller.Service;
+using KazApi.Service;
 
 namespace TestRun
 {

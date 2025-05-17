@@ -1,9 +1,8 @@
-﻿
-using KazApi.Domain.DTO;
+﻿using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class EditService
     {
@@ -38,12 +37,12 @@ namespace KazApi.Controller.Service
             {
                 var param = new
                 {
-                    monster_id   = monster.MonsterId,
+                    monster_id = monster.MonsterId,
                     monster_name = monster.AfterName,
-                    hp           = monster.AfterHp,
-                    attack       = monster.AfterAttack,
-                    speed        = monster.AfterSpeed,
-                    week         = monster.AfterWeek
+                    hp = monster.AfterHp,
+                    attack = monster.AfterAttack,
+                    speed = monster.AfterSpeed,
+                    week = monster.AfterWeek
                 };
                 _posgre.Execute(EditSQL.UpdateMonsterStatus(), param);
             }
@@ -85,7 +84,7 @@ namespace KazApi.Controller.Service
                     var param = new
                     {
                         myskill_id = skill.MySkillIds[i],
-                        skill_id   = skill.SkillIds[i],
+                        skill_id = skill.SkillIds[i],
                     };
                     _posgre.Execute(EditSQL.UpdateMonsterSkills(), param);
                 }

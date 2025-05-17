@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using KazApi.Controller.Service;
 using KazApi.Common._Filter;
 using KazApi.Domain.DTO;
+using KazApi.Service;
 
 namespace KazApi.Controller
 {

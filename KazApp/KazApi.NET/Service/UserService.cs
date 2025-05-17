@@ -4,7 +4,7 @@ using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class UserService
     {
@@ -132,7 +132,7 @@ namespace KazApi.Controller.Service
             var param = new
             {
                 login_id = loginId,
-                cash = cashAfterPurchase 
+                cash = cashAfterPurchase
             };
             _posgre.Execute(UserSQL.Purchase(), param);
         }
@@ -149,7 +149,7 @@ namespace KazApi.Controller.Service
                     login_id = loginId,
                     wins = hit ? 1 : 0,
                     losses = hit ? 0 : 1,
-                    cash = hit ? Math.Floor(betGil * betRate) : (-1 * betGil),
+                    cash = hit ? Math.Floor(betGil * betRate) : -1 * betGil,
                     wins_get_cash = hit ? Math.Floor(betGil * betRate) : 0,
                     losses_lost_cash = hit ? 0 : betGil,
                 };

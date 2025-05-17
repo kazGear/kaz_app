@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using KazApi.Controller.Service;
 using KazApi.Domain.DTO;
 using System.Transactions;
 using KazApi.Domain._Factory;
+using KazApi.Service;
 
 namespace KazApi.Controller
 {

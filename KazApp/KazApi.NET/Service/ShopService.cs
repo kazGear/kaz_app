@@ -2,7 +2,7 @@
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class ShopService
     {
@@ -34,12 +34,12 @@ namespace KazApi.Controller.Service
         /// <summary>
         /// 店舗リスト取得
         /// </summary>
-        public IEnumerable<ItemDTO> SelectShopItems(string loginId , string shopId)
+        public IEnumerable<ItemDTO> SelectShopItems(string loginId, string shopId)
         {
-            var param = new 
+            var param = new
             {
                 login_id = loginId,
-                shop_id = shopId 
+                shop_id = shopId
             };
             return _posgre.Select<ItemDTO>(ShopSQL.SelectItems(), param);
         }
@@ -50,7 +50,7 @@ namespace KazApi.Controller.Service
         public IEnumerable<ShopDTO> ExistsUsableShop(string loginId)
         {
             var param = new { login_id = loginId };
-            return _posgre.Select<ShopDTO>(ShopSQL.ExistsUsableShop(), param);                        
+            return _posgre.Select<ShopDTO>(ShopSQL.ExistsUsableShop(), param);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace KazApi.Controller.Service
         {
             foreach (ShopDTO shop in shops)
             {
-                var param = new 
+                var param = new
                 {
                     login_id = loginId,
                     shop_id = shop.ShopId

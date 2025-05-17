@@ -1,6 +1,5 @@
 ﻿using KazApi.Repository;
 using System.Text;
-using KazApi.Controller.Service;
 using CSLib.Lib;
 using KazApi.Domain._Factory;
 using KazApi.Domain._GameSystem;
@@ -8,6 +7,7 @@ using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._State;
 using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
+using KazApi.Service;
 
 Console.WriteLine("Auto battle start...");
 

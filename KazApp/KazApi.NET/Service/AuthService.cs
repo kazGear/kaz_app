@@ -3,7 +3,7 @@ using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class AuthService
     {

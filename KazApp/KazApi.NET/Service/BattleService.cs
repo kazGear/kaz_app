@@ -7,7 +7,7 @@ using KazApi.Repository.sql;
 using System.Transactions;
 
 
-namespace KazApi.Controller.Service
+namespace KazApi.Service
 {
     public class BattleService
     {
@@ -37,7 +37,7 @@ namespace KazApi.Controller.Service
         /// </summary>
         public IEnumerable<MonsterDTO> SelectMonsters(string? loginId = null)
         {
-            var param = new　{ login_id = loginId };
+            var param = new { login_id = loginId };
             return _posgre.Select<MonsterDTO>(MonsterSQL.SelectMonsters(), param);
         }
 
