@@ -7,6 +7,7 @@ using KazApi.Domain._Monster;
 using KazApi.Domain.DTO;
 using System.Text;
 using KazApi.Service;
+using KazApi.Common._Filter;
 
 namespace TestRun
 {

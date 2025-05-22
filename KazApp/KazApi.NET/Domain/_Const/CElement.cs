@@ -1,4 +1,7 @@
-﻿namespace KazApi.Domain._Const
+﻿using System.Reflection;
+using System.Security.Policy;
+
+namespace KazApi.Domain._Const
 {
     /// <summary>
     /// 自然属性定数
@@ -38,5 +41,23 @@
         /// 闇
         /// </summary>
         public static readonly CElement DARK = new(6, "DARK");
+
+        /// <summary>
+        /// フィールド情報の一覧を取得
+        /// </summary>
+        public static IReadOnlyCollection<int> GetValues()
+        {
+            IReadOnlyCollection<int> values = new HashSet<int>()
+            {
+                NONE.VALUE,
+                FIRE.VALUE,
+                THUNDER.VALUE,
+                ICE.VALUE,
+                EARTH.VALUE,
+                HOLY.VALUE,
+                DARK.VALUE
+            };
+            return values;
+        }
     }
 }
