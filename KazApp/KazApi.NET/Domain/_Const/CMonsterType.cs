@@ -49,7 +49,9 @@
         public static readonly CMonsterType ボルダー = new("monsterType031", "ボルダー");
         public static readonly CMonsterType パンプキンボム = new("monsterType032", "パンプキンボム");
 
-        // ユーザ登録初期から登場するモンスターたち
+        /// <summary>
+        /// ユーザ登録初期から登場するモンスターたち 
+        /// </summary>
         public static readonly IList<CMonsterType> START_UP = new List<CMonsterType>
         {
             ラビ,
@@ -63,6 +65,55 @@
             マイコニド,
             ニードルバード
         };
+
+        /// <summary>
+        /// フィールド情報の一覧を取得
+        /// </summary>
+        public static IReadOnlyCollection<string> GetValues()
+        {
+            IReadOnlyCollection<string> values = new HashSet<string>()
+            {
+                キラービー.VALUE,
+                カーミラ.VALUE,
+                デーモン.VALUE,
+                ゴブリン.VALUE,
+                マシンゴーレム.VALUE,
+
+                ハーピー.VALUE,
+                アーマーナイト.VALUE,
+                マジシャン.VALUE,
+                マイコニド.VALUE,
+                ニードルバード.VALUE,
+
+                プチドラゴン.VALUE,
+                ポト.VALUE,
+                プリースト.VALUE,
+                ラビ.VALUE,
+                グリーンスライム.VALUE,
+
+                イビルソード.VALUE,
+                ウルフ.VALUE,
+                ダック.VALUE,
+                モールベア.VALUE,
+                ギャルビー.VALUE,
+
+                サハギン.VALUE,
+                クロウラー.VALUE,
+                パックン.VALUE,
+                チビデビル.VALUE,
+                オーガボックス.VALUE,
+
+                バレッテ.VALUE,
+                バシリスク.VALUE,
+                スペクター.VALUE,
+                ユニコーンヘッド.VALUE,
+                シェイプシフター.VALUE,
+
+                ボルダー.VALUE,
+                パンプキンボム.VALUE,
+            };
+            return values;
+        }
 
     }
 }

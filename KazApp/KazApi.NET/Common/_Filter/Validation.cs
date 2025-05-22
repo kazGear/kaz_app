@@ -4,8 +4,7 @@ namespace KazApi.Common._Filter
 {
     public static class Validation
     {
-        private static readonly string _messageUndefinedElement
-            = "定義されていない属性です。";
+        private static readonly string _messageUndefinedElement = "定義されていない属性です。";
 
         public static int Attack(int attack)
         {
@@ -51,6 +50,16 @@ namespace KazApi.Common._Filter
                 throw new Exception($"モンスター名は{maxLength}文字以内にしてください。");
 
             return monsterName;
+        }
+
+        public static string MonsterType(string monsterType)
+        {
+            IReadOnlyCollection<string> values = CMonsterType.GetValues();
+
+            if (!values.Contains(monsterType))
+                throw new Exception("未定義のモンスタータイプです。");
+
+            return monsterType;
         }
 
         public static int Speed(int speed)
