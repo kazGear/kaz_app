@@ -1,6 +1,4 @@
 ﻿using KazApi.Domain._Const;
-using KazApi.Domain._Monster;
-using KazApi.Domain._Monster._State;
 using System.Text.RegularExpressions;
 
 namespace KazApi.Common._Filter
@@ -11,11 +9,21 @@ namespace KazApi.Common._Filter
         private static readonly string _messageUndefinedSkill = "定義されていないスキルです。";
         private static readonly string _messageUndefinedState = "定義されていない状態です。";
 
+        private static string MessageSetWithinRange(string target, int min, int max)
+        {
+            return $"{target}は{min}-{max}の範囲で設定してください。";
+        }
+        private static string MessageSetWithinRange(string target, double min, double max)
+        {
+            return $"{target}は{min}-{max}の範囲で設定してください。";
+        }
+
         public static int Attack(int attack)
         {
             int min = 0;
             int max = 255;
-            string message = $"攻撃力は{min}-{max}の範囲で設定してください。";
+
+            string message = MessageSetWithinRange("攻撃力", min, max);
 
             if (attack < min) throw new Exception(message);
             if (max < attack) throw new Exception(message);
@@ -37,7 +45,8 @@ namespace KazApi.Common._Filter
         {
             int min = 0;
             int max = 99;
-            string message = $"コード値は{min}-{max}の範囲で設定してください。";
+
+            string message = MessageSetWithinRange("コード値", min, max);
 
             if (codeValue < min) throw new Exception(message);
             if (max < codeValue) throw new Exception(message);
@@ -49,7 +58,8 @@ namespace KazApi.Common._Filter
         {
             double min = 0.0;
             double max = 1.0;
-            string message = $"クリティカル率は{min}-{max}の範囲で設定してください。";
+
+            string message = MessageSetWithinRange("クリティカル率", min, max);
 
             if (critical < min) throw new Exception(message);
             if (max < critical) throw new Exception(message);
@@ -61,7 +71,8 @@ namespace KazApi.Common._Filter
         {
             double min = 0.0;
             double max = 1.0;
-            string message = $"素早さは{min}-{max}の範囲で設定してください。";
+         
+            string message = MessageSetWithinRange("回避率", min, max);
 
             if (dodge < min) throw new Exception(message);
             if (max < dodge) throw new Exception(message);
@@ -73,7 +84,8 @@ namespace KazApi.Common._Filter
         {
             double min = 0.0;
             double max = 1.0;
-            string message = $"ヒット率は{min}-{max}の範囲で設定してください。";
+
+            string message = MessageSetWithinRange("ヒット率", min, max);
 
             if (hitRate < min) throw new Exception(message);
             if (max < hitRate) throw new Exception(message);
@@ -85,7 +97,8 @@ namespace KazApi.Common._Filter
         {
             int min = 0;
             int max = 999;
-            string message = $"HPは{min}-{max}の範囲で設定してください。";
+
+            string message = MessageSetWithinRange("HP", min, max);
 
             if (hp < min) throw new Exception(message);
             if (max < hp) throw new Exception(message);
@@ -118,7 +131,7 @@ namespace KazApi.Common._Filter
             int maxLength = 15;
 
             if (maxLength < name.Length)
-                throw new Exception($"名称は{maxLength}文字以内にしてください。");
+                throw new Exception($"名称は{maxLength}文字以内で設定してください。");
 
             return name;
         }
@@ -146,7 +159,7 @@ namespace KazApi.Common._Filter
             int maxLength = 5;
 
             if (maxLength < shortName.Length)
-                throw new Exception($"省略名は{maxLength}文字以内にしてください。");
+                throw new Exception($"省略名は{maxLength}文字以内で設定してください。");
 
             return shortName;
         }
@@ -185,7 +198,8 @@ namespace KazApi.Common._Filter
         {
             int min = 0;
             int max = 255;
-            string message = $"素早さは{min}-{max}の範囲で設定してください。";
+
+            string message = MessageSetWithinRange("素早さ", min, max);
 
             if (speed < min) throw new Exception(message);
             if (max < speed) throw new Exception(message);
