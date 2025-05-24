@@ -1,4 +1,6 @@
 ﻿using KazApi.Domain._Const;
+using KazApi.Domain._Monster;
+using KazApi.Domain._Monster._State;
 using System.Text.RegularExpressions;
 
 namespace KazApi.Common._Filter
@@ -8,7 +10,6 @@ namespace KazApi.Common._Filter
         private static readonly string _messageUndefinedElement = "定義されていない属性です。";
         private static readonly string _messageUndefinedSkill = "定義されていないスキルです。";
         private static readonly string _messageUndefinedState = "定義されていない状態です。";
-        private static readonly int _maxLengthName = 10;
 
         public static int Attack(int attack)
         {
@@ -22,6 +23,40 @@ namespace KazApi.Common._Filter
             return attack;
         }
 
+        public static string CodeId(string codeId)
+        {
+            string pattern = @"^code\d{3}$";
+
+            if (!Regex.IsMatch(codeId, pattern))
+                throw new Exception("コードIDのパターンが異なります。");
+
+            return codeId;
+        }
+
+        public static int CodeValue(int codeValue)
+        {
+            int min = 0;
+            int max = 99;
+            string message = $"コード値は{min}-{max}の範囲で設定してください。";
+
+            if (codeValue < min) throw new Exception(message);
+            if (max < codeValue) throw new Exception(message);
+
+            return codeValue;
+        }
+
+        public static double Critical(double critical)
+        {
+            double min = 0.0;
+            double max = 1.0;
+            string message = $"クリティカル率は{min}-{max}の範囲で設定してください。";
+
+            if (critical < min) throw new Exception(message);
+            if (max < critical) throw new Exception(message);
+
+            return critical;
+        }
+
         public static double Dodge(double dodge)
         {
             double min = 0.0;
@@ -32,7 +67,19 @@ namespace KazApi.Common._Filter
             if (max < dodge) throw new Exception(message);
 
             return dodge;
-        }        
+        }
+
+        public static double HitRate(double hitRate)
+        {
+            double min = 0.0;
+            double max = 1.0;
+            string message = $"ヒット率は{min}-{max}の範囲で設定してください。";
+
+            if (hitRate < min) throw new Exception(message);
+            if (max < hitRate) throw new Exception(message);
+
+            return hitRate;
+        }
 
         public static int Hp(int hp)
         {
@@ -46,6 +93,16 @@ namespace KazApi.Common._Filter
             return hp;
         }
 
+        public static string ItemId(string itemId)
+        {
+            string pattern = @"^[a-zA-Z]+\d{3}$";
+
+            if (!Regex.IsMatch(itemId, pattern))
+                throw new Exception("アイテムIDのパターンが異なります。");
+
+            return itemId;
+        }
+
         public static string MonsterId(string monsterId)
         {
             string pattern = @"^monster\d{3}$";
@@ -56,12 +113,42 @@ namespace KazApi.Common._Filter
             return monsterId;
         }
 
-        public static string MonsterName(string monsterName)
+        public static string Name(string name)
         {
-            if (_maxLengthName < monsterName.Length)
-                throw new Exception($"モンスター名は{_maxLengthName}文字以内にしてください。");
+            int maxLength = 15;
 
-            return monsterName;
+            if (maxLength < name.Length)
+                throw new Exception($"名称は{maxLength}文字以内にしてください。");
+
+            return name;
+        }
+
+        public static int Price(int price)
+        {
+            if (price < 0)
+                throw new Exception("価格は０円以上で設定してください。");
+
+            return price;
+        }
+
+        public static string ShopId(string shopId)
+        {
+            string pattern = @"^shop\d{3}$";
+
+            if (!Regex.IsMatch(shopId, pattern))
+                throw new Exception("ショップIDのパターンが異なります。");
+
+            return shopId;
+        }
+
+        public static string ShortName(string shortName)
+        {
+            int maxLength = 5;
+
+            if (maxLength < shortName.Length)
+                throw new Exception($"省略名は{maxLength}文字以内にしてください。");
+
+            return shortName;
         }
 
         public static string MonsterType(string monsterType)
@@ -82,14 +169,6 @@ namespace KazApi.Common._Filter
                 throw new Exception("スキルIDのパターンが異なります。");
 
             return skillId;
-        }
-
-        public static string SkillName(string skillName)
-        {
-            if (_maxLengthName < skillName.Length)
-                throw new Exception($"モンスター名は{_maxLengthName}文字以内にしてください。");
-
-            return skillName;
         }
 
         public static int SkillType(int skillType)
