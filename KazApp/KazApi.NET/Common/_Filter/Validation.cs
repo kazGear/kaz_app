@@ -18,6 +18,11 @@ namespace KazApi.Common._Filter
             return $"{target}は{min}-{max}の範囲で設定してください。";
         }
 
+        private static string MessageNotMatching(string target)
+        {
+            return $"{target}のパターンが異なっています。";
+        }
+
         public static int Attack(int attack)
         {
             int min = 0;
@@ -36,7 +41,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^code\d{3}$";
 
             if (!Regex.IsMatch(codeId, pattern))
-                throw new Exception("コードIDのパターンが異なります。");
+                throw new Exception(MessageNotMatching("コードID"));
 
             return codeId;
         }
@@ -111,7 +116,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^[a-zA-Z]+\d{3}$";
 
             if (!Regex.IsMatch(itemId, pattern))
-                throw new Exception("アイテムIDのパターンが異なります。");
+                throw new Exception(MessageNotMatching("アイテムID"));
 
             return itemId;
         }
@@ -121,7 +126,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^monster\d{3}$";
 
             if (!Regex.IsMatch(monsterId, pattern))
-                throw new Exception("モンスターIDのパターンが異なります。");
+                throw new Exception(MessageNotMatching("モンスターID"));
 
             return monsterId;
         }
@@ -149,7 +154,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^shop\d{3}$";
 
             if (!Regex.IsMatch(shopId, pattern))
-                throw new Exception("ショップIDのパターンが異なります。");
+                throw new Exception(MessageNotMatching("ショップID"));
 
             return shopId;
         }
@@ -179,7 +184,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^skill\d{3}$";
 
             if (!Regex.IsMatch(skillId, pattern))
-                throw new Exception("スキルIDのパターンが異なります。");
+                throw new Exception(MessageNotMatching("スキルID"));
 
             return skillId;
         }
