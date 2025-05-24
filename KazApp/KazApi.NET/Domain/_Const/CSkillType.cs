@@ -46,5 +46,25 @@
         /// 何もしない
         /// </summary>
         public static readonly CSkillType NOT_MOVE = new(8, "NOT_MOVE");
+
+        /// <summary>
+        /// フィールド情報の一覧を取得
+        /// </summary>
+        public static IReadOnlyCollection<int> GetValues()
+        {
+            IReadOnlyCollection<int> values = new HashSet<int>()
+            {
+                NONE.VALUE,
+                BLOW.VALUE,
+                SLASH.VALUE,
+                ATTACK_MAGIC.VALUE,
+                ATTACK_RATE.VALUE,
+                DEAD.VALUE,
+                HEAL.VALUE,
+                STATE.VALUE,
+                NOT_MOVE.VALUE
+            };
+            return values;
+        }
     }
 }

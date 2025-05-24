@@ -1,4 +1,7 @@
 ﻿using KazApi.Domain.DTO;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
+using Mono.TextTemplating;
+using System.Security.Policy;
 
 namespace KazApi.Domain._Const
 {
@@ -53,6 +56,28 @@ namespace KazApi.Domain._Const
         /// 猛毒
         /// </summary>
         public static readonly CStateType DEADLY_POISON = new(9, "猛毒", "猛");
+
+        /// <summary>
+        /// フィールド情報の一覧を取得
+        /// </summary>
+        public static IReadOnlyCollection<int> GetValues()
+        {
+            IReadOnlyCollection<int> values = new HashSet<int>()
+            {
+                NONE.VALUE,
+                POISON.VALUE,
+                SLEEP.VALUE,
+                CHARM.VALUE,
+                SLOW.VALUE,
+                POWERUP.VALUE,
+                DODGEUP.VALUE,
+                CRITICALUP.VALUE,
+                AUTOHEAL.VALUE,
+                DEADLY_POISON.VALUE
+            };
+            return values;
+        }
+
         /// <summary>
         /// 状態名の詰め合わせを取得
         /// </summary>

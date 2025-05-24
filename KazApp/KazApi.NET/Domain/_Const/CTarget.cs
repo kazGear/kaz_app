@@ -1,4 +1,6 @@
-﻿namespace KazApi.Domain._Const
+﻿using KazApi.Domain._Monster._State;
+
+namespace KazApi.Domain._Const
 {
     public class CTarget : Enumeration<int>
     {
@@ -43,5 +45,25 @@
         /// 味方ランダム・味方全体
         /// </summary>
         public static readonly CTarget FRIEND_RANDOM_OR_ALL = new(8, "FRIEND_RANDOM_OR_ALL");
+
+        /// <summary>
+        /// フィールド情報の一覧を取得
+        /// </summary>
+        public static IReadOnlyCollection<int> GetValues()
+        {
+            IReadOnlyCollection<int> values = new HashSet<int>()
+            {
+                NONE.VALUE,
+                ENEMY_RANDOM.VALUE,
+                ENEMY_ALL.VALUE,
+                ENEMY_RANDOM_OR_ALL.VALUE,
+                ENEMY_RANDOM_SOME_TIMES.VALUE,
+                ME.VALUE,
+                FRIEND_RANDOM.VALUE,
+                FRIEND_ALL.VALUE,
+                FRIEND_RANDOM_OR_ALL.VALUE
+            };
+            return values;
+        }
     }
 }
