@@ -9,16 +9,16 @@ namespace KazApi.Common._Filter
         private static readonly string _messageUndefinedSkill = "定義されていないスキルです。";
         private static readonly string _messageUndefinedState = "定義されていない状態です。";
 
-        private static string MessageSetWithinRange(string target, int min, int max)
+        private static string GetMessageSetWithinRange(string target, int min, int max)
         {
             return $"{target}は{min}-{max}の範囲で設定してください。";
         }
-        private static string MessageSetWithinRange(string target, double min, double max)
+        private static string GetMessageSetWithinRange(string target, double min, double max)
         {
             return $"{target}は{min}-{max}の範囲で設定してください。";
         }
 
-        private static string MessageNotMatching(string target)
+        private static string GetMessageNotMatching(string target)
         {
             return $"{target}のパターンが異なっています。";
         }
@@ -28,7 +28,7 @@ namespace KazApi.Common._Filter
             int min = 0;
             int max = 255;
 
-            string message = MessageSetWithinRange("攻撃力", min, max);
+            string message = GetMessageSetWithinRange("攻撃力", min, max);
 
             if (attack < min) throw new Exception(message);
             if (max < attack) throw new Exception(message);
@@ -41,7 +41,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^code\d{3}$";
 
             if (!Regex.IsMatch(codeId, pattern))
-                throw new Exception(MessageNotMatching("コードID"));
+                throw new Exception(GetMessageNotMatching("コードID"));
 
             return codeId;
         }
@@ -51,7 +51,7 @@ namespace KazApi.Common._Filter
             int min = 0;
             int max = 99;
 
-            string message = MessageSetWithinRange("コード値", min, max);
+            string message = GetMessageSetWithinRange("コード値", min, max);
 
             if (codeValue < min) throw new Exception(message);
             if (max < codeValue) throw new Exception(message);
@@ -64,7 +64,7 @@ namespace KazApi.Common._Filter
             double min = 0.0;
             double max = 1.0;
 
-            string message = MessageSetWithinRange("クリティカル率", min, max);
+            string message = GetMessageSetWithinRange("クリティカル率", min, max);
 
             if (critical < min) throw new Exception(message);
             if (max < critical) throw new Exception(message);
@@ -77,7 +77,7 @@ namespace KazApi.Common._Filter
             double min = 0.0;
             double max = 1.0;
          
-            string message = MessageSetWithinRange("回避率", min, max);
+            string message = GetMessageSetWithinRange("回避率", min, max);
 
             if (dodge < min) throw new Exception(message);
             if (max < dodge) throw new Exception(message);
@@ -90,7 +90,7 @@ namespace KazApi.Common._Filter
             double min = 0.0;
             double max = 1.0;
 
-            string message = MessageSetWithinRange("ヒット率", min, max);
+            string message = GetMessageSetWithinRange("ヒット率", min, max);
 
             if (hitRate < min) throw new Exception(message);
             if (max < hitRate) throw new Exception(message);
@@ -103,7 +103,7 @@ namespace KazApi.Common._Filter
             int min = 0;
             int max = 999;
 
-            string message = MessageSetWithinRange("HP", min, max);
+            string message = GetMessageSetWithinRange("HP", min, max);
 
             if (hp < min) throw new Exception(message);
             if (max < hp) throw new Exception(message);
@@ -116,7 +116,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^[a-zA-Z]+\d{3}$";
 
             if (!Regex.IsMatch(itemId, pattern))
-                throw new Exception(MessageNotMatching("アイテムID"));
+                throw new Exception(GetMessageNotMatching("アイテムID"));
 
             return itemId;
         }
@@ -126,7 +126,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^monster\d{3}$";
 
             if (!Regex.IsMatch(monsterId, pattern))
-                throw new Exception(MessageNotMatching("モンスターID"));
+                throw new Exception(GetMessageNotMatching("モンスターID"));
 
             return monsterId;
         }
@@ -154,7 +154,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^shop\d{3}$";
 
             if (!Regex.IsMatch(shopId, pattern))
-                throw new Exception(MessageNotMatching("ショップID"));
+                throw new Exception(GetMessageNotMatching("ショップID"));
 
             return shopId;
         }
@@ -184,7 +184,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^skill\d{3}$";
 
             if (!Regex.IsMatch(skillId, pattern))
-                throw new Exception(MessageNotMatching("スキルID"));
+                throw new Exception(GetMessageNotMatching("スキルID"));
 
             return skillId;
         }
@@ -204,7 +204,7 @@ namespace KazApi.Common._Filter
             int min = 0;
             int max = 255;
 
-            string message = MessageSetWithinRange("素早さ", min, max);
+            string message = GetMessageSetWithinRange("素早さ", min, max);
 
             if (speed < min) throw new Exception(message);
             if (max < speed) throw new Exception(message);
