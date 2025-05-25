@@ -139,7 +139,7 @@ namespace KazApi.Common._Filter
 
         public static string LoginId(string loginId)
         {
-            string pattern = @"^[a-zA-Z-_]+\d{4,15}$";
+            string pattern = @"^[a-zA-Z0-9-_]{4,15}$";
 
             if (!Regex.IsMatch(loginId, pattern))
                 throw new Exception(GetMessageNotMatching("ログインID"));

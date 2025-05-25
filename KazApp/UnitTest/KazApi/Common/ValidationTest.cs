@@ -194,5 +194,66 @@ namespace UnitTest.KazApi.Common
         {
             Assert.Throws<Exception>(() => Validation.ItemId(itemId));
         }
+
+        [Theory]
+        [DisplayName("ログインID OK")]
+        [InlineData("user")]
+        [InlineData("_user_")]
+        [InlineData("-user-")]
+        [InlineData("User001")]
+        [InlineData("001User")]
+        [InlineData("123456789012345")]
+        public void LoginIdOkTest(string loginId)
+        {
+            Validation.LoginId(loginId);
+        }
+
+        [Theory]
+        [DisplayName("ログイン NG")]
+        [InlineData("123")]
+        [InlineData("1234567890123456")]
+        [InlineData("ゆーざー")]
+        [InlineData("ユーザー")]
+        public void LoginIdNgTest(string itemId)
+        {
+            Assert.Throws<Exception>(() => Validation.LoginId(itemId));
+        }
+
+        [Theory]
+        [DisplayName("モンスターID OK")]
+        [InlineData("monster123")]
+        [InlineData("monster999")]
+        public void MonsterIdOkTest(string monsterId)
+        {
+            Validation.MonsterId(monsterId);
+        }
+
+        [Theory]
+        [DisplayName("モンスターID NG")]
+        [InlineData("onster001")]
+        [InlineData("Monster001")]
+        [InlineData("monster0001")]
+        [InlineData("001monster")]
+        public void MonsterIdNgTest(string monsterId)
+        {
+            Assert.Throws<Exception>(() => Validation.MonsterId(monsterId));
+        }
+
+        [Theory]
+        [DisplayName("モンスタータイプ OK")]
+        [InlineData("monsterType001")]
+        [InlineData("monsterType002")]
+        public void MonsterTypeOkTest(string monsterType)
+        {
+            Validation.MonsterType(monsterType);
+        }
+
+        [Theory]
+        [DisplayName("モンスタータイプ NG")]
+        [InlineData("monsterType")]
+        public void MonsterTypeNgTest(string monsterType)
+        {
+            Assert.Throws<Exception>(() => Validation.MonsterType(monsterType));
+        }
     }
 }
