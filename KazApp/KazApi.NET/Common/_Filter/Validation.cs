@@ -23,6 +23,14 @@ namespace KazApi.Common._Filter
             return $"{target}のパターンが異なっています。";
         }
 
+        public static int Amount(int amount)
+        {
+            if (amount < 0)
+                throw new Exception($"金額は{amount}円以上で設定してください。");
+
+            return amount;
+        }
+
         public static int Attack(int attack)
         {
             int min = 0;
@@ -57,6 +65,14 @@ namespace KazApi.Common._Filter
             if (max < codeValue) throw new Exception(message);
 
             return codeValue;
+        }
+
+        public static int Count(int count)
+        {
+            if (count < 0)
+                throw new Exception($"カウントは{count}以上で設定してください。");
+
+            return count;
         }
 
         public static double Critical(double critical)
@@ -121,6 +137,16 @@ namespace KazApi.Common._Filter
             return itemId;
         }
 
+        public static string LoginId(string loginId)
+        {
+            string pattern = @"^[a-zA-Z-_]+\d{4,15}$";
+
+            if (!Regex.IsMatch(loginId, pattern))
+                throw new Exception(GetMessageNotMatching("ログインID"));
+
+            return loginId;
+        }
+
         public static string MonsterId(string monsterId)
         {
             string pattern = @"^monster\d{3}$";
@@ -131,6 +157,26 @@ namespace KazApi.Common._Filter
             return monsterId;
         }
 
+        public static string MonsterType(string monsterType)
+        {
+            IReadOnlyCollection<string> values = CMonsterType.GetValues();
+
+            if (!values.Contains(monsterType))
+                throw new Exception("未定義のモンスタータイプです。");
+
+            return monsterType;
+        }
+
+        public static string MySkillId(string mySkillId)
+        {
+            string pattern = @"^myskill\d{4}$";
+
+            if (!Regex.IsMatch(mySkillId, pattern))
+                throw new Exception(GetMessageNotMatching("マイスキルID"));
+
+            return mySkillId;
+        }
+
         public static string Name(string name)
         {
             int maxLength = 15;
@@ -139,14 +185,6 @@ namespace KazApi.Common._Filter
                 throw new Exception($"名称は{maxLength}文字以内で設定してください。");
 
             return name;
-        }
-
-        public static int Price(int price)
-        {
-            if (price < 0)
-                throw new Exception("価格は０円以上で設定してください。");
-
-            return price;
         }
 
         public static string ShopId(string shopId)
@@ -167,16 +205,6 @@ namespace KazApi.Common._Filter
                 throw new Exception($"省略名は{maxLength}文字以内で設定してください。");
 
             return shortName;
-        }
-
-        public static string MonsterType(string monsterType)
-        {
-            IReadOnlyCollection<string> values = CMonsterType.GetValues();
-
-            if (!values.Contains(monsterType))
-                throw new Exception("未定義のモンスタータイプです。");
-
-            return monsterType;
         }
 
         public static string SkillId(string skillId)
