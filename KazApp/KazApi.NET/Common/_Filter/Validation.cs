@@ -44,6 +44,19 @@ namespace KazApi.Common._Filter
             return attack;
         }
 
+        public static int BattleReportSerial(int serial)
+        {
+            int min = 1;
+            int max = 6;
+
+            string message = GetMessageSetWithinRange("バトルレポートの連番", min, max);
+
+            if (serial < min) throw new Exception(message);
+            if (max < serial) throw new Exception(message);
+
+            return serial;
+        }
+
         public static string CodeId(string codeId)
         {
             string pattern = @"^code\d{3}$";

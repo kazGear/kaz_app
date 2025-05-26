@@ -42,6 +42,24 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
+        [DisplayName("バトルレポートの連番 OK")]
+        [InlineData(1)]
+        [InlineData(6)]
+        public void BattleReportSerialOkTest(int serial)
+        {
+            Validation.BattleReportSerial(serial);
+        }
+
+        [Theory]
+        [DisplayName("バトルレポートの連番 NG")]
+        [InlineData(0)]
+        [InlineData(7)]
+        public void BattleReportSerialNgTest(int serial)
+        {
+            Assert.Throws<Exception>(() => Validation.BattleReportSerial(serial));
+        }
+
+        [Theory]
         [DisplayName("コードID OK")]
         [InlineData("code000")]
         [InlineData("code999")]
