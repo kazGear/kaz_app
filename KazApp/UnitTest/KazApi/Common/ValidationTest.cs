@@ -36,7 +36,7 @@ namespace UnitTest.KazApi.Common
         [DisplayName("攻撃力 NG")]
         [InlineData(-1)]
         [InlineData(256)]
-        public void AttackNg(int attack)
+        public void AttackNgTest(int attack)
         {
             Assert.Throws<Exception>(() => Validation.Attack(attack));
         }
@@ -254,6 +254,154 @@ namespace UnitTest.KazApi.Common
         public void MonsterTypeNgTest(string monsterType)
         {
             Assert.Throws<Exception>(() => Validation.MonsterType(monsterType));
+        }
+
+        [Theory]
+        [DisplayName("マイスキルID OK")]
+        [InlineData("myskill0001")]
+        [InlineData("myskill9999")]
+        public void MySkillIdOkTest(string mySkillId)
+        {
+            Validation.MySkillId(mySkillId);
+        }
+
+        [Theory]
+        [DisplayName("マイスキルID NG")]
+        [InlineData("Myskill0001")]
+        [InlineData("mySkill0001")]
+        [InlineData("myskill00001")]
+        [InlineData("0001myskill")]
+        public void MySkillIdNgTest(string mySkillId)
+        {
+            Assert.Throws<Exception>(() => Validation.MySkillId(mySkillId));
+        }
+
+        [Theory]
+        [DisplayName("名称 OK")]
+        [InlineData("userName")]
+        [InlineData("123456789012345")]
+        [InlineData("ユーザー名ユーザー名ユーザー名")]
+        [InlineData("!#$%&'-^|\\_,./")]
+        public void NameOkTest(string name)
+        {
+            Validation.Name(name);
+        }
+
+        [Theory]
+        [DisplayName("マイスキルID NG")]
+        [InlineData("12345667890123456")]
+        public void NameNgTest(string name)
+        {
+            Assert.Throws<Exception>(() => Validation.Name(name));
+        }
+
+        [Theory]
+        [DisplayName("ショップID OK")]
+        [InlineData("shop001")]
+        [InlineData("shop999")]
+        public void ShopIdOkTest(string shopId)
+        {
+            Validation.ShopId(shopId);
+        }
+
+        [Theory]
+        [DisplayName("ショップID NG")]
+        [InlineData("Shop001")]
+        [InlineData("shop0011")]
+        [InlineData("shop_011")]
+        public void ShopIdNgTest(string shopId)
+        {
+            Assert.Throws<Exception>(() => Validation.ShopId(shopId));
+        }
+
+        [Theory]
+        [DisplayName("スキルタイプ OK")]
+        [InlineData(1)]
+        [InlineData(8)]
+        public void SkillTypeOkTest(int skillType)
+        {
+            Validation.SkillType(skillType);
+        }
+
+        [Theory]
+        [DisplayName("スキルタイプ NG")]
+        [InlineData(-1)]
+        [InlineData(100)]
+        public void SkillTypeNgTest(int skillType)
+        {
+            Assert.Throws<Exception>(() => Validation.SkillType(skillType));
+        }
+
+        [Theory]
+        [DisplayName("スピード OK")]
+        [InlineData(0)]
+        [InlineData(255)]
+        public void SpeedOkTest(int speed)
+        {
+            Validation.Speed(speed);
+        }
+
+        [Theory]
+        [DisplayName("スピード NG")]
+        [InlineData(-1)]
+        [InlineData(256)]
+        public void SpeedNgTest(int speed)
+        {
+            Assert.Throws<Exception>(() => Validation.Speed(speed));
+        }
+
+        [Theory]
+        [DisplayName("状態タイプ OK")]
+        [InlineData(1)]
+        [InlineData(9)]
+        public void StateTypeOkTest(int stateType)
+        {
+            Validation.StateType(stateType);
+        }
+
+        [Theory]
+        [DisplayName("状態タイプ NG")]
+        [InlineData(-1)]
+        [InlineData(100)]
+        public void StateTypeNgTest(int stateType)
+        {
+            Assert.Throws<Exception>(() => Validation.StateType(stateType));
+        }
+
+        [Theory]
+        [DisplayName("ターゲットタイプ OK")]
+        [InlineData(1)]
+        [InlineData(8)]
+        public void TargetTypeOkTest(int targetType)
+        {
+            Validation.TargetType(targetType);
+        }
+
+        [Theory]
+        [DisplayName("ターゲットタイプ NG")]
+        [InlineData(-1)]
+        [InlineData(100)]
+        public void TargetTypeNgTest(int targetType)
+        {
+            Assert.Throws<Exception>(() => Validation.TargetType(targetType));
+        }
+
+        [Theory]
+        [DisplayName("弱点タイプ OK")]
+        [InlineData(1)]
+        [InlineData(5)]
+        public void WeekTypeOkTest(int weekType)
+        {
+            Validation.WeekType(weekType);
+        }
+
+        [Theory]
+        [DisplayName("ターゲットタイプ NG")]
+        [InlineData(-1)]
+        [InlineData(100)]
+        public void WeekTypeNgTest(int weekType)
+        {
+            Assert.Throws<Exception>(() => Validation.WeekType(weekType));
         }
     }
 }

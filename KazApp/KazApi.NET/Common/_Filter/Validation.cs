@@ -252,7 +252,7 @@ namespace KazApi.Common._Filter
 
         public static int TargetType(int stateType)
         {
-            IReadOnlyCollection<int> values = CStateType.GetValues();
+            IReadOnlyCollection<int> values = CTarget.GetValues();
 
             if (!values.Contains(stateType))
                 throw new Exception(_messageUndefinedState);
@@ -260,7 +260,7 @@ namespace KazApi.Common._Filter
             return stateType;
         }
 
-        public static int Week(int week)
+        public static int WeekType(int week)
         {
             IReadOnlyCollection<int> values = CElement.GetValues();
 
