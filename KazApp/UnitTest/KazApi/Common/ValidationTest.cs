@@ -333,6 +333,42 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
+        [DisplayName("省略名 OK")]
+        [InlineData("略")]
+        [InlineData("ryaku")]
+        public void ShortNameOkTest(string shortName)
+        {
+            Validation.ShortName(shortName);
+        }
+
+        [Theory]
+        [DisplayName("省略名 NG")]
+        [InlineData("省略名６文字")]
+        public void ShortNameNgTest(string shortName)
+        {
+            Assert.Throws<Exception>(() => Validation.ShortName(shortName));
+        }
+
+        [Theory]
+        [DisplayName("スキルID OK")]
+        [InlineData("skill001")]
+        [InlineData("skill999")]
+        public void SkillIdOkTest(string skillId)
+        {
+            Validation.SkillId(skillId);
+        }
+
+        [Theory]
+        [DisplayName("マイスキルID NG")]
+        [InlineData("Skill001")]
+        [InlineData("skill9999")]
+        [InlineData("001skill001")]
+        public void SkillIdNgTest(string skillId)
+        {
+            Assert.Throws<Exception>(() => Validation.SkillId(skillId));
+        }
+
+        [Theory]
         [DisplayName("スキルタイプ OK")]
         [InlineData(1)]
         [InlineData(8)]
