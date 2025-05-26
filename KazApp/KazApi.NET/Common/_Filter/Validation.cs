@@ -57,16 +57,6 @@ namespace KazApi.Common._Filter
             return serial;
         }
 
-        public static string CodeId(string codeId)
-        {
-            string pattern = @"^code\d{3}$";
-
-            if (!Regex.IsMatch(codeId, pattern))
-                throw new Exception(GetMessageNotMatching("コードID"));
-
-            return codeId;
-        }
-
         public static int CodeValue(int codeValue)
         {
             int min = 0;
@@ -140,12 +130,12 @@ namespace KazApi.Common._Filter
             return hp;
         }
 
-        public static string ItemId(string itemId)
+        public static string Id(string itemId)
         {
             string pattern = @"^[a-zA-Z]+\d{3}$";
 
             if (!Regex.IsMatch(itemId, pattern))
-                throw new Exception(GetMessageNotMatching("アイテムID"));
+                throw new Exception(GetMessageNotMatching("ID"));
 
             return itemId;
         }
@@ -158,16 +148,6 @@ namespace KazApi.Common._Filter
                 throw new Exception(GetMessageNotMatching("ログインID"));
 
             return loginId;
-        }
-
-        public static string MonsterId(string monsterId)
-        {
-            string pattern = @"^monster\d{3}$";
-
-            if (!Regex.IsMatch(monsterId, pattern))
-                throw new Exception(GetMessageNotMatching("モンスターID"));
-
-            return monsterId;
         }
 
         public static string MonsterType(string monsterType)
@@ -200,16 +180,6 @@ namespace KazApi.Common._Filter
             return name;
         }
 
-        public static string ShopId(string shopId)
-        {
-            string pattern = @"^shop\d{3}$";
-
-            if (!Regex.IsMatch(shopId, pattern))
-                throw new Exception(GetMessageNotMatching("ショップID"));
-
-            return shopId;
-        }
-
         public static string ShortName(string shortName)
         {
             int maxLength = 5;
@@ -218,16 +188,6 @@ namespace KazApi.Common._Filter
                 throw new Exception($"省略名は{maxLength}文字以内で設定してください。");
 
             return shortName;
-        }
-
-        public static string SkillId(string skillId)
-        {
-            string pattern = @"^skill\d{3}$";
-
-            if (!Regex.IsMatch(skillId, pattern))
-                throw new Exception(GetMessageNotMatching("スキルID"));
-
-            return skillId;
         }
 
         public static int SkillType(int skillType)

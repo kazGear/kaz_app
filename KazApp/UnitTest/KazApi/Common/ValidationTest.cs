@@ -60,26 +60,6 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
-        [DisplayName("コードID OK")]
-        [InlineData("code000")]
-        [InlineData("code999")]
-        public void CodeIdOkTest(string codeId)
-        {
-            Validation.CodeId(codeId);
-        }
-
-        [Theory]
-        [DisplayName("コードID NG")]
-        [InlineData("code1111")]
-        [InlineData("code11")]
-        [InlineData("Code001")]
-        [InlineData("codee001")]
-        public void CodeIdNgTest(string codeId)
-        {
-            Assert.Throws<Exception>(() => Validation.CodeId(codeId));
-        }
-
-        [Theory]
         [DisplayName("コード値 OK")]
         [InlineData(0)]
         [InlineData(99)]
@@ -191,26 +171,26 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
-        [DisplayName("アイテムID OK")]
+        [DisplayName("ID OK")]
         [InlineData("item001")]
         [InlineData("item999")]
-        [InlineData("aZ001")]
-        [InlineData("ZZZaaa001")]
-        public void ItemIdOkTest(string itemId)
+        [InlineData("skill999")]
+        [InlineData("monster999")]
+        public void IdOkTest(string id)
         {
-            Validation.ItemId(itemId);
+            Validation.Id(id);
         }
 
         [Theory]
-        [DisplayName("アイテムID NG")]
+        [DisplayName("ID NG")]
         [InlineData("item0011")]
         [InlineData("_item999")]
         [InlineData("Item")]
         [InlineData("001")]
         [InlineData("")]
-        public void ItemIdNgTest(string itemId)
+        public void IdNgTest(string id)
         {
-            Assert.Throws<Exception>(() => Validation.ItemId(itemId));
+            Assert.Throws<Exception>(() => Validation.Id(id));
         }
 
         [Theory]
@@ -235,26 +215,6 @@ namespace UnitTest.KazApi.Common
         public void LoginIdNgTest(string itemId)
         {
             Assert.Throws<Exception>(() => Validation.LoginId(itemId));
-        }
-
-        [Theory]
-        [DisplayName("モンスターID OK")]
-        [InlineData("monster123")]
-        [InlineData("monster999")]
-        public void MonsterIdOkTest(string monsterId)
-        {
-            Validation.MonsterId(monsterId);
-        }
-
-        [Theory]
-        [DisplayName("モンスターID NG")]
-        [InlineData("onster001")]
-        [InlineData("Monster001")]
-        [InlineData("monster0001")]
-        [InlineData("001monster")]
-        public void MonsterIdNgTest(string monsterId)
-        {
-            Assert.Throws<Exception>(() => Validation.MonsterId(monsterId));
         }
 
         [Theory]
@@ -314,25 +274,6 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
-        [DisplayName("ショップID OK")]
-        [InlineData("shop001")]
-        [InlineData("shop999")]
-        public void ShopIdOkTest(string shopId)
-        {
-            Validation.ShopId(shopId);
-        }
-
-        [Theory]
-        [DisplayName("ショップID NG")]
-        [InlineData("Shop001")]
-        [InlineData("shop0011")]
-        [InlineData("shop_011")]
-        public void ShopIdNgTest(string shopId)
-        {
-            Assert.Throws<Exception>(() => Validation.ShopId(shopId));
-        }
-
-        [Theory]
         [DisplayName("省略名 OK")]
         [InlineData("略")]
         [InlineData("ryaku")]
@@ -347,25 +288,6 @@ namespace UnitTest.KazApi.Common
         public void ShortNameNgTest(string shortName)
         {
             Assert.Throws<Exception>(() => Validation.ShortName(shortName));
-        }
-
-        [Theory]
-        [DisplayName("スキルID OK")]
-        [InlineData("skill001")]
-        [InlineData("skill999")]
-        public void SkillIdOkTest(string skillId)
-        {
-            Validation.SkillId(skillId);
-        }
-
-        [Theory]
-        [DisplayName("マイスキルID NG")]
-        [InlineData("Skill001")]
-        [InlineData("skill9999")]
-        [InlineData("001skill001")]
-        public void SkillIdNgTest(string skillId)
-        {
-            Assert.Throws<Exception>(() => Validation.SkillId(skillId));
         }
 
         [Theory]
