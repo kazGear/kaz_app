@@ -5,10 +5,10 @@ namespace KazApi.Common._Filter
 {
     public static class Validation
     {
-        private static readonly string _messageUndefinedElement = "定義されていない属性です。";
-        private static readonly string _messageUndefinedSkill = "定義されていないスキルです。";
-        private static readonly string _messageUndefinedState = "定義されていない状態です。";
-
+        private static string GetMessageUndefined(string item)
+        {
+            return $"定義されていない{item}です。";
+        }
         private static string GetMessageSetWithinRange(string target, int min, int max)
         {
             return $"{target}は{min}-{max}の範囲で設定してください。";
@@ -17,7 +17,6 @@ namespace KazApi.Common._Filter
         {
             return $"{target}は{min}-{max}の範囲で設定してください。";
         }
-
         private static string GetMessageNotMatching(string target)
         {
             return $"{target}のパターンが異なっています。";
@@ -70,7 +69,7 @@ namespace KazApi.Common._Filter
             IReadOnlyCollection<int> values = CElement.GetValues();
 
             if (!values.Contains(week))
-                throw new Exception(_messageUndefinedElement);
+                throw new Exception(GetMessageUndefined("属性"));
 
             return week;
         }
@@ -177,7 +176,7 @@ namespace KazApi.Common._Filter
             IReadOnlyCollection<int> values = CSkillType.GetValues();
 
             if (!values.Contains(skillType))
-                throw new Exception(_messageUndefinedSkill);
+                throw new Exception(GetMessageUndefined("スキル"));
 
             return skillType;
         }
@@ -187,7 +186,7 @@ namespace KazApi.Common._Filter
             IReadOnlyCollection<int> values = CStateType.GetValues();
 
             if (!values.Contains(stateType))
-                throw new Exception(_messageUndefinedState);
+                throw new Exception(GetMessageUndefined("状態"));
 
             return stateType;
         }
@@ -210,7 +209,7 @@ namespace KazApi.Common._Filter
             IReadOnlyCollection<int> values = CTarget.GetValues();
 
             if (!values.Contains(stateType))
-                throw new Exception(_messageUndefinedState);
+                throw new Exception(GetMessageUndefined("ターゲット"));
 
             return stateType;
         }
