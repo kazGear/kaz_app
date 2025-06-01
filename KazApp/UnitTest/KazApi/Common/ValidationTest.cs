@@ -24,24 +24,6 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
-        [DisplayName("攻撃力 OK")]
-        [InlineData(0)]
-        [InlineData(255)]
-        public void AttackOkTest(int attack)
-        {
-            Validation.Attack(attack);
-        }
-
-        [Theory]
-        [DisplayName("攻撃力 NG")]
-        [InlineData(-1)]
-        [InlineData(256)]
-        public void AttackNgTest(int attack)
-        {
-            Assert.Throws<Exception>(() => Validation.Attack(attack));
-        }
-
-        [Theory]
         [DisplayName("バトルレポートの連番 OK")]
         [InlineData(1)]
         [InlineData(6)]
@@ -94,61 +76,42 @@ namespace UnitTest.KazApi.Common
             Assert.Throws<Exception>(() => Validation.Count(count));
         }
 
+
         [Theory]
-        [DisplayName("クリティカル率 OK")]
+        [DisplayName("属性 OK")]
+        [InlineData(1)]
+        [InlineData(5)]
+        public void ElementOkTest(int weekType)
+        {
+            Validation.ElementType(weekType);
+        }
+
+        [Theory]
+        [DisplayName("属性 NG")]
+        [InlineData(-1)]
+        [InlineData(100)]
+        public void ElementNgTest(int weekType)
+        {
+            Assert.Throws<Exception>(() => Validation.ElementType(weekType));
+        }
+
+        [Theory]
+        [DisplayName("割合 OK")]
         [InlineData(0.0)]
         [InlineData(0.1)]
         [InlineData(1.0)]
-        public void CriticalOkTest(double critical)
+        public void RateOkTest(double hitRate)
         {
-            Validation.Critical(critical);
+            Validation.Rate(hitRate);
         }
 
         [Theory]
-        [DisplayName("クリティカル率 NG")]
-        [InlineData(-0.1)]
-        [InlineData(1.1)]
-        public void CriticalNgTest(double critical)
-        {
-            Assert.Throws<Exception>(() => Validation.Critical(critical));
-        }
-
-        [Theory]
-        [DisplayName("回避率 OK")]
-        [InlineData(0.0)]
-        [InlineData(0.1)]
-        [InlineData(1.0)]
-        public void DodgeOkTest(double dodge)
-        {
-            Validation.Dodge(dodge);
-        }
-
-        [Theory]
-        [DisplayName("回避率 NG")]
-        [InlineData(-0.1)]
-        [InlineData(1.1)]
-        public void DodgeNgTest(double dodge)
-        {
-            Assert.Throws<Exception>(() => Validation.Dodge(dodge));
-        }
-
-        [Theory]
-        [DisplayName("命中率 OK")]
-        [InlineData(0.0)]
-        [InlineData(0.1)]
-        [InlineData(1.0)]
-        public void HitRateOkTest(double hitRate)
-        {
-            Validation.HitRate(hitRate);
-        }
-
-        [Theory]
-        [DisplayName("命中率 NG")]
+        [DisplayName("割合 NG")]
         [InlineData(-0.1)]
         [InlineData(1.1)]
         public void HitRateNgTest(double hitRate)
         {
-            Assert.Throws<Exception>(() => Validation.HitRate(hitRate));
+            Assert.Throws<Exception>(() => Validation.Rate(hitRate));
         }
 
         [Theory]
@@ -309,24 +272,6 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
-        [DisplayName("スピード OK")]
-        [InlineData(0)]
-        [InlineData(255)]
-        public void SpeedOkTest(int speed)
-        {
-            Validation.Speed(speed);
-        }
-
-        [Theory]
-        [DisplayName("スピード NG")]
-        [InlineData(-1)]
-        [InlineData(256)]
-        public void SpeedNgTest(int speed)
-        {
-            Assert.Throws<Exception>(() => Validation.Speed(speed));
-        }
-
-        [Theory]
         [DisplayName("状態タイプ OK")]
         [InlineData(1)]
         [InlineData(9)]
@@ -345,6 +290,24 @@ namespace UnitTest.KazApi.Common
         }
 
         [Theory]
+        [DisplayName("強さ OK")]
+        [InlineData(0)]
+        [InlineData(255)]
+        public void StrengthOkTest(int speed)
+        {
+            Validation.Strength(speed);
+        }
+
+        [Theory]
+        [DisplayName("強さ NG")]
+        [InlineData(-1)]
+        [InlineData(256)]
+        public void StrengthNgTest(int speed)
+        {
+            Assert.Throws<Exception>(() => Validation.Strength(speed));
+        }
+
+        [Theory]
         [DisplayName("ターゲットタイプ OK")]
         [InlineData(1)]
         [InlineData(8)]
@@ -360,24 +323,6 @@ namespace UnitTest.KazApi.Common
         public void TargetTypeNgTest(int targetType)
         {
             Assert.Throws<Exception>(() => Validation.TargetType(targetType));
-        }
-
-        [Theory]
-        [DisplayName("弱点タイプ OK")]
-        [InlineData(1)]
-        [InlineData(5)]
-        public void WeekTypeOkTest(int weekType)
-        {
-            Validation.WeekType(weekType);
-        }
-
-        [Theory]
-        [DisplayName("ターゲットタイプ NG")]
-        [InlineData(-1)]
-        [InlineData(100)]
-        public void WeekTypeNgTest(int weekType)
-        {
-            Assert.Throws<Exception>(() => Validation.WeekType(weekType));
         }
     }
 }

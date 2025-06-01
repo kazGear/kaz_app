@@ -31,19 +31,6 @@ namespace KazApi.Common._Filter
             return amount;
         }
 
-        public static int Attack(int attack)
-        {
-            int min = 0;
-            int max = 255;
-
-            string message = GetMessageSetWithinRange("攻撃力", min, max);
-
-            if (attack < min) throw new Exception(message);
-            if (max < attack) throw new Exception(message);
-
-            return attack;
-        }
-
         public static int BattleReportSerial(int serial)
         {
             int min = 1;
@@ -78,43 +65,27 @@ namespace KazApi.Common._Filter
             return count;
         }
 
-        public static double Critical(double critical)
+        public static int ElementType(int week)
         {
-            double min = 0.0;
-            double max = 1.0;
+            IReadOnlyCollection<int> values = CElement.GetValues();
 
-            string message = GetMessageSetWithinRange("クリティカル率", min, max);
+            if (!values.Contains(week))
+                throw new Exception(_messageUndefinedElement);
 
-            if (critical < min) throw new Exception(message);
-            if (max < critical) throw new Exception(message);
-
-            return critical;
+            return week;
         }
 
-        public static double Dodge(double dodge)
-        {
-            double min = 0.0;
-            double max = 1.0;
-         
-            string message = GetMessageSetWithinRange("回避率", min, max);
-
-            if (dodge < min) throw new Exception(message);
-            if (max < dodge) throw new Exception(message);
-
-            return dodge;
-        }
-
-        public static double HitRate(double hitRate)
+        public static double Rate(double rate)
         {
             double min = 0.0;
             double max = 1.0;
 
-            string message = GetMessageSetWithinRange("ヒット率", min, max);
+            string message = GetMessageSetWithinRange("割合", min, max);
 
-            if (hitRate < min) throw new Exception(message);
-            if (max < hitRate) throw new Exception(message);
+            if (rate < min) throw new Exception(message);
+            if (max < rate) throw new Exception(message);
 
-            return hitRate;
+            return rate;
         }
 
         public static int Hp(int hp)
@@ -200,7 +171,17 @@ namespace KazApi.Common._Filter
             return skillType;
         }
 
-        public static int Speed(int speed)
+        public static int StateType(int stateType)
+        {
+            IReadOnlyCollection<int> values = CStateType.GetValues();
+
+            if (!values.Contains(stateType))
+                throw new Exception(_messageUndefinedState);
+
+            return stateType;
+        }
+
+        public static int Strength(int speed)
         {
             int min = 0;
             int max = 255;
@@ -213,16 +194,6 @@ namespace KazApi.Common._Filter
             return speed;
         }
 
-        public static int StateType(int stateType)
-        {
-            IReadOnlyCollection<int> values = CStateType.GetValues();
-
-            if (!values.Contains(stateType))
-                throw new Exception(_messageUndefinedState);
-
-            return stateType;
-        }
-
         public static int TargetType(int stateType)
         {
             IReadOnlyCollection<int> values = CTarget.GetValues();
@@ -231,16 +202,6 @@ namespace KazApi.Common._Filter
                 throw new Exception(_messageUndefinedState);
 
             return stateType;
-        }
-
-        public static int WeekType(int week)
-        {
-            IReadOnlyCollection<int> values = CElement.GetValues();
-
-            if (!values.Contains(week))
-                throw new Exception(_messageUndefinedElement);
-
-            return week;
         }
     }
 }
