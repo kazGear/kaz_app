@@ -121,6 +121,17 @@ namespace KazApi.Common._Filter
             return loginId;
         }
 
+        public static string LoginPass(string loginPass)
+        {
+            int minLength = 4;
+
+            if (minLength > loginPass.Length)
+                throw new Exception($"ログインパスワードは{minLength}文字以上で設定してください。");
+
+            return loginPass;
+
+        }
+
         public static string MonsterType(string monsterType)
         {
             IReadOnlyCollection<string> values = CMonsterType.GetValues();

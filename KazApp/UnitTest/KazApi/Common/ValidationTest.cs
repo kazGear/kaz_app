@@ -76,7 +76,6 @@ namespace UnitTest.KazApi.Common
             Assert.Throws<Exception>(() => Validation.Count(count));
         }
 
-
         [Theory]
         [DisplayName("属性 OK")]
         [InlineData(1)]
@@ -178,6 +177,25 @@ namespace UnitTest.KazApi.Common
         public void LoginIdNgTest(string itemId)
         {
             Assert.Throws<Exception>(() => Validation.LoginId(itemId));
+        }
+
+        [Theory]
+        [DisplayName("ログインパスワード OK")]
+        [InlineData("Pass")]
+        [InlineData("パスワード")]
+        [InlineData("!pass123?")]
+        public void LoginPassOkTest(string name)
+        {
+            Validation.LoginPass(name);
+        }
+
+        [Theory]
+        [DisplayName("ログインパスワード NG")]
+        [InlineData("pas")]
+        [InlineData("p-_")]
+        public void LoginPassNgTest(string name)
+        {
+            Assert.Throws<Exception>(() => Validation.LoginPass(name));
         }
 
         [Theory]
