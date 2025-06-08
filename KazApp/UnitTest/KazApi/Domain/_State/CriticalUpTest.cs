@@ -1,7 +1,6 @@
 ﻿using KazApi.Common._Log;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._State;
-using Microsoft.CodeAnalysis.CSharp;
 using UnitTest.Mock;
 using Xunit.Abstractions;
 
@@ -10,11 +9,15 @@ namespace UnitTest.KazApi.Domain._State
     public class CriticalUpTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
 
         public CriticalUpTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
+
             _monster = new Monster
                 (
                     MockMonsterParams.Normal,
@@ -27,7 +30,7 @@ namespace UnitTest.KazApi.Domain._State
         [Fact(DisplayName = "効果(critical: 10% >>> xx)")]
         public void UT001()
         {
-            _monster.StateImpact();
+            _monster.StateImpact(_logger);
 
             foreach (var skill in _monster.CurrentSkills())
                 Assert.True(skill.Critical == 0.40);
@@ -37,10 +40,9 @@ namespace UnitTest.KazApi.Domain._State
         public void UT003()
         {
             foreach (var state in _monster.CurrentStatus())
-                state.DisabledLogging(_monster);
+                state.DisabledLogging(_monster, _logger);
 
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            var log = _logger.DumpMemory();
 
             Assert.Contains("クリティカル率が元に", log[0].Message);
         }

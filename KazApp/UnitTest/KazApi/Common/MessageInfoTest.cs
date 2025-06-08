@@ -3,6 +3,7 @@ using KazApi.Domain._Monster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using UnitTest.Mock;
@@ -13,6 +14,7 @@ namespace UnitTest.KazApi.Common
     {
         private readonly IMonster _normalMonster;
         private readonly IMonster _deadMonster;
+        private readonly ILog<BattleMetaData> _logger;
 
         public MessageInfoTest()
         {
@@ -29,16 +31,16 @@ namespace UnitTest.KazApi.Common
                     []
                 );
 
+            _logger = new BattleLogger();
             new BattleLogger().DumpMemory(); // ログ初期化
         }
 
         [Fact(DisplayName = "誰のターンか")]
         public void UT001()
         {
-            MessageInfo.WhoseTurn(_normalMonster);
+            MessageInfo.WhoseTurn(_normalMonster, _logger);
 
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            var log = _logger.DumpMemory();
             var who = log[1]; // ログの中央
 
             Assert.True(log.Count == 3);
@@ -54,7 +56,7 @@ namespace UnitTest.KazApi.Common
                 _normalMonster
             };
 
-            MessageInfo.BattleResult(monsters);
+            MessageInfo.BattleResult(monsters, _logger);
             var logger = new BattleLogger();
             var log = logger.DumpMemory();
 
@@ -70,9 +72,8 @@ namespace UnitTest.KazApi.Common
                 _normalMonster
             };
 
-            MessageInfo.BattleResult(monsters);
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            MessageInfo.BattleResult(monsters, _logger);
+            var log = _logger.DumpMemory();
             var winner = log[2]; // ログの中央
 
             Assert.True(log.Count == 6);
@@ -91,9 +92,8 @@ namespace UnitTest.KazApi.Common
                 _deadMonster
             };
 
-            MessageInfo.BattleResult(monsters);
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            MessageInfo.BattleResult(monsters, _logger);
+            var log = _logger.DumpMemory();
 
             Assert.True(log.Count == 2);
         }

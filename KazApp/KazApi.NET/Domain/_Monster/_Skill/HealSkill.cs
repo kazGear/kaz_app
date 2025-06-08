@@ -16,7 +16,10 @@ namespace KazApi.Domain._Monster._Skill
         public HealSkill(SkillDTO dto)
                   : base(dto) { }
 
-        public override void Use(IEnumerable<IMonster> monsters, IMonster me)
+        public override void Use(
+            IEnumerable<IMonster> monsters,
+            IMonster me,
+            ILog<BattleMetaData> logger)
         {
             int healPoint = new URandom().RandomChangeInt(
                 (Attack + me.Attack), CSysRate.MAGIC_SKILL_DAMAGE.VALUE
@@ -26,7 +29,7 @@ namespace KazApi.Domain._Monster._Skill
             int healAble = me.MaxHp - me.Hp;
             healPoint = healAble < healPoint ? healAble : healPoint;
 
-            _log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 me.MonsterId,
                 me.Hp,
                 healPoint * -1,

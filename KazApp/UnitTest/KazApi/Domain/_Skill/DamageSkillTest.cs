@@ -1,4 +1,5 @@
-﻿using KazApi.Domain._Monster;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
 using Microsoft.CodeAnalysis.Host.Mef;
 using UnitTest.Mock;
@@ -9,12 +10,15 @@ namespace UnitTest.KazApi.Domain._Skill
     public class IMonsterTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private IList<IMonster> _monsters;
         private IMonster _monster;
 
         public IMonsterTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
 
             _monster = new Monster(
                     MockMonsterParams.NoDodge,
@@ -36,7 +40,7 @@ namespace UnitTest.KazApi.Domain._Skill
         [Fact(DisplayName = "単体攻撃")]
         public void UT001()
         {
-            MockSkills.AbsHit.Use(_monsters, _monster);
+            MockSkills.AbsHit.Use(_monsters, _monster, _logger);
 
             int damageCount = 0;
             foreach (var monster in _monsters)
@@ -48,7 +52,7 @@ namespace UnitTest.KazApi.Domain._Skill
         [Fact(DisplayName = "全体攻撃")]
         public void UT002()
         {
-            MockSkills.AbsHitAllTarget.Use(_monsters, _monster);
+            MockSkills.AbsHitAllTarget.Use(_monsters, _monster, _logger);
 
             int damageCount = 0;
             foreach (var monster in _monsters)
@@ -62,7 +66,7 @@ namespace UnitTest.KazApi.Domain._Skill
         {
             try
             {
-                MockSkills.InvalidTarget.Use(_monsters, _monster);
+                MockSkills.InvalidTarget.Use(_monsters, _monster, _logger);
                 Assert.Fail();
             }
             catch { }
@@ -88,7 +92,7 @@ namespace UnitTest.KazApi.Domain._Skill
                     MockSkillSets.AbsHitOnly,
                     []),
                 };
-                MockSkills.AbsHitAllOrSingleTargetFire.Use(_monsters, _monster);
+                MockSkills.AbsHitAllOrSingleTargetFire.Use(_monsters, _monster, _logger);
                 damageCount = _monsters.Where(e => e.Hp < e.MaxHp).Count();
 
                 if (damageCount == 1) singleTarget++;
@@ -114,8 +118,8 @@ namespace UnitTest.KazApi.Domain._Skill
                     new Monster(MockMonsterParams.NoDodge, MockSkillSets.AbsHitOnly, [])
                 };
 
-                MockSkills.AbsHit.Use(acceptSingleDamageMonster, acceptAllDamageMonster[0]);
-                MockSkills.AbsHitAllTarget.Use(acceptAllDamageMonster, acceptSingleDamageMonster[0]);
+                MockSkills.AbsHit.Use(acceptSingleDamageMonster, acceptAllDamageMonster[0], _logger);
+                MockSkills.AbsHitAllTarget.Use(acceptAllDamageMonster, acceptSingleDamageMonster[0], _logger);
 
                 // 単体攻撃の方がダメージが大きい
                 if (acceptSingleDamageMonster[0].Hp <= acceptAllDamageMonster[0].Hp)
@@ -139,7 +143,7 @@ namespace UnitTest.KazApi.Domain._Skill
                         [])
                 };
 
-                MockSkills.AbsHit.Use(monsters, monsters[0]);
+                MockSkills.AbsHit.Use(monsters, monsters[0], _logger);
 
                 if (beforeHp != monsters[0].Hp)
                     sameCount = 0;
@@ -170,8 +174,8 @@ namespace UnitTest.KazApi.Domain._Skill
                         MockSkillSets.HealOnly,
                         [])
                 };
-                MockSkills.FireSingleTargetMagic.Use(weekFireMonsters, normalMonsters[0]); ;
-                MockSkills.IceSingleTarget.Use(normalMonsters, weekFireMonsters[0]);
+                MockSkills.FireSingleTargetMagic.Use(weekFireMonsters, normalMonsters[0], _logger);
+                MockSkills.IceSingleTarget.Use(normalMonsters, weekFireMonsters[0], _logger);
 
                 Assert.True(weekFireMonsters[0].Hp < normalMonsters[0].Hp);
             }
@@ -198,8 +202,8 @@ namespace UnitTest.KazApi.Domain._Skill
                         [])
                 };
                 
-                MockSkills.AbsHitCritical.Use(acceptCriticalMonsters, normalMonsters[0]); ;
-                MockSkills.AbsHit.Use(normalMonsters, acceptCriticalMonsters[0]);
+                MockSkills.AbsHitCritical.Use(acceptCriticalMonsters, normalMonsters[0], _logger); ;
+                MockSkills.AbsHit.Use(normalMonsters, acceptCriticalMonsters[0], _logger);
 
                 if (acceptCriticalMonsters[0].Hp <= normalMonsters[0].Hp)
                     expectCount++;

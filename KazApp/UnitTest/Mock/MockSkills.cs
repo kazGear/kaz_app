@@ -38,7 +38,7 @@ namespace UnitTest.Mock
 
         public static readonly ISkill AbsHitCritical = new DamageSkill(new SkillDTO()
         {
-            SkillId = "skill001_1",
+            SkillId = "skill001",
             SkillName = "打撃(Critical)",
             SkillType = CSkillType.BLOW.VALUE,
             ElementType = CElement.NONE.VALUE,

@@ -35,9 +35,9 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new Poison(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster monster)
+        public override void DisabledLogging(IMonster monster, ILog<BattleMetaData> logger)
         {
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 monster.MonsterId,
                 base._disabledState,
                 base.ShortName,
@@ -48,14 +48,14 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// 毒ダメージを受ける
         /// </summary>
-        public override void Impact(IMonster monster)
+        public override void Impact(IMonster monster, ILog<BattleMetaData> logger)
         {
             // 毒ダメージ算出
             int poisonDamage = (int)(monster.MaxHp * POISON_DAMAGE_RATE);
             poisonDamage = new URandom().RandomChangeInt(poisonDamage, ADJUST_RATE);
 
-            base._log.Logging(new BattleMetaData(monster.MonsterId, $"毒がまわってきた。。。"));
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(monster.MonsterId, $"毒がまわってきた。。。"));
+            logger.Logging(new BattleMetaData(
                 monster.MonsterId,
                 POISON_SKILL_ID,
                 monster.Hp,

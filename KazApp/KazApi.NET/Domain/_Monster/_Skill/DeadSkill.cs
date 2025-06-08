@@ -19,7 +19,10 @@ namespace KazApi.Domain._Monster._Skill
         public DeadSkill(SkillDTO dto)
                   : base(dto) { }
 
-        public override void Use(IEnumerable<IMonster> monsters, IMonster me)
+        public override void Use(
+            IEnumerable<IMonster> monsters,
+            IMonster me,
+            ILog<BattleMetaData> logger)
         {
             IMonster enemy = BattleSystem.SelectOneEnemy(monsters);
 
@@ -33,7 +36,7 @@ namespace KazApi.Domain._Monster._Skill
             if (randomVal <= rate)
             {
                 enemy.AcceptDamage(DEAD_DAMAGE);
-                _log.Logging(new BattleMetaData(
+                logger.Logging(new BattleMetaData(
                     enemy.MonsterId,
                     enemy.Hp,
                     deadDamage,
@@ -43,7 +46,7 @@ namespace KazApi.Domain._Monster._Skill
             }
             else
             {
-                _log.Logging(new BattleMetaData(
+                logger.Logging(new BattleMetaData(
                     enemy.MonsterId,
                     SkillId,
                     EffectTime,

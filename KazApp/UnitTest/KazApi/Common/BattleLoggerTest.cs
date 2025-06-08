@@ -1,9 +1,4 @@
 ﻿using KazApi.Common._Log;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnitTest.KazApi.Common
 {
@@ -11,7 +6,7 @@ namespace UnitTest.KazApi.Common
     {
         public BattleLoggerTest()
         {
-            new BattleLogger().DumpMemory(); // ログ初期化
+
         }
 
         [Fact(DisplayName = "ログ出力　データ無し")]

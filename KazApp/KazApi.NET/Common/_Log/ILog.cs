@@ -9,10 +9,12 @@
         /// ログを記録
         /// </summary>
         public void Logging(T log);
+
         /// <summary>
         /// ログを出力
         /// </summary>
         public IList<T> DumpMemory();
+
         /// <summary>
         /// ログを全て出力
         /// </summary>

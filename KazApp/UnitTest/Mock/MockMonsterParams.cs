@@ -8,7 +8,7 @@ namespace UnitTest.Mock
         public static readonly MonsterDTO Normal = new ()
         {
             MonsterId = "monster001",
-            MonsterName = "NormalParamMonster",
+            MonsterName = "NormalParam",
             MonsterType = -1,
             Hp = 100,
             MaxHp = 100,

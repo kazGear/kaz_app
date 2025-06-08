@@ -4,22 +4,20 @@ namespace KazApi.Common._Log
 {
     public class MessageInfo
     {
-        private static readonly ILog<BattleMetaData> LOG = new BattleLogger();
-
         /// <summary>
         /// 誰のターンか表示
         /// </summary>
-        public static void WhoseTurn(IMonster monster)
+        public static void WhoseTurn(IMonster monster, ILog<BattleMetaData> logger)
         {
-            LOG.Logging(new BattleMetaData($"\n============================================"));
-            LOG.Logging(new BattleMetaData($">>> {monster.MonsterName}のターン"));
-            LOG.Logging(new BattleMetaData($"============================================\n"));
+            logger.Logging(new BattleMetaData($"\n============================================"));
+            logger.Logging(new BattleMetaData($">>> {monster.MonsterName}のターン"));
+            logger.Logging(new BattleMetaData($"============================================\n"));
         }
 
         /// <summary>
         /// 戦闘結果表示
         /// </summary>
-        public static void BattleResult(IEnumerable<IMonster> monsters)
+        public static void BattleResult(IEnumerable<IMonster> monsters, ILog<BattleMetaData> logger)
         {
             bool existWinner = false;
             bool allLoser = false;
@@ -31,18 +29,18 @@ namespace KazApi.Common._Log
             {
                 existWinner = true;
 
-                LOG.Logging(new BattleMetaData($"\n*************************************************"));
-                LOG.Logging(new BattleMetaData($"*************************************************"));
-                LOG.Logging(new BattleMetaData($"  Winner {alives.Single().MonsterName} !!"));
-                LOG.Logging(new BattleMetaData($"*************************************************"));
-                LOG.Logging(new BattleMetaData($"*************************************************\n"));
-                LOG.Logging(new BattleMetaData(existWinner, allLoser, alive));
+                logger.Logging(new BattleMetaData($"\n*************************************************"));
+                logger.Logging(new BattleMetaData($"*************************************************"));
+                logger.Logging(new BattleMetaData($"  Winner {alives.Single().MonsterName} !!"));
+                logger.Logging(new BattleMetaData($"*************************************************"));
+                logger.Logging(new BattleMetaData($"*************************************************\n"));
+                logger.Logging(new BattleMetaData(existWinner, allLoser, alive));
             }
             else if (alives.Count() <= 0)
             {
                 allLoser = true;
-                LOG.Logging(new BattleMetaData($"... 勝者なし。"));
-                LOG.Logging(new BattleMetaData(existWinner, allLoser, alive));
+                logger.Logging(new BattleMetaData($"... 勝者なし。"));
+                logger.Logging(new BattleMetaData(existWinner, allLoser, alive));
             }
         }
     }

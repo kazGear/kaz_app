@@ -43,7 +43,7 @@ namespace UnitTest.KazApi.Domain._Factory
 
             _invalidSkillDto = new SkillDTO()
             {
-                SkillId = "invalidSkill",
+                SkillId = "invalidSkill001",
                 SkillName = "リジェネ",
                 SkillType = -1,
                 ElementType = -1,
@@ -168,6 +168,7 @@ namespace UnitTest.KazApi.Domain._Factory
 
             Assert.True(skills[0] is StateSkill);
             Assert.True(skills[1] is HealSkill);
+
             Assert.True(skills[2] is RateDamageSkill);
             Assert.True(skills[3] is DeadSkill);
             Assert.True(skills[4] is NoMoveSkill);

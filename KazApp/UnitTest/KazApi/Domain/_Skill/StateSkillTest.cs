@@ -1,4 +1,5 @@
-﻿using KazApi.Domain._Const;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Const;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
@@ -11,6 +12,7 @@ namespace UnitTest.KazApi.Domain._Skill
     public class StateSkillTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
         private readonly ISkill _positiveStateSkill;
         private readonly ISkill _nagativeStateSkill;
@@ -18,6 +20,9 @@ namespace UnitTest.KazApi.Domain._Skill
         public StateSkillTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
+
             _monster = new Monster(
                 MockMonsterParams.NoDodge,
                 MockSkillSets.HealOnly,
@@ -33,7 +38,7 @@ namespace UnitTest.KazApi.Domain._Skill
             var beforeStatus = _monster.CurrentStatus();
             Assert.True(beforeStatus.Count() == 0);
 
-            _positiveStateSkill.Use([_monster], _monster);
+            _positiveStateSkill.Use([_monster], _monster, _logger);
 
             IList<IState> afterStatus = (IList<IState>)_monster.CurrentStatus();
             Assert.True(afterStatus.Count() == 1);
@@ -46,7 +51,7 @@ namespace UnitTest.KazApi.Domain._Skill
             var beforeStatus = _monster.CurrentStatus();
             Assert.True(beforeStatus.Count() == 0);
 
-            _nagativeStateSkill.Use([_monster], _monster);
+            _nagativeStateSkill.Use([_monster], _monster, _logger);
 
             IList<IState> afterStatus = (IList<IState>)_monster.CurrentStatus();
             Assert.True(afterStatus.Count() == 1);
@@ -59,8 +64,8 @@ namespace UnitTest.KazApi.Domain._Skill
             var beforeStatus = _monster.CurrentStatus();
             Assert.True(beforeStatus.Count() == 0);
 
-            _positiveStateSkill.Use([_monster], _monster);
-            _nagativeStateSkill.Use([_monster], _monster);
+            _positiveStateSkill.Use([_monster], _monster, _logger);
+            _nagativeStateSkill.Use([_monster], _monster, _logger);
 
             IList<IState> afterStatus = (IList<IState>)_monster.CurrentStatus();
             Assert.True(afterStatus.Count() == 2);
@@ -74,8 +79,8 @@ namespace UnitTest.KazApi.Domain._Skill
             var beforeStatus = _monster.CurrentStatus();
             Assert.True(beforeStatus.Count() == 0);
 
-            _nagativeStateSkill.Use([_monster], _monster);
-            _nagativeStateSkill.Use([_monster], _monster);
+            _nagativeStateSkill.Use([_monster], _monster, _logger);
+            _nagativeStateSkill.Use([_monster], _monster, _logger);
 
             var afterStatus = _monster.CurrentStatus();
             Assert.True(afterStatus.Count() == 1);
@@ -87,8 +92,8 @@ namespace UnitTest.KazApi.Domain._Skill
             var beforeStatus = _monster.CurrentStatus();
             Assert.True(beforeStatus.Count() == 0);
 
-            _positiveStateSkill.Use([_monster], _monster);
-            _positiveStateSkill.Use([_monster], _monster);
+            _positiveStateSkill.Use([_monster], _monster, _logger);
+            _positiveStateSkill.Use([_monster], _monster, _logger);
 
             var afterStatus = _monster.CurrentStatus();
             Assert.True(afterStatus.Count() == 1);

@@ -1,5 +1,4 @@
-﻿using KazApi.Common._Log;
-using KazApi.Domain._Const;
+﻿using KazApi.Domain._Const;
 using KazApi.Domain._Monster;
 using KazApi.Domain.DTO;
 using KazApi.Repository;
@@ -11,7 +10,6 @@ namespace KazApi.Service
 {
     public class BattleService
     {
-        private readonly ILog<BattleMetaData> _log;
         private readonly IDatabase _posgre;
 
         /// <summary>
@@ -25,10 +23,8 @@ namespace KazApi.Service
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="configuration"></param>
         public BattleService(IConfiguration configuration)
         {
-            _log = new BattleLogger();
             _posgre = new PostgreSQL(configuration!);
         }
 

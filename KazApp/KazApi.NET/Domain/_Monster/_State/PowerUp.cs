@@ -25,11 +25,11 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new PowerUp(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster me)
+        public override void DisabledLogging(IMonster me, ILog<BattleMetaData> logger)
         {
             me.InitAttack();
 
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 me.MonsterId,
                 base._disabledState,
                 base.ShortName,
@@ -40,14 +40,14 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// 攻撃力を上昇させる
         /// </summary>
-        public override void Impact(IMonster me)
+        public override void Impact(IMonster me, ILog<BattleMetaData> logger)
         {
             if (me.Attack == me.DefaultAttack)
             {
                 double gainerAttack = (double)me.Attack * ATTACK_GAIN;
                 me.SetAttack((int)gainerAttack);
 
-                base._log.Logging(new BattleMetaData(
+                logger.Logging(new BattleMetaData(
                     me.MonsterId,
                     $"{me.MonsterName}の攻撃力が上昇した！")
                     );

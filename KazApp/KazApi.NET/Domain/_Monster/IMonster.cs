@@ -12,7 +12,6 @@ namespace KazApi.Domain._Monster
     /// </summary>
     public abstract class IMonster
     {
-        protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
         protected ISet<IState> _status = new HashSet<IState>();
         protected IList<ISkill> _skills = new List<ISkill>();
 
@@ -55,7 +54,7 @@ namespace KazApi.Domain._Monster
         /// <summary>
         /// 行動する
         /// </summarys>
-        public void Move(IList<IMonster> monsters)
+        public void Move(IList<IMonster> monsters, ILog<BattleMetaData> logger)
         {
             // 戦闘不能中は攻撃不可
             if (Hp <= 0) return;
@@ -66,21 +65,31 @@ namespace KazApi.Domain._Monster
 
             if (skill is IPositiveSkill)
             {
-                PositiveMove(monsters, skill);
+                PositiveMove(monsters, skill, logger);
             }
             else
             {
-                AttackMove(monsters, skill);
+                AttackMove(monsters, skill, logger);
             }
         }
         /// <summary>
         /// 攻撃する
         /// </summary>
-        protected abstract void AttackMove(IEnumerable<IMonster> monsters, ISkill skill);
+        protected abstract void AttackMove(
+            IEnumerable<IMonster> monsters,
+            ISkill skill,
+            ILog<BattleMetaData> logger
+            );
+
         /// <summary>
         /// 有利な行動
         /// </summary>
-        protected abstract void PositiveMove(IEnumerable<IMonster> monsters, ISkill skill);
+        protected abstract void PositiveMove(
+            IEnumerable<IMonster> monsters,
+            ISkill skill,
+            ILog<BattleMetaData> logger
+            );
+
         /// <summary>
         /// スキルを選択
         /// </summary>
@@ -136,7 +145,7 @@ namespace KazApi.Domain._Monster
         /// <summary>
         /// 状態異常になる
         /// </summary>
-        public void AcceptState(IState state, ISkill skill)
+        public void AcceptState(IState state, ISkill skill, ILog<BattleMetaData> logger)
         {
             // 状態異常は重複しない
             if (_status.Where(e => e.GetStateType() == state.GetStateType()).Count() <= 0)
@@ -144,7 +153,7 @@ namespace KazApi.Domain._Monster
                 bool enableState = true;
 
                 _status.Add(state);
-                _Log.Logging(new BattleMetaData(
+                logger.Logging(new BattleMetaData(
                     MonsterId,
                     skill.SkillId,
                     skill.EffectTime,
@@ -155,13 +164,13 @@ namespace KazApi.Domain._Monster
             }
             else
             {
-                _Log.Logging(new BattleMetaData(MonsterId, $"{MonsterName}は既に{state.Name}状態になっている。"));
+                logger.Logging(new BattleMetaData(MonsterId, $"{MonsterName}は既に{state.Name}状態になっている。"));
             }
         }
         /// <summary>
         /// 状態異常解除・未解除の振り分け
         /// </summary>
-        public void RefreshStatus()
+        public void RefreshStatus(ILog<BattleMetaData> logger)
         {
             IEnumerable<IState> currentStatus = this.CurrentStatus();
             ISet<IState> changedStatus = new HashSet<IState>();
@@ -171,7 +180,7 @@ namespace KazApi.Domain._Monster
                 if (BattleSystem.StateIsDisabled(state) && state.Activate)
                 {
                     // ステータス解除
-                    state.DisabledLogging(this);
+                    state.DisabledLogging(this, logger);
                 }
                 else
                 {
@@ -185,11 +194,11 @@ namespace KazApi.Domain._Monster
         /// <summary>
         /// 状態異常の効果を受ける
         /// </summary>
-        public void StateImpact()
+        public void StateImpact(ILog<BattleMetaData> logger)
         {
             // 変化したコレクションの操作は例外となる > 新しいコレクションを操作して回避
             IEnumerable<IState> copyStatus = new List<IState>(_status);
-            foreach (IState state in copyStatus) state.Impact(this);
+            foreach (IState state in copyStatus) state.Impact(this, logger);
         }
         /// <summary>
         /// 行動できる状態か判定

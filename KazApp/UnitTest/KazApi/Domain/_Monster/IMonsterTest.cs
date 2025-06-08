@@ -1,7 +1,7 @@
-﻿using KazApi.Domain._Monster;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
-using Microsoft.CodeAnalysis.Host.Mef;
 using UnitTest.Mock;
 using Xunit.Abstractions;
 
@@ -10,6 +10,7 @@ namespace UnitTest.KazApi.Domain._Monster
     public class IMonsterTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
         private readonly ISkill _healStateSkill;
         private readonly IState _healState;
@@ -21,6 +22,8 @@ namespace UnitTest.KazApi.Domain._Monster
         public IMonsterTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
 
             _monster = new Monster(
                     MockMonsterParams.NoDodge,
@@ -41,7 +44,7 @@ namespace UnitTest.KazApi.Domain._Monster
         {
             Assert.True(_monster.CurrentStatus().Count() == 0);
             
-            _monster.AcceptState(_healState, _healStateSkill);
+            _monster.AcceptState(_healState, _healStateSkill, _logger);
 
             Assert.True(_monster.CurrentStatus().Count() == 1);
         }
@@ -51,8 +54,8 @@ namespace UnitTest.KazApi.Domain._Monster
         {
             Assert.True(_monster.CurrentStatus().Count() == 0);
 
-            _monster.AcceptState(_healState, _healStateSkill);
-            _monster.AcceptState(_healState, _healStateSkill);
+            _monster.AcceptState(_healState, _healStateSkill, _logger);
+            _monster.AcceptState(_healState, _healStateSkill, _logger);
 
             Assert.True(_monster.CurrentStatus().Count() == 1);
         }
@@ -62,8 +65,8 @@ namespace UnitTest.KazApi.Domain._Monster
         {
             Assert.True(_monster.CurrentStatus().Count() == 0);
 
-            _monster.AcceptState(_healState, _healStateSkill);
-            _monster.AcceptState(_charmState, _charmStateSkill);
+            _monster.AcceptState(_healState, _healStateSkill, _logger);
+            _monster.AcceptState(_charmState, _charmStateSkill, _logger);
 
             Assert.True(_monster.CurrentStatus().Count() == 2);
         }
@@ -73,10 +76,10 @@ namespace UnitTest.KazApi.Domain._Monster
         {
             Assert.True(_monster.CurrentStatus().Count() == 0);
 
-            _monster.AcceptState(_charmState, _charmStateSkill);
+            _monster.AcceptState(_charmState, _charmStateSkill, _logger);
             foreach (var state in _monster.CurrentStatus())
                 state.Activation();
-            _monster.RefreshStatus();
+            _monster.RefreshStatus(_logger);
 
             Assert.True(_monster.CurrentStatus().Count() == 0);
         }
@@ -96,7 +99,7 @@ namespace UnitTest.KazApi.Domain._Monster
         [Fact(DisplayName = "行動可能か判定（不可）")]
         public void UT006()
         {
-            _monster.AcceptState(_sleepState, _sleepStateSkill);
+            _monster.AcceptState(_sleepState, _sleepStateSkill, _logger);
 
             Assert.True(!_monster.IsMoveAble());
         }
@@ -119,6 +122,17 @@ namespace UnitTest.KazApi.Domain._Monster
 
             Assert.True(_monster.Hp == 100);
         }
+
+        [Theory(DisplayName = "被ダメージ上限は現在のHP")]
         [InlineData(100)]
+        [InlineData(99)]
+        [InlineData(101)]
+        [InlineData(9999)]
+        public void UT009(int damage)
+        {
+            _monster.AcceptDamage(damage);
+
+            Assert.True(_monster.Hp >= 0);
+        }
     }
 }

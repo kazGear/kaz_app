@@ -1,4 +1,5 @@
-﻿using KazApi.Domain.DTO;
+﻿using KazApi.Common._Log;
+using KazApi.Domain.DTO;
 
 namespace KazApi.Domain._Monster._Skill
 {
@@ -13,7 +14,10 @@ namespace KazApi.Domain._Monster._Skill
         public NoMoveSkill(SkillDTO dto)
                     : base(dto) { }
 
-        public override void Use(IEnumerable<IMonster> monsters, IMonster me)
+        public override void Use(
+            IEnumerable<IMonster> monsters,
+            IMonster me,
+            ILog<BattleMetaData> logger)
         {
             // 何もしない
         }

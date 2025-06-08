@@ -9,11 +9,15 @@ namespace UnitTest.KazApi.Domain._State
     public class AutoHealTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
 
         public AutoHealTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
+
             _monster = new Monster
                 (
                     MockMonsterParams.Normal,
@@ -37,7 +41,7 @@ namespace UnitTest.KazApi.Domain._State
                 );
                 monster.AcceptDamage((int)(_monster.Hp * 0.5));
 
-                monster.StateImpact();
+                monster.StateImpact(_logger);
 
                 Assert.True(61 <= monster.Hp && monster.Hp <= 68);
             }
@@ -48,7 +52,7 @@ namespace UnitTest.KazApi.Domain._State
         {
             _monster.AcceptDamage(1);
 
-            _monster.StateImpact();
+            _monster.StateImpact(_logger);
 
             Assert.True(_monster.Hp == _monster.MaxHp);
         }
@@ -57,10 +61,9 @@ namespace UnitTest.KazApi.Domain._State
         public void UT003()
         {
             foreach (var state in _monster.CurrentStatus())
-                state.DisabledLogging(_monster);
+                state.DisabledLogging(_monster, _logger);
 
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            var log = _logger.DumpMemory();
 
             Assert.Contains("自然治癒力", log[0].Message);
         }

@@ -10,7 +10,6 @@ namespace KazApi.Domain._Monster._Skill
     /// </summary>
     public abstract class ISkill
     {
-        protected readonly ILog<BattleMetaData> _log = new BattleLogger();
         protected int _initialAttack;
 
         public string SkillId { get; protected set; }
@@ -49,7 +48,7 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// スキルを使用
         /// </summary>
-        public abstract void Use(IEnumerable<IMonster> monsters, IMonster me);
+        public abstract void Use(IEnumerable<IMonster> monsters, IMonster me, ILog<BattleMetaData> logger);
 
         /// <summary>
         /// 全体攻撃の際は威力減少
@@ -79,7 +78,11 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// 弱点属性によるダメージの算出
         /// </summary>
-        public int WeeknessDamage(ISkill skill, IMonster enemy, int damage)
+        public int WeeknessDamage(
+            ISkill skill,
+            IMonster enemy,
+            int damage,
+            ILog<BattleMetaData> logger)
         {
             // 弱点ダメージが発生しようがなければダメージの変動なし
             if (skill.ElementType == CElement.NONE.VALUE) return damage;
@@ -88,7 +91,7 @@ namespace KazApi.Domain._Monster._Skill
             if (enemy.Week == skill.ElementType)
             {
                 damage = (int)(damage * CSysRate.WEEK_DAMAGE.VALUE);
-                _log.Logging(new BattleMetaData("弱点ダメージ！"));
+                logger.Logging(new BattleMetaData("弱点ダメージ！"));
             }
             return damage;
         }
@@ -96,7 +99,7 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// クリティカルによるダメージ
         /// </summary>
-        public int CriticalDamage(ISkill skill, int damage)
+        public int CriticalDamage(ISkill skill, int damage, ILog<BattleMetaData> logger)
         {
             double randomVal = new URandom().RandomDouble(0.0, 1.0);
             bool isCritical = randomVal <= skill.Critical;
@@ -104,7 +107,7 @@ namespace KazApi.Domain._Monster._Skill
             if (isCritical)
             {
                 damage = (int)(damage * CSysRate.CRITICAL_DAMAGE.VALUE);
-                _log.Logging(new BattleMetaData("クリティカルヒット！"));
+                logger.Logging(new BattleMetaData("クリティカルヒット！"));
             }
             return damage;
         }

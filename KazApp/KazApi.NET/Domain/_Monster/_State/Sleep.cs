@@ -32,9 +32,9 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new Sleep(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster monster)
+        public override void DisabledLogging(IMonster monster, ILog<BattleMetaData> logger)
         {
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 monster.MonsterId,
                 base._disabledState,
                 base.ShortName,
@@ -45,11 +45,11 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// 自ターンは行動不能
         /// </summary>
-        public override void Impact(IMonster monster)
+        public override void Impact(IMonster monster, ILog<BattleMetaData> logger)
         {
             int effectTime = 1400;
 
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 monster.MonsterId,
                 STATE_TYPE2,
                 effectTime,

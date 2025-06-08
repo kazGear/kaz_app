@@ -25,11 +25,11 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new DodgeUp(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster me)
+        public override void DisabledLogging(IMonster me, ILog<BattleMetaData> logger)
         {
             me.InitDodge();
 
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 me.MonsterId,
                 base._disabledState,
                 base.ShortName,
@@ -40,14 +40,14 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// 回避力を上昇させる
         /// </summary>
-        public override void Impact(IMonster me)
+        public override void Impact(IMonster me, ILog<BattleMetaData> logger)
         {
             if (me.Dodge == me.DefaultDodge)
             {
                 double gainerDodge = me.Dodge * DODGE_GAIN;
                 me.SetDodge(gainerDodge);
 
-                base._log.Logging(new BattleMetaData(
+                logger.Logging(new BattleMetaData(
                     me.MonsterId,
                     $"{me.MonsterName}の回避力が上昇した！")
                     );

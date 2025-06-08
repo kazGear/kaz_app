@@ -11,8 +11,6 @@ namespace KazApi.Domain._GameSystem
     /// </summary>
     public class BattleSystem
     {
-        private static readonly ILog<BattleMetaData> LOG = new BattleLogger();
-
         /// <summary>
         /// 敵を選択する
         /// </summary>

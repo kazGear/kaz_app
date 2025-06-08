@@ -1,7 +1,6 @@
 ﻿using KazApi.Common._Log;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._State;
-using Microsoft.CodeAnalysis.CSharp;
 using UnitTest.Mock;
 using Xunit.Abstractions;
 
@@ -10,11 +9,15 @@ namespace UnitTest.KazApi.Domain._State
     public class PowerUpTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
 
         public PowerUpTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
+
             _monster = new Monster
                 (
                     MockMonsterParams.Normal,
@@ -36,7 +39,7 @@ namespace UnitTest.KazApi.Domain._State
                     [MockStatus.POWERUP]
                 );
 
-                monster.StateImpact();
+                monster.StateImpact(_logger);
 
                 Assert.True(monster.Attack == 35);
             }
@@ -46,10 +49,9 @@ namespace UnitTest.KazApi.Domain._State
         public void UT002()
         {
             foreach (var state in _monster.CurrentStatus())
-                state.DisabledLogging(_monster);
+                state.DisabledLogging(_monster, _logger);
 
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            var log = _logger.DumpMemory();
 
             Assert.Contains("攻撃力", log[0].Message);
         }

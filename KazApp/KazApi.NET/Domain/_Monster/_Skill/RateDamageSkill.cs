@@ -15,14 +15,17 @@ namespace KazApi.Domain._Monster._Skill
         public RateDamageSkill(SkillDTO dto)
                         : base(dto) { }
 
-        public override void Use(IEnumerable<IMonster> monsters, IMonster me)
+        public override void Use(
+            IEnumerable<IMonster> monsters,
+            IMonster me,
+            ILog<BattleMetaData> logger)
         {
             IMonster enemy = BattleSystem.SelectOneEnemy(monsters);
 
             // 現HPの割合ダメージ
             double damage = enemy.Hp * (Attack / 100.0);
 
-            _log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 enemy.MonsterId,
                 enemy.Hp,
                 (int)damage,

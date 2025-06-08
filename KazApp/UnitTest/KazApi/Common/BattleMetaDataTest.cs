@@ -58,7 +58,7 @@ namespace UnitTest.KazApi.Common
             Assert.True(data.IsStop);
             Assert.True(data.TargetMonsterId == "monster001");
             Assert.True(data.WinnerMonsterId == "monster001");
-            Assert.True(data.WinnerMonsterName == "NormalParamMonster");
+            Assert.True(data.WinnerMonsterName == "NormalParam");
         }
 
         [Fact(DisplayName = "コンストラクタ4_2")]

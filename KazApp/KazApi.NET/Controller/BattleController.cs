@@ -139,24 +139,24 @@ namespace KazApi.Controller
                     if (me.Hp <= 0) continue;
 
                     // 誰のターンか
-                    MessageInfo.WhoseTurn(me);
+                    MessageInfo.WhoseTurn(me, _logger);
 
                     // 状態異常の影響
-                    me.StateImpact();
+                    me.StateImpact(_logger);
 
                     // モンスターの行動
                     IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId)
                                                                    .ToList();
-                    if (me.IsMoveAble()) me.Move(otherMonsters);
+                    if (me.IsMoveAble()) me.Move(otherMonsters, _logger);
 
                     // 状態異常解除
-                    if (me.CurrentStatus().Count() > 0) me.RefreshStatus();
+                    if (me.CurrentStatus().Count() > 0) me.RefreshStatus(_logger);
 
                     _logger.Logging(new BattleMetaData());
                 }
 
                 // 勝敗判定
-                MessageInfo.BattleResult(battleMonsters);
+                MessageInfo.BattleResult(battleMonsters, _logger);
 
                 // DTOへ変換
                 IEnumerable<MonsterDTO> monstersDTO = _monsterFactory.ConvertToDTO(battleMonsters);

@@ -7,7 +7,7 @@ using KazApi.Domain._Monster;
 using KazApi.Domain.DTO;
 using System.Text;
 using KazApi.Service;
-using KazApi.Common._Filter;
+using KazApi.Common._Log;
 
 namespace TestRun
 {
@@ -16,6 +16,7 @@ namespace TestRun
         private BattleService _service = new BattleService();
         private MonsterFactory _monsterFactory = new MonsterFactory();
         private URandom _random = new URandom();
+        private ILog<BattleMetaData> _logger = new BattleLogger();
 
         internal void Run()
         {
@@ -76,11 +77,11 @@ namespace TestRun
                         if (me.Hp <= 0) continue;
 
                         // 状態異常の効果
-                        me.StateImpact();
+                        me.StateImpact(_logger);
 
                         // モンスターの行動
                         IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId).ToList();
-                        if (me.IsMoveAble()) me.Move(otherMonsters);
+                        if (me.IsMoveAble()) me.Move(otherMonsters, _logger);
 
                         // 状態異常解除
                         IEnumerable<IState> currentStatus = me.CurrentStatus();
@@ -90,7 +91,7 @@ namespace TestRun
                             if (!BattleSystem.StateIsDisabled(state))
                                 changedStatus.Add(state);
                             else
-                                state.DisabledLogging(me);
+                                state.DisabledLogging(me, _logger);
                         }
                         me.UpdateStatus(changedStatus);
 

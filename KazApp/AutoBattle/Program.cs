@@ -8,6 +8,7 @@ using KazApi.Domain._Monster._State;
 using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
 using KazApi.Service;
+using KazApi.Common._Log;
 
 Console.WriteLine("Auto battle start...");
 
@@ -15,6 +16,7 @@ IDatabase _posgre = new PostgreSQL();
 BattleService _service = new BattleService();
 MonsterFactory _monsterFactory = new MonsterFactory();
 URandom _random = new URandom();
+ILog<BattleMetaData> logger = new BattleLogger();
 
 int battleTimes = 5; // 戦闘回数
 
@@ -71,11 +73,11 @@ for (int i = 0; i < battleTimes; i++)
                 if (me.Hp <= 0) continue;
 
                 // 状態異常の効果
-                me.StateImpact();
+                me.StateImpact(logger);
 
                 // モンスターの行動
                 IList<IMonster> otherMonsters = orderedMonsters.Where(e => e.MonsterId != me.MonsterId).ToList();
-                if (me.IsMoveAble()) me.Move(otherMonsters);
+                if (me.IsMoveAble()) me.Move(otherMonsters, logger);
 
                 // 状態異常解除
                 IEnumerable<IState> currentStatus = me.CurrentStatus();
@@ -85,7 +87,7 @@ for (int i = 0; i < battleTimes; i++)
                     if (!BattleSystem.StateIsDisabled(state))
                         changedStatus.Add(state);
                     else
-                        state.DisabledLogging(me);
+                        state.DisabledLogging(me, logger);
                 }
                 me.UpdateStatus(changedStatus);
 

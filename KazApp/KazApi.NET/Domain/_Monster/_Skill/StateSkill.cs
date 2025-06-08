@@ -25,33 +25,39 @@ namespace KazApi.Domain._Monster._Skill
             _state = state;
         }
 
-        public override void Use(IEnumerable<IMonster> monsters, IMonster me)
+        public override void Use(
+            IEnumerable<IMonster> monsters,
+            IMonster me,
+            ILog<BattleMetaData> logger)
         {
             bool isPositive = POSITIVE_SKILLS.Where(e => e.VALUE == _state.StateType)
                                              .Count() >= 1;
 
             if (isPositive) // 有利スキル
             {
-                GivePositiveState(me);
+                GivePositiveState(me, logger);
             }
             else // 状態異常スキル
             {
-                GiveNegativeState(monsters, me);
+                GiveNegativeState(monsters, me, logger);
             }
         }
 
         /// <summary>
         /// 良い状態を与える
         /// </summary>
-        private void GivePositiveState(IMonster me)
+        private void GivePositiveState(IMonster me, ILog<BattleMetaData> logger)
         {
-            me.AcceptState(_state!.DeepCopy(), this);
+            me.AcceptState(_state!.DeepCopy(), this, logger);
         }
 
         /// <summary>
         /// 悪い状態を与える
         /// </summary>
-        private void GiveNegativeState(IEnumerable<IMonster> monsters, IMonster me)
+        private void GiveNegativeState(
+            IEnumerable<IMonster> monsters,
+            IMonster me,
+            ILog<BattleMetaData> logger)
         {
             if (TargetType == CTarget.ENEMY_RANDOM.VALUE)
             {
@@ -60,10 +66,10 @@ namespace KazApi.Domain._Monster._Skill
 
                 if (!IsHitSkill(this, enemy)) // 効かないことがある
                 {
-                    MissLogging(enemy);
+                    MissLogging(enemy, logger);
                     return;
                 }
-                enemy.AcceptState(_state.DeepCopy(), this);
+                enemy.AcceptState(_state.DeepCopy(), this, logger);
             }
             else
             {
@@ -72,10 +78,10 @@ namespace KazApi.Domain._Monster._Skill
                 {
                     if (!IsHitSkill(this, enemy)) // 効かないことがある
                     {
-                        MissLogging(enemy);
+                        MissLogging(enemy, logger);
                         continue;
                     }
-                    enemy.AcceptState(_state.DeepCopy(), this);
+                    enemy.AcceptState(_state.DeepCopy(), this, logger);
                 }
             }
         }
@@ -83,12 +89,12 @@ namespace KazApi.Domain._Monster._Skill
         /// <summary>
         /// 状態異常を受けなかった際のログ
         /// </summary>
-        private void MissLogging(IMonster enemy)
+        private void MissLogging(IMonster enemy, ILog<BattleMetaData> logger)
         {
             int noDamage = 0;
             bool isDodge = true;
 
-            _log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 enemy.MonsterId,
                 enemy.Hp,
                 noDamage,

@@ -30,9 +30,9 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new Charm(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster monster)
+        public override void DisabledLogging(IMonster monster, ILog<BattleMetaData> logger)
         {
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 monster.MonsterId,
                 base._disabledState,
                 base.ShortName,
@@ -44,7 +44,7 @@ namespace KazApi.Domain._Monster._State
         /// 自身に攻撃
         //  有利な効果は使用しない
         /// </summary>
-        public override void Impact(IMonster me)
+        public override void Impact(IMonster me, ILog<BattleMetaData> logger)
         {
             // 睡眠時は発動しない
             int sleepCnt = me.CurrentStatus()
@@ -58,9 +58,9 @@ namespace KazApi.Domain._Monster._State
                 skill = me.SelectSkill();
 
             // 自傷
-            base._log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は自分に攻撃！"));
-            base._log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は {skill.SkillName} を放った！"));
-            skill.Use([me], me);
+            logger.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は自分に攻撃！"));
+            logger.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は {skill.SkillName} を放った！"));
+            skill.Use([me], me, logger);
         }
     }
 }

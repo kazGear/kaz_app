@@ -1,7 +1,4 @@
 ﻿using KazApi.Domain._Monster._Skill;
-using KazApi.Domain._Monster._State;
-using KazApi.Domain._Monster;
-using KazApi.Domain.DTO;
 
 namespace UnitTest.Mock
 {

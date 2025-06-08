@@ -1,4 +1,5 @@
-﻿using KazApi.Domain._Const;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
 
 namespace KazApi.Domain._Monster._State
@@ -26,13 +27,10 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new None(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster monster)
+        public override void DisabledLogging(IMonster monster, ILog<BattleMetaData> logger)
             => throw new NotImplementedException();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override void Impact(IMonster monster)
+        public override void Impact(IMonster monster, ILog<BattleMetaData> logger)
         {
             throw new NotImplementedException();
         }

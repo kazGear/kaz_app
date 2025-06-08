@@ -25,7 +25,7 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new CriticalUp(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster me)
+        public override void DisabledLogging(IMonster me, ILog<BattleMetaData> logger)
         {
             IList<ISkill> result = new List<ISkill>();
 
@@ -37,7 +37,7 @@ namespace KazApi.Domain._Monster._State
             }
             me.UpdateSkills(result);
 
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 me.MonsterId,
                 base._disabledState,
                 base.ShortName,
@@ -48,7 +48,7 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// クリティカル率を上昇させる
         /// </summary>
-        public override void Impact(IMonster me)
+        public override void Impact(IMonster me, ILog<BattleMetaData> logger)
         {
             IList<ISkill> result = new List<ISkill>();
 

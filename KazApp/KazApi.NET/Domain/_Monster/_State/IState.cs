@@ -8,7 +8,6 @@ namespace KazApi.Domain._Monster._State
     /// </summary>
     public abstract class IState
     {
-        protected readonly ILog<BattleMetaData> _log = new BattleLogger();
         protected readonly bool _disabledState = true;
 
         public string Name { get; protected set; }
@@ -76,11 +75,11 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// 状態解除時のログ
         /// </summary>
-        public abstract void DisabledLogging(IMonster monster);
+        public abstract void DisabledLogging(IMonster monster, ILog<BattleMetaData> logger);
 
         /// <summary>
         /// 状態の影響をモンスターに与える
         /// </summary>
-        public abstract void Impact(IMonster monster);
+        public abstract void Impact(IMonster monster, ILog<BattleMetaData> logger);
     }
 }

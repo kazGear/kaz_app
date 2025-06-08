@@ -87,7 +87,7 @@ namespace UnitTest.KazApi.Common
 
         [Theory]
         [DisplayName("属性 NG")]
-        [InlineData(-1)]
+        [InlineData(-3)]
         [InlineData(100)]
         public void ElementNgTest(int weekType)
         {
@@ -282,7 +282,7 @@ namespace UnitTest.KazApi.Common
 
         [Theory]
         [DisplayName("スキルタイプ NG")]
-        [InlineData(-1)]
+        [InlineData(-2)]
         [InlineData(100)]
         public void SkillTypeNgTest(int skillType)
         {
@@ -300,7 +300,7 @@ namespace UnitTest.KazApi.Common
 
         [Theory]
         [DisplayName("状態タイプ NG")]
-        [InlineData(-1)]
+        [InlineData(-2)]
         [InlineData(100)]
         public void StateTypeNgTest(int stateType)
         {
@@ -336,7 +336,7 @@ namespace UnitTest.KazApi.Common
 
         [Theory]
         [DisplayName("ターゲットタイプ NG")]
-        [InlineData(-1)]
+        [InlineData(-2)]
         [InlineData(100)]
         public void TargetTypeNgTest(int targetType)
         {

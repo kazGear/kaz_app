@@ -9,11 +9,15 @@ namespace UnitTest.KazApi.Domain._State
     public class CharmTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
 
         public CharmTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
+
             _monster = new Monster( // 必ず自傷ダメージが当たる設定
                 MockMonsterParams.NoDodge,
                 MockSkillSets.AbsHitAllOrSingleTargetOnly,
@@ -28,7 +32,7 @@ namespace UnitTest.KazApi.Domain._State
         {
             int savedHp = _monster.Hp;
 
-            _monster.StateImpact();
+            _monster.StateImpact(_logger);
 
             Assert.True(_monster.Hp < savedHp);
         }
@@ -43,7 +47,7 @@ namespace UnitTest.KazApi.Domain._State
                 });
             int savedHp = _monster.Hp;
 
-            _monster.StateImpact();
+            _monster.StateImpact(_logger);
 
             Assert.True(_monster.Hp == savedHp);
         }
@@ -52,10 +56,9 @@ namespace UnitTest.KazApi.Domain._State
         public void UT003()
         {
             foreach (var state in _monster.CurrentStatus())
-                state.DisabledLogging(_monster);
+                state.DisabledLogging(_monster, _logger);
 
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            var log = _logger.DumpMemory();
 
             Assert.Contains("我に返った", log[0].Message);
         }

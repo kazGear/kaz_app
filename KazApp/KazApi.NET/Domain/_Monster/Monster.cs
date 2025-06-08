@@ -31,7 +31,10 @@ namespace KazApi.Domain._Monster
             return skill;
         }
 
-        protected override void AttackMove(IEnumerable<IMonster> monsters, ISkill skill)
+        protected override void AttackMove(
+            IEnumerable<IMonster> monsters,
+            ISkill skill,
+            ILog<BattleMetaData> logger)
         {
             string attackMessage = $"{MonsterName}は {skill.SkillName} を放った！";
 
@@ -39,16 +42,19 @@ namespace KazApi.Domain._Monster
             if (skill.SkillType == CSkillType.NOT_MOVE.VALUE)
                 attackMessage = $"{MonsterName}は {skill.SkillName} ...";
 
-            _Log.Logging(new BattleMetaData(TARGET_NONE, attackMessage + "\n"));
+            logger.Logging(new BattleMetaData(TARGET_NONE, attackMessage + "\n"));
 
-            skill.Use(monsters, this);
+            skill.Use(monsters, this, logger);
         }
 
-        protected override void PositiveMove(IEnumerable<IMonster> monsters, ISkill skill)
+        protected override void PositiveMove(
+            IEnumerable<IMonster> monsters,
+            ISkill skill,
+            ILog<BattleMetaData> logger)
         {
             string attackMessage = $"{MonsterName}は {skill.SkillName} を放った！";
-            _Log.Logging(new BattleMetaData(MonsterId, attackMessage + "\n"));
-            skill.Use([this], this);
+            logger.Logging(new BattleMetaData(MonsterId, attackMessage + "\n"));
+            skill.Use([this], this, logger);
         }
     }
 }

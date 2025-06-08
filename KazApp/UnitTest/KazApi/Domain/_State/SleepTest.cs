@@ -2,8 +2,6 @@
 using KazApi.Domain._Const;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._State;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using UnitTest.Mock;
 using Xunit.Abstractions;
 
@@ -12,12 +10,16 @@ namespace UnitTest.KazApi.Domain._State
     public class SleepTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
         private readonly IMonster _monster2;
 
         public SleepTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
+
             _monster = new Monster
                 (
                     MockMonsterParams.Normal,
@@ -43,7 +45,7 @@ namespace UnitTest.KazApi.Domain._State
                         _monster, _monster2
                     ];
                 
-                if (monsters[0].IsMoveAble()) monsters[0].Move(monsters);
+                if (monsters[0].IsMoveAble()) monsters[0].Move(monsters, _logger);
 
                 Assert.True(monsters[1].Hp == 100);
             }
@@ -57,8 +59,8 @@ namespace UnitTest.KazApi.Domain._State
                     _monster, _monster2
                 ];
 
-            monsters[0].StateImpact();
-            var log = new BattleLogger().DumpMemory();
+            monsters[0].StateImpact(_logger);
+            var log = _logger.DumpMemory();
 
             Assert.Contains("眠っている", log[0].Message);
         }
@@ -67,10 +69,9 @@ namespace UnitTest.KazApi.Domain._State
         public void UT002()
         {
             foreach (var state in _monster.CurrentStatus())
-                state.DisabledLogging(_monster);
+                state.DisabledLogging(_monster, _logger);
 
-            var logger = new BattleLogger();
-            var log = logger.DumpMemory();
+            var log = _logger.DumpMemory();
 
             Assert.Contains("目覚めた", log[0].Message);
         }

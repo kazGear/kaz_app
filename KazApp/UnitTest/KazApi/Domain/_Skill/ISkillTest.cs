@@ -1,8 +1,5 @@
-﻿using KazApi.Domain._Const;
+﻿using KazApi.Common._Log;
 using KazApi.Domain._Monster;
-using KazApi.Domain._Monster._Skill;
-using KazApi.Domain._Monster._State;
-using Microsoft.CodeAnalysis.Host.Mef;
 using UnitTest.Mock;
 using Xunit.Abstractions;
 
@@ -11,11 +8,15 @@ namespace UnitTest.KazApi.Domain._Skill
     public class ISkillTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _monster;
 
         public ISkillTest(ITestOutputHelper output)
         {
             _output = output;
+
+            _logger = new BattleLogger();
+
             _monster = new Monster(
                 MockMonsterParams.NoDodge,
                 MockSkillSets.HealOnly,
@@ -48,7 +49,8 @@ namespace UnitTest.KazApi.Domain._Skill
             int weekDamage = fire.WeeknessDamage(
                 fire,
                 weekFireMonster,
-                fire.Attack);
+                fire.Attack,
+                _logger);
 
             Assert.True(beforeDamage < weekDamage);
         }
@@ -61,7 +63,8 @@ namespace UnitTest.KazApi.Domain._Skill
 
             int criticalDamage = critical.CriticalDamage(
                 critical,
-                critical.Attack);
+                critical.Attack,
+                _logger);
 
             Assert.True(beforeDamage < criticalDamage);
         }

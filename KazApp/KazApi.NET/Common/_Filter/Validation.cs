@@ -5,9 +5,9 @@ namespace KazApi.Common._Filter
 {
     public static class Validation
     {
-        private static string GetMessageUndefined(string item)
+        private static string GetMessageUndefined(string target, object actual)
         {
-            return $"定義されていない{item}です。";
+            return $"定義されていない{target}です。>>> {actual}";
         }
         private static string GetMessageSetWithinRange(string target, int min, int max)
         {
@@ -17,9 +17,9 @@ namespace KazApi.Common._Filter
         {
             return $"{target}は{min}-{max}の範囲で設定してください。";
         }
-        private static string GetMessageNotMatching(string target)
+        private static string GetMessageNotMatching(string target, object actual)
         {
-            return $"{target}のパターンが異なっています。";
+            return $"{target}のパターンが異なっています。>>> {actual}";
         }
 
         public static int Amount(int amount)
@@ -66,10 +66,12 @@ namespace KazApi.Common._Filter
 
         public static int ElementType(int week)
         {
+            if (week == -1) return week; // tmp
+
             IReadOnlyCollection<int> values = CElement.GetValues();
 
             if (!values.Contains(week))
-                throw new Exception(GetMessageUndefined("属性"));
+                throw new Exception(GetMessageUndefined("属性", week));
 
             return week;
         }
@@ -105,7 +107,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^[a-zA-Z]+\d{3}$";
 
             if (!Regex.IsMatch(itemId, pattern))
-                throw new Exception(GetMessageNotMatching("ID"));
+                throw new Exception(GetMessageNotMatching("ID", itemId));
 
             return itemId;
         }
@@ -115,7 +117,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^[a-zA-Z0-9-_]{4,15}$";
 
             if (!Regex.IsMatch(loginId, pattern))
-                throw new Exception(GetMessageNotMatching("ログインID"));
+                throw new Exception(GetMessageNotMatching("ログインID", loginId));
 
             return loginId;
         }
@@ -136,7 +138,7 @@ namespace KazApi.Common._Filter
             IReadOnlyCollection<string> values = CMonsterType.GetValues();
 
             if (!values.Contains(monsterType))
-                throw new Exception("未定義のモンスタータイプです。");
+                throw new Exception(GetMessageUndefined("モンスタータイプ", monsterType));
 
             return monsterType;
         }
@@ -146,7 +148,7 @@ namespace KazApi.Common._Filter
             string pattern = @"^myskill\d{4}$";
 
             if (!Regex.IsMatch(mySkillId, pattern))
-                throw new Exception(GetMessageNotMatching("マイスキルID"));
+                throw new Exception(GetMessageNotMatching("マイスキルID", mySkillId));
 
             return mySkillId;
         }
@@ -173,20 +175,25 @@ namespace KazApi.Common._Filter
 
         public static int SkillType(int skillType)
         {
+            // tmp
+            if (skillType == -1) return skillType;
+
             IReadOnlyCollection<int> values = CSkillType.GetValues();
 
             if (!values.Contains(skillType))
-                throw new Exception(GetMessageUndefined("スキル"));
+                throw new Exception(GetMessageUndefined("スキル", skillType));
 
             return skillType;
         }
 
         public static int StateType(int stateType)
         {
+            if (stateType == -1) return stateType; // tmp
+
             IReadOnlyCollection<int> values = CStateType.GetValues();
 
             if (!values.Contains(stateType))
-                throw new Exception(GetMessageUndefined("状態"));
+                throw new Exception(GetMessageUndefined("状態", stateType));
 
             return stateType;
         }
@@ -204,14 +211,16 @@ namespace KazApi.Common._Filter
             return speed;
         }
 
-        public static int TargetType(int stateType)
+        public static int TargetType(int targetType)
         {
+            if (targetType == -1) return targetType; // tmp
+
             IReadOnlyCollection<int> values = CTarget.GetValues();
 
-            if (!values.Contains(stateType))
-                throw new Exception(GetMessageUndefined("ターゲット"));
+            if (!values.Contains(targetType))
+                throw new Exception(GetMessageUndefined("ターゲット", targetType));
 
-            return stateType;
+            return targetType;           
         }
     }
 }

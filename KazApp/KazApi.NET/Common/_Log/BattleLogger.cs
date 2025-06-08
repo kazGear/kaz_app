@@ -5,8 +5,8 @@
     /// </summary>
     public class BattleLogger : ILog<BattleMetaData>
     {
-        private static IList<BattleMetaData> _cache = [];
-        private static IList<BattleMetaData> _storage = [];
+        private IList<BattleMetaData> _cache   = [];
+        private IList<BattleMetaData> _storage = [];
 
         /// <summary>
         /// ログを記録する

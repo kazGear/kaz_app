@@ -32,11 +32,11 @@ namespace KazApi.Domain._Monster._State
         public override IState DeepCopy()
             => new Slow(base.Name, base.ShortName, base.StateType, base.CancelRate);
 
-        public override void DisabledLogging(IMonster me)
+        public override void DisabledLogging(IMonster me, ILog<BattleMetaData> logger)
         {
             me.InitSpeed();
 
-            base._log.Logging(new BattleMetaData(
+            logger.Logging(new BattleMetaData(
                 me.MonsterId,
                 base._disabledState,
                 base.ShortName,
@@ -47,14 +47,14 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// モンスターの行動速度を遅くする
         /// </summary>
-        public override void Impact(IMonster me)
+        public override void Impact(IMonster me, ILog<BattleMetaData> logger)
         {
             if (me.Speed == me.DefaultSpeed)
             {
                 double downedSpeed = me.Speed * DOWN_RATE;
                 me.SetSpeed((int)downedSpeed);
 
-                base._log.Logging(new BattleMetaData(
+                logger.Logging(new BattleMetaData(
                     me.MonsterId,
                     $"{me.MonsterName}はスロー状態になった。")
                     );

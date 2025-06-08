@@ -1,7 +1,6 @@
-﻿using KazApi.Domain._Monster;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
-using KazApi.Domain._Monster._State;
-using Microsoft.CodeAnalysis.Host.Mef;
 using UnitTest.Mock;
 using Xunit.Abstractions;
 
@@ -10,19 +9,22 @@ namespace UnitTest.KazApi.Domain._Monster
     public class MonsterTest
     {
         private readonly ITestOutputHelper _output;
+        private readonly ILog<BattleMetaData> _logger;
         private readonly IMonster _absHitMonster;
-        private readonly IMonster _noMoveMonster;
+        private readonly IMonster _noDodgeMonster;
         private readonly IMonster _healMonster;
 
         public MonsterTest(ITestOutputHelper output)
         {
             _output = output;
 
+            _logger = new BattleLogger();
+
             _absHitMonster = new Monster(
                 MockMonsterParams.NoDodge,
                 MockSkillSets.AbsHitOnly,
                 []);
-            _noMoveMonster = new Monster(
+            _noDodgeMonster = new Monster(
                 MockMonsterParams.NoDodge,
                 MockSkillSets.NoMoveOnly,
                 []);
@@ -50,12 +52,13 @@ namespace UnitTest.KazApi.Domain._Monster
         {
             var monsters = new List<IMonster>()
             {
-                _absHitMonster, _noMoveMonster
+                _noDodgeMonster
             };
 
-            _absHitMonster.Move(monsters);
+            int defaultHp = monsters[0].Hp;
+            _absHitMonster.Move(monsters, _logger);
 
-            Assert.True(_noMoveMonster.Hp < 100);
+            Assert.True(monsters[0].Hp < defaultHp);
         }
 
         [Fact(DisplayName = "無害な攻撃")]
@@ -63,10 +66,10 @@ namespace UnitTest.KazApi.Domain._Monster
         {
             var monsters = new List<IMonster>()
             {
-                _absHitMonster, _noMoveMonster
+                _absHitMonster, _noDodgeMonster
             };
 
-            _noMoveMonster.Move(monsters);
+            _noDodgeMonster.Move(monsters, _logger);
 
             Assert.True(_absHitMonster.Hp == 100);
         }
@@ -81,7 +84,7 @@ namespace UnitTest.KazApi.Domain._Monster
                 _absHitMonster, _healMonster
             };
 
-            _healMonster.Move(monsters);
+            _healMonster.Move(monsters, _logger);
 
             Assert.True(_healMonster.Hp > 50);
         }
