@@ -119,5 +119,6 @@ namespace UnitTest.KazApi.Domain._Monster
 
             Assert.True(_monster.Hp == 100);
         }
+        [InlineData(100)]
     }
 }

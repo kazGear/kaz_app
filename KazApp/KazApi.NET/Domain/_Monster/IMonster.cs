@@ -104,7 +104,7 @@ namespace KazApi.Domain._Monster
         /// <summary>
         /// ダメージを受ける
         /// </summary>
-        public void AcceptDamage(int damage) => Hp -= damage;
+        public void AcceptDamage(int damage) => Hp -= (Hp < damage) ? Hp : damage;
         /// <summary>
         /// チームを決定する
         /// </summary>
