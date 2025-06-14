@@ -24,7 +24,7 @@ namespace UnitTest.KazApi.Domain._State
                 (
                     MockMonsterParams.Normal,
                     MockSkillSets.AbsHitOnly,
-                    [new Sleep("睡眠", "眠", CStateType.SLEEP.VALUE, 0.0)]
+                    [new Sleep("睡眠", "眠", CStateType.SLEEP.Value, 0.0)]
                 );
             _monster2 = new Monster
                 (

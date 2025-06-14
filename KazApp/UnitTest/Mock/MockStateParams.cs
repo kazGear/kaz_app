@@ -11,7 +11,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "無",
                 ShortName = "無",
-                StateType = CStateType.NONE.VALUE, 
+                StateType = CStateType.NONE.Value, 
                 CancelRate = 0,
                 Activate = true
             };
@@ -22,7 +22,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "毒",
                 ShortName = "毒",
-                StateType = CStateType.POISON.VALUE,
+                StateType = CStateType.POISON.Value,
                 CancelRate = 0.25,
                 Activate = true
             };
@@ -33,7 +33,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "睡眠",
                 ShortName = "眠",
-                StateType = CStateType.SLEEP.VALUE,
+                StateType = CStateType.SLEEP.Value,
                 CancelRate = 0.8,
                 Activate = true
             };
@@ -44,7 +44,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "魅了",
                 ShortName = "魅",
-                StateType = CStateType.CHARM.VALUE,
+                StateType = CStateType.CHARM.Value,
                 CancelRate = 1.0,
                 Activate = true
             };
@@ -55,7 +55,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "スロー",
                 ShortName = "遅", 
-                StateType = CStateType.SLOW.VALUE,
+                StateType = CStateType.SLOW.Value,
                 CancelRate = 0.3,
                 Activate = true
             };
@@ -66,7 +66,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "攻撃力UP",
                 ShortName = "攻↑",
-                StateType = CStateType.POWERUP.VALUE,
+                StateType = CStateType.POWERUP.Value,
                 CancelRate = 0.2,
                 Activate = true
             };
@@ -77,7 +77,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "回避力UP",
                 ShortName = "回↑",
-                StateType = CStateType.DODGEUP.VALUE,
+                StateType = CStateType.DODGEUP.Value,
                 CancelRate = 0.2,
                 Activate = true
             };
@@ -88,7 +88,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "会心UP",
                 ShortName = "会UP",
-                StateType = CStateType.CRITICALUP.VALUE,
+                StateType = CStateType.CRITICALUP.Value,
                 CancelRate = 0.35,
                 Activate = true
             };
@@ -99,7 +99,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "自動回復",
                 ShortName = "癒",
-                StateType = CStateType.AUTOHEAL.VALUE,
+                StateType = CStateType.AUTOHEAL.Value,
                 CancelRate = 0.2,
                 Activate = true
             };
@@ -110,7 +110,7 @@ namespace UnitTest.Mock
                 CodeId = "code002",
                 Name = "猛毒",
                 ShortName = "猛",
-                StateType = CStateType.DEADLY_POISON.VALUE,
+                StateType = CStateType.DEADLY_POISON.Value,
                 CancelRate = 0.5,
                 Activate = true
             };

@@ -64,16 +64,16 @@ namespace KazApi.Domain._Const
         {
             IReadOnlyCollection<int> values = new HashSet<int>()
             {
-                NONE.VALUE,
-                POISON.VALUE,
-                SLEEP.VALUE,
-                CHARM.VALUE,
-                SLOW.VALUE,
-                POWERUP.VALUE,
-                DODGEUP.VALUE,
-                CRITICALUP.VALUE,
-                AUTOHEAL.VALUE,
-                DEADLY_POISON.VALUE
+                NONE.Value,
+                POISON.Value,
+                SLEEP.Value,
+                CHARM.Value,
+                SLOW.Value,
+                POWERUP.Value,
+                DODGEUP.Value,
+                CRITICALUP.Value,
+                AUTOHEAL.Value,
+                DEADLY_POISON.Value
             };
             return values;
         }

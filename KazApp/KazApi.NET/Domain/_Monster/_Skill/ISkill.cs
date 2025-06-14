@@ -56,8 +56,8 @@ namespace KazApi.Domain._Monster._Skill
         public void PowerDown()
         {
             double allAttackDamage = Attack * new URandom().RandomDouble(
-                CSysRate.ALL_ATTACK_ADJUST_MIN.VALUE,
-                CSysRate.ALL_ATTACK_ADJUST_MAX.VALUE
+                CSysRate.ALL_ATTACK_ADJUST_MIN.Value,
+                CSysRate.ALL_ATTACK_ADJUST_MAX.Value
                 );
             Attack = (int)allAttackDamage;
         }
@@ -85,12 +85,12 @@ namespace KazApi.Domain._Monster._Skill
             ILog<BattleMetaData> logger)
         {
             // 弱点ダメージが発生しようがなければダメージの変動なし
-            if (skill.ElementType == CElement.NONE.VALUE) return damage;
-            if (enemy.Week == CElement.NONE.VALUE) return damage;
+            if (skill.ElementType == CElement.NONE.Value) return damage;
+            if (enemy.Week == CElement.NONE.Value) return damage;
 
             if (enemy.Week == skill.ElementType)
             {
-                damage = (int)(damage * CSysRate.WEEK_DAMAGE.VALUE);
+                damage = (int)(damage * CSysRate.WEEK_DAMAGE.Value);
                 logger.Logging(new BattleMetaData("弱点ダメージ！"));
             }
             return damage;
@@ -106,7 +106,7 @@ namespace KazApi.Domain._Monster._Skill
 
             if (isCritical)
             {
-                damage = (int)(damage * CSysRate.CRITICAL_DAMAGE.VALUE);
+                damage = (int)(damage * CSysRate.CRITICAL_DAMAGE.Value);
                 logger.Logging(new BattleMetaData("クリティカルヒット！"));
             }
             return damage;

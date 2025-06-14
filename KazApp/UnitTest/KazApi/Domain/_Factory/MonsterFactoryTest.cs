@@ -32,16 +32,16 @@ namespace UnitTest.KazApi.Domain._Factory
             _factory = new MonsterFactory();
             _codeDTO = new List<CodeDTO>()
             {
-                new CodeDTO() { Value = CStateType.NONE.VALUE },
-                new CodeDTO() { Value = CStateType.POISON.VALUE },
-                new CodeDTO() { Value = CStateType.SLEEP.VALUE },
-                new CodeDTO() { Value = CStateType.CHARM.VALUE },
-                new CodeDTO() { Value = CStateType.SLOW.VALUE },
-                new CodeDTO() { Value = CStateType.POWERUP.VALUE },
-                new CodeDTO() { Value = CStateType.DODGEUP.VALUE },
-                new CodeDTO() { Value = CStateType.CRITICALUP.VALUE },
-                new CodeDTO() { Value = CStateType.AUTOHEAL.VALUE },
-                new CodeDTO() { Value = CStateType.DEADLY_POISON.VALUE }
+                new CodeDTO() { Value = CStateType.NONE.Value },
+                new CodeDTO() { Value = CStateType.POISON.Value },
+                new CodeDTO() { Value = CStateType.SLEEP.Value },
+                new CodeDTO() { Value = CStateType.CHARM.Value },
+                new CodeDTO() { Value = CStateType.SLOW.Value },
+                new CodeDTO() { Value = CStateType.POWERUP.Value },
+                new CodeDTO() { Value = CStateType.DODGEUP.Value },
+                new CodeDTO() { Value = CStateType.CRITICALUP.Value },
+                new CodeDTO() { Value = CStateType.AUTOHEAL.Value },
+                new CodeDTO() { Value = CStateType.DEADLY_POISON.Value }
             };
             _monstersDTO = new List<MonsterDTO>() { MockMonsterParams.NoDodge };
             _monsterSkillsDTO = new List<MonsterSkillDTO>()
@@ -63,10 +63,10 @@ namespace UnitTest.KazApi.Domain._Factory
             {
                 SkillId = "skill001",
                 SkillName = "打撃（必中）",
-                SkillType = CSkillType.BLOW.VALUE,
-                ElementType = CElement.NONE.VALUE,
-                StateType = CStateType.NONE.VALUE,
-                TargetType = CTarget.ENEMY_RANDOM.VALUE,
+                SkillType = CSkillType.BLOW.Value,
+                ElementType = CElement.NONE.Value,
+                StateType = CStateType.NONE.Value,
+                TargetType = CTarget.ENEMY_RANDOM.Value,
                 Attack = 10,
                 Weight = 10,
                 DefaultCritical = 0.1,
@@ -77,10 +77,10 @@ namespace UnitTest.KazApi.Domain._Factory
             {
                 SkillId = "skill005",
                 SkillName = "回し蹴り（必中全体）",
-                SkillType = CSkillType.BLOW.VALUE,
-                ElementType = CElement.NONE.VALUE,
-                StateType = CStateType.NONE.VALUE,
-                TargetType = CTarget.ENEMY_ALL.VALUE,
+                SkillType = CSkillType.BLOW.Value,
+                ElementType = CElement.NONE.Value,
+                StateType = CStateType.NONE.Value,
+                TargetType = CTarget.ENEMY_ALL.Value,
                 Attack = 10,
                 Weight = 10,
                 DefaultCritical = 0.1,

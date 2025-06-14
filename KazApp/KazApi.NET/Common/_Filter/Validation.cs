@@ -220,7 +220,7 @@ namespace KazApi.Common._Filter
             if (!values.Contains(targetType))
                 throw new Exception(GetMessageUndefined("ターゲット", targetType));
 
-            return targetType;           
+            return targetType;
         }
     }
 }

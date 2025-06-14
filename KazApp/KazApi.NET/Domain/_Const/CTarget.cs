@@ -53,15 +53,15 @@ namespace KazApi.Domain._Const
         {
             IReadOnlyCollection<int> values = new HashSet<int>()
             {
-                NONE.VALUE,
-                ENEMY_RANDOM.VALUE,
-                ENEMY_ALL.VALUE,
-                ENEMY_RANDOM_OR_ALL.VALUE,
-                ENEMY_RANDOM_SOME_TIMES.VALUE,
-                ME.VALUE,
-                FRIEND_RANDOM.VALUE,
-                FRIEND_ALL.VALUE,
-                FRIEND_RANDOM_OR_ALL.VALUE
+                NONE.Value,
+                ENEMY_RANDOM.Value,
+                ENEMY_ALL.Value,
+                ENEMY_RANDOM_OR_ALL.Value,
+                ENEMY_RANDOM_SOME_TIMES.Value,
+                ME.Value,
+                FRIEND_RANDOM.Value,
+                FRIEND_ALL.Value,
+                FRIEND_RANDOM_OR_ALL.Value
             };
             return values;
         }

@@ -18,7 +18,7 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.1,
             DefaultDodge = 0.1,
-            Week = CStateType.NONE.VALUE,
+            Week = CStateType.NONE.Value,
             BetScore = 1000
         };
 
@@ -35,7 +35,7 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = CStateType.NONE.VALUE,
+            Week = CStateType.NONE.Value,
             BetScore = 1000
         };
 
@@ -52,7 +52,7 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.1,
             DefaultDodge = 0.1,
-            Week = CStateType.NONE.VALUE,
+            Week = CStateType.NONE.Value,
             BetScore = 1000
         };
 
@@ -69,7 +69,7 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = CElement.FIRE.VALUE,
+            Week = CElement.FIRE.Value,
             BetScore = 1000
         };
 
@@ -86,7 +86,7 @@ namespace UnitTest.Mock
             DefaultSpeed = 15,
             Dodge = 0.0,
             DefaultDodge = 0.0,
-            Week = CElement.FIRE.VALUE,
+            Week = CElement.FIRE.Value,
             BetScore = 1000
         };
     }

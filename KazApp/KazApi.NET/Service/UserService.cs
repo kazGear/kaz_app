@@ -81,7 +81,7 @@ namespace KazApi.Service
                     var param = new
                     {
                         user_id = loginId,
-                        item_id = monsterType.VALUE,
+                        item_id = monsterType.Value,
                         not_use_this = false
                     };
                     _posgre.Execute(UserSQL.InsertStartUpMonsters(), param);

@@ -20,7 +20,7 @@ namespace KazApi.Domain._Monster._State
         public None(string name, string shortName, int stateType, double cancelRate)
              : base(name, shortName, stateType, cancelRate)
         {
-            StateType = CStateType.NONE.VALUE;
+            StateType = CStateType.NONE.Value;
         }
 
 

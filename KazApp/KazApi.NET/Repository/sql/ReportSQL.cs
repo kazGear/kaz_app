@@ -61,23 +61,23 @@ namespace KazApi.Repository.sql
         {
             string result = string.Empty;
 
-            if (sortKey == CReportSortType.MONSTER_NAME.VALUE)
+            if (sortKey == CReportSortType.MONSTER_NAME.Value)
             {
                 result = $@" ORDER BY MonsterName {IsAscOrder(isAscOrder)} ";
             }
-            else if (sortKey == CReportSortType.WIN_COUNT.VALUE)
+            else if (sortKey == CReportSortType.WIN_COUNT.Value)
             {
                 result = $@" ORDER BY Wins {IsAscOrder(isAscOrder)}
                                  , MonsterName {IsAscOrder(isAscOrder)}
                 ";
             }
-            else if (sortKey == CReportSortType.BATTLE_COUNT.VALUE)
+            else if (sortKey == CReportSortType.BATTLE_COUNT.Value)
             {
                 result = $@" ORDER BY BattleCount {IsAscOrder(isAscOrder)}
                                     , MonsterName {IsAscOrder(isAscOrder)}
                 ";
             }
-            else if (sortKey == CReportSortType.WINS_RATE.VALUE)
+            else if (sortKey == CReportSortType.WINS_RATE.Value)
             {
                 result = $@" ORDER BY sum(CASE WHEN is_win = TRUE
                                                THEN 1

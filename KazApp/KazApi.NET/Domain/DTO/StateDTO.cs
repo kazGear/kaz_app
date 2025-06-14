@@ -62,7 +62,7 @@ namespace KazApi.Domain.DTO
         /// </summary>
         public StateDTO(IState model)
         {
-            CodeId = CCodeType.STATE.VALUE;
+            CodeId = CCodeType.STATE.Value;
             StateType = model.StateType;
             Name = model.Name;
             ShortName = model.ShortName;

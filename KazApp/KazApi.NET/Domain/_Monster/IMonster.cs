@@ -48,7 +48,7 @@ namespace KazApi.Domain._Monster
 
             foreach (IState state in status) _status.Add(state);
             foreach (ISkill skill in skills) _skills.Add(skill);
-            Team = CTeam.UNKNOWN.VALUE;
+            Team = CTeam.UNKNOWN.Value;
             Week = dto.Week;
         }
         /// <summary>

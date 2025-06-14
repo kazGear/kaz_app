@@ -27,34 +27,34 @@ namespace KazApi.Domain._Factory
         {
             CodeDTO param = _codeEntities.Where(e => e.Value == stateCode).Single();
 
-            if (stateCode == CStateType.NONE.VALUE)
+            if (stateCode == CStateType.NONE.Value)
                 return new None(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.POISON.VALUE)
+            else if (stateCode == CStateType.POISON.Value)
                 return new Poison(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.DEADLY_POISON.VALUE)
+            else if (stateCode == CStateType.DEADLY_POISON.Value)
                 return new DeadlyPoison(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.SLEEP.VALUE)
+            else if (stateCode == CStateType.SLEEP.Value)
                 return new Sleep(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.CHARM.VALUE)
+            else if (stateCode == CStateType.CHARM.Value)
                 return new Charm(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.SLOW.VALUE)
+            else if (stateCode == CStateType.SLOW.Value)
                 return new Slow(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.POWERUP.VALUE)
+            else if (stateCode == CStateType.POWERUP.Value)
                 return new PowerUp(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.DODGEUP.VALUE)
+            else if (stateCode == CStateType.DODGEUP.Value)
                 return new DodgeUp(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.CRITICALUP.VALUE)
+            else if (stateCode == CStateType.CRITICALUP.Value)
                 return new CriticalUp(param.Name, param.ShortName, param.Value, param.Param3);
 
-            else if (stateCode == CStateType.AUTOHEAL.VALUE)
+            else if (stateCode == CStateType.AUTOHEAL.Value)
                 return new AutoHeal(param.Name, param.ShortName, param.Value, param.Param3);
 
             else
@@ -67,34 +67,34 @@ namespace KazApi.Domain._Factory
         {
             CodeDTO param = _codeEntities.Where(e => e.Value == stateCode).Single();
 
-            if (stateCode == CStateType.NONE.VALUE)
+            if (stateCode == CStateType.NONE.Value)
                 return new None(dto);
 
-            else if (stateCode == CStateType.POISON.VALUE)
+            else if (stateCode == CStateType.POISON.Value)
                 return new Poison(dto);
 
-            else if (stateCode == CStateType.DEADLY_POISON.VALUE)
+            else if (stateCode == CStateType.DEADLY_POISON.Value)
                 return new DeadlyPoison(dto);
 
-            else if (stateCode == CStateType.SLEEP.VALUE)
+            else if (stateCode == CStateType.SLEEP.Value)
                 return new Sleep(dto);
 
-            else if (stateCode == CStateType.CHARM.VALUE)
+            else if (stateCode == CStateType.CHARM.Value)
                 return new Charm(dto);
 
-            else if (stateCode == CStateType.SLOW.VALUE)
+            else if (stateCode == CStateType.SLOW.Value)
                 return new Slow(dto);
 
-            else if (stateCode == CStateType.POWERUP.VALUE)
+            else if (stateCode == CStateType.POWERUP.Value)
                 return new PowerUp(dto);
 
-            else if (stateCode == CStateType.DODGEUP.VALUE)
+            else if (stateCode == CStateType.DODGEUP.Value)
                 return new DodgeUp(dto);
 
-            else if (stateCode == CStateType.CRITICALUP.VALUE)
+            else if (stateCode == CStateType.CRITICALUP.Value)
                 return new CriticalUp(dto);
 
-            else if (stateCode == CStateType.AUTOHEAL.VALUE)
+            else if (stateCode == CStateType.AUTOHEAL.Value)
                 return new AutoHeal(dto);
 
             else

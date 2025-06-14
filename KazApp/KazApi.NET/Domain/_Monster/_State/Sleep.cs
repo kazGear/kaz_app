@@ -25,7 +25,7 @@ namespace KazApi.Domain._Monster._State
         public Sleep(string name, string shortName, int stateType, double cancelRate)
               : base(name, shortName, stateType, cancelRate)
         {
-            StateType = CStateType.SLEEP.VALUE;
+            StateType = CStateType.SLEEP.Value;
             base.Activate = true;
         }
 

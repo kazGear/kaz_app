@@ -30,7 +30,7 @@ namespace KazApi.Domain._Monster._Skill
             IMonster me,
             ILog<BattleMetaData> logger)
         {
-            bool isPositive = POSITIVE_SKILLS.Where(e => e.VALUE == _state.StateType)
+            bool isPositive = POSITIVE_SKILLS.Where(e => e.Value == _state.StateType)
                                              .Count() >= 1;
 
             if (isPositive) // 有利スキル
@@ -59,7 +59,7 @@ namespace KazApi.Domain._Monster._Skill
             IMonster me,
             ILog<BattleMetaData> logger)
         {
-            if (TargetType == CTarget.ENEMY_RANDOM.VALUE)
+            if (TargetType == CTarget.ENEMY_RANDOM.Value)
             {
                 // 単体付与
                 IMonster enemy = BattleSystem.SelectOneEnemy(monsters.ToList());

@@ -28,7 +28,7 @@ namespace KazApi.Domain._Monster._State
         public Poison(string name, string shortName, int stateType, double cancelRate)
                : base(name, shortName, stateType, cancelRate)
         {
-            base.StateType = CStateType.POISON.VALUE;
+            base.StateType = CStateType.POISON.Value;
             base.Activate = true;
         }
 

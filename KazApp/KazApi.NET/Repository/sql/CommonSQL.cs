@@ -34,7 +34,7 @@ namespace KazApi.Repository.sql
                   FROM
                        m_code
                  WHERE
-                       code_id = '{CCodeType.ELEMENT.VALUE}' ;
+                       code_id = '{CCodeType.ELEMENT.Value}' ;
             ";
             return SQL;
         }

@@ -22,7 +22,7 @@ namespace KazApi.Domain._Monster._Skill
             ILog<BattleMetaData> logger)
         {
             int healPoint = new URandom().RandomChangeInt(
-                (Attack + me.Attack), CSysRate.MAGIC_SKILL_DAMAGE.VALUE
+                (Attack + me.Attack), CSysRate.MAGIC_SKILL_DAMAGE.Value
                 );
 
             // MaxHp以上に回復はできない

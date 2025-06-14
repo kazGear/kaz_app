@@ -3,26 +3,26 @@
 namespace KazApi.Domain._Const
 {
     /// <summary>
-    /// 定数値既定クラス
+    /// 定数値基底クラス
     /// </summary>
     public abstract class Enumeration<T>
     {
-        public readonly T VALUE;
-        public readonly string NAME;
-        public readonly string SHORT_NAME;
+        public readonly T Value;
+        public readonly string Name;
+        public readonly string ShortName;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         protected Enumeration(T value, string name, string shortName = "")
         {
-            VALUE = value;
-            NAME = name;
-            SHORT_NAME = shortName;
+            Value = value;
+            Name = name;
+            ShortName = shortName;
         }
 
         public override string ToString() 
-            => $"NAME: {NAME}, VALUE: {VALUE}, SHORT_NAME: {SHORT_NAME}" ?? "";
+            => $"NAME: {Name}, VALUE: {Value}, SHORT_NAME: {ShortName}" ?? "";
 
         /// <summary>
         /// フィールド名称の列挙を取得

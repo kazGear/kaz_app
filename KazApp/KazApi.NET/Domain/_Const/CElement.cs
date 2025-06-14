@@ -49,13 +49,13 @@ namespace KazApi.Domain._Const
         {
             IReadOnlyCollection<int> values = new HashSet<int>()
             {
-                NONE.VALUE,
-                FIRE.VALUE,
-                THUNDER.VALUE,
-                ICE.VALUE,
-                EARTH.VALUE,
-                HOLY.VALUE,
-                DARK.VALUE
+                NONE.Value,
+                FIRE.Value,
+                THUNDER.Value,
+                ICE.Value,
+                EARTH.Value,
+                HOLY.Value,
+                DARK.Value
             };
             return values;
         }

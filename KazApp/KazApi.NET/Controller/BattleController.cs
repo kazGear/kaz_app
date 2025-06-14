@@ -104,9 +104,9 @@ namespace KazApi.Controller
                 //monstersDTO.Where(e => e.MonsterId == CMonster.プチポセイドン.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.パンプキンボム.VALUE).Single(),
                 //monstersDTO.Where(e => e.MonsterId == CMonster.グレネードボム.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.シェイプシフター.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロ.VALUE).Single(),
-                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロワン.VALUE).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.シェイプシフター.Value).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロ.Value).Single(),
+                monstersDTO.Where(e => e.MonsterId == CMonster.シャドウゼロワン.Value).Single(),
 
             };
             return testMonsters;
@@ -125,8 +125,8 @@ namespace KazApi.Controller
                 IEnumerable<IMonster> battleMonsters = _monsterFactory.CreateBattleMonsters(monsters, codes);
 
                 // TODO 未実装 チーム決め
-                ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
-                if (battleMonsters.Where(e => e.Team == CTeam.UNKNOWN.VALUE).Count() > 0)
+                ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.Value));
+                if (battleMonsters.Where(e => e.Team == CTeam.UNKNOWN.Value).Count() > 0)
                 {
                     throw new Exception("チーム決めが完了していません。");
                 }

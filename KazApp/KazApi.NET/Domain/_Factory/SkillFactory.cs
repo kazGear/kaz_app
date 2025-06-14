@@ -39,29 +39,29 @@ namespace KazApi.Domain._Factory
         /// </summary>
         private void CreateSkill(SkillDTO skill)
         {
-            if (skill.StateType != CStateType.NONE.VALUE)
+            if (skill.StateType != CStateType.NONE.Value)
                 // 状態スキル
                 CreateStateSkill(skill);
 
-            else if (skill.SkillType == CSkillType.HEAL.VALUE)
+            else if (skill.SkillType == CSkillType.HEAL.Value)
                 // 回復スキル
                 CreateHealSkill(skill);
 
-            else if (skill.SkillType == CSkillType.ATTACK_RATE.VALUE)
+            else if (skill.SkillType == CSkillType.ATTACK_RATE.Value)
                 // 割合ダメージスキル
                 CreateRateAttackSkill(skill);
 
-            else if (skill.SkillType == CSkillType.DEAD.VALUE)
+            else if (skill.SkillType == CSkillType.DEAD.Value)
                 // 即死攻撃スキル
                 CreateDeadSkill(skill);
 
-            else if (skill.SkillType == CSkillType.NOT_MOVE.VALUE)
+            else if (skill.SkillType == CSkillType.NOT_MOVE.Value)
                 // 行動しないスキル
                 CreateNotMoveSkill(skill);
 
-            else if (   skill.TargetType == CTarget.ENEMY_RANDOM.VALUE
-                     || skill.TargetType == CTarget.ENEMY_ALL.VALUE
-                     || skill.TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
+            else if (   skill.TargetType == CTarget.ENEMY_RANDOM.Value
+                     || skill.TargetType == CTarget.ENEMY_ALL.Value
+                     || skill.TargetType == CTarget.ENEMY_RANDOM_OR_ALL.Value)
                 // 攻撃スキル
                 CreateDamageSkill(skill);
 

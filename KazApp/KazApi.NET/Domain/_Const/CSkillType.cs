@@ -54,15 +54,15 @@
         {
             IReadOnlyCollection<int> values = new HashSet<int>()
             {
-                NONE.VALUE,
-                BLOW.VALUE,
-                SLASH.VALUE,
-                ATTACK_MAGIC.VALUE,
-                ATTACK_RATE.VALUE,
-                DEAD.VALUE,
-                HEAL.VALUE,
-                STATE.VALUE,
-                NOT_MOVE.VALUE
+                NONE.Value,
+                BLOW.Value,
+                SLASH.Value,
+                ATTACK_MAGIC.Value,
+                ATTACK_RATE.Value,
+                DEAD.Value,
+                HEAL.Value,
+                STATE.Value,
+                NOT_MOVE.Value
             };
             return values;
         }

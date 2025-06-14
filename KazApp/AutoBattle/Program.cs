@@ -49,9 +49,9 @@ for (int i = 0; i < battleTimes; i++)
             = _monsterFactory.CreateBattleMonsters(battleMonstersDTO, stateCodeFromDB);
 
         // TODO 未実装 チーム決め
-        ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
+        ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.Value));
 
-        if (battleMonsters.Where(e => e.Team == (CTeam.UNKNOWN.VALUE)).Count() > 0)
+        if (battleMonsters.Where(e => e.Team == (CTeam.UNKNOWN.Value)).Count() > 0)
         {
             throw new Exception("チーム決めが完了していません。");
         }

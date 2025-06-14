@@ -16,7 +16,7 @@ namespace KazApi.Repository.sql
                   FROM
                        m_code
                  WHERE
-                       code_id = '{CCodeType.EDIT.VALUE}'
+                       code_id = '{CCodeType.EDIT.Value}'
             ";
             return SQL;
         }
