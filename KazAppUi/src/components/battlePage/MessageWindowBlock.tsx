@@ -4,7 +4,7 @@ import React from "react";
 import { MetaDataDTO } from "../../types/MonsterBattle";
 
 const SdivMessageWindowFrame = styled.div`
-    height: 180px;
+    height: 45%;
     border: inset 4px ${COLORS.BORDER_COLOR};
     overflow-y: scroll;
     background: rgba(255, 255, 255, 0.8);
@@ -17,21 +17,19 @@ interface ArgProps { shortLog: MetaDataDTO[]; }
 
 const MessageWindowBlock = ({shortLog}: ArgProps) => {
     return (
-        <>
-            <SdivMessageWindowFrame id="messageWindow">
-                <SdivMessageWindow>
-                    {
-                        shortLog.map((log, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    {log.Message}<br />
-                                </React.Fragment>
-                            )
-                        })
-                    }
-                </SdivMessageWindow>
-            </SdivMessageWindowFrame>
-        </>
+        <SdivMessageWindowFrame id="messageWindow">
+            <SdivMessageWindow>
+                {
+                    shortLog.map((log, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                {log.Message}<br />
+                            </React.Fragment>
+                        )
+                    })
+                }
+            </SdivMessageWindow>
+        </SdivMessageWindowFrame>
     );
 }
 

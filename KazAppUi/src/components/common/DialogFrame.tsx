@@ -13,7 +13,6 @@ const SdivDialogFrame = styled.div`
     min-height: 20%;
     max-height: 70%;
     border-radius: 50px;
-    box-shadow: ${COLORS.ACCENT_FONT_GREEN} 6px 6px 10px;
     z-index: 3000;
 `;
 

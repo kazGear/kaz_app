@@ -1,6 +1,8 @@
 const ACCENT_COLOR: string = "#0aff84";
 const ACCENT_COLOR2: string = "#F05F8D";
 const ALERT_COLOR: string = "red";
+const SHADOW_COLOR: string = "#15400e";
+
 export const COLORS = {
     MAIN_FONT_COLOR: "gray",
     ACCENT_FONT_GREEN: `${ACCENT_COLOR}`,
@@ -8,14 +10,14 @@ export const COLORS = {
     LOSER_FONT_COLOR: "#EC008C",
     ALERT_MESSAGE_COLOR: `${ALERT_COLOR}`,
     CAPTION_FONT_COLOR: "#33cc99",
-    BUTTON_FORN_COLOR: "gray",
+    BUTTON_FONT_COLOR: "gray",
 
     BORDER_COLOR: "darkgray",
     LINE_COLOR: "blue",
 
-    SHADOW_COLOR: "dimgrey",
-    DIALOG_SHADOW: "gray",
-    MENU_SHADOW: "gray",
+    SHADOW: `${SHADOW_COLOR}`,
+    DIALOG_SHADOW: `${SHADOW_COLOR}`,
+    MENU_SHADOW: `${SHADOW_COLOR}`,
 
     BUTTON_COLOR: `${ACCENT_COLOR}`,
     BUTTON_DISABLED: 0.3,

@@ -42,57 +42,55 @@ const IndexPage = () => {
     }, []);
 
     return (
-        <>
-            <SdivLinkFrame>
-                <div style={{display: "flex"}}>
-                    <SdivContentsFrame>
-                        {/* ログインページ */}
-                        <ToLoginPageBlock />
-                    </SdivContentsFrame>
+        <SdivLinkFrame>
+            <div style={{display: "flex"}}>
+                <SdivContentsFrame>
+                    {/* ログインページ */}
+                    <ToLoginPageBlock />
+                </SdivContentsFrame>
 
-                    <SdivContentsFrame>
-                        {/* ユーザーページ */}
-                        <ToUserPageBlock validToken={validToken}
-                                         classOfAnime={classOfAnime}
-                                         titleStyle={titleStyle} />
-                    </SdivContentsFrame>
-                </div>
+                <SdivContentsFrame>
+                    {/* ユーザーページ */}
+                    <ToUserPageBlock validToken={validToken}
+                                     classOfAnime={classOfAnime}
+                                     titleStyle={titleStyle} />
+                </SdivContentsFrame>
+            </div>
 
-                <div style={{display: "flex"}}>
-                    <SdivContentsFrame>
-                        {/* 戦闘ページ */}
-                        <ToBattlePageBlock validToken={validToken}
-                                           classOfAnime={classOfAnime}
-                                           titleStyle={titleStyle}/>
-                    </SdivContentsFrame>
+            <div style={{display: "flex"}}>
+                <SdivContentsFrame>
+                    {/* 戦闘ページ */}
+                    <ToBattlePageBlock validToken={validToken}
+                                       classOfAnime={classOfAnime}
+                                       titleStyle={titleStyle}/>
+                </SdivContentsFrame>
 
-                    <SdivContentsFrame>
-                        {/* 戦闘レポートページ */}
-                        <ToBattleResultPageBlock validToken={validToken}
-                                                 classOfAnime={classOfAnime}
-                                                 titleStyle={titleStyle}/>
-                    </SdivContentsFrame>
-                </div>
+                <SdivContentsFrame>
+                    {/* 戦闘レポートページ */}
+                    <ToBattleResultPageBlock validToken={validToken}
+                                             classOfAnime={classOfAnime}
+                                             titleStyle={titleStyle}/>
+                </SdivContentsFrame>
+            </div>
 
-                <div style={{display: "flex"}}>
-                    <SdivContentsFrame>
-                        {/* ショップページ */}
-                        <ToShopPageBlock validToken={validToken}
-                                         classOfAnime={classOfAnime}
-                                         titleStyle={titleStyle}/>
-                    </SdivContentsFrame>
+            <div style={{display: "flex"}}>
+                <SdivContentsFrame>
+                    {/* ショップページ */}
+                    <ToShopPageBlock validToken={validToken}
+                                     classOfAnime={classOfAnime}
+                                     titleStyle={titleStyle}/>
+                </SdivContentsFrame>
 
-                    <SdivContentsFrame>
-                        {/* 設定ページ */}
-                        <ToEditPageBlock isValid={validToken && usableSettings}
-                                        classOfAnime={classOfAnime}
-                                         titleStyle={titleStyle}/>
-                    </SdivContentsFrame>
-                </div>
+                <SdivContentsFrame>
+                    {/* 設定ページ */}
+                    <ToEditPageBlock isValid={validToken && usableSettings}
+                                     classOfAnime={classOfAnime}
+                                     titleStyle={titleStyle}/>
+                </SdivContentsFrame>
+            </div>
 
-                <p style={{color: `${COLORS.ACCENT_FONT_PINK}`}}>※スマホ非対応、Chrome, edge推奨。</p>
-            </SdivLinkFrame>
-        </>
+            <p style={{color: `${COLORS.ACCENT_FONT_PINK}`}}>※スマホ非対応、Chrome, edge推奨。</p>
+        </SdivLinkFrame>
     );
 };
 

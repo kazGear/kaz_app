@@ -16,8 +16,9 @@ const Simg = styled.img`
 `;
 const Sheader = styled.header`
     width: 100%;
-    height: 10%;
-    box-shadow: 0px 0px 10px 0px #000000;
+    height: 60px;
+    margin-bottom: 20px;
+    box-shadow: ${COLORS.SHADOW};
     text-align: left;
     display: flex;
     align-items: center;
@@ -110,6 +111,7 @@ const AppHeader = ({title}: ArgProps) => {
                         onClick={() => navigate("/LoginPage")}
                         disabled={!validToken}/>
             </SdivButtonFrame>
+
             <div style={{display: "flex", alignItems: "center"}}>
                 {
                     !isEmpty(loginUser) && loginUser!.UserImage!.length > 50 ? <Simg src={userImage} alt="" /> : ""

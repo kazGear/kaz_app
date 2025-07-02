@@ -16,10 +16,9 @@ interface ArgProps {
 }
 
 const MenuTitle = ({title, styleObj, className}: ArgProps) => {
-    return <SmenuTitle className={className}
-                       style={styleObj}>
-                {title}
-            </SmenuTitle>;
+    return <SmenuTitle className={className} style={styleObj}>
+               {title}
+           </SmenuTitle>;
 };
 
 export default MenuTitle;

@@ -47,7 +47,7 @@ const CashBlock = ({user}: ArgProps) => {
     return (
         <SdivCashFrame>
             <p style={{margin:"20px 0 0 0"}}><Strong>所持金</Strong> : {cash != null ? cash.toLocaleString() : ""} Gil</p>
-            <p style={{margin:0}}><Strong>自己破産</Strong>（所持金初期化）<Button text="自己破産 実行" onClick={restartAsPlayer} /></p>
+            <p style={{margin:0}}><Strong>自己破産</Strong>（所持金初期化）<Button text="自己破産 実行" width={120} onClick={restartAsPlayer} /></p>
             <p style={{margin:0}}><Strong>自己破産回数</Strong> : <SspanDanger>{bankruptcyCnt != null ? bankruptcyCnt : ""} 回</SspanDanger></p>
         </SdivCashFrame>
     );
